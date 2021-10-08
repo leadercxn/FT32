@@ -1,0 +1,7 @@
+---- RCC_I2CCLKConfig Matches (6 in 4 files) ----
+Ft32f030x8_rcc.c (c:\gsy\prj\prj0\ft32f0_stdperiph_lib\ft32f0xx_stdperiph_lib_v1.0.0\libraries\ft32f0xx_stdperiph_driver\src):void RCC_I2CCLKConfig(uint32_t RCC_I2CCLK)
+Ft32f030x8_rcc.h (c:\gsy\prj\prj0\ft32f0_stdperiph_lib\ft32f0xx_stdperiph_lib_v1.0.0\libraries\ft32f0xx_stdperiph_driver\inc):void RCC_I2CCLKConfig(uint32_t RCC_I2CCLK);
+FT32F030XX_eval.c (c:\gsy\prj\prj0\ft32f0_stdperiph_lib\ft32f0xx_stdperiph_lib_v1.0.0\utilities\ft32_eval\ft32f030xx_eval):  RCC_I2CCLKConfig(RCC_I2C1CLK_HSI);
+FT32F030XX_eval.c (c:\gsy\prj\prj0\ft32f0_stdperiph_lib\ft32f0xx_stdperiph_lib_v1.0.0\utilities\ft32_eval\ft32f030xx_eval):  RCC_I2CCLKConfig(RCC_I2C1CLK_SYSCLK);
+FT32F072X8_eval.C (c:\gsy\prj\prj0\ft32f0_stdperiph_lib\ft32f0xx_stdperiph_lib_v1.0.0\utilities\ft32_eval\ft32f072x8_eval):  RCC_I2CCLKConfig(RCC_I2C1CLK_HSI);
+FT32F072X8_eval.C (c:\gsy\prj\prj0\ft32f0_stdperiph_lib\ft32f0xx_stdperiph_lib_v1.0.0\utilities\ft32_eval\ft32f072x8_eval):  RCC_I2CCLKConfig(RCC_I2C1CLK_SYSCLK);	//RCC_I2C1CLK_SYSCLK	RCC_I2C1CLK_HSI
