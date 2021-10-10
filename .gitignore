@@ -1,0 +1,9 @@
+.vscode/
+**/*.o
+**/*.map
+**/*.axf
+**/*.htm
+**/*.d
+**/*.crf
+**/*.dep
+*.DS_Store

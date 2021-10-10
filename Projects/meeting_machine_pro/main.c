@@ -14,6 +14,7 @@ static void delay(uint32_t n)
 
 int main(void)
 {
+#if 0
     conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_1);
     while (1)
     {
@@ -22,7 +23,18 @@ int main(void)
         set_gpio_value(GPIOB, GPIO_Pin_1,0);
         delay(5000);
     }
+#endif
 
+  conf_whole_gpios_output(RCC_AHBPeriph_GPIOC, GPIOC, 0xff);
+  while (1)
+  {
+      //set_gpio_value(GPIOB, GPIO_Pin_1,1);
+      set_halt_gpios_value(GPIOC ,0xff, true);
+      delay(5000);
+      //set_gpio_value(GPIOB, GPIO_Pin_1,0);
+      set_halt_gpios_value(GPIOC ,0x00, true);
+      delay(5000);
+  }
 
 }
 

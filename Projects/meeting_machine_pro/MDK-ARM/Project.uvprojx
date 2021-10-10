@@ -558,6 +558,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\ft_lib\gpio\ft_gpio.c</FilePath>
             </File>
+            <File>
+              <FileName>ft_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\ft_lib\i2c\ft_i2c.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

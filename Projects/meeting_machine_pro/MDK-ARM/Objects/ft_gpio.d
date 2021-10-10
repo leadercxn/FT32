@@ -30,5 +30,5 @@
 .\objects\ft_gpio.o: ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_wwdg.h
 .\objects\ft_gpio.o: ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_misc.h
 .\objects\ft_gpio.o: ..\..\..\develop_lib\ft_lib\gpio\ft_gpio.h
-.\objects\ft_gpio.o: ..\..\..\develop_lib\util.h
 .\objects\ft_gpio.o: C:\software_install\keil\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\ft_gpio.o: ..\..\..\develop_lib\util.h

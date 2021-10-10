@@ -1,11 +1,19 @@
+#include "stddef.h"
+#include "stdbool.h"
+
 #include "ft32f0xx.h"
 #include "ft_i2c.h"
 #include "util.h"
-#include "stdbool.h"
+#include "lib_error.h"
 
+
+
+#define I2C_TRANFS_TIMEOUT  1000
+
+static i2c_transfer_timeout_handler_t m_i2c_transfer_timeout_handler = NULL;
 
 /**
-  * @brief  Initializes the I2C source clock and IOs used to drive.
+  * @brief  i2c1 资源、IO初始化
   * @param  None
   * @retval None
   */
@@ -60,6 +68,11 @@ void i2c1_res_init(void)
     I2C_Cmd(I2C1, ENABLE);
 }
 
+/**
+  * @brief  i2c1 资源、IO释放
+  * @param  None
+  * @retval None
+  */
 void i2c1_res_deinit(void)
 {
     GPIO_InitTypeDef  GPIO_InitStructure; 
@@ -84,6 +97,190 @@ void i2c1_res_deinit(void)
     GPIO_Init(I2C1_SDA_GPIO_PORT, &GPIO_InitStructure);
 }
 
+/**
+ * 
+ */
+void i2c_transfer_timeout_handler_register(i2c_transfer_timeout_handler_t handler)
+{
+    m_i2c_transfer_timeout_handler = handler;
+}
 
+/**
+ * @brief i2c1往从设备指定的寄存器写入1字节数据
+ * 
+ * 模式: 从设备地址+寄存器地址+数据(1B)
+ */
+int i2c1_write_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t data)
+{
+    uint16_t time_out = I2C_TRANFS_TIMEOUT;
+
+    /**
+     * 配置CR2寄存器
+     * 
+     * 发送一次从设备的地址
+     */
+    I2C_TransferHandling(I2C1, slaver_addr, 1, I2C_SoftEnd_Mode, I2C_Generate_Start_Write);
+
+    /* 获取发送完成状态 */
+    while(I2C_GetFlagStatus(I2C1, I2C_ISR_TXIS) == RESET)
+    {
+        if((time_out--) == 0)
+        {
+            if(m_i2c_transfer_timeout_handler)
+            {
+                m_i2c_transfer_timeout_handler();
+            }
+
+            return -EIO;
+        }
+    }
+
+    /**发送要读寄存器的地址*/
+    I2C_SendData(I2C1, reg);
+
+    time_out = I2C_TRANFS_TIMEOUT;
+    /* 获取发送完成状态 */
+    while(I2C_GetFlagStatus(I2C1, I2C_ISR_TC) == RESET)
+    {
+        if((time_out--) == 0)
+        {
+            if(m_i2c_transfer_timeout_handler)
+            {
+                m_i2c_transfer_timeout_handler();
+            }
+
+            return -EIO;
+        }
+    }
+
+    /* 发送数据 */  
+    I2C_SendData(I2C1, data);
+    time_out = I2C_TRANFS_TIMEOUT;
+    /* 获取发送完成状态 */
+    while(I2C_GetFlagStatus(I2C1, I2C_ISR_TC) == RESET)
+    {
+        if((time_out--) == 0)
+        {
+            if(m_i2c_transfer_timeout_handler)
+            {
+                m_i2c_transfer_timeout_handler();
+            }
+
+            return -EIO;
+        }
+    }
+
+    /**
+     * 产生stop
+     */
+    I2C_GenerateSTOP(I2C1, ENABLE);
+
+    return ENONE;
+}
+
+
+/**
+ * @brief i2c1往从设备指定的寄存器读出1字节数据
+ * 
+ * 模式: 从设备地址+寄存器地址+从设备地址+数据(1B)
+ */
+int i2c1_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data)
+{
+    uint16_t time_out = I2C_TRANFS_TIMEOUT;
+
+    /**
+     * 配置CR2寄存器
+     * 
+     * 发送一次从设备的地址
+     */
+    I2C_TransferHandling(I2C1, slaver_addr, 1, I2C_SoftEnd_Mode, I2C_Generate_Start_Write);
+
+    /* 获取发送完成状态 */
+    while(I2C_GetFlagStatus(I2C1, I2C_ISR_TXIS) == RESET)
+    {
+        if((time_out--) == 0)
+        {
+            if(m_i2c_transfer_timeout_handler)
+            {
+                m_i2c_transfer_timeout_handler();
+            }
+
+            return -EIO;
+        }
+    }
+
+    /**
+     * 发送要读寄存器的地址
+     */
+    I2C_SendData(I2C1, reg);
+
+    time_out = I2C_TRANFS_TIMEOUT;
+    /* 获取发送完成状态 */
+    while(I2C_GetFlagStatus(I2C1, I2C_ISR_TC) == RESET)
+    {
+        if((time_out--) == 0)
+        {
+            if(m_i2c_transfer_timeout_handler)
+            {
+                m_i2c_transfer_timeout_handler();
+            }
+
+            return -EIO;
+        }
+    }
+
+    /* 判断是否有未完成的接收 */
+    time_out = I2C_TRANFS_TIMEOUT;
+    while(I2C_GetFlagStatus(I2C1, I2C_ISR_TCR) == RESET)
+    {
+        if((time_out--) == 0)
+        {
+            if(m_i2c_transfer_timeout_handler)
+            {
+                m_i2c_transfer_timeout_handler();
+            }
+
+            return -EIO;
+        }
+    }
+
+    I2C_TransferHandling(I2C1, slaver_addr, 1, I2C_AutoEnd_Mode, I2C_Generate_Start_Read);
+
+    /* 等待接收到的数据 */
+    time_out = I2C_TRANFS_TIMEOUT;
+    while(I2C_GetFlagStatus(I2C1, I2C_ISR_RXNE) == RESET)
+    {
+        if((time_out--) == 0)
+        {
+            if(m_i2c_transfer_timeout_handler)
+            {
+                m_i2c_transfer_timeout_handler();
+            }
+
+            return -EIO;
+        }
+    }
+
+    *p_data = I2C_ReceiveData(I2C1);
+
+    /* 等待stop信号 */
+    time_out = I2C_TRANFS_TIMEOUT;
+    while(I2C_GetFlagStatus(I2C1, I2C_ISR_STOPF) == RESET)
+    {
+        if((time_out--) == 0)
+        {
+            if(m_i2c_transfer_timeout_handler)
+            {
+                m_i2c_transfer_timeout_handler();
+            }
+
+            return -EIO;
+        }
+    }
+
+    I2C_ClearFlag(I2C1, I2C_ICR_STOPCF);
+
+    return ENONE;
+}
 
 

@@ -115,13 +115,13 @@ void get_gpio_value(GPIO_TypeDef *gpio_port , uint32_t gpio_pin ,uint8_t *p_valu
  * @param  gpio_pins: 对应引脚的bit位要置1
  *           
  */
-void conf_whole_gpios_output(uint32_t ahbperiph, GPIO_TypeDef *gpio_port, uint32_t gpio_pins)
+void conf_whole_gpios_output(uint32_t ahbperiph, GPIO_TypeDef *gpio_port, uint16_t gpio_pins)
 {
     GPIO_InitTypeDef        GPIO_InitStructure;
 
     RCC_AHBPeriphClockCmd(ahbperiph, ENABLE);
 
-    GPIO_InitStructure.GPIO_Pin   = gpio_pin;
+    GPIO_InitStructure.GPIO_Pin   = gpio_pins;
     GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_OUT;
     GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -163,7 +163,7 @@ void set_halt_gpios_value(GPIO_TypeDef *gpio_port ,uint8_t value, bool lsb)
  * @param  gpio_pins: 对应引脚的bit位要置1
  *           
  */
-void conf_whole_gpios_input(uint32_t ahbperiph, GPIO_TypeDef *gpio_port, uint32_t gpio_pins, GPIOPuPd_TypeDef pupd)
+void conf_whole_gpios_input(uint32_t ahbperiph, GPIO_TypeDef *gpio_port, uint16_t gpio_pins, GPIOPuPd_TypeDef pupd)
 {
     GPIO_InitTypeDef        GPIO_InitStructure;
 
@@ -192,3 +192,33 @@ void get_halt_gpios_value(GPIO_TypeDef *gpio_port ,bool lsb, uint8_t *p_value)
 
     *p_value = (uint8_t)get_value;
 }
+
+
+/**
+ * @brief 输出模式转为输入
+ */
+void output_shift_to_input(GPIO_TypeDef *gpio_port, uint16_t gpio_pin, GPIOPuPd_TypeDef pupd)
+{
+    GPIO_InitTypeDef        GPIO_InitStructure;
+
+    GPIO_InitStructure.GPIO_Pin   = gpio_pin;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IN;
+    GPIO_InitStructure.GPIO_PuPd  = pupd;
+    GPIO_Init(gpio_port, &GPIO_InitStructure);
+}
+
+/**
+ * @brief 输入模式转为输出
+ */
+void input_shift_to_output(GPIO_TypeDef *gpio_port, uint16_t gpio_pin)
+{
+    GPIO_InitTypeDef        GPIO_InitStructure;
+
+    GPIO_InitStructure.GPIO_Pin   = gpio_pin;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_OUT;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_UP;
+    GPIO_Init(gpio_port, &GPIO_InitStructure);
+}
+

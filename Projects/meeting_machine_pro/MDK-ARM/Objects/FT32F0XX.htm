@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\FT32F0XX.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\FT32F0XX.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Oct 05 00:55:52 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Oct 10 22:51:56 2021
 <BR><P>
 <H3>Maximum Stack Usage =         44 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; conf_gpio_output &rArr; GPIO_Init
+main &rArr; conf_whole_gpios_output &rArr; GPIO_Init
 <P>
 <H3>
 Mutually Recursive functions
@@ -180,7 +180,7 @@ Global Symbols
 <P><STRONG><a name="[2a]"></a>GPIO_Init</STRONG> (Thumb, 144 bytes, Stack size 20 bytes, ft32f0xx_gpio.o(i.GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conf_gpio_output
+<BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conf_whole_gpios_output
 </UL>
 
 <P><STRONG><a name="[2]"></a>HardFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, ft32f0xx_it.o(i.HardFault_Handler))
@@ -193,7 +193,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_ft32f030x8.o(RESET)
 </UL>
 <P><STRONG><a name="[29]"></a>RCC_AHBPeriphClockCmd</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, ft32f0xx_rcc.o(i.RCC_AHBPeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conf_gpio_output
+<BR><BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conf_whole_gpios_output
 </UL>
 
 <P><STRONG><a name="[3]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, ft32f0xx_it.o(i.SVC_Handler))
@@ -215,8 +215,8 @@ Global Symbols
 
 <P><STRONG><a name="[36]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[28]"></a>conf_gpio_output</STRONG> (Thumb, 46 bytes, Stack size 24 bytes, ft_gpio.o(i.conf_gpio_output))
-<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = conf_gpio_output &rArr; GPIO_Init
+<P><STRONG><a name="[28]"></a>conf_whole_gpios_output</STRONG> (Thumb, 46 bytes, Stack size 24 bytes, ft_gpio.o(i.conf_whole_gpios_output))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = conf_whole_gpios_output &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 <LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
@@ -225,16 +225,18 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[21]"></a>main</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = main &rArr; conf_gpio_output &rArr; GPIO_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = main &rArr; conf_whole_gpios_output &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_gpio_value
-<LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conf_gpio_output
+<BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_halt_gpios_value
+<LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conf_whole_gpios_output
 <LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
-<P><STRONG><a name="[2b]"></a>set_gpio_value</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, ft_gpio.o(i.set_gpio_value))
-<BR><BR>[Called By]<UL><LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[2b]"></a>set_halt_gpios_value</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, ft_gpio.o(i.set_halt_gpios_value))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = set_halt_gpios_value
+</UL>
+<BR>[Called By]<UL><LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 <P>
 <H3>

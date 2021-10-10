@@ -19,9 +19,9 @@
 #define I2C1_SDA_AF                   GPIO_AF_1
 
 
+typedef void (*i2c_transfer_timeout_handler_t) (void);
 
-
-
+void i2c_transfer_timeout_handler_register(i2c_transfer_timeout_handler_t handler);
 
 #endif
 

@@ -32,6 +32,7 @@
 .\objects\st7789.o: ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_wwdg.h
 .\objects\st7789.o: ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_misc.h
 .\objects\st7789.o: ..\..\..\develop_lib\ft_lib\gpio\ft_gpio.h
+.\objects\st7789.o: C:\software_install\keil\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\st7789.o: ..\..\..\develop_lib\middle_api\middle_api.h
 .\objects\st7789.o: ..\..\..\develop_lib\middle_api\tft_8080\tft_8080.h
 .\objects\st7789.o: ..\..\..\develop_lib\hardware\st7789\st7789.h
