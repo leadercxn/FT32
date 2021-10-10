@@ -34,5 +34,6 @@
 .\objects\main.o: ..\..\..\develop_lib\ft_lib\ft_lib.h
 .\objects\main.o: ..\..\..\develop_lib\ft_lib\gpio\ft_gpio.h
 .\objects\main.o: C:\software_install\keil\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\main.o: ..\..\..\develop_lib\ft_lib\i2c\ft_i2c.h
 .\objects\main.o: ..\..\..\develop_lib\hardware\hardware.h
 .\objects\main.o: ..\..\..\develop_lib\hardware\st7789\st7789.h
