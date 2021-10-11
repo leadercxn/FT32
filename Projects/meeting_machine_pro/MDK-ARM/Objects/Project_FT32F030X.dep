@@ -66,7 +66,7 @@ I (..\..\..\develop_lib\develop_lib.h)(0x615B1F67)
 I (..\..\..\develop_lib\ft_lib\ft_lib.h)(0x61630522)
 I (..\..\..\develop_lib\ft_lib\gpio\ft_gpio.h)(0x6161BA7C)
 I (C:\software_install\keil\ARM\ARMCC\include\stdbool.h)(0x5EC775F6)
-I (..\..\..\develop_lib\ft_lib\i2c\ft_i2c.h)(0x6162BD88)
+I (..\..\..\develop_lib\ft_lib\i2c\ft_i2c.h)(0x61630E0E)
 I (..\..\..\develop_lib\hardware\hardware.h)(0x6159E691)
 I (..\..\..\develop_lib\hardware\st7789\st7789.h)(0x6159E11B)
 F (..\ft32f0xx_it.c)(0x61599B16)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\ -I ..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include -I ..\..\..\Libraries\CMSIS\Include -I ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc -I ..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc -I ..\..\..\Utilities\FT32_EVAL\Common -I ..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL -I ..\..\..\develop_lib\hardware\st7789 -I ..\..\..\develop_lib\ft_lib\gpio -I ..\..\..\develop_lib\hardware -I ..\..\..\develop_lib\middle_api -I ..\..\..\develop_lib\middle_api\tft_8080 -I ..\..\..\develop_lib\ft_lib -I ..\..\..\develop_lib -I ..\..\meeting_machine_pro -I ..\..\..\develop_lib\ft_lib\i2c-IC:\software_install\keil\FMD\FT32F0xx_DFP\1.0.1\Drivers\CMSIS\FT32F0xx\Include-IC:\software_install\keil\ARM\CMSIS\Include-D__UVISION_VERSION="531" -DFT32F030x8 -DFT32F030x8 -DUSE_STDPERIPH_DRIVER -DUSE_FT32F030XX_EVAL -DUSE_DEFAULT_TIMEOUT_CALLBACK -DFT32-o .\objects\ft32f0xx_it.o --omf_browse .\objects\ft32f0xx_it.crf --depend .\objects\ft32f0xx_it.d)
@@ -865,7 +865,7 @@ I (..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_wwdg.h)(0x60FF9EFA)
 I (..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_misc.h)(0x60FF9EF6)
 I (..\..\..\develop_lib\ft_lib\gpio\ft_gpio.h)(0x6161BA7C)
 I (C:\software_install\keil\ARM\ARMCC\include\stdbool.h)(0x5EC775F6)
-I (..\..\..\develop_lib\ft_lib\i2c\ft_i2c.h)(0x6162BD88)
+I (..\..\..\develop_lib\ft_lib\i2c\ft_i2c.h)(0x61630E0E)
 I (..\..\..\develop_lib\middle_api\middle_api.h)(0x615AE1B7)
 I (..\..\..\develop_lib\middle_api\tft_8080\tft_8080.h)(0x615AE185)
 I (..\..\..\develop_lib\hardware\st7789\st7789.h)(0x6159E11B)
@@ -902,7 +902,7 @@ I (..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_misc.h)(0x60FF9EF6)
 I (..\..\..\develop_lib\ft_lib\gpio\ft_gpio.h)(0x6161BA7C)
 I (C:\software_install\keil\ARM\ARMCC\include\stdbool.h)(0x5EC775F6)
 I (..\..\..\develop_lib\util.h)(0x615B1E13)
-F (..\..\..\develop_lib\ft_lib\i2c\ft_i2c.c)(0x6162FDFF)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\ -I ..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include -I ..\..\..\Libraries\CMSIS\Include -I ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc -I ..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc -I ..\..\..\Utilities\FT32_EVAL\Common -I ..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL -I ..\..\..\develop_lib\hardware\st7789 -I ..\..\..\develop_lib\ft_lib\gpio -I ..\..\..\develop_lib\hardware -I ..\..\..\develop_lib\middle_api -I ..\..\..\develop_lib\middle_api\tft_8080 -I ..\..\..\develop_lib\ft_lib -I ..\..\..\develop_lib -I ..\..\meeting_machine_pro -I ..\..\..\develop_lib\ft_lib\i2c-IC:\software_install\keil\FMD\FT32F0xx_DFP\1.0.1\Drivers\CMSIS\FT32F0xx\Include-IC:\software_install\keil\ARM\CMSIS\Include-D__UVISION_VERSION="531" -DFT32F030x8 -DFT32F030x8 -DUSE_STDPERIPH_DRIVER -DUSE_FT32F030XX_EVAL -DUSE_DEFAULT_TIMEOUT_CALLBACK -DFT32-o .\objects\ft_i2c.o --omf_browse .\objects\ft_i2c.crf --depend .\objects\ft_i2c.d)
+F (..\..\..\develop_lib\ft_lib\i2c\ft_i2c.c)(0x616311CC)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\ -I ..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include -I ..\..\..\Libraries\CMSIS\Include -I ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc -I ..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc -I ..\..\..\Utilities\FT32_EVAL\Common -I ..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL -I ..\..\..\develop_lib\hardware\st7789 -I ..\..\..\develop_lib\ft_lib\gpio -I ..\..\..\develop_lib\hardware -I ..\..\..\develop_lib\middle_api -I ..\..\..\develop_lib\middle_api\tft_8080 -I ..\..\..\develop_lib\ft_lib -I ..\..\..\develop_lib -I ..\..\meeting_machine_pro -I ..\..\..\develop_lib\ft_lib\i2c-IC:\software_install\keil\FMD\FT32F0xx_DFP\1.0.1\Drivers\CMSIS\FT32F0xx\Include-IC:\software_install\keil\ARM\CMSIS\Include-D__UVISION_VERSION="531" -DFT32F030x8 -DFT32F030x8 -DUSE_STDPERIPH_DRIVER -DUSE_FT32F030XX_EVAL -DUSE_DEFAULT_TIMEOUT_CALLBACK -DFT32-o .\objects\ft_i2c.o --omf_browse .\objects\ft_i2c.crf --depend .\objects\ft_i2c.d)
 I (C:\software_install\keil\ARM\ARMCC\include\stddef.h)(0x5EC775FC)
 I (C:\software_install\keil\ARM\ARMCC\include\stdbool.h)(0x5EC775F6)
 I (..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include\ft32f0xx.h)(0x60FF9EF2)
@@ -934,7 +934,8 @@ I (..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_tim.h)(0x60FF9EF8)
 I (..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_usart.h)(0x60FF9EF8)
 I (..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_wwdg.h)(0x60FF9EFA)
 I (..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_misc.h)(0x60FF9EF6)
-I (..\..\..\develop_lib\ft_lib\i2c\ft_i2c.h)(0x6162BD88)
+I (..\..\..\develop_lib\ft_lib\gpio\ft_gpio.h)(0x6161BA7C)
+I (..\..\..\develop_lib\ft_lib\i2c\ft_i2c.h)(0x61630E0E)
 I (..\..\..\develop_lib\util.h)(0x615B1E13)
 I (..\..\..\develop_lib\lib_error.h)(0x6162FCB1)
 F (..\..\..\develop_lib\middle_api\tft_8080\tft_8080.c)(0x615AE1A8)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\ -I ..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include -I ..\..\..\Libraries\CMSIS\Include -I ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc -I ..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc -I ..\..\..\Utilities\FT32_EVAL\Common -I ..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL -I ..\..\..\develop_lib\hardware\st7789 -I ..\..\..\develop_lib\ft_lib\gpio -I ..\..\..\develop_lib\hardware -I ..\..\..\develop_lib\middle_api -I ..\..\..\develop_lib\middle_api\tft_8080 -I ..\..\..\develop_lib\ft_lib -I ..\..\..\develop_lib -I ..\..\meeting_machine_pro -I ..\..\..\develop_lib\ft_lib\i2c-IC:\software_install\keil\FMD\FT32F0xx_DFP\1.0.1\Drivers\CMSIS\FT32F0xx\Include-IC:\software_install\keil\ARM\CMSIS\Include-D__UVISION_VERSION="531" -DFT32F030x8 -DFT32F030x8 -DUSE_STDPERIPH_DRIVER -DUSE_FT32F030XX_EVAL -DUSE_DEFAULT_TIMEOUT_CALLBACK -DFT32-o .\objects\tft_8080.o --omf_browse .\objects\tft_8080.crf --depend .\objects\tft_8080.d)

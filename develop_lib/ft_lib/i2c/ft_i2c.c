@@ -2,6 +2,7 @@
 #include "stdbool.h"
 
 #include "ft32f0xx.h"
+#include "ft_gpio.h"
 #include "ft_i2c.h"
 #include "util.h"
 #include "lib_error.h"
@@ -284,3 +285,15 @@ int i2c1_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data)
 }
 
 
+
+/**
+ * @brief 模拟i2c初始化
+ */
+void virt_i2c_init(void)
+{
+  conf_gpio_output(VIRT_SCL_GPIO_CLK, VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN);
+  set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+
+  conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
+  set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
+}

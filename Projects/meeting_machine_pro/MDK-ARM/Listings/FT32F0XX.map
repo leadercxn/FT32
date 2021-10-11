@@ -352,6 +352,8 @@ Section Cross References
     ft_i2c.o(i.i2c1_write_one_byte) refers to ft32f0xx_i2c.o(i.I2C_GenerateSTOP) for I2C_GenerateSTOP
     ft_i2c.o(i.i2c1_write_one_byte) refers to ft_i2c.o(.data) for m_i2c_transfer_timeout_handler
     ft_i2c.o(i.i2c_transfer_timeout_handler_register) refers to ft_i2c.o(.data) for m_i2c_transfer_timeout_handler
+    ft_i2c.o(i.virt_i2c_init) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
+    ft_i2c.o(i.virt_i2c_init) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000D) for __rt_final_cpp
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$0000000F) for __rt_final_exit
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
@@ -990,6 +992,7 @@ Removing Unused input sections from the image.
     Removing ft_i2c.o(i.i2c1_res_init), (136 bytes).
     Removing ft_i2c.o(i.i2c1_write_one_byte), (208 bytes).
     Removing ft_i2c.o(i.i2c_transfer_timeout_handler_register), (12 bytes).
+    Removing ft_i2c.o(i.virt_i2c_init), (56 bytes).
     Removing ft_i2c.o(.data), (4 bytes).
     Removing dflti.o(.text), (40 bytes).
     Removing dfltui.o(.text), (28 bytes).
@@ -998,7 +1001,7 @@ Removing Unused input sections from the image.
     Removing depilogue.o(.text), (190 bytes).
     Removing depilogue.o(i.__ARM_clz), (46 bytes).
 
-614 unused section(s) (total 40230 bytes) removed from the image.
+615 unused section(s) (total 40286 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1215,17 +1218,17 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x000000c0   Data   RO            3    RESET               startup_ft32f030x8.o
-    0x080000c0   0x080000c0   0x00000000   Code   RO         4040  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
-    0x080000c0   0x080000c0   0x00000004   Code   RO         4055    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
-    0x080000c4   0x080000c4   0x00000004   Code   RO         4058    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
-    0x080000c8   0x080000c8   0x00000000   Code   RO         4060    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
-    0x080000c8   0x080000c8   0x00000000   Code   RO         4062    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
-    0x080000c8   0x080000c8   0x00000008   Code   RO         4063    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
-    0x080000d0   0x080000d0   0x00000000   Code   RO         4065    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
-    0x080000d0   0x080000d0   0x00000000   Code   RO         4067    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
-    0x080000d0   0x080000d0   0x00000004   Code   RO         4056    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x080000c0   0x080000c0   0x00000000   Code   RO         4046  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x080000c0   0x080000c0   0x00000004   Code   RO         4061    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x080000c4   0x080000c4   0x00000004   Code   RO         4064    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         4066    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         4068    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x080000c8   0x080000c8   0x00000008   Code   RO         4069    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x080000d0   0x080000d0   0x00000000   Code   RO         4071    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x080000d0   0x080000d0   0x00000000   Code   RO         4073    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x080000d0   0x080000d0   0x00000004   Code   RO         4062    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
     0x080000d4   0x080000d4   0x00000058   Code   RO            4    .text               startup_ft32f030x8.o
-    0x0800012c   0x0800012c   0x00000024   Code   RO         4074    .text               mc_p.l(init.o)
+    0x0800012c   0x0800012c   0x00000024   Code   RO         4080    .text               mc_p.l(init.o)
     0x08000150   0x08000150   0x00000090   Code   RO         1222    i.GPIO_Init         ft32f0xx_gpio.o
     0x080001e0   0x080001e0   0x00000002   Code   RO          208    i.HardFault_Handler  ft32f0xx_it.o
     0x080001e2   0x080001e2   0x00000002   Code   RO          209    i.NMI_Handler       ft32f0xx_it.o
@@ -1238,16 +1241,16 @@ Memory Map of the image
     0x080002dc   0x080002dc   0x00000002   Code   RO          212    i.SysTick_Handler   ft32f0xx_it.o
     0x080002de   0x080002de   0x00000002   PAD
     0x080002e0   0x080002e0   0x0000007c   Code   RO           14    i.SystemInit        system_ft32f0xx.o
-    0x0800035c   0x0800035c   0x0000000e   Code   RO         4082    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x0800036a   0x0800036a   0x00000002   Code   RO         4083    i.__scatterload_null  mc_p.l(handlers.o)
-    0x0800036c   0x0800036c   0x0000000e   Code   RO         4084    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x0800035c   0x0800035c   0x0000000e   Code   RO         4088    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x0800036a   0x0800036a   0x00000002   Code   RO         4089    i.__scatterload_null  mc_p.l(handlers.o)
+    0x0800036c   0x0800036c   0x0000000e   Code   RO         4090    i.__scatterload_zeroinit  mc_p.l(handlers.o)
     0x0800037a   0x0800037a   0x0000002e   Code   RO         3907    i.conf_whole_gpios_output  ft_gpio.o
     0x080003a8   0x080003a8   0x00000022   Code   RO          134    i.delay             main.o
     0x080003ca   0x080003ca   0x00000002   PAD
     0x080003cc   0x080003cc   0x00000038   Code   RO          135    i.main              main.o
     0x08000404   0x08000404   0x00000026   Code   RO         3913    i.set_halt_gpios_value  ft_gpio.o
     0x0800042a   0x0800042a   0x00000002   PAD
-    0x0800042c   0x0800042c   0x00000010   Data   RO         4080    Region$$Table       anon$$obj.o
+    0x0800042c   0x0800042c   0x00000010   Data   RO         4086    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0800043c, Size: 0x00000400, Max: 0x00002000, ABSOLUTE)

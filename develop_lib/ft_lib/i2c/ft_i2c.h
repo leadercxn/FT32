@@ -19,6 +19,18 @@
 #define I2C1_SDA_AF                   GPIO_AF_1
 
 
+
+#define VIRT_SCL_PIN                  GPIO_Pin_12                  /* 模拟I2C-SCL */
+#define VIRT_SCL_GPIO_PORT            GPIOA                       /* GPIOA */
+#define VIRT_SCL_GPIO_CLK             RCC_AHBPeriph_GPIOA
+
+
+#define VIRT_SDA_PIN                  GPIO_Pin_11                  /* 模拟I2C-SDA */
+#define VIRT_SDA_GPIO_PORT            GPIOA                       /* GPIOA */
+#define VIRT_SDA_GPIO_CLK             RCC_AHBPeriph_GPIOA
+
+
+
 typedef void (*i2c_transfer_timeout_handler_t) (void);
 
 void i2c_transfer_timeout_handler_register(i2c_transfer_timeout_handler_t handler);

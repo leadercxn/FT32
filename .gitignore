@@ -7,3 +7,11 @@
 *.crf
 *.dep
 *.DS_Store
+
+Projects/meeting_machine_pro/MDK-ARM/Listings/FT32F0XX.map
+Projects/meeting_machine_pro/MDK-ARM/Objects/*.axf
+Projects/meeting_machine_pro/MDK-ARM/Objects/*.htm
+Projects/meeting_machine_pro/MDK-ARM/Objects/*.crf
+Projects/meeting_machine_pro/MDK-ARM/Objects/*.d
+Projects/meeting_machine_pro/MDK-ARM/Objects/*.dep
+Projects/meeting_machine_pro/MDK-ARM/Project.uvguix.*
