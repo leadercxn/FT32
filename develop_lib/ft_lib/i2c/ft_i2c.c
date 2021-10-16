@@ -4,6 +4,7 @@
 #include "ft32f0xx.h"
 #include "ft_gpio.h"
 #include "ft_i2c.h"
+#include "ft_delay.h"
 #include "util.h"
 #include "lib_error.h"
 
@@ -183,7 +184,7 @@ int i2c1_write_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t data)
 /**
  * @brief i2c1往从设备指定的寄存器读出1字节数据
  * 
- * 模式: 从设备地址+寄存器地址+从设备地址+数据(1B)
+ * 模式: 从设备地址+寄存器地址+开始+从设备地址+数据(1B)
  */
 int i2c1_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data)
 {
@@ -296,4 +297,197 @@ void virt_i2c_init(void)
 
   conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
   set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
+}
+
+static void virt_i2c_start(void)
+{
+    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
+    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+
+    delay_us(5);
+
+    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 0);
+
+    delay_us(5);
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+}
+
+static void virt_i2c_stop(void)
+{
+    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
+    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 0);
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+
+    delay_us(5);
+
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+    delay_us(5);
+    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
+}
+
+static int virt_i2c_wait_ack(void)
+{
+    uint8_t timeout = 0;
+    uint8_t sda_value = 0;
+    
+    conf_gpio_input(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, GPIO_PuPd_UP);
+
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+    delay_us(1);
+
+    get_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, &sda_value);
+    while(sda_value)
+    {
+        timeout++;
+        if(timeout > 250)
+        {
+            virt_i2c_stop();
+            return -EIO;
+        }
+
+        get_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, &sda_value);
+        delay_us(1);
+    }
+
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+
+    return ENONE;
+}
+
+static void virt_i2c_set_ack(void)
+{
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
+    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 0);
+
+    delay_us(2);
+
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+    delay_us(2);
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+}
+
+static void virt_i2c_set_nack(void)
+{
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
+    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
+
+    delay_us(2);
+
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+    delay_us(2);
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+}
+
+static void virt_i2c_send_byte(uint8_t byte)
+{
+    uint8_t i = 0;
+    uint8_t temp = 0;
+
+    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
+    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+
+    for(i = 0; i < 8; i++)
+    {
+        temp = (byte & 0x80) >> 1;
+
+        set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, temp);
+        delay_us(2);
+        set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+        delay_us(2);
+        set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+        delay_us(2);
+
+        byte <<= 1;
+    }
+}
+
+/**
+ * @brief 
+ * 
+ * @param ack 读取完一个字节后是否发送一个应答信号
+ */
+static uint8_t virt_i2c_read_byte(bool ack)
+{
+    uint8_t i = 0,recv_byte = 0;
+    uint8_t sda_value = 0;
+
+    conf_gpio_input(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, GPIO_PuPd_UP);
+
+    for(i = 0; i < 8; i++)
+    {
+        recv_byte <<= 1;
+
+        set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+        delay_us(2);
+        set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+
+        get_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, &sda_value);
+        if(sda_value)
+        {
+            recv_byte++;
+        }
+        delay_us(1);
+    }
+
+    if(ack)
+    {
+        virt_i2c_set_ack();
+    }
+    else
+    {
+        virt_i2c_set_nack();
+    }
+
+    return recv_byte;
+}
+
+
+/**
+ * @brief 模拟i2c往从设备指定的寄存器写入1字节数据
+ * 
+ * 模式: 从设备地址+寄存器地址+从设备地址+数据(1B)
+ */
+void virt_i2c_write_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t data)
+{
+    uint8_t address = (slaver_addr << 1);
+
+    virt_i2c_start();
+
+    virt_i2c_send_byte(address);
+    virt_i2c_wait_ack();
+    virt_i2c_send_byte(reg);
+    virt_i2c_wait_ack();
+    virt_i2c_send_byte(data);
+    virt_i2c_wait_ack();
+    virt_i2c_stop();
+}
+
+
+/**
+ * @brief 模拟i2c往从设备指定的寄存器读出1字节数据
+ * 
+ * 模式: 从设备地址+寄存器地址+开始+从设备地址+数据(1B)
+ */
+void virt_i2c_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data)
+{
+    uint8_t address = (slaver_addr << 1);
+
+    virt_i2c_start();
+
+    virt_i2c_send_byte(address);
+    virt_i2c_wait_ack();
+    virt_i2c_send_byte(reg);
+    virt_i2c_wait_ack();
+
+    virt_i2c_start();
+    address = (slaver_addr << 1) | 0x01 ;
+    virt_i2c_send_byte(address);
+    virt_i2c_wait_ack();
+
+    *p_data = virt_i2c_read_byte(false);
+
+    virt_i2c_stop();
 }

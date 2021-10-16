@@ -33,5 +33,6 @@
 .\objects\ft_i2c.o: ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc\FT32f0xx_misc.h
 .\objects\ft_i2c.o: ..\..\..\develop_lib\ft_lib\gpio\ft_gpio.h
 .\objects\ft_i2c.o: ..\..\..\develop_lib\ft_lib\i2c\ft_i2c.h
+.\objects\ft_i2c.o: ..\..\..\develop_lib\ft_lib\common\ft_delay.h
 .\objects\ft_i2c.o: ..\..\..\develop_lib\util.h
 .\objects\ft_i2c.o: ..\..\..\develop_lib\lib_error.h

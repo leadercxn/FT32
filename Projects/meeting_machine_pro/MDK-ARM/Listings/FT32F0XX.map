@@ -4,19 +4,19 @@ Component: ARM Compiler 5.06 update 6 (build 750) Tool: armlink [4d35ed]
 
 Section Cross References
 
-    startup_ft32f030x8.o(RESET) refers to startup_ft32f030x8.o(STACK) for __initial_sp
-    startup_ft32f030x8.o(RESET) refers to startup_ft32f030x8.o(.text) for Reset_Handler
-    startup_ft32f030x8.o(RESET) refers to ft32f0xx_it.o(i.NMI_Handler) for NMI_Handler
-    startup_ft32f030x8.o(RESET) refers to ft32f0xx_it.o(i.HardFault_Handler) for HardFault_Handler
-    startup_ft32f030x8.o(RESET) refers to ft32f0xx_it.o(i.SVC_Handler) for SVC_Handler
-    startup_ft32f030x8.o(RESET) refers to ft32f0xx_it.o(i.PendSV_Handler) for PendSV_Handler
-    startup_ft32f030x8.o(RESET) refers to ft32f0xx_it.o(i.SysTick_Handler) for SysTick_Handler
-    startup_ft32f030x8.o(.text) refers to startup_ft32f030x8.o(STACK) for __initial_sp
-    startup_ft32f030x8.o(.text) refers to system_ft32f0xx.o(i.SystemInit) for SystemInit
-    startup_ft32f030x8.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
     system_ft32f0xx.o(i.SystemCoreClockUpdate) refers to uidiv.o(.text) for __aeabi_uidivmod
     system_ft32f0xx.o(i.SystemCoreClockUpdate) refers to system_ft32f0xx.o(.data) for SystemCoreClock
     system_ft32f0xx.o(i.SystemInit) refers to system_ft32f0xx.o(i.SetSysClock) for SetSysClock
+    startup_ft32f072xb.o(RESET) refers to startup_ft32f072xb.o(STACK) for __initial_sp
+    startup_ft32f072xb.o(RESET) refers to startup_ft32f072xb.o(.text) for Reset_Handler
+    startup_ft32f072xb.o(RESET) refers to ft32f0xx_it.o(i.NMI_Handler) for NMI_Handler
+    startup_ft32f072xb.o(RESET) refers to ft32f0xx_it.o(i.HardFault_Handler) for HardFault_Handler
+    startup_ft32f072xb.o(RESET) refers to ft32f0xx_it.o(i.SVC_Handler) for SVC_Handler
+    startup_ft32f072xb.o(RESET) refers to ft32f0xx_it.o(i.PendSV_Handler) for PendSV_Handler
+    startup_ft32f072xb.o(RESET) refers to ft32f0xx_it.o(i.SysTick_Handler) for SysTick_Handler
+    startup_ft32f072xb.o(.text) refers to startup_ft32f072xb.o(STACK) for __initial_sp
+    startup_ft32f072xb.o(.text) refers to system_ft32f0xx.o(i.SystemInit) for SystemInit
+    startup_ft32f072xb.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
     main.o(i.main) refers to ft_gpio.o(i.conf_whole_gpios_output) for conf_whole_gpios_output
     main.o(i.main) refers to ft_gpio.o(i.set_halt_gpios_value) for set_halt_gpios_value
     main.o(i.main) refers to main.o(i.delay) for delay
@@ -95,230 +95,6 @@ Section Cross References
     ft32f0xx_usart.o(i.USART_Init) refers to ft32f0xx_rcc.o(i.RCC_GetClocksFreq) for RCC_GetClocksFreq
     ft32f0xx_usart.o(i.USART_Init) refers to uidiv.o(.text) for __aeabi_uidivmod
     ft32f0xx_wwdg.o(i.WWDG_DeInit) refers to ft32f0xx_rcc.o(i.RCC_APB1PeriphResetCmd) for RCC_APB1PeriphResetCmd
-    ft32f030xx_eval.o(i.FT_EVAL_COMInit) refers to ft32f0xx_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
-    ft32f030xx_eval.o(i.FT_EVAL_COMInit) refers to ft32f0xx_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
-    ft32f030xx_eval.o(i.FT_EVAL_COMInit) refers to ft32f0xx_gpio.o(i.GPIO_PinAFConfig) for GPIO_PinAFConfig
-    ft32f030xx_eval.o(i.FT_EVAL_COMInit) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval.o(i.FT_EVAL_COMInit) refers to ft32f0xx_usart.o(i.USART_Init) for USART_Init
-    ft32f030xx_eval.o(i.FT_EVAL_COMInit) refers to ft32f0xx_usart.o(i.USART_Cmd) for USART_Cmd
-    ft32f030xx_eval.o(i.FT_EVAL_COMInit) refers to ft32f030xx_eval.o(.constdata) for COM_TX_PORT_CLK
-    ft32f030xx_eval.o(i.FT_EVAL_COMInit) refers to ft32f030xx_eval.o(.data) for COM_TX_PORT
-    ft32f030xx_eval.o(i.FT_EVAL_LEDInit) refers to ft32f0xx_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
-    ft32f030xx_eval.o(i.FT_EVAL_LEDInit) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval.o(i.FT_EVAL_LEDInit) refers to ft32f030xx_eval.o(.constdata) for GPIO_CLK
-    ft32f030xx_eval.o(i.FT_EVAL_LEDInit) refers to ft32f030xx_eval.o(.data) for GPIO_PORT
-    ft32f030xx_eval.o(i.FT_EVAL_LEDOff) refers to ft32f030xx_eval.o(.constdata) for GPIO_PIN
-    ft32f030xx_eval.o(i.FT_EVAL_LEDOff) refers to ft32f030xx_eval.o(.data) for GPIO_PORT
-    ft32f030xx_eval.o(i.FT_EVAL_LEDOn) refers to ft32f030xx_eval.o(.constdata) for GPIO_PIN
-    ft32f030xx_eval.o(i.FT_EVAL_LEDOn) refers to ft32f030xx_eval.o(.data) for GPIO_PORT
-    ft32f030xx_eval.o(i.FT_EVAL_LEDToggle) refers to ft32f030xx_eval.o(.data) for GPIO_PORT
-    ft32f030xx_eval.o(i.FT_EVAL_LEDToggle) refers to ft32f030xx_eval.o(.constdata) for GPIO_PIN
-    ft32f030xx_eval.o(i.FT_EVAL_PBGetState) refers to ft32f0xx_gpio.o(i.GPIO_ReadInputDataBit) for GPIO_ReadInputDataBit
-    ft32f030xx_eval.o(i.FT_EVAL_PBGetState) refers to ft32f030xx_eval.o(.constdata) for BUTTON_PIN
-    ft32f030xx_eval.o(i.FT_EVAL_PBGetState) refers to ft32f030xx_eval.o(.data) for BUTTON_PORT
-    ft32f030xx_eval.o(i.FT_EVAL_PBInit) refers to ft32f0xx_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
-    ft32f030xx_eval.o(i.FT_EVAL_PBInit) refers to ft32f0xx_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
-    ft32f030xx_eval.o(i.FT_EVAL_PBInit) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval.o(i.FT_EVAL_PBInit) refers to ft32f0xx_syscfg.o(i.SYSCFG_EXTILineConfig) for SYSCFG_EXTILineConfig
-    ft32f030xx_eval.o(i.FT_EVAL_PBInit) refers to ft32f0xx_exti.o(i.EXTI_Init) for EXTI_Init
-    ft32f030xx_eval.o(i.FT_EVAL_PBInit) refers to ft32f0xx_misc.o(i.NVIC_Init) for NVIC_Init
-    ft32f030xx_eval.o(i.FT_EVAL_PBInit) refers to ft32f030xx_eval.o(.constdata) for BUTTON_CLK
-    ft32f030xx_eval.o(i.FT_EVAL_PBInit) refers to ft32f030xx_eval.o(.data) for BUTTON_PORT
-    ft32f030xx_eval.o(i.LM75_LowLevel_DeInit) refers to ft32f0xx_i2c.o(i.I2C_Cmd) for I2C_Cmd
-    ft32f030xx_eval.o(i.LM75_LowLevel_DeInit) refers to ft32f0xx_i2c.o(i.I2C_DeInit) for I2C_DeInit
-    ft32f030xx_eval.o(i.LM75_LowLevel_DeInit) refers to ft32f0xx_rcc.o(i.RCC_APB1PeriphClockCmd) for RCC_APB1PeriphClockCmd
-    ft32f030xx_eval.o(i.LM75_LowLevel_DeInit) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval.o(i.LM75_LowLevel_Init) refers to ft32f0xx_rcc.o(i.RCC_APB1PeriphClockCmd) for RCC_APB1PeriphClockCmd
-    ft32f030xx_eval.o(i.LM75_LowLevel_Init) refers to ft32f0xx_rcc.o(i.RCC_I2CCLKConfig) for RCC_I2CCLKConfig
-    ft32f030xx_eval.o(i.LM75_LowLevel_Init) refers to ft32f0xx_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
-    ft32f030xx_eval.o(i.LM75_LowLevel_Init) refers to ft32f0xx_gpio.o(i.GPIO_PinAFConfig) for GPIO_PinAFConfig
-    ft32f030xx_eval.o(i.LM75_LowLevel_Init) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval.o(i.SD_LowLevel_DeInit) refers to ft32f0xx_spi.o(i.SPI_Cmd) for SPI_Cmd
-    ft32f030xx_eval.o(i.SD_LowLevel_DeInit) refers to ft32f0xx_spi.o(i.SPI_I2S_DeInit) for SPI_I2S_DeInit
-    ft32f030xx_eval.o(i.SD_LowLevel_DeInit) refers to ft32f0xx_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
-    ft32f030xx_eval.o(i.SD_LowLevel_DeInit) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval.o(i.SD_LowLevel_Init) refers to ft32f0xx_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
-    ft32f030xx_eval.o(i.SD_LowLevel_Init) refers to ft32f0xx_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
-    ft32f030xx_eval.o(i.SD_LowLevel_Init) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval.o(i.SD_LowLevel_Init) refers to ft32f0xx_gpio.o(i.GPIO_PinAFConfig) for GPIO_PinAFConfig
-    ft32f030xx_eval.o(i.SD_LowLevel_Init) refers to ft32f0xx_spi.o(i.SPI_I2S_DeInit) for SPI_I2S_DeInit
-    ft32f030xx_eval.o(i.SD_LowLevel_Init) refers to ft32f0xx_spi.o(i.SPI_Init) for SPI_Init
-    ft32f030xx_eval.o(i.SD_LowLevel_Init) refers to ft32f0xx_spi.o(i.SPI_RxFIFOThresholdConfig) for SPI_RxFIFOThresholdConfig
-    ft32f030xx_eval.o(i.SD_LowLevel_Init) refers to ft32f0xx_spi.o(i.SPI_Cmd) for SPI_Cmd
-    ft32f030xx_eval.o(i.sEE_LowLevel_DeInit) refers to ft32f0xx_i2c.o(i.I2C_Cmd) for I2C_Cmd
-    ft32f030xx_eval.o(i.sEE_LowLevel_DeInit) refers to ft32f0xx_i2c.o(i.I2C_DeInit) for I2C_DeInit
-    ft32f030xx_eval.o(i.sEE_LowLevel_DeInit) refers to ft32f0xx_rcc.o(i.RCC_APB1PeriphClockCmd) for RCC_APB1PeriphClockCmd
-    ft32f030xx_eval.o(i.sEE_LowLevel_DeInit) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval.o(i.sEE_LowLevel_Init) refers to ft32f0xx_rcc.o(i.RCC_I2CCLKConfig) for RCC_I2CCLKConfig
-    ft32f030xx_eval.o(i.sEE_LowLevel_Init) refers to ft32f0xx_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
-    ft32f030xx_eval.o(i.sEE_LowLevel_Init) refers to ft32f0xx_rcc.o(i.RCC_APB1PeriphClockCmd) for RCC_APB1PeriphClockCmd
-    ft32f030xx_eval.o(i.sEE_LowLevel_Init) refers to ft32f0xx_gpio.o(i.GPIO_PinAFConfig) for GPIO_PinAFConfig
-    ft32f030xx_eval.o(i.sEE_LowLevel_Init) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval_lcd.o(i.FT32F030XX_LCD_Init) refers to ft32f030xx_eval_lcd.o(i.LCD_Setup) for LCD_Setup
-    ft32f030xx_eval_lcd.o(i.FT32F030XX_LCD_Init) refers to ft32f030xx_eval_lcd.o(i.LCD_ReadReg) for LCD_ReadReg
-    ft32f030xx_eval_lcd.o(i.FT32F030XX_LCD_Init) refers to ft32f030xx_eval_lcd.o(i.LCD_SetFont) for LCD_SetFont
-    ft32f030xx_eval_lcd.o(i.FT32F030XX_LCD_Init) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_Clear) refers to ft32f030xx_eval_lcd.o(i.LCD_SetCursor) for LCD_SetCursor
-    ft32f030xx_eval_lcd.o(i.LCD_Clear) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAM_Prepare) for LCD_WriteRAM_Prepare
-    ft32f030xx_eval_lcd.o(i.LCD_Clear) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAM) for LCD_WriteRAM
-    ft32f030xx_eval_lcd.o(i.LCD_Clear) refers to ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite) for LCD_CtrlLinesWrite
-    ft32f030xx_eval_lcd.o(i.LCD_Clear) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_ClearLine) refers to ft32f030xx_eval_lcd.o(i.LCD_DisplayChar) for LCD_DisplayChar
-    ft32f030xx_eval_lcd.o(i.LCD_ClearLine) refers to ft32f030xx_eval_lcd.o(.data) for LCD_Currentfonts
-    ft32f030xx_eval_lcd.o(i.LCD_ClosedPolyLine) refers to ft32f030xx_eval_lcd.o(i.LCD_PolyLine) for LCD_PolyLine
-    ft32f030xx_eval_lcd.o(i.LCD_ClosedPolyLine) refers to ft32f030xx_eval_lcd.o(i.LCD_DrawUniLine) for LCD_DrawUniLine
-    ft32f030xx_eval_lcd.o(i.LCD_ClosedPolyLineRelative) refers to ft32f030xx_eval_lcd.o(i.LCD_PolyLineRelativeClosed) for LCD_PolyLineRelativeClosed
-    ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesConfig) refers to ft32f0xx_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
-    ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesConfig) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesConfig) refers to ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite) for LCD_CtrlLinesWrite
-    ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite) refers to ft32f0xx_gpio.o(i.GPIO_WriteBit) for GPIO_WriteBit
-    ft32f030xx_eval_lcd.o(i.LCD_DeInit) refers to ft32f030xx_eval_lcd.o(i.LCD_DisplayOff) for LCD_DisplayOff
-    ft32f030xx_eval_lcd.o(i.LCD_DeInit) refers to ft32f0xx_spi.o(i.SPI_Cmd) for SPI_Cmd
-    ft32f030xx_eval_lcd.o(i.LCD_DeInit) refers to ft32f0xx_spi.o(i.SPI_I2S_DeInit) for SPI_I2S_DeInit
-    ft32f030xx_eval_lcd.o(i.LCD_DeInit) refers to ft32f0xx_rcc.o(i.RCC_APB1PeriphClockCmd) for RCC_APB1PeriphClockCmd
-    ft32f030xx_eval_lcd.o(i.LCD_DeInit) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval_lcd.o(i.LCD_DisplayChar) refers to ft32f030xx_eval_lcd.o(i.LCD_DrawChar) for LCD_DrawChar
-    ft32f030xx_eval_lcd.o(i.LCD_DisplayChar) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_DisplayOff) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteReg) for LCD_WriteReg
-    ft32f030xx_eval_lcd.o(i.LCD_DisplayOff) refers to ft32f030xx_eval_lcd.o(i.delay) for delay
-    ft32f030xx_eval_lcd.o(i.LCD_DisplayOff) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_DisplayOn) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteReg) for LCD_WriteReg
-    ft32f030xx_eval_lcd.o(i.LCD_DisplayOn) refers to ft32f030xx_eval_lcd.o(i.delay) for delay
-    ft32f030xx_eval_lcd.o(i.LCD_DisplayOn) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_DisplayStringLine) refers to ft32f030xx_eval_lcd.o(i.LCD_DisplayChar) for LCD_DisplayChar
-    ft32f030xx_eval_lcd.o(i.LCD_DisplayStringLine) refers to ft32f030xx_eval_lcd.o(.data) for LCD_Currentfonts
-    ft32f030xx_eval_lcd.o(i.LCD_DrawChar) refers to ft32f030xx_eval_lcd.o(i.LCD_SetCursor) for LCD_SetCursor
-    ft32f030xx_eval_lcd.o(i.LCD_DrawChar) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAM_Prepare) for LCD_WriteRAM_Prepare
-    ft32f030xx_eval_lcd.o(i.LCD_DrawChar) refers to idiv.o(.text) for __aeabi_idivmod
-    ft32f030xx_eval_lcd.o(i.LCD_DrawChar) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAM) for LCD_WriteRAM
-    ft32f030xx_eval_lcd.o(i.LCD_DrawChar) refers to ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite) for LCD_CtrlLinesWrite
-    ft32f030xx_eval_lcd.o(i.LCD_DrawChar) refers to ft32f030xx_eval_lcd.o(.data) for LCD_Currentfonts
-    ft32f030xx_eval_lcd.o(i.LCD_DrawCircle) refers to ft32f030xx_eval_lcd.o(i.LCD_SetCursor) for LCD_SetCursor
-    ft32f030xx_eval_lcd.o(i.LCD_DrawCircle) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAMWord) for LCD_WriteRAMWord
-    ft32f030xx_eval_lcd.o(i.LCD_DrawCircle) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_DrawFullCircle) refers to ft32f030xx_eval_lcd.o(i.LCD_SetTextColor) for LCD_SetTextColor
-    ft32f030xx_eval_lcd.o(i.LCD_DrawFullCircle) refers to ft32f030xx_eval_lcd.o(i.LCD_DrawLine) for LCD_DrawLine
-    ft32f030xx_eval_lcd.o(i.LCD_DrawFullCircle) refers to ft32f030xx_eval_lcd.o(i.LCD_DrawCircle) for LCD_DrawCircle
-    ft32f030xx_eval_lcd.o(i.LCD_DrawFullCircle) refers to ft32f030xx_eval_lcd.o(.data) for BackColor
-    ft32f030xx_eval_lcd.o(i.LCD_DrawFullRect) refers to ft32f030xx_eval_lcd.o(i.LCD_SetTextColor) for LCD_SetTextColor
-    ft32f030xx_eval_lcd.o(i.LCD_DrawFullRect) refers to ft32f030xx_eval_lcd.o(i.LCD_DrawLine) for LCD_DrawLine
-    ft32f030xx_eval_lcd.o(i.LCD_DrawFullRect) refers to ft32f030xx_eval_lcd.o(.data) for TextColor
-    ft32f030xx_eval_lcd.o(i.LCD_DrawLine) refers to ft32f030xx_eval_lcd.o(i.LCD_SetCursor) for LCD_SetCursor
-    ft32f030xx_eval_lcd.o(i.LCD_DrawLine) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAM_Prepare) for LCD_WriteRAM_Prepare
-    ft32f030xx_eval_lcd.o(i.LCD_DrawLine) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAM) for LCD_WriteRAM
-    ft32f030xx_eval_lcd.o(i.LCD_DrawLine) refers to ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite) for LCD_CtrlLinesWrite
-    ft32f030xx_eval_lcd.o(i.LCD_DrawLine) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAMWord) for LCD_WriteRAMWord
-    ft32f030xx_eval_lcd.o(i.LCD_DrawLine) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_DrawMonoPict) refers to ft32f030xx_eval_lcd.o(i.LCD_SetCursor) for LCD_SetCursor
-    ft32f030xx_eval_lcd.o(i.LCD_DrawMonoPict) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAM_Prepare) for LCD_WriteRAM_Prepare
-    ft32f030xx_eval_lcd.o(i.LCD_DrawMonoPict) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAM) for LCD_WriteRAM
-    ft32f030xx_eval_lcd.o(i.LCD_DrawMonoPict) refers to ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite) for LCD_CtrlLinesWrite
-    ft32f030xx_eval_lcd.o(i.LCD_DrawMonoPict) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_DrawRect) refers to ft32f030xx_eval_lcd.o(i.LCD_DrawLine) for LCD_DrawLine
-    ft32f030xx_eval_lcd.o(i.LCD_DrawUniLine) refers to ft32f030xx_eval_lcd.o(i.PutPixel) for PutPixel
-    ft32f030xx_eval_lcd.o(i.LCD_FillPolyLine) refers to ft32f030xx_eval_lcd.o(i.LCD_SetTextColor) for LCD_SetTextColor
-    ft32f030xx_eval_lcd.o(i.LCD_FillPolyLine) refers to dfltui.o(.text) for __aeabi_ui2d
-    ft32f030xx_eval_lcd.o(i.LCD_FillPolyLine) refers to dflti.o(.text) for __aeabi_i2d
-    ft32f030xx_eval_lcd.o(i.LCD_FillPolyLine) refers to cdcmple.o(.text) for __aeabi_cdcmple
-    ft32f030xx_eval_lcd.o(i.LCD_FillPolyLine) refers to cdrcmple.o(.text) for __aeabi_cdrcmple
-    ft32f030xx_eval_lcd.o(i.LCD_FillPolyLine) refers to idiv.o(.text) for __aeabi_idivmod
-    ft32f030xx_eval_lcd.o(i.LCD_FillPolyLine) refers to ft32f030xx_eval_lcd.o(i.LCD_DrawLine) for LCD_DrawLine
-    ft32f030xx_eval_lcd.o(i.LCD_FillPolyLine) refers to ft32f030xx_eval_lcd.o(i.PutPixel) for PutPixel
-    ft32f030xx_eval_lcd.o(i.LCD_FillPolyLine) refers to ft32f030xx_eval_lcd.o(.data) for BackColor
-    ft32f030xx_eval_lcd.o(i.LCD_GetColors) refers to ft32f030xx_eval_lcd.o(.data) for TextColor
-    ft32f030xx_eval_lcd.o(i.LCD_GetFont) refers to ft32f030xx_eval_lcd.o(.data) for LCD_Currentfonts
-    ft32f030xx_eval_lcd.o(i.LCD_PolyLine) refers to ft32f030xx_eval_lcd.o(i.LCD_DrawUniLine) for LCD_DrawUniLine
-    ft32f030xx_eval_lcd.o(i.LCD_PolyLineRelative) refers to ft32f030xx_eval_lcd.o(i.LCD_PolyLineRelativeClosed) for LCD_PolyLineRelativeClosed
-    ft32f030xx_eval_lcd.o(i.LCD_PolyLineRelativeClosed) refers to ft32f030xx_eval_lcd.o(i.LCD_DrawUniLine) for LCD_DrawUniLine
-    ft32f030xx_eval_lcd.o(i.LCD_PowerOn) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteReg) for LCD_WriteReg
-    ft32f030xx_eval_lcd.o(i.LCD_PowerOn) refers to ft32f030xx_eval_lcd.o(i.delay) for delay
-    ft32f030xx_eval_lcd.o(i.LCD_ReadReg) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRegIndex) for LCD_WriteRegIndex
-    ft32f030xx_eval_lcd.o(i.LCD_ReadReg) refers to ft32f030xx_eval_lcd.o(i.LCD_nCS_StartByte) for LCD_nCS_StartByte
-    ft32f030xx_eval_lcd.o(i.LCD_ReadReg) refers to ft32f0xx_spi.o(i.SPI_SendData8) for SPI_SendData8
-    ft32f030xx_eval_lcd.o(i.LCD_ReadReg) refers to ft32f0xx_spi.o(i.SPI_I2S_GetFlagStatus) for SPI_I2S_GetFlagStatus
-    ft32f030xx_eval_lcd.o(i.LCD_ReadReg) refers to ft32f0xx_spi.o(i.SPI_ReceiveData8) for SPI_ReceiveData8
-    ft32f030xx_eval_lcd.o(i.LCD_ReadReg) refers to ft32f0xx_spi.o(i.SPI_I2S_ReceiveData16) for SPI_I2S_ReceiveData16
-    ft32f030xx_eval_lcd.o(i.LCD_ReadReg) refers to ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite) for LCD_CtrlLinesWrite
-    ft32f030xx_eval_lcd.o(i.LCD_SPIConfig) refers to ft32f0xx_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
-    ft32f030xx_eval_lcd.o(i.LCD_SPIConfig) refers to ft32f0xx_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
-    ft32f030xx_eval_lcd.o(i.LCD_SPIConfig) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
-    ft32f030xx_eval_lcd.o(i.LCD_SPIConfig) refers to ft32f0xx_gpio.o(i.GPIO_PinAFConfig) for GPIO_PinAFConfig
-    ft32f030xx_eval_lcd.o(i.LCD_SPIConfig) refers to ft32f0xx_spi.o(i.SPI_I2S_DeInit) for SPI_I2S_DeInit
-    ft32f030xx_eval_lcd.o(i.LCD_SPIConfig) refers to ft32f0xx_spi.o(i.SPI_Init) for SPI_Init
-    ft32f030xx_eval_lcd.o(i.LCD_SPIConfig) refers to ft32f0xx_spi.o(i.SPI_RxFIFOThresholdConfig) for SPI_RxFIFOThresholdConfig
-    ft32f030xx_eval_lcd.o(i.LCD_SPIConfig) refers to ft32f0xx_spi.o(i.SPI_Cmd) for SPI_Cmd
-    ft32f030xx_eval_lcd.o(i.LCD_SetBackColor) refers to ft32f030xx_eval_lcd.o(.data) for BackColor
-    ft32f030xx_eval_lcd.o(i.LCD_SetColors) refers to ft32f030xx_eval_lcd.o(.data) for TextColor
-    ft32f030xx_eval_lcd.o(i.LCD_SetCursor) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteReg) for LCD_WriteReg
-    ft32f030xx_eval_lcd.o(i.LCD_SetCursor) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_SetDisplayWindow) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteReg) for LCD_WriteReg
-    ft32f030xx_eval_lcd.o(i.LCD_SetDisplayWindow) refers to ft32f030xx_eval_lcd.o(i.LCD_SetCursor) for LCD_SetCursor
-    ft32f030xx_eval_lcd.o(i.LCD_SetDisplayWindow) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_SetFont) refers to ft32f030xx_eval_lcd.o(.data) for LCD_Currentfonts
-    ft32f030xx_eval_lcd.o(i.LCD_SetTextColor) refers to ft32f030xx_eval_lcd.o(.data) for TextColor
-    ft32f030xx_eval_lcd.o(i.LCD_Setup) refers to ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesConfig) for LCD_CtrlLinesConfig
-    ft32f030xx_eval_lcd.o(i.LCD_Setup) refers to ft32f030xx_eval_lcd.o(i.LCD_SPIConfig) for LCD_SPIConfig
-    ft32f030xx_eval_lcd.o(i.LCD_Setup) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteReg) for LCD_WriteReg
-    ft32f030xx_eval_lcd.o(i.LCD_Setup) refers to ft32f030xx_eval_lcd.o(i.delay) for delay
-    ft32f030xx_eval_lcd.o(i.LCD_Setup) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_WindowModeDisable) refers to ft32f030xx_eval_lcd.o(i.LCD_SetDisplayWindow) for LCD_SetDisplayWindow
-    ft32f030xx_eval_lcd.o(i.LCD_WindowModeDisable) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteReg) for LCD_WriteReg
-    ft32f030xx_eval_lcd.o(i.LCD_WindowModeDisable) refers to ft32f030xx_eval_lcd.o(.data) for LCDType
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRAM) refers to ft32f0xx_spi.o(i.SPI_I2S_GetFlagStatus) for SPI_I2S_GetFlagStatus
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRAM) refers to ft32f0xx_spi.o(i.SPI_SendData8) for SPI_SendData8
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRAM) refers to ft32f0xx_spi.o(i.SPI_ReceiveData8) for SPI_ReceiveData8
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRAMWord) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAM_Prepare) for LCD_WriteRAM_Prepare
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRAMWord) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRAM) for LCD_WriteRAM
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRAMWord) refers to ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite) for LCD_CtrlLinesWrite
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRAM_Prepare) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRegIndex) for LCD_WriteRegIndex
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRAM_Prepare) refers to ft32f030xx_eval_lcd.o(i.LCD_nCS_StartByte) for LCD_nCS_StartByte
-    ft32f030xx_eval_lcd.o(i.LCD_WriteReg) refers to ft32f030xx_eval_lcd.o(i.LCD_WriteRegIndex) for LCD_WriteRegIndex
-    ft32f030xx_eval_lcd.o(i.LCD_WriteReg) refers to ft32f030xx_eval_lcd.o(i.LCD_nCS_StartByte) for LCD_nCS_StartByte
-    ft32f030xx_eval_lcd.o(i.LCD_WriteReg) refers to ft32f0xx_spi.o(i.SPI_I2S_GetFlagStatus) for SPI_I2S_GetFlagStatus
-    ft32f030xx_eval_lcd.o(i.LCD_WriteReg) refers to ft32f0xx_spi.o(i.SPI_SendData8) for SPI_SendData8
-    ft32f030xx_eval_lcd.o(i.LCD_WriteReg) refers to ft32f0xx_spi.o(i.SPI_ReceiveData8) for SPI_ReceiveData8
-    ft32f030xx_eval_lcd.o(i.LCD_WriteReg) refers to ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite) for LCD_CtrlLinesWrite
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRegIndex) refers to ft32f030xx_eval_lcd.o(i.LCD_nCS_StartByte) for LCD_nCS_StartByte
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRegIndex) refers to ft32f0xx_spi.o(i.SPI_I2S_GetFlagStatus) for SPI_I2S_GetFlagStatus
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRegIndex) refers to ft32f0xx_spi.o(i.SPI_SendData8) for SPI_SendData8
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRegIndex) refers to ft32f0xx_spi.o(i.SPI_ReceiveData8) for SPI_ReceiveData8
-    ft32f030xx_eval_lcd.o(i.LCD_WriteRegIndex) refers to ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite) for LCD_CtrlLinesWrite
-    ft32f030xx_eval_lcd.o(i.LCD_nCS_StartByte) refers to ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite) for LCD_CtrlLinesWrite
-    ft32f030xx_eval_lcd.o(i.LCD_nCS_StartByte) refers to ft32f0xx_spi.o(i.SPI_I2S_GetFlagStatus) for SPI_I2S_GetFlagStatus
-    ft32f030xx_eval_lcd.o(i.LCD_nCS_StartByte) refers to ft32f0xx_spi.o(i.SPI_SendData8) for SPI_SendData8
-    ft32f030xx_eval_lcd.o(i.LCD_nCS_StartByte) refers to ft32f0xx_spi.o(i.SPI_ReceiveData8) for SPI_ReceiveData8
-    ft32f030xx_eval_lcd.o(i.PutPixel) refers to ft32f030xx_eval_lcd.o(i.LCD_DrawLine) for LCD_DrawLine
-    ft32f030xx_eval_lcd.o(.data) refers to ft32f030xx_eval_lcd.o(.constdata) for ASCII16x24_Table
-    ft32f030xx_eval_i2c_ee.o(i.sEE_DeInit) refers to ft32f030xx_eval.o(i.sEE_LowLevel_DeInit) for sEE_LowLevel_DeInit
-    ft32f030xx_eval_i2c_ee.o(i.sEE_Init) refers to ft32f030xx_eval.o(i.sEE_LowLevel_Init) for sEE_LowLevel_Init
-    ft32f030xx_eval_i2c_ee.o(i.sEE_Init) refers to ft32f0xx_i2c.o(i.I2C_Init) for I2C_Init
-    ft32f030xx_eval_i2c_ee.o(i.sEE_Init) refers to ft32f0xx_i2c.o(i.I2C_Cmd) for I2C_Cmd
-    ft32f030xx_eval_i2c_ee.o(i.sEE_Init) refers to ft32f030xx_eval_i2c_ee.o(.data) for sEEAddress
-    ft32f030xx_eval_i2c_ee.o(i.sEE_ReadBuffer) refers to idiv.o(.text) for __aeabi_idivmod
-    ft32f030xx_eval_i2c_ee.o(i.sEE_ReadBuffer) refers to ft32f0xx_i2c.o(i.I2C_TransferHandling) for I2C_TransferHandling
-    ft32f030xx_eval_i2c_ee.o(i.sEE_ReadBuffer) refers to ft32f030xx_eval_i2c_ee.o(i.sEE_TIMEOUT_UserCallback) for sEE_TIMEOUT_UserCallback
-    ft32f030xx_eval_i2c_ee.o(i.sEE_ReadBuffer) refers to ft32f0xx_i2c.o(i.I2C_GetFlagStatus) for I2C_GetFlagStatus
-    ft32f030xx_eval_i2c_ee.o(i.sEE_ReadBuffer) refers to ft32f0xx_i2c.o(i.I2C_SendData) for I2C_SendData
-    ft32f030xx_eval_i2c_ee.o(i.sEE_ReadBuffer) refers to ft32f0xx_i2c.o(i.I2C_ReceiveData) for I2C_ReceiveData
-    ft32f030xx_eval_i2c_ee.o(i.sEE_ReadBuffer) refers to ft32f0xx_i2c.o(i.I2C_ClearFlag) for I2C_ClearFlag
-    ft32f030xx_eval_i2c_ee.o(i.sEE_ReadBuffer) refers to ft32f030xx_eval_i2c_ee.o(.data) for sEEAddress
-    ft32f030xx_eval_i2c_ee.o(i.sEE_TIMEOUT_UserCallback) refers to ft32f030xx_eval_i2c_ee.o(i.sEE_DeInit) for sEE_DeInit
-    ft32f030xx_eval_i2c_ee.o(i.sEE_TIMEOUT_UserCallback) refers to ft32f030xx_eval_i2c_ee.o(i.sEE_Init) for sEE_Init
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WaitEepromStandbyState) refers to ft32f0xx_i2c.o(i.I2C_TransferHandling) for I2C_TransferHandling
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WaitEepromStandbyState) refers to ft32f0xx_i2c.o(i.I2C_ClearFlag) for I2C_ClearFlag
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WaitEepromStandbyState) refers to ft32f0xx_i2c.o(i.I2C_GenerateSTART) for I2C_GenerateSTART
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WaitEepromStandbyState) refers to ft32f030xx_eval_i2c_ee.o(i.sEE_TIMEOUT_UserCallback) for sEE_TIMEOUT_UserCallback
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WaitEepromStandbyState) refers to ft32f0xx_i2c.o(i.I2C_GetFlagStatus) for I2C_GetFlagStatus
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WaitEepromStandbyState) refers to ft32f030xx_eval_i2c_ee.o(.data) for sEEAddress
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WriteBuffer) refers to ft32f030xx_eval_i2c_ee.o(i.sEE_WritePage) for sEE_WritePage
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WriteBuffer) refers to ft32f030xx_eval_i2c_ee.o(i.sEE_WaitEepromStandbyState) for sEE_WaitEepromStandbyState
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WriteBuffer) refers to ft32f030xx_eval_i2c_ee.o(.data) for sEEDataNum
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WritePage) refers to ft32f0xx_i2c.o(i.I2C_TransferHandling) for I2C_TransferHandling
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WritePage) refers to ft32f030xx_eval_i2c_ee.o(i.sEE_TIMEOUT_UserCallback) for sEE_TIMEOUT_UserCallback
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WritePage) refers to ft32f0xx_i2c.o(i.I2C_GetFlagStatus) for I2C_GetFlagStatus
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WritePage) refers to ft32f0xx_i2c.o(i.I2C_SendData) for I2C_SendData
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WritePage) refers to ft32f0xx_i2c.o(i.I2C_ClearFlag) for I2C_ClearFlag
-    ft32f030xx_eval_i2c_ee.o(i.sEE_WritePage) refers to ft32f030xx_eval_i2c_ee.o(.data) for sEEAddress
     ft_gpio.o(i.conf_gpio_input) refers to ft32f0xx_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
     ft_gpio.o(i.conf_gpio_input) refers to ft32f0xx_gpio.o(i.GPIO_Init) for GPIO_Init
     ft_gpio.o(i.conf_gpio_output) refers to ft32f0xx_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
@@ -354,6 +130,41 @@ Section Cross References
     ft_i2c.o(i.i2c_transfer_timeout_handler_register) refers to ft_i2c.o(.data) for m_i2c_transfer_timeout_handler
     ft_i2c.o(i.virt_i2c_init) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
     ft_i2c.o(i.virt_i2c_init) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_gpio.o(i.conf_gpio_input) for conf_gpio_input
+    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_delay.o(i.delay_us) for delay_us
+    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_gpio.o(i.get_gpio_value) for get_gpio_value
+    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_i2c.o(i.virt_i2c_set_ack) for virt_i2c_set_ack
+    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_i2c.o(i.virt_i2c_set_nack) for virt_i2c_set_nack
+    ft_i2c.o(i.virt_i2c_read_one_byte) refers to ft_i2c.o(i.virt_i2c_start) for virt_i2c_start
+    ft_i2c.o(i.virt_i2c_read_one_byte) refers to ft_i2c.o(i.virt_i2c_send_byte) for virt_i2c_send_byte
+    ft_i2c.o(i.virt_i2c_read_one_byte) refers to ft_i2c.o(i.virt_i2c_wait_ack) for virt_i2c_wait_ack
+    ft_i2c.o(i.virt_i2c_read_one_byte) refers to ft_i2c.o(i.virt_i2c_read_byte) for virt_i2c_read_byte
+    ft_i2c.o(i.virt_i2c_read_one_byte) refers to ft_i2c.o(i.virt_i2c_stop) for virt_i2c_stop
+    ft_i2c.o(i.virt_i2c_send_byte) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
+    ft_i2c.o(i.virt_i2c_send_byte) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt_i2c_send_byte) refers to ft_delay.o(i.delay_us) for delay_us
+    ft_i2c.o(i.virt_i2c_set_ack) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt_i2c_set_ack) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
+    ft_i2c.o(i.virt_i2c_set_ack) refers to ft_delay.o(i.delay_us) for delay_us
+    ft_i2c.o(i.virt_i2c_set_nack) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt_i2c_set_nack) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
+    ft_i2c.o(i.virt_i2c_set_nack) refers to ft_delay.o(i.delay_us) for delay_us
+    ft_i2c.o(i.virt_i2c_start) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
+    ft_i2c.o(i.virt_i2c_start) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt_i2c_start) refers to ft_delay.o(i.delay_us) for delay_us
+    ft_i2c.o(i.virt_i2c_stop) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
+    ft_i2c.o(i.virt_i2c_stop) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt_i2c_stop) refers to ft_delay.o(i.delay_us) for delay_us
+    ft_i2c.o(i.virt_i2c_wait_ack) refers to ft_gpio.o(i.conf_gpio_input) for conf_gpio_input
+    ft_i2c.o(i.virt_i2c_wait_ack) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt_i2c_wait_ack) refers to ft_delay.o(i.delay_us) for delay_us
+    ft_i2c.o(i.virt_i2c_wait_ack) refers to ft_gpio.o(i.get_gpio_value) for get_gpio_value
+    ft_i2c.o(i.virt_i2c_wait_ack) refers to ft_i2c.o(i.virt_i2c_stop) for virt_i2c_stop
+    ft_i2c.o(i.virt_i2c_write_one_byte) refers to ft_i2c.o(i.virt_i2c_start) for virt_i2c_start
+    ft_i2c.o(i.virt_i2c_write_one_byte) refers to ft_i2c.o(i.virt_i2c_send_byte) for virt_i2c_send_byte
+    ft_i2c.o(i.virt_i2c_write_one_byte) refers to ft_i2c.o(i.virt_i2c_wait_ack) for virt_i2c_wait_ack
+    ft_i2c.o(i.virt_i2c_write_one_byte) refers to ft_i2c.o(i.virt_i2c_stop) for virt_i2c_stop
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000D) for __rt_final_cpp
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$0000000F) for __rt_final_exit
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
@@ -361,23 +172,13 @@ Section Cross References
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry9a.o(.ARM.Collect$$$$0000000B) for _main_init
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry5.o(.ARM.Collect$$$$00000004) for _main_scatterload
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry2.o(.ARM.Collect$$$$00000001) for _main_stk
-    idiv.o(.text) refers to uidiv.o(.text) for __aeabi_uidivmod
-    dflti.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
-    dflti.o(.text) refers to depilogue.o(.text) for _double_epilogue
-    dfltui.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
-    dfltui.o(.text) refers to depilogue.o(.text) for _double_epilogue
-    cdcmple.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
-    cdrcmple.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
     entry2.o(.ARM.Collect$$$$00000001) refers to entry2.o(.ARM.Collect$$$$00002712) for __lit__00000000
-    entry2.o(.ARM.Collect$$$$00002712) refers to startup_ft32f030x8.o(STACK) for __initial_sp
-    entry2.o(__vectab_stack_and_reset_area) refers to startup_ft32f030x8.o(STACK) for __initial_sp
+    entry2.o(.ARM.Collect$$$$00002712) refers to startup_ft32f072xb.o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to startup_ft32f072xb.o(STACK) for __initial_sp
     entry2.o(__vectab_stack_and_reset_area) refers to entry.o(.ARM.Collect$$$$00000000) for __main
     entry5.o(.ARM.Collect$$$$00000004) refers to init.o(.text) for __scatterload
     entry9a.o(.ARM.Collect$$$$0000000B) refers to main.o(i.main) for main
     entry9b.o(.ARM.Collect$$$$0000000C) refers to main.o(i.main) for main
-    depilogue.o(.text) refers to depilogue.o(i.__ARM_clz) for __ARM_clz
-    depilogue.o(.text) refers to llshl.o(.text) for __aeabi_llsl
-    depilogue.o(.text) refers to llushr.o(.text) for __aeabi_llsr
     init.o(.text) refers to entry5.o(.ARM.Collect$$$$00000004) for __main_after_scatterload
 
 
@@ -385,11 +186,11 @@ Section Cross References
 
 Removing Unused input sections from the image.
 
-    Removing startup_ft32f030x8.o(HEAP), (512 bytes).
     Removing system_ft32f0xx.o(.rev16_text), (4 bytes).
     Removing system_ft32f0xx.o(.revsh_text), (4 bytes).
     Removing system_ft32f0xx.o(i.SystemCoreClockUpdate), (176 bytes).
     Removing system_ft32f0xx.o(.data), (20 bytes).
+    Removing startup_ft32f072xb.o(HEAP), (512 bytes).
     Removing main.o(.rev16_text), (4 bytes).
     Removing main.o(.revsh_text), (4 bytes).
     Removing ft32f0xx_it.o(.rev16_text), (4 bytes).
@@ -897,82 +698,6 @@ Removing Unused input sections from the image.
     Removing ft32f0xx_wwdg.o(i.WWDG_SetCounter), (16 bytes).
     Removing ft32f0xx_wwdg.o(i.WWDG_SetPrescaler), (32 bytes).
     Removing ft32f0xx_wwdg.o(i.WWDG_SetWindowValue), (40 bytes).
-    Removing ft32f030xx_eval.o(.rev16_text), (4 bytes).
-    Removing ft32f030xx_eval.o(.revsh_text), (4 bytes).
-    Removing ft32f030xx_eval.o(i.FT_EVAL_COMInit), (208 bytes).
-    Removing ft32f030xx_eval.o(i.FT_EVAL_LEDInit), (80 bytes).
-    Removing ft32f030xx_eval.o(i.FT_EVAL_LEDOff), (24 bytes).
-    Removing ft32f030xx_eval.o(i.FT_EVAL_LEDOn), (24 bytes).
-    Removing ft32f030xx_eval.o(i.FT_EVAL_LEDToggle), (36 bytes).
-    Removing ft32f030xx_eval.o(i.FT_EVAL_PBGetState), (32 bytes).
-    Removing ft32f030xx_eval.o(i.FT_EVAL_PBInit), (172 bytes).
-    Removing ft32f030xx_eval.o(i.LM75_LowLevel_DeInit), (80 bytes).
-    Removing ft32f030xx_eval.o(i.LM75_LowLevel_Init), (116 bytes).
-    Removing ft32f030xx_eval.o(i.SD_LowLevel_DeInit), (116 bytes).
-    Removing ft32f030xx_eval.o(i.SD_LowLevel_Init), (256 bytes).
-    Removing ft32f030xx_eval.o(i.sEE_LowLevel_DeInit), (68 bytes).
-    Removing ft32f030xx_eval.o(i.sEE_LowLevel_Init), (92 bytes).
-    Removing ft32f030xx_eval.o(.constdata), (124 bytes).
-    Removing ft32f030xx_eval.o(.data), (56 bytes).
-    Removing ft32f030xx_eval_lcd.o(.rev16_text), (4 bytes).
-    Removing ft32f030xx_eval_lcd.o(.revsh_text), (4 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.FT32F030XX_LCD_Init), (104 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_Clear), (80 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_ClearLine), (52 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_ClosedPolyLine), (48 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_ClosedPolyLineRelative), (18 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesConfig), (52 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_CtrlLinesWrite), (20 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DeInit), (104 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DisplayChar), (68 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DisplayOff), (48 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DisplayOn), (52 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DisplayStringLine), (80 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DrawChar), (192 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DrawCircle), (252 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DrawFullCircle), (192 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DrawFullRect), (140 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DrawLine), (124 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DrawMonoPict), (136 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DrawRect), (66 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_DrawUniLine), (288 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_FillPolyLine), (624 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_GetColors), (24 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_GetFont), (12 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_PolyLine), (62 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_PolyLineRelative), (18 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_PolyLineRelativeClosed), (108 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_PowerOn), (120 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_ReadReg), (216 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_SPIConfig), (240 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_SetBackColor), (16 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_SetColors), (28 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_SetCursor), (72 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_SetDisplayWindow), (224 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_SetFont), (12 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_SetTextColor), (16 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_Setup), (2150 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_WindowModeDisable), (44 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_WriteRAM), (108 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_WriteRAMWord), (32 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_WriteRAM_Prepare), (16 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_WriteReg), (136 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_WriteRegIndex), (128 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.LCD_nCS_StartByte), (80 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.PutPixel), (44 bytes).
-    Removing ft32f030xx_eval_lcd.o(i.delay), (36 bytes).
-    Removing ft32f030xx_eval_lcd.o(.constdata), (10704 bytes).
-    Removing ft32f030xx_eval_lcd.o(.data), (44 bytes).
-    Removing ft32f030xx_eval_i2c_ee.o(.rev16_text), (4 bytes).
-    Removing ft32f030xx_eval_i2c_ee.o(.revsh_text), (4 bytes).
-    Removing ft32f030xx_eval_i2c_ee.o(i.sEE_DeInit), (8 bytes).
-    Removing ft32f030xx_eval_i2c_ee.o(i.sEE_Init), (64 bytes).
-    Removing ft32f030xx_eval_i2c_ee.o(i.sEE_ReadBuffer), (704 bytes).
-    Removing ft32f030xx_eval_i2c_ee.o(i.sEE_TIMEOUT_UserCallback), (14 bytes).
-    Removing ft32f030xx_eval_i2c_ee.o(i.sEE_WaitEepromStandbyState), (124 bytes).
-    Removing ft32f030xx_eval_i2c_ee.o(i.sEE_WriteBuffer), (400 bytes).
-    Removing ft32f030xx_eval_i2c_ee.o(i.sEE_WritePage), (268 bytes).
-    Removing ft32f030xx_eval_i2c_ee.o(.data), (10 bytes).
     Removing st7789.o(.rev16_text), (4 bytes).
     Removing st7789.o(.revsh_text), (4 bytes).
     Removing ft_gpio.o(.rev16_text), (4 bytes).
@@ -993,15 +718,22 @@ Removing Unused input sections from the image.
     Removing ft_i2c.o(i.i2c1_write_one_byte), (208 bytes).
     Removing ft_i2c.o(i.i2c_transfer_timeout_handler_register), (12 bytes).
     Removing ft_i2c.o(i.virt_i2c_init), (56 bytes).
+    Removing ft_i2c.o(i.virt_i2c_read_byte), (124 bytes).
+    Removing ft_i2c.o(i.virt_i2c_read_one_byte), (70 bytes).
+    Removing ft_i2c.o(i.virt_i2c_send_byte), (118 bytes).
+    Removing ft_i2c.o(i.virt_i2c_set_ack), (84 bytes).
+    Removing ft_i2c.o(i.virt_i2c_set_nack), (82 bytes).
+    Removing ft_i2c.o(i.virt_i2c_start), (82 bytes).
+    Removing ft_i2c.o(i.virt_i2c_stop), (82 bytes).
+    Removing ft_i2c.o(i.virt_i2c_wait_ack), (120 bytes).
+    Removing ft_i2c.o(i.virt_i2c_write_one_byte), (52 bytes).
     Removing ft_i2c.o(.data), (4 bytes).
-    Removing dflti.o(.text), (40 bytes).
-    Removing dfltui.o(.text), (28 bytes).
-    Removing cdcmple.o(.text), (40 bytes).
-    Removing cdrcmple.o(.text), (40 bytes).
-    Removing depilogue.o(.text), (190 bytes).
-    Removing depilogue.o(i.__ARM_clz), (46 bytes).
+    Removing ft_delay.o(.rev16_text), (4 bytes).
+    Removing ft_delay.o(.revsh_text), (4 bytes).
+    Removing ft_delay.o(i.delay_ms), (2 bytes).
+    Removing ft_delay.o(i.delay_us), (2 bytes).
 
-615 unused section(s) (total 40286 bytes) removed from the image.
+546 unused section(s) (total 20198 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1011,28 +743,21 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    ../clib/microlib/division.c              0x00000000   Number         0  idiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
-    ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
-    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
-    ../fplib/microlib/fpflt.c                0x00000000   Number         0  dfltui.o ABSOLUTE
-    ../fplib/microlib/fpflt.c                0x00000000   Number         0  dflti.o ABSOLUTE
-    ..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Source\Templates\arm\startup_ft32f030x8.s 0x00000000   Number         0  startup_ft32f030x8.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Source\Templates\arm\startup_ft32f072xb.s 0x00000000   Number         0  startup_ft32f072xb.o ABSOLUTE
     ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_adc.c 0x00000000   Number         0  ft32f0xx_adc.o ABSOLUTE
     ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_comp.c 0x00000000   Number         0  ft32f0xx_comp.o ABSOLUTE
     ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_crc.c 0x00000000   Number         0  ft32f0xx_crc.o ABSOLUTE
@@ -1054,9 +779,7 @@ Image Symbol Table
     ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_tim.c 0x00000000   Number         0  ft32f0xx_tim.o ABSOLUTE
     ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_usart.c 0x00000000   Number         0  ft32f0xx_usart.o ABSOLUTE
     ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_wwdg.c 0x00000000   Number         0  ft32f0xx_wwdg.o ABSOLUTE
-    ..\..\..\Utilities\FT32_EVAL\FT32F030XX_EVAL\FT32F030XX_eval.c 0x00000000   Number         0  ft32f030xx_eval.o ABSOLUTE
-    ..\..\..\Utilities\FT32_EVAL\FT32F030XX_EVAL\FT32F030XX_eval_i2c_ee.c 0x00000000   Number         0  ft32f030xx_eval_i2c_ee.o ABSOLUTE
-    ..\..\..\Utilities\FT32_EVAL\FT32F030XX_EVAL\FT32F030XX_eval_lcd.c 0x00000000   Number         0  ft32f030xx_eval_lcd.o ABSOLUTE
+    ..\..\..\develop_lib\ft_lib\common\ft_delay.c 0x00000000   Number         0  ft_delay.o ABSOLUTE
     ..\..\..\develop_lib\ft_lib\gpio\ft_gpio.c 0x00000000   Number         0  ft_gpio.o ABSOLUTE
     ..\..\..\develop_lib\ft_lib\i2c\ft_i2c.c 0x00000000   Number         0  ft_i2c.o ABSOLUTE
     ..\..\..\develop_lib\hardware\st7789\st7789.c 0x00000000   Number         0  st7789.o ABSOLUTE
@@ -1082,9 +805,7 @@ Image Symbol Table
     ..\\..\\..\\Libraries\\FT32F0xx_StdPeriph_Driver\\src\\FT32f0xx_tim.c 0x00000000   Number         0  ft32f0xx_tim.o ABSOLUTE
     ..\\..\\..\\Libraries\\FT32F0xx_StdPeriph_Driver\\src\\FT32f0xx_usart.c 0x00000000   Number         0  ft32f0xx_usart.o ABSOLUTE
     ..\\..\\..\\Libraries\\FT32F0xx_StdPeriph_Driver\\src\\FT32f0xx_wwdg.c 0x00000000   Number         0  ft32f0xx_wwdg.o ABSOLUTE
-    ..\\..\\..\\Utilities\\FT32_EVAL\\FT32F030XX_EVAL\\FT32F030XX_eval.c 0x00000000   Number         0  ft32f030xx_eval.o ABSOLUTE
-    ..\\..\\..\\Utilities\\FT32_EVAL\\FT32F030XX_EVAL\\FT32F030XX_eval_i2c_ee.c 0x00000000   Number         0  ft32f030xx_eval_i2c_ee.o ABSOLUTE
-    ..\\..\\..\\Utilities\\FT32_EVAL\\FT32F030XX_EVAL\\FT32F030XX_eval_lcd.c 0x00000000   Number         0  ft32f030xx_eval_lcd.o ABSOLUTE
+    ..\\..\\..\\develop_lib\\ft_lib\\common\\ft_delay.c 0x00000000   Number         0  ft_delay.o ABSOLUTE
     ..\\..\\..\\develop_lib\\ft_lib\\gpio\\ft_gpio.c 0x00000000   Number         0  ft_gpio.o ABSOLUTE
     ..\\..\\..\\develop_lib\\ft_lib\\i2c\\ft_i2c.c 0x00000000   Number         0  ft_i2c.o ABSOLUTE
     ..\\..\\..\\develop_lib\\hardware\\st7789\\st7789.c 0x00000000   Number         0  st7789.o ABSOLUTE
@@ -1094,12 +815,10 @@ Image Symbol Table
     ..\ft32f0xx_it.c                         0x00000000   Number         0  ft32f0xx_it.o ABSOLUTE
     ..\main.c                                0x00000000   Number         0  main.o ABSOLUTE
     ..\system_ft32f0xx.c                     0x00000000   Number         0  system_ft32f0xx.o ABSOLUTE
-    cdcmple.s                                0x00000000   Number         0  cdcmple.o ABSOLUTE
-    cdrcmple.s                               0x00000000   Number         0  cdrcmple.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
     handlers.s                               0x00000000   Number         0  handlers.o ABSOLUTE
     init.s                                   0x00000000   Number         0  init.o ABSOLUTE
-    RESET                                    0x08000000   Section      192  startup_ft32f030x8.o(RESET)
+    RESET                                    0x08000000   Section      192  startup_ft32f072xb.o(RESET)
     .ARM.Collect$$$$00000000                 0x080000c0   Section        0  entry.o(.ARM.Collect$$$$00000000)
     .ARM.Collect$$$$00000001                 0x080000c0   Section        4  entry2.o(.ARM.Collect$$$$00000001)
     .ARM.Collect$$$$00000004                 0x080000c4   Section        4  entry5.o(.ARM.Collect$$$$00000004)
@@ -1110,7 +829,7 @@ Image Symbol Table
     .ARM.Collect$$$$0000000F                 0x080000d0   Section        0  entry11a.o(.ARM.Collect$$$$0000000F)
     .ARM.Collect$$$$00002712                 0x080000d0   Section        4  entry2.o(.ARM.Collect$$$$00002712)
     __lit__00000000                          0x080000d0   Data           4  entry2.o(.ARM.Collect$$$$00002712)
-    .text                                    0x080000d4   Section       88  startup_ft32f030x8.o(.text)
+    .text                                    0x080000d4   Section       88  startup_ft32f072xb.o(.text)
     .text                                    0x0800012c   Section       36  init.o(.text)
     i.GPIO_Init                              0x08000150   Section        0  ft32f0xx_gpio.o(i.GPIO_Init)
     i.HardFault_Handler                      0x080001e0   Section        0  ft32f0xx_it.o(i.HardFault_Handler)
@@ -1130,22 +849,22 @@ Image Symbol Table
     delay                                    0x080003a9   Thumb Code    34  main.o(i.delay)
     i.main                                   0x080003cc   Section        0  main.o(i.main)
     i.set_halt_gpios_value                   0x08000404   Section        0  ft_gpio.o(i.set_halt_gpios_value)
-    STACK                                    0x20000000   Section     1024  startup_ft32f030x8.o(STACK)
+    STACK                                    0x20000000   Section     1024  startup_ft32f072xb.o(STACK)
 
     Global Symbols
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$ROPI$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
     __ARM_use_no_argv                        0x00000000   Number         0  main.o ABSOLUTE
     __cpp_initialize__aeabi_                  - Undefined Weak Reference
     __cxa_finalize                            - Undefined Weak Reference
     __decompress                              - Undefined Weak Reference
     _clock_init                               - Undefined Weak Reference
     _microlib_exit                            - Undefined Weak Reference
-    __Vectors_Size                           0x000000c0   Number         0  startup_ft32f030x8.o ABSOLUTE
-    __Vectors                                0x08000000   Data           4  startup_ft32f030x8.o(RESET)
-    __Vectors_End                            0x080000c0   Data           0  startup_ft32f030x8.o(RESET)
+    __Vectors_Size                           0x000000c0   Number         0  startup_ft32f072xb.o ABSOLUTE
+    __Vectors                                0x08000000   Data           4  startup_ft32f072xb.o(RESET)
+    __Vectors_End                            0x080000c0   Data           0  startup_ft32f072xb.o(RESET)
     __main                                   0x080000c1   Thumb Code     0  entry.o(.ARM.Collect$$$$00000000)
     _main_stk                                0x080000c1   Thumb Code     0  entry2.o(.ARM.Collect$$$$00000001)
     _main_scatterload                        0x080000c5   Thumb Code     0  entry5.o(.ARM.Collect$$$$00000004)
@@ -1155,34 +874,34 @@ Image Symbol Table
     _main_init                               0x080000c9   Thumb Code     0  entry9a.o(.ARM.Collect$$$$0000000B)
     __rt_final_cpp                           0x080000d1   Thumb Code     0  entry10a.o(.ARM.Collect$$$$0000000D)
     __rt_final_exit                          0x080000d1   Thumb Code     0  entry11a.o(.ARM.Collect$$$$0000000F)
-    Reset_Handler                            0x080000d5   Thumb Code    38  startup_ft32f030x8.o(.text)
-    ADC1_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    DMA1_Channel1_IRQHandler                 0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    DMA1_Channel2_3_IRQHandler               0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    DMA1_Channel4_5_IRQHandler               0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    EXTI0_1_IRQHandler                       0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    EXTI2_3_IRQHandler                       0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    EXTI4_15_IRQHandler                      0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    FLASH_IRQHandler                         0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    I2C1_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    I2C2_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    PVD_VDDIO_IRQHandler                     0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    RCC_IRQHandler                           0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    RTC_IRQHandler                           0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    SPI1_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    SPI2_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    TIM14_IRQHandler                         0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    TIM15_IRQHandler                         0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    TIM16_IRQHandler                         0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    TIM17_IRQHandler                         0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    TIM1_BRK_UP_TRG_COM_IRQHandler           0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    TIM1_CC_IRQHandler                       0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    TIM3_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    TIM6_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    USART1_IRQHandler                        0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    USART2_IRQHandler                        0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    USB_IRQHandler                           0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
-    WWDG_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f030x8.o(.text)
+    Reset_Handler                            0x080000d5   Thumb Code    38  startup_ft32f072xb.o(.text)
+    ADC1_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    DMA1_Channel1_IRQHandler                 0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    DMA1_Channel2_3_IRQHandler               0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    DMA1_Channel4_5_IRQHandler               0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    EXTI0_1_IRQHandler                       0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    EXTI2_3_IRQHandler                       0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    EXTI4_15_IRQHandler                      0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    FLASH_IRQHandler                         0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    I2C1_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    I2C2_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    PVD_VDDIO_IRQHandler                     0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    RCC_IRQHandler                           0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    RTC_IRQHandler                           0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    SPI1_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    SPI2_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    TIM14_IRQHandler                         0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    TIM15_IRQHandler                         0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    TIM16_IRQHandler                         0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    TIM17_IRQHandler                         0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    TIM1_BRK_UP_TRG_COM_IRQHandler           0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    TIM1_CC_IRQHandler                       0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    TIM3_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    TIM6_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    USART1_IRQHandler                        0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    USART2_IRQHandler                        0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    USB_IRQHandler                           0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
+    WWDG_IRQHandler                          0x08000105   Thumb Code     0  startup_ft32f072xb.o(.text)
     __scatterload                            0x0800012d   Thumb Code    28  init.o(.text)
     __scatterload_rt2                        0x0800012d   Thumb Code     0  init.o(.text)
     GPIO_Init                                0x08000151   Thumb Code   144  ft32f0xx_gpio.o(i.GPIO_Init)
@@ -1201,7 +920,7 @@ Image Symbol Table
     set_halt_gpios_value                     0x08000405   Thumb Code    38  ft_gpio.o(i.set_halt_gpios_value)
     Region$$Table$$Base                      0x0800042c   Number         0  anon$$obj.o(Region$$Table)
     Region$$Table$$Limit                     0x0800043c   Number         0  anon$$obj.o(Region$$Table)
-    __initial_sp                             0x20000400   Data           0  startup_ft32f030x8.o(STACK)
+    __initial_sp                             0x20000400   Data           0  startup_ft32f072xb.o(STACK)
 
 
 
@@ -1217,18 +936,18 @@ Memory Map of the image
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x08000000   0x08000000   0x000000c0   Data   RO            3    RESET               startup_ft32f030x8.o
-    0x080000c0   0x080000c0   0x00000000   Code   RO         4046  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
-    0x080000c0   0x080000c0   0x00000004   Code   RO         4061    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
-    0x080000c4   0x080000c4   0x00000004   Code   RO         4064    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
-    0x080000c8   0x080000c8   0x00000000   Code   RO         4066    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
-    0x080000c8   0x080000c8   0x00000000   Code   RO         4068    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
-    0x080000c8   0x080000c8   0x00000008   Code   RO         4069    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
-    0x080000d0   0x080000d0   0x00000000   Code   RO         4071    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
-    0x080000d0   0x080000d0   0x00000000   Code   RO         4073    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
-    0x080000d0   0x080000d0   0x00000004   Code   RO         4062    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
-    0x080000d4   0x080000d4   0x00000058   Code   RO            4    .text               startup_ft32f030x8.o
-    0x0800012c   0x0800012c   0x00000024   Code   RO         4080    .text               mc_p.l(init.o)
+    0x08000000   0x08000000   0x000000c0   Data   RO          127    RESET               startup_ft32f072xb.o
+    0x080000c0   0x080000c0   0x00000000   Code   RO         3664  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x080000c0   0x080000c0   0x00000004   Code   RO         3669    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x080000c4   0x080000c4   0x00000004   Code   RO         3672    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         3674    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         3676    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x080000c8   0x080000c8   0x00000008   Code   RO         3677    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x080000d0   0x080000d0   0x00000000   Code   RO         3679    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x080000d0   0x080000d0   0x00000000   Code   RO         3681    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x080000d0   0x080000d0   0x00000004   Code   RO         3670    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x080000d4   0x080000d4   0x00000058   Code   RO          128    .text               startup_ft32f072xb.o
+    0x0800012c   0x0800012c   0x00000024   Code   RO         3683    .text               mc_p.l(init.o)
     0x08000150   0x08000150   0x00000090   Code   RO         1222    i.GPIO_Init         ft32f0xx_gpio.o
     0x080001e0   0x080001e0   0x00000002   Code   RO          208    i.HardFault_Handler  ft32f0xx_it.o
     0x080001e2   0x080001e2   0x00000002   Code   RO          209    i.NMI_Handler       ft32f0xx_it.o
@@ -1237,27 +956,27 @@ Memory Map of the image
     0x080001e8   0x080001e8   0x00000020   Code   RO         1751    i.RCC_AHBPeriphClockCmd  ft32f0xx_rcc.o
     0x08000208   0x08000208   0x00000002   Code   RO          211    i.SVC_Handler       ft32f0xx_it.o
     0x0800020a   0x0800020a   0x00000002   PAD
-    0x0800020c   0x0800020c   0x000000d0   Code   RO           12    i.SetSysClock       system_ft32f0xx.o
+    0x0800020c   0x0800020c   0x000000d0   Code   RO            3    i.SetSysClock       system_ft32f0xx.o
     0x080002dc   0x080002dc   0x00000002   Code   RO          212    i.SysTick_Handler   ft32f0xx_it.o
     0x080002de   0x080002de   0x00000002   PAD
-    0x080002e0   0x080002e0   0x0000007c   Code   RO           14    i.SystemInit        system_ft32f0xx.o
-    0x0800035c   0x0800035c   0x0000000e   Code   RO         4088    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x0800036a   0x0800036a   0x00000002   Code   RO         4089    i.__scatterload_null  mc_p.l(handlers.o)
-    0x0800036c   0x0800036c   0x0000000e   Code   RO         4090    i.__scatterload_zeroinit  mc_p.l(handlers.o)
-    0x0800037a   0x0800037a   0x0000002e   Code   RO         3907    i.conf_whole_gpios_output  ft_gpio.o
+    0x080002e0   0x080002e0   0x0000007c   Code   RO            5    i.SystemInit        system_ft32f0xx.o
+    0x0800035c   0x0800035c   0x0000000e   Code   RO         3687    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x0800036a   0x0800036a   0x00000002   Code   RO         3688    i.__scatterload_null  mc_p.l(handlers.o)
+    0x0800036c   0x0800036c   0x0000000e   Code   RO         3689    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x0800037a   0x0800037a   0x0000002e   Code   RO         3449    i.conf_whole_gpios_output  ft_gpio.o
     0x080003a8   0x080003a8   0x00000022   Code   RO          134    i.delay             main.o
     0x080003ca   0x080003ca   0x00000002   PAD
     0x080003cc   0x080003cc   0x00000038   Code   RO          135    i.main              main.o
-    0x08000404   0x08000404   0x00000026   Code   RO         3913    i.set_halt_gpios_value  ft_gpio.o
+    0x08000404   0x08000404   0x00000026   Code   RO         3455    i.set_halt_gpios_value  ft_gpio.o
     0x0800042a   0x0800042a   0x00000002   PAD
-    0x0800042c   0x0800042c   0x00000010   Data   RO         4086    Region$$Table       anon$$obj.o
+    0x0800042c   0x0800042c   0x00000010   Data   RO         3685    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0800043c, Size: 0x00000400, Max: 0x00002000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000        -       0x00000400   Zero   RW            1    STACK               startup_ft32f030x8.o
+    0x20000000        -       0x00000400   Zero   RW          125    STACK               startup_ft32f072xb.o
 
 
 ==============================================================================
@@ -1272,8 +991,8 @@ Image component sizes
         32          4          0          0          0        644   ft32f0xx_rcc.o
         84          0          0          0          0       2053   ft_gpio.o
         90         10          0          0          0        931   main.o
-        88         38        192          0       1024        808   startup_ft32f030x8.o
-       332         24          0          0          0     151385   system_ft32f0xx.o
+        88         38        192          0       1024        776   startup_ft32f072xb.o
+       332         24          0          0          0     151417   system_ft32f0xx.o
 
     ----------------------------------------------------------------------
        790         76        208          0       1024     164756   Object Totals

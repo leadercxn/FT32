@@ -35,5 +35,21 @@ typedef void (*i2c_transfer_timeout_handler_t) (void);
 
 void i2c_transfer_timeout_handler_register(i2c_transfer_timeout_handler_t handler);
 
+void i2c1_res_init(void);
+
+void i2c1_res_deinit(void);
+
+int i2c1_write_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t data);
+
+int i2c1_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data);
+
+
+
+void virt_i2c_init(void);
+
+void virt_i2c_write_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t data);
+
+void virt_i2c_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data);
+
 #endif
 

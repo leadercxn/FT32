@@ -337,9 +337,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>FT32F030x8,USE_STDPERIPH_DRIVER,USE_FT32F030XX_EVAL,USE_DEFAULT_TIMEOUT_CALLBACK,FT32</Define>
+              <Define>FT32F030x8,USE_STDPERIPH_DRIVER,USE_FT32F072X8_EVAL,USE_DEFAULT_TIMEOUT_CALLBACK,FT32</Define>
               <Undefine></Undefine>
-              <IncludePath>..\;..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include;..\..\..\Libraries\CMSIS\Include;..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc;..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc;..\..\..\Utilities\FT32_EVAL\Common;..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\ft_lib\gpio;..\..\..\develop_lib\hardware;..\..\..\develop_lib\middle_api;..\..\..\develop_lib\middle_api\tft_8080;..\..\..\develop_lib\ft_lib;..\..\..\develop_lib;..\..\meeting_machine_pro;..\..\..\develop_lib\ft_lib\i2c</IncludePath>
+              <IncludePath>..\;..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include;..\..\..\Libraries\CMSIS\Include;..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc;..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc;..\..\..\Utilities\FT32_EVAL\Common;..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\ft_lib\gpio;..\..\..\develop_lib\hardware;..\..\..\develop_lib\middle_api;..\..\..\develop_lib\middle_api\tft_8080;..\..\..\develop_lib\ft_lib;..\..\..\develop_lib;..\..\meeting_machine_pro;..\..\..\develop_lib\ft_lib\i2c;..\..\..\develop_lib\ft_lib\common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -384,14 +384,14 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>startup_ft32f030x8.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Source\Templates\arm\startup_ft32f030x8.s</FilePath>
-            </File>
-            <File>
               <FileName>system_ft32f0xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\system_ft32f0xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>startup_ft32f072xb.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Source\Templates\arm\startup_ft32f072xb.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -521,26 +521,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>utility</GroupName>
-          <Files>
-            <File>
-              <FileName>FT32F030XX_eval.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Utilities\FT32_EVAL\FT32F030XX_EVAL\FT32F030XX_eval.c</FilePath>
-            </File>
-            <File>
-              <FileName>FT32F030XX_eval_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Utilities\FT32_EVAL\FT32F030XX_EVAL\FT32F030XX_eval_lcd.c</FilePath>
-            </File>
-            <File>
-              <FileName>FT32F030XX_eval_i2c_ee.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Utilities\FT32_EVAL\FT32F030XX_EVAL\FT32F030XX_eval_i2c_ee.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>hardware</GroupName>
           <Files>
             <File>
@@ -562,6 +542,11 @@
               <FileName>ft_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\ft_lib\i2c\ft_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft_delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\ft_lib\common\ft_delay.c</FilePath>
             </File>
           </Files>
         </Group>
