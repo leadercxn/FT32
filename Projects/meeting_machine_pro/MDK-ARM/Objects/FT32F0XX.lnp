@@ -28,6 +28,7 @@
 ".\objects\ft_gpio.o"
 ".\objects\ft_i2c.o"
 ".\objects\ft_delay.o"
+".\objects\ft_timer.o"
 ".\objects\tft_8080.o"
 --library_type=microlib --strict --scatter ".\Objects\FT32F0XX.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols

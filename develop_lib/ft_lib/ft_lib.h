@@ -3,6 +3,9 @@
 
 #include "ft_gpio.h"
 #include "ft_i2c.h"
+#include "ft_delay.h"
+#include "ft_timer.h"
+
 
 #endif
 
