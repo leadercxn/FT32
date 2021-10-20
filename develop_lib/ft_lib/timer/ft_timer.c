@@ -24,7 +24,7 @@ void timer_init(void)
     static uint16_t prescaler_value = 0;
 
     /* 产生1M的时钟 */
-    prescaler_value = (SystemCoreClock / 1000000) - 1;
+    prescaler_value = (SystemCoreClock / USER_TIMER_FREQ) - 1;
 
     TIM_TimeBaseInitTypeDef     TIM_TimeBaseStructure;
     TIM_OCInitTypeDef           TIM_OCInitStructure;
@@ -37,7 +37,7 @@ void timer_init(void)
     NVIC_InitStructure.NVIC_IRQChannelCmd      = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
 
-    TIM_TimeBaseStructure.TIM_Period        = 1000;
+    TIM_TimeBaseStructure.TIM_Period        = USER_TIMER_PERIOD;
     TIM_TimeBaseStructure.TIM_Prescaler     = prescaler_value;
     TIM_TimeBaseStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseStructure.TIM_CounterMode   = TIM_CounterMode_Up;
@@ -55,16 +55,16 @@ void timer_init(void)
     TIM_OC1PreloadConfig(USER_TIMER, TIM_OCPreload_Disable);
 #endif
 
-    TIM_ITConfig(USER_TIMER, TIM_IT_CC1, ENABLE);
+    TIM_ITConfig(USER_TIMER, USER_TIMER_CH, ENABLE);
     TIM_Cmd(USER_TIMER, ENABLE);
 }
 
 void TIM3_IRQHandler(void)
 {
     /* TIM3 通道1产生定时器更新 */
-    if(TIM_GetITStatus(USER_TIMER, TIM_IT_CC1) != RESET)
+    if(TIM_GetITStatus(USER_TIMER, USER_TIMER_CH) != RESET)
     {
-        TIM_ClearITPendingBit(USER_TIMER, TIM_IT_CC1);
+        TIM_ClearITPendingBit(USER_TIMER, USER_TIMER_CH);
 
         if(m_timer_handler)
         {
