@@ -286,6 +286,14 @@ int i2c1_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data)
 }
 
 
+/**
+ * @brief 做一个简单的延时
+ */
+static void ft_i2c_delay(void)
+{
+    uint8_t i;
+    for(i = 0; i < 1; i++);
+}
 
 /**
  * @brief 模拟i2c初始化
@@ -305,11 +313,11 @@ static void virt_i2c_start(void)
     set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
 
-    delay_us(5);
+    ft_i2c_delay();
 
     set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 0);
 
-    delay_us(5);
+    ft_i2c_delay();
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
 }
 
@@ -319,10 +327,10 @@ static void virt_i2c_stop(void)
     set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 0);
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
 
-    delay_us(5);
+    ft_i2c_delay();
 
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
-    delay_us(5);
+    ft_i2c_delay();
     set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
 }
 
@@ -334,7 +342,7 @@ static int virt_i2c_wait_ack(void)
     conf_gpio_input(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, GPIO_PuPd_UP);
 
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
-    delay_us(1);
+    ft_i2c_delay();
 
     get_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, &sda_value);
     while(sda_value)
@@ -347,7 +355,7 @@ static int virt_i2c_wait_ack(void)
         }
 
         get_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, &sda_value);
-        delay_us(1);
+        ft_i2c_delay();
     }
 
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
@@ -361,10 +369,10 @@ static void virt_i2c_set_ack(void)
     conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
     set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 0);
 
-    delay_us(2);
+    ft_i2c_delay();
 
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
-    delay_us(2);
+    ft_i2c_delay();
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
 }
 
@@ -374,10 +382,10 @@ static void virt_i2c_set_nack(void)
     conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
     set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
 
-    delay_us(2);
+    ft_i2c_delay();
 
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
-    delay_us(2);
+    ft_i2c_delay();
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
 }
 
@@ -394,11 +402,11 @@ static void virt_i2c_send_byte(uint8_t byte)
         temp = (byte & 0x80) >> 1;
 
         set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, temp);
-        delay_us(2);
+        ft_i2c_delay();
         set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
-        delay_us(2);
+        ft_i2c_delay();
         set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
-        delay_us(2);
+        ft_i2c_delay();
 
         byte <<= 1;
     }
@@ -421,7 +429,7 @@ static uint8_t virt_i2c_read_byte(bool ack)
         recv_byte <<= 1;
 
         set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
-        delay_us(2);
+        ft_i2c_delay();
         set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
 
         get_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, &sda_value);
@@ -429,7 +437,7 @@ static uint8_t virt_i2c_read_byte(bool ack)
         {
             recv_byte++;
         }
-        delay_us(1);
+        ft_i2c_delay();
     }
 
     if(ack)

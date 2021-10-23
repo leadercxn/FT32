@@ -1,12 +1,4 @@
 .vscode/
-*.o
-*.map
-*.axf
-*.htm
-*.d
-*.crf
-*.dep
-*.DS_Store
 Projects/meeting_machine_pro/MDK-ARM/Listings/
 Projects/meeting_machine_pro/MDK-ARM/Objects/
 Projects/meeting_machine_pro/MDK-ARM/DebugConfig/

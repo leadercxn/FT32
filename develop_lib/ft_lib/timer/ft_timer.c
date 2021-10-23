@@ -4,9 +4,12 @@
 #include "ft32f0xx.h"
 #include "ft_timer.h"
 
+
+
 __IO uint16_t CCR1_Val = 40961;
 
 static timer_handler_t m_timer_handler = NULL;
+static uint64_t m_timer_tick = 0;
 
 void timer_handler_register(timer_handler_t handler)
 {
@@ -27,7 +30,6 @@ void timer_init(void)
     prescaler_value = (SystemCoreClock / USER_TIMER_FREQ) - 1;
 
     TIM_TimeBaseInitTypeDef     TIM_TimeBaseStructure;
-    TIM_OCInitTypeDef           TIM_OCInitStructure;
     NVIC_InitTypeDef            NVIC_InitStructure;
 
     RCC_APB1PeriphClockCmd(USER_TIMER_CLK, ENABLE);
@@ -45,6 +47,8 @@ void timer_init(void)
     TIM_TimeBaseInit(USER_TIMER, &TIM_TimeBaseStructure);
 
 #if 0
+    TIM_OCInitTypeDef           TIM_OCInitStructure;
+
     /* 配置IO输出 */
     TIM_OCInitStructure.TIM_OCMode      = TIM_OCMode_Timing;
     TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Disable;
@@ -59,12 +63,15 @@ void timer_init(void)
     TIM_Cmd(USER_TIMER, ENABLE);
 }
 
+/* 已验证 1ms 的中断 */
 void TIM3_IRQHandler(void)
 {
     /* TIM3 通道1产生定时器更新 */
     if(TIM_GetITStatus(USER_TIMER, USER_TIMER_CH) != RESET)
     {
         TIM_ClearITPendingBit(USER_TIMER, USER_TIMER_CH);
+
+        m_timer_tick++;
 
         if(m_timer_handler)
         {
@@ -73,5 +80,9 @@ void TIM3_IRQHandler(void)
     }
 }
 
+uint64_t ft_timer_tick_get(void)
+{
+    return m_timer_tick;
+}
 
 
