@@ -307,7 +307,7 @@ void virt_i2c_init(void)
   set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
 }
 
-static void virt_i2c_start(void)
+void virt1_i2c_start(void)
 {
     conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
     set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
@@ -321,7 +321,7 @@ static void virt_i2c_start(void)
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
 }
 
-static void virt_i2c_stop(void)
+void virt1_i2c_stop(void)
 {
     conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
     set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 0);
@@ -334,7 +334,7 @@ static void virt_i2c_stop(void)
     set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
 }
 
-static int virt_i2c_wait_ack(void)
+int virt1_i2c_wait_ack(void)
 {
     uint8_t timeout = 0;
     uint8_t sda_value = 0;
@@ -350,7 +350,7 @@ static int virt_i2c_wait_ack(void)
         timeout++;
         if(timeout > 250)
         {
-            virt_i2c_stop();
+            virt1_i2c_stop();
             return -EIO;
         }
 
@@ -363,7 +363,7 @@ static int virt_i2c_wait_ack(void)
     return ENONE;
 }
 
-static void virt_i2c_set_ack(void)
+void virt1_i2c_set_ack(void)
 {
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
     conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
@@ -376,7 +376,7 @@ static void virt_i2c_set_ack(void)
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
 }
 
-static void virt_i2c_set_nack(void)
+void virt1_i2c_set_nack(void)
 {
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
     conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
@@ -389,7 +389,7 @@ static void virt_i2c_set_nack(void)
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
 }
 
-static void virt_i2c_send_byte(uint8_t byte)
+void virt1_i2c_send_byte(uint8_t byte)
 {
     uint8_t i = 0;
     uint8_t temp = 0;
@@ -399,7 +399,7 @@ static void virt_i2c_send_byte(uint8_t byte)
 
     for(i = 0; i < 8; i++)
     {
-        temp = (byte & 0x80) >> 1;
+        temp = (byte & 0x80) >> 7;
 
         set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, temp);
         ft_i2c_delay();
@@ -417,7 +417,7 @@ static void virt_i2c_send_byte(uint8_t byte)
  * 
  * @param ack 读取完一个字节后是否发送一个应答信号
  */
-static uint8_t virt_i2c_read_byte(bool ack)
+uint8_t virt1_i2c_read_byte(bool ack)
 {
     uint8_t i = 0,recv_byte = 0;
     uint8_t sda_value = 0;
@@ -442,11 +442,11 @@ static uint8_t virt_i2c_read_byte(bool ack)
 
     if(ack)
     {
-        virt_i2c_set_ack();
+        virt1_i2c_set_ack();
     }
     else
     {
-        virt_i2c_set_nack();
+        virt1_i2c_set_nack();
     }
 
     return recv_byte;
@@ -458,19 +458,19 @@ static uint8_t virt_i2c_read_byte(bool ack)
  * 
  * 模式: 从设备地址+寄存器地址+从设备地址+数据(1B)
  */
-void virt_i2c_write_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t data)
+void virt1_i2c_write_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t data)
 {
     uint8_t address = (slaver_addr << 1);
 
-    virt_i2c_start();
+    virt1_i2c_start();
 
-    virt_i2c_send_byte(address);
-    virt_i2c_wait_ack();
-    virt_i2c_send_byte(reg);
-    virt_i2c_wait_ack();
-    virt_i2c_send_byte(data);
-    virt_i2c_wait_ack();
-    virt_i2c_stop();
+    virt1_i2c_send_byte(address);
+    virt1_i2c_wait_ack();
+    virt1_i2c_send_byte(reg);
+    virt1_i2c_wait_ack();
+    virt1_i2c_send_byte(data);
+    virt1_i2c_wait_ack();
+    virt1_i2c_stop();
 }
 
 
@@ -479,23 +479,23 @@ void virt_i2c_write_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t data)
  * 
  * 模式: 从设备地址+寄存器地址+开始+从设备地址+数据(1B)
  */
-void virt_i2c_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data)
+void virt1_i2c_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data)
 {
     uint8_t address = (slaver_addr << 1);
 
-    virt_i2c_start();
+    virt1_i2c_start();
 
-    virt_i2c_send_byte(address);
-    virt_i2c_wait_ack();
-    virt_i2c_send_byte(reg);
-    virt_i2c_wait_ack();
+    virt1_i2c_send_byte(address);
+    virt1_i2c_wait_ack();
+    virt1_i2c_send_byte(reg);
+    virt1_i2c_wait_ack();
 
-    virt_i2c_start();
+    virt1_i2c_start();
     address = (slaver_addr << 1) | 0x01 ;
-    virt_i2c_send_byte(address);
-    virt_i2c_wait_ack();
+    virt1_i2c_send_byte(address);
+    virt1_i2c_wait_ack();
 
-    *p_data = virt_i2c_read_byte(false);
+    *p_data = virt1_i2c_read_byte(false);
 
-    virt_i2c_stop();
+    virt1_i2c_stop();
 }

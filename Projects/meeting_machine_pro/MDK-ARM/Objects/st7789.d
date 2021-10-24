@@ -35,5 +35,7 @@
 .\objects\st7789.o: C:\software_install\keil\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\st7789.o: ..\..\..\develop_lib\ft_lib\i2c\ft_i2c.h
 .\objects\st7789.o: ..\..\..\develop_lib\middle_api\middle_api.h
+.\objects\st7789.o: ..\..\..\develop_lib\middle_api\queue\queue.h
 .\objects\st7789.o: ..\..\..\develop_lib\middle_api\tft_8080\tft_8080.h
+.\objects\st7789.o: ..\..\..\develop_lib\middle_api\mid_bk953x\mid_bk953x.h
 .\objects\st7789.o: ..\..\..\develop_lib\hardware\st7789\st7789.h

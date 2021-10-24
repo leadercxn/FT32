@@ -40,17 +40,6 @@ int main(void)
       set_gpio_value(GPIOB, GPIO_Pin_1,0);
       ft_delay_ms(200);
   }
-#if 0
-    conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_1);
-    while (1)
-    {
-        set_gpio_value(GPIOB, GPIO_Pin_1,1);
-        delay(5000);
-        set_gpio_value(GPIOB, GPIO_Pin_1,0);
-        delay(5000);
-    }
-#endif
-
 }
 
 #ifdef  USE_FULL_ASSERT

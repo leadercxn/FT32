@@ -132,43 +132,43 @@ Section Cross References
     ft_i2c.o(i.i2c1_write_one_byte) refers to ft32f0xx_i2c.o(i.I2C_GenerateSTOP) for I2C_GenerateSTOP
     ft_i2c.o(i.i2c1_write_one_byte) refers to ft_i2c.o(.data) for m_i2c_transfer_timeout_handler
     ft_i2c.o(i.i2c_transfer_timeout_handler_register) refers to ft_i2c.o(.data) for m_i2c_transfer_timeout_handler
+    ft_i2c.o(i.virt1_i2c_read_byte) refers to ft_gpio.o(i.conf_gpio_input) for conf_gpio_input
+    ft_i2c.o(i.virt1_i2c_read_byte) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt1_i2c_read_byte) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
+    ft_i2c.o(i.virt1_i2c_read_byte) refers to ft_gpio.o(i.get_gpio_value) for get_gpio_value
+    ft_i2c.o(i.virt1_i2c_read_byte) refers to ft_i2c.o(i.virt1_i2c_set_ack) for virt1_i2c_set_ack
+    ft_i2c.o(i.virt1_i2c_read_byte) refers to ft_i2c.o(i.virt1_i2c_set_nack) for virt1_i2c_set_nack
+    ft_i2c.o(i.virt1_i2c_read_one_byte) refers to ft_i2c.o(i.virt1_i2c_start) for virt1_i2c_start
+    ft_i2c.o(i.virt1_i2c_read_one_byte) refers to ft_i2c.o(i.virt1_i2c_send_byte) for virt1_i2c_send_byte
+    ft_i2c.o(i.virt1_i2c_read_one_byte) refers to ft_i2c.o(i.virt1_i2c_wait_ack) for virt1_i2c_wait_ack
+    ft_i2c.o(i.virt1_i2c_read_one_byte) refers to ft_i2c.o(i.virt1_i2c_read_byte) for virt1_i2c_read_byte
+    ft_i2c.o(i.virt1_i2c_read_one_byte) refers to ft_i2c.o(i.virt1_i2c_stop) for virt1_i2c_stop
+    ft_i2c.o(i.virt1_i2c_send_byte) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
+    ft_i2c.o(i.virt1_i2c_send_byte) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt1_i2c_send_byte) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
+    ft_i2c.o(i.virt1_i2c_set_ack) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt1_i2c_set_ack) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
+    ft_i2c.o(i.virt1_i2c_set_ack) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
+    ft_i2c.o(i.virt1_i2c_set_nack) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt1_i2c_set_nack) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
+    ft_i2c.o(i.virt1_i2c_set_nack) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
+    ft_i2c.o(i.virt1_i2c_start) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
+    ft_i2c.o(i.virt1_i2c_start) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt1_i2c_start) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
+    ft_i2c.o(i.virt1_i2c_stop) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
+    ft_i2c.o(i.virt1_i2c_stop) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt1_i2c_stop) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
+    ft_i2c.o(i.virt1_i2c_wait_ack) refers to ft_gpio.o(i.conf_gpio_input) for conf_gpio_input
+    ft_i2c.o(i.virt1_i2c_wait_ack) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
+    ft_i2c.o(i.virt1_i2c_wait_ack) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
+    ft_i2c.o(i.virt1_i2c_wait_ack) refers to ft_gpio.o(i.get_gpio_value) for get_gpio_value
+    ft_i2c.o(i.virt1_i2c_wait_ack) refers to ft_i2c.o(i.virt1_i2c_stop) for virt1_i2c_stop
+    ft_i2c.o(i.virt1_i2c_write_one_byte) refers to ft_i2c.o(i.virt1_i2c_start) for virt1_i2c_start
+    ft_i2c.o(i.virt1_i2c_write_one_byte) refers to ft_i2c.o(i.virt1_i2c_send_byte) for virt1_i2c_send_byte
+    ft_i2c.o(i.virt1_i2c_write_one_byte) refers to ft_i2c.o(i.virt1_i2c_wait_ack) for virt1_i2c_wait_ack
+    ft_i2c.o(i.virt1_i2c_write_one_byte) refers to ft_i2c.o(i.virt1_i2c_stop) for virt1_i2c_stop
     ft_i2c.o(i.virt_i2c_init) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
     ft_i2c.o(i.virt_i2c_init) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
-    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_gpio.o(i.conf_gpio_input) for conf_gpio_input
-    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
-    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
-    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_gpio.o(i.get_gpio_value) for get_gpio_value
-    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_i2c.o(i.virt_i2c_set_ack) for virt_i2c_set_ack
-    ft_i2c.o(i.virt_i2c_read_byte) refers to ft_i2c.o(i.virt_i2c_set_nack) for virt_i2c_set_nack
-    ft_i2c.o(i.virt_i2c_read_one_byte) refers to ft_i2c.o(i.virt_i2c_start) for virt_i2c_start
-    ft_i2c.o(i.virt_i2c_read_one_byte) refers to ft_i2c.o(i.virt_i2c_send_byte) for virt_i2c_send_byte
-    ft_i2c.o(i.virt_i2c_read_one_byte) refers to ft_i2c.o(i.virt_i2c_wait_ack) for virt_i2c_wait_ack
-    ft_i2c.o(i.virt_i2c_read_one_byte) refers to ft_i2c.o(i.virt_i2c_read_byte) for virt_i2c_read_byte
-    ft_i2c.o(i.virt_i2c_read_one_byte) refers to ft_i2c.o(i.virt_i2c_stop) for virt_i2c_stop
-    ft_i2c.o(i.virt_i2c_send_byte) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
-    ft_i2c.o(i.virt_i2c_send_byte) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
-    ft_i2c.o(i.virt_i2c_send_byte) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
-    ft_i2c.o(i.virt_i2c_set_ack) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
-    ft_i2c.o(i.virt_i2c_set_ack) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
-    ft_i2c.o(i.virt_i2c_set_ack) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
-    ft_i2c.o(i.virt_i2c_set_nack) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
-    ft_i2c.o(i.virt_i2c_set_nack) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
-    ft_i2c.o(i.virt_i2c_set_nack) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
-    ft_i2c.o(i.virt_i2c_start) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
-    ft_i2c.o(i.virt_i2c_start) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
-    ft_i2c.o(i.virt_i2c_start) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
-    ft_i2c.o(i.virt_i2c_stop) refers to ft_gpio.o(i.conf_gpio_output) for conf_gpio_output
-    ft_i2c.o(i.virt_i2c_stop) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
-    ft_i2c.o(i.virt_i2c_stop) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
-    ft_i2c.o(i.virt_i2c_wait_ack) refers to ft_gpio.o(i.conf_gpio_input) for conf_gpio_input
-    ft_i2c.o(i.virt_i2c_wait_ack) refers to ft_gpio.o(i.set_gpio_value) for set_gpio_value
-    ft_i2c.o(i.virt_i2c_wait_ack) refers to ft_i2c.o(i.ft_i2c_delay) for ft_i2c_delay
-    ft_i2c.o(i.virt_i2c_wait_ack) refers to ft_gpio.o(i.get_gpio_value) for get_gpio_value
-    ft_i2c.o(i.virt_i2c_wait_ack) refers to ft_i2c.o(i.virt_i2c_stop) for virt_i2c_stop
-    ft_i2c.o(i.virt_i2c_write_one_byte) refers to ft_i2c.o(i.virt_i2c_start) for virt_i2c_start
-    ft_i2c.o(i.virt_i2c_write_one_byte) refers to ft_i2c.o(i.virt_i2c_send_byte) for virt_i2c_send_byte
-    ft_i2c.o(i.virt_i2c_write_one_byte) refers to ft_i2c.o(i.virt_i2c_wait_ack) for virt_i2c_wait_ack
-    ft_i2c.o(i.virt_i2c_write_one_byte) refers to ft_i2c.o(i.virt_i2c_stop) for virt_i2c_stop
     ft_timer.o(i.TIM3_IRQHandler) refers to ft32f0xx_tim.o(i.TIM_GetITStatus) for TIM_GetITStatus
     ft_timer.o(i.TIM3_IRQHandler) refers to ft32f0xx_tim.o(i.TIM_ClearITPendingBit) for TIM_ClearITPendingBit
     ft_timer.o(i.TIM3_IRQHandler) refers to ft_timer.o(.data) for m_timer_tick
@@ -185,6 +185,16 @@ Section Cross References
     ft_delay.o(i.ft_delay_ms) refers to ft_delay.o(i.ft_delay_us) for ft_delay_us
     ft_delay.o(i.ft_delay_us) refers to ft_timer.o(i.ft_timer_tick_get) for ft_timer_tick_get
     ft_delay.o(i.ft_delay_us) refers to idiv.o(.text) for __aeabi_idivmod
+    mid_bk953x.o(i.ft_virt1_i2c_bk953x_read_one_reg) refers to ft_i2c.o(i.virt1_i2c_start) for virt1_i2c_start
+    mid_bk953x.o(i.ft_virt1_i2c_bk953x_read_one_reg) refers to ft_i2c.o(i.virt1_i2c_send_byte) for virt1_i2c_send_byte
+    mid_bk953x.o(i.ft_virt1_i2c_bk953x_read_one_reg) refers to ft_i2c.o(i.virt1_i2c_wait_ack) for virt1_i2c_wait_ack
+    mid_bk953x.o(i.ft_virt1_i2c_bk953x_read_one_reg) refers to ft_i2c.o(i.virt1_i2c_read_byte) for virt1_i2c_read_byte
+    mid_bk953x.o(i.ft_virt1_i2c_bk953x_write_one_reg) refers to ft_i2c.o(i.virt1_i2c_start) for virt1_i2c_start
+    mid_bk953x.o(i.ft_virt1_i2c_bk953x_write_one_reg) refers to ft_i2c.o(i.virt1_i2c_send_byte) for virt1_i2c_send_byte
+    mid_bk953x.o(i.ft_virt1_i2c_bk953x_write_one_reg) refers to ft_i2c.o(i.virt1_i2c_wait_ack) for virt1_i2c_wait_ack
+    mid_bk953x.o(i.ft_virt1_i2c_bk953x_write_one_reg) refers to ft_i2c.o(i.virt1_i2c_stop) for virt1_i2c_stop
+    mid_bk953x.o(i.mid_bk953x_read_one_reg) refers to mid_bk953x.o(i.ft_virt1_i2c_bk953x_read_one_reg) for ft_virt1_i2c_bk953x_read_one_reg
+    mid_bk953x.o(i.mid_bk953x_write_one_reg) refers to mid_bk953x.o(i.ft_virt1_i2c_bk953x_write_one_reg) for ft_virt1_i2c_bk953x_write_one_reg
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000D) for __rt_final_cpp
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$0000000F) for __rt_final_exit
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
@@ -733,24 +743,32 @@ Removing Unused input sections from the image.
     Removing ft_i2c.o(i.i2c1_res_init), (136 bytes).
     Removing ft_i2c.o(i.i2c1_write_one_byte), (208 bytes).
     Removing ft_i2c.o(i.i2c_transfer_timeout_handler_register), (12 bytes).
+    Removing ft_i2c.o(i.virt1_i2c_read_byte), (120 bytes).
+    Removing ft_i2c.o(i.virt1_i2c_read_one_byte), (70 bytes).
+    Removing ft_i2c.o(i.virt1_i2c_send_byte), (112 bytes).
+    Removing ft_i2c.o(i.virt1_i2c_set_ack), (80 bytes).
+    Removing ft_i2c.o(i.virt1_i2c_set_nack), (78 bytes).
+    Removing ft_i2c.o(i.virt1_i2c_start), (78 bytes).
+    Removing ft_i2c.o(i.virt1_i2c_stop), (78 bytes).
+    Removing ft_i2c.o(i.virt1_i2c_wait_ack), (116 bytes).
+    Removing ft_i2c.o(i.virt1_i2c_write_one_byte), (52 bytes).
     Removing ft_i2c.o(i.virt_i2c_init), (56 bytes).
-    Removing ft_i2c.o(i.virt_i2c_read_byte), (120 bytes).
-    Removing ft_i2c.o(i.virt_i2c_read_one_byte), (70 bytes).
-    Removing ft_i2c.o(i.virt_i2c_send_byte), (112 bytes).
-    Removing ft_i2c.o(i.virt_i2c_set_ack), (80 bytes).
-    Removing ft_i2c.o(i.virt_i2c_set_nack), (78 bytes).
-    Removing ft_i2c.o(i.virt_i2c_start), (78 bytes).
-    Removing ft_i2c.o(i.virt_i2c_stop), (78 bytes).
-    Removing ft_i2c.o(i.virt_i2c_wait_ack), (116 bytes).
-    Removing ft_i2c.o(i.virt_i2c_write_one_byte), (52 bytes).
     Removing ft_i2c.o(.data), (4 bytes).
     Removing ft_timer.o(.rev16_text), (4 bytes).
     Removing ft_timer.o(.revsh_text), (4 bytes).
     Removing ft_timer.o(i.timer_handler_register), (12 bytes).
     Removing ft_delay.o(.rev16_text), (4 bytes).
     Removing ft_delay.o(.revsh_text), (4 bytes).
+    Removing mid_bk953x.o(.rev16_text), (4 bytes).
+    Removing mid_bk953x.o(.revsh_text), (4 bytes).
+    Removing mid_bk953x.o(i.ft_i2c1_i2c_bk953x_read_one_reg), (8 bytes).
+    Removing mid_bk953x.o(i.ft_i2c1_i2c_bk953x_write_one_reg), (8 bytes).
+    Removing mid_bk953x.o(i.ft_virt1_i2c_bk953x_read_one_reg), (106 bytes).
+    Removing mid_bk953x.o(i.ft_virt1_i2c_bk953x_write_one_reg), (114 bytes).
+    Removing mid_bk953x.o(i.mid_bk953x_read_one_reg), (46 bytes).
+    Removing mid_bk953x.o(i.mid_bk953x_write_one_reg), (46 bytes).
 
-542 unused section(s) (total 19922 bytes) removed from the image.
+550 unused section(s) (total 20258 bytes) removed from the image.
 
 ==============================================================================
 
@@ -763,18 +781,18 @@ Image Symbol Table
     ../clib/microlib/division.c              0x00000000   Number         0  idiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
     ..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Source\Templates\arm\startup_ft32f072xb.s 0x00000000   Number         0  startup_ft32f072xb.o ABSOLUTE
     ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_adc.c 0x00000000   Number         0  ft32f0xx_adc.o ABSOLUTE
     ..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_comp.c 0x00000000   Number         0  ft32f0xx_comp.o ABSOLUTE
@@ -802,6 +820,7 @@ Image Symbol Table
     ..\..\..\develop_lib\ft_lib\i2c\ft_i2c.c 0x00000000   Number         0  ft_i2c.o ABSOLUTE
     ..\..\..\develop_lib\ft_lib\timer\ft_timer.c 0x00000000   Number         0  ft_timer.o ABSOLUTE
     ..\..\..\develop_lib\hardware\st7789\st7789.c 0x00000000   Number         0  st7789.o ABSOLUTE
+    ..\..\..\develop_lib\middle_api\mid_bk953x\mid_bk953x.c 0x00000000   Number         0  mid_bk953x.o ABSOLUTE
     ..\..\..\develop_lib\middle_api\tft_8080\tft_8080.c 0x00000000   Number         0  tft_8080.o ABSOLUTE
     ..\\..\\..\\Libraries\\FT32F0xx_StdPeriph_Driver\\src\\FT32f0xx_adc.c 0x00000000   Number         0  ft32f0xx_adc.o ABSOLUTE
     ..\\..\\..\\Libraries\\FT32F0xx_StdPeriph_Driver\\src\\FT32f0xx_comp.c 0x00000000   Number         0  ft32f0xx_comp.o ABSOLUTE
@@ -829,6 +848,7 @@ Image Symbol Table
     ..\\..\\..\\develop_lib\\ft_lib\\i2c\\ft_i2c.c 0x00000000   Number         0  ft_i2c.o ABSOLUTE
     ..\\..\\..\\develop_lib\\ft_lib\\timer\\ft_timer.c 0x00000000   Number         0  ft_timer.o ABSOLUTE
     ..\\..\\..\\develop_lib\\hardware\\st7789\\st7789.c 0x00000000   Number         0  st7789.o ABSOLUTE
+    ..\\..\\..\\develop_lib\\middle_api\\mid_bk953x\\mid_bk953x.c 0x00000000   Number         0  mid_bk953x.o ABSOLUTE
     ..\\ft32f0xx_it.c                        0x00000000   Number         0  ft32f0xx_it.o ABSOLUTE
     ..\\main.c                               0x00000000   Number         0  main.o ABSOLUTE
     ..\\system_ft32f0xx.c                    0x00000000   Number         0  system_ft32f0xx.o ABSOLUTE
@@ -992,19 +1012,19 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x000000c0   Data   RO          127    RESET               startup_ft32f072xb.o
-    0x080000c0   0x080000c0   0x00000000   Code   RO         3715  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
-    0x080000c0   0x080000c0   0x00000004   Code   RO         3722    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
-    0x080000c4   0x080000c4   0x00000004   Code   RO         3725    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
-    0x080000c8   0x080000c8   0x00000000   Code   RO         3727    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
-    0x080000c8   0x080000c8   0x00000000   Code   RO         3729    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
-    0x080000c8   0x080000c8   0x00000008   Code   RO         3730    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
-    0x080000d0   0x080000d0   0x00000000   Code   RO         3732    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
-    0x080000d0   0x080000d0   0x00000000   Code   RO         3734    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
-    0x080000d0   0x080000d0   0x00000004   Code   RO         3723    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x080000c0   0x080000c0   0x00000000   Code   RO         3777  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x080000c0   0x080000c0   0x00000004   Code   RO         3784    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x080000c4   0x080000c4   0x00000004   Code   RO         3787    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         3789    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         3791    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x080000c8   0x080000c8   0x00000008   Code   RO         3792    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x080000d0   0x080000d0   0x00000000   Code   RO         3794    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x080000d0   0x080000d0   0x00000000   Code   RO         3796    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x080000d0   0x080000d0   0x00000004   Code   RO         3785    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
     0x080000d4   0x080000d4   0x00000058   Code   RO          128    .text               startup_ft32f072xb.o
-    0x0800012c   0x0800012c   0x0000002c   Code   RO         3718    .text               mc_p.l(uidiv.o)
-    0x08000158   0x08000158   0x00000028   Code   RO         3720    .text               mc_p.l(idiv.o)
-    0x08000180   0x08000180   0x00000024   Code   RO         3736    .text               mc_p.l(init.o)
+    0x0800012c   0x0800012c   0x0000002c   Code   RO         3780    .text               mc_p.l(uidiv.o)
+    0x08000158   0x08000158   0x00000028   Code   RO         3782    .text               mc_p.l(idiv.o)
+    0x08000180   0x08000180   0x00000024   Code   RO         3798    .text               mc_p.l(init.o)
     0x080001a4   0x080001a4   0x00000090   Code   RO         1230    i.GPIO_Init         ft32f0xx_gpio.o
     0x08000234   0x08000234   0x00000002   Code   RO          216    i.HardFault_Handler  ft32f0xx_it.o
     0x08000236   0x08000236   0x00000002   Code   RO          217    i.NMI_Handler       ft32f0xx_it.o
@@ -1019,7 +1039,7 @@ Memory Map of the image
     0x080003c0   0x080003c0   0x00000002   Code   RO          220    i.SysTick_Handler   ft32f0xx_it.o
     0x080003c2   0x080003c2   0x00000002   PAD
     0x080003c4   0x080003c4   0x0000007c   Code   RO            5    i.SystemInit        system_ft32f0xx.o
-    0x08000440   0x08000440   0x00000044   Code   RO         3644    i.TIM3_IRQHandler   ft_timer.o
+    0x08000440   0x08000440   0x00000044   Code   RO         3657    i.TIM3_IRQHandler   ft_timer.o
     0x08000484   0x08000484   0x00000006   Code   RO         2566    i.TIM_ClearITPendingBit  ft32f0xx_tim.o
     0x0800048a   0x0800048a   0x00000002   PAD
     0x0800048c   0x0800048c   0x0000001c   Code   RO         2571    i.TIM_Cmd           ft32f0xx_tim.o
@@ -1027,17 +1047,17 @@ Memory Map of the image
     0x080004ce   0x080004ce   0x00000014   Code   RO         2596    i.TIM_ITConfig      ft32f0xx_tim.o
     0x080004e2   0x080004e2   0x00000002   PAD
     0x080004e4   0x080004e4   0x0000007c   Code   RO         2644    i.TIM_TimeBaseInit  ft32f0xx_tim.o
-    0x08000560   0x08000560   0x0000000e   Code   RO         3740    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x0800056e   0x0800056e   0x00000002   Code   RO         3741    i.__scatterload_null  mc_p.l(handlers.o)
-    0x08000570   0x08000570   0x0000000e   Code   RO         3742    i.__scatterload_zeroinit  mc_p.l(handlers.o)
-    0x0800057e   0x0800057e   0x0000002e   Code   RO         3455    i.conf_gpio_output  ft_gpio.o
-    0x080005ac   0x080005ac   0x0000001c   Code   RO         3685    i.ft_delay_ms       ft_delay.o
-    0x080005c8   0x080005c8   0x000000b0   Code   RO         3686    i.ft_delay_us       ft_delay.o
-    0x08000678   0x08000678   0x0000000c   Code   RO         3645    i.ft_timer_tick_get  ft_timer.o
+    0x08000560   0x08000560   0x0000000e   Code   RO         3802    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x0800056e   0x0800056e   0x00000002   Code   RO         3803    i.__scatterload_null  mc_p.l(handlers.o)
+    0x08000570   0x08000570   0x0000000e   Code   RO         3804    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x0800057e   0x0800057e   0x0000002e   Code   RO         3461    i.conf_gpio_output  ft_gpio.o
+    0x080005ac   0x080005ac   0x0000001c   Code   RO         3698    i.ft_delay_ms       ft_delay.o
+    0x080005c8   0x080005c8   0x000000b0   Code   RO         3699    i.ft_delay_us       ft_delay.o
+    0x08000678   0x08000678   0x0000000c   Code   RO         3658    i.ft_timer_tick_get  ft_timer.o
     0x08000684   0x08000684   0x00000038   Code   RO          134    i.main              main.o
-    0x080006bc   0x080006bc   0x0000000c   Code   RO         3462    i.set_gpio_value    ft_gpio.o
-    0x080006c8   0x080006c8   0x0000006c   Code   RO         3647    i.timer_init        ft_timer.o
-    0x08000734   0x08000734   0x00000020   Data   RO         3738    Region$$Table       anon$$obj.o
+    0x080006bc   0x080006bc   0x0000000c   Code   RO         3468    i.set_gpio_value    ft_gpio.o
+    0x080006c8   0x080006c8   0x0000006c   Code   RO         3660    i.timer_init        ft_timer.o
+    0x08000734   0x08000734   0x00000020   Data   RO         3800    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08000754, Size: 0x00000430, Max: 0x00002000, ABSOLUTE)
@@ -1046,7 +1066,7 @@ Memory Map of the image
 
     0x20000000   0x08000754   0x00000014   Data   RW            6    .data               system_ft32f0xx.o
     0x20000014   0x08000768   0x00000004   PAD
-    0x20000018   0x0800076c   0x00000012   Data   RW         3648    .data               ft_timer.o
+    0x20000018   0x0800076c   0x00000012   Data   RW         3661    .data               ft_timer.o
     0x2000002a   0x0800077e   0x00000006   PAD
     0x20000030        -       0x00000400   Zero   RW          125    STACK               startup_ft32f072xb.o
 

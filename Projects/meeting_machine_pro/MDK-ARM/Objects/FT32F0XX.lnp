@@ -30,6 +30,7 @@
 ".\objects\ft_timer.o"
 ".\objects\ft_delay.o"
 ".\objects\tft_8080.o"
+".\objects\mid_bk953x.o"
 --library_type=microlib --strict --scatter ".\Objects\FT32F0XX.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
