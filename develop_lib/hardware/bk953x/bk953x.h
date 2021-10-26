@@ -25,5 +25,17 @@ typedef struct
     bk953x_band_type_e band_type;
 } bk953x_object_t;
 
+typedef struct
+{
+    uint8_t  reg;
+    uint32_t value;
+} bk953x_reg_value_t;
+
+bk953x_reg_value_t g_bk9532_init_config[54] = {
+    {0x00 , 0xDFFFFFF8 },
+    {0x01 , 0x04D28057 },
+    {0x01 , 0x08990E028 },
+};
+
 
 #endif
