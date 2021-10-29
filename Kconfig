@@ -1,0 +1,134 @@
+# Kconfig - general configuration options
+
+#
+# Copyright (c) 2014-2015 Wind River Systems, Inc.
+#
+#
+mainmenu "Sensoro build system Configuration"
+
+choice
+    prompt "Board"
+    default BOARD_DEMO
+
+    config BOARD_DEMO
+        bool "demo"
+
+    config BOARD_SWC11XS
+        bool "swc11xs"
+
+endchoice
+
+config BOARD
+    string
+    default "swc11xs"        if BOARD_SWC11XS
+    default "demo"           if BOARD_DEMO
+
+choice
+    prompt "Build Type"
+    default BUILD_TYPE_DEBUG
+
+    config BUILD_TYPE_DEBUG
+        bool "DEBUG"
+
+    config BUILD_TYPE_RELEASE
+        bool "RELEASE"
+
+endchoice
+
+config BUILD_TYPE
+    string
+    default "DEBUG"    if BUILD_TYPE_DEBUG
+    default "RELEASE"  if BUILD_TYPE_RELEASE
+
+menuconfig TRACE_ENABLE
+    bool "Enable debug trace"
+    default y
+    depends on BUILD_TYPE_DEBUG
+
+if TRACE_ENABLE
+
+choice
+    prompt "Trace level"
+    depends on TRACE_ENABLE
+    default TRACE_LEVEL_DEBUG
+
+    config TRACE_LEVEL_DISABLED
+        bool "DISABLED"
+
+    config TRACE_LEVEL_VERBOSE
+        bool "VERBOSE"
+
+    config TRACE_LEVEL_DEBUG
+        bool "DEBUG"
+
+    config TRACE_LEVEL_INFO
+        bool "INFO"
+
+    config TRACE_LEVEL_NOTICE
+        bool "NOTICE"
+
+    config TRACE_LEVEL_WARN
+        bool "WARN"
+
+    config TRACE_LEVEL_ERROR
+        bool "ERROR"
+
+    config TRACE_LEVEL_ASSERT
+        bool "ASSERT"
+endchoice
+
+config TRACE_LEVEL
+    string
+    default "DISABLED"  if TRACE_LEVEL_DISABLED
+    default "VERBOSE"   if TRACE_LEVEL_VERBOSE
+    default "DEBUG"     if TRACE_LEVEL_DEBUG
+    default "INFO"      if TRACE_LEVEL_INFO
+    default "NOTICE"    if TRACE_LEVEL_NOTICE
+    default "WARN"      if TRACE_LEVEL_WARN
+    default "ERROR"     if TRACE_LEVEL_ERROR
+    default "ASSERT"    if TRACE_LEVEL_ASSERT
+
+choice
+    prompt "Trace backend"
+    depends on TRACE_ENABLE
+    default TRACE_BACKEND_RTT
+
+    config TRACE_BACKEND_RTT
+        bool "RTT"
+        select SEGGER_RTT
+
+    config TRACE_BACKEND_UART
+        bool "UART"
+
+    config TRACE_BACKEND_RAW_UART
+        bool "RAW_UART"
+endchoice
+
+config TRACE_BACKEND
+    string
+    default "RTT"       if TRACE_BACKEND_RTT
+    default "UART"      if TRACE_BACKEND_UART
+    default "RAW_UART"  if TRACE_BACKEND_RAW_UART
+
+endif
+
+
+choice
+    prompt "Firmware Type"
+    default WORK_MODE
+
+    config CCC_MODE
+        bool "CCC"
+
+    config WORK_MODE
+        bool "WORK"
+
+endchoice
+
+config FIRMWARE_TYPE
+    string
+    default "CCC"             if CCC_MODE
+    default "WORK"            if WORK_MODE
+    
+source "sdk/external/Kconfig"
+
