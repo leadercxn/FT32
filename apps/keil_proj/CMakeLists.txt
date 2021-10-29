@@ -42,15 +42,28 @@ set(SDK_INCLUDE_DIRS
 )
 
 
+# file(GLOB APP_SOURCE_FILES
+#     ${EXAMPLE_DIR}/USART/USART_Printf/main.c
+#     ${EXAMPLE_DIR}/USART/USART_Printf/ft32f0XX_it.c
+# )
+
+# set(APP_INCLUDE_DIRS
+#     ${CMAKE_CURRENT_SOURCE_DIR}
+#     ${CMAKE_CURRENT_SOURCE_DIR}/config
+#     ${EXAMPLE_DIR}/USART/USART_Printf
+    
+# )
+
 file(GLOB APP_SOURCE_FILES
-    ${EXAMPLE_DIR}/USART/USART_Printf/main.c
-    ${EXAMPLE_DIR}/USART/USART_Printf/ft32f0XX_it.c
+    ${EXAMPLE_DIR}/USART/USART_HyperTerminalInterrupt/main.c
+    ${EXAMPLE_DIR}/USART/USART_HyperTerminalInterrupt/ft32f0XX_it.c
 )
 
 set(APP_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/config
-    ${EXAMPLE_DIR}/USART/USART_Printf
+    ${EXAMPLE_DIR}/USART/USART_HyperTerminalInterrupt
+    
 )
 
 set(USER_DEFINITIONS

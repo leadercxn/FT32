@@ -1,0 +1,18 @@
+set(CMAKE_ASM_COMPILER "/usr/local/DS-5_v5.26.0/sw/ARMCompiler5.06u4/bin/armasm")
+set(CMAKE_ASM_COMPILER_ARG1 "")
+set(CMAKE_AR "/usr/bin/ar")
+set(CMAKE_ASM_COMPILER_AR "")
+set(CMAKE_RANLIB "/usr/bin/ranlib")
+set(CMAKE_ASM_COMPILER_RANLIB "")
+set(CMAKE_LINKER "/usr/local/DS-5_v5.26.0/sw/ARMCompiler5.06u4/bin/armlink")
+set(CMAKE_MT "")
+set(CMAKE_ASM_COMPILER_LOADED 1)
+set(CMAKE_ASM_COMPILER_ID "ARMCC")
+set(CMAKE_ASM_COMPILER_VERSION "")
+set(CMAKE_ASM_COMPILER_ENV_VAR "ASM")
+
+
+set(CMAKE_ASM_IGNORE_EXTENSIONS h;H;o;O;obj;OBJ;def;DEF;rc;RC)
+set(CMAKE_ASM_LINKER_PREFERENCE 0)
+
+
