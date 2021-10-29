@@ -20,6 +20,7 @@ set(DEV_DIR ${CMAKE_SOURCE_DIR}/develop_lib)
 set(LIB_DIR ${CMAKE_SOURCE_DIR}/Libraries/FT32F0xx_StdPeriph_Driver)
 set(UTIL_DIR ${CMAKE_SOURCE_DIR}/Utilities)
 set(CMSIS_DIR ${CMAKE_SOURCE_DIR}/Libraries/CMSIS)
+set(EXAMPLE_DIR ${CMAKE_SOURCE_DIR}/Projects/FT32F0xx_StdPeriph_Examples)
 
 set(AUTOCONF_H ${PROJECT_BINARY_DIR}/include/generated/autoconf.h)
 # Re-configure (Re-execute all CMakeLists.txt code) when autoconf.h changes
@@ -69,7 +70,8 @@ endif()
 add_subdirectory(sdk)
 
 if(NOT BUILD_HOST)
-    add_subdirectory(apps/fct)
+    # add_subdirectory(apps/fct)
+    add_subdirectory(apps/keil_proj)
 endif()
 
 
