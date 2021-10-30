@@ -1,4 +1,4 @@
-   /**
+/**
   ******************************************************************************
   * @file    USART/USART_Printf/main.c 
   * @author  AE
@@ -27,7 +27,7 @@
 
 /** @addtogroup USART_Printf
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -37,15 +37,14 @@
 static void USART_Config(void);
 
 #ifdef __GNUC__
-  /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
+/* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
      set to 'Yes') calls __io_putchar() */
-  #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #else
-  #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
 #endif /* __GNUC__ */
-  
-/* Private functions ---------------------------------------------------------*/
 
+/* Private functions ---------------------------------------------------------*/
 
 /**
   * @brief  Main program
@@ -59,20 +58,20 @@ int main(void)
        file (startup_FT32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_FT32f0xx.c file
-     */     
-
+     */
   /* USART configuration */
   USART_Config();
-  
+
   /* Output a message on Hyperterminal using printf function */
   printf("\n\rUSART Printf Example: retarget the C library printf function to the USART\n\r");
 
   /* Loop until the end of transmission */
   /* The software must wait until TC=1. The TC flag remains cleared during all data
-     transfers and it is set by hardware at the last frame’s end of transmission*/
+     transfers and it is set by hardware at the last frameï¿½s end of transmission*/
   while (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TC) == RESET)
-  {}
-  
+  {
+  }
+
   while (1)
   {
   }
@@ -84,9 +83,9 @@ int main(void)
   * @retval None
   */
 static void USART_Config(void)
-{ 
+{
   USART_InitTypeDef USART_InitStructure;
-  
+
   /* USARTx configured as follow:
   - BaudRate = 115200 baud  
   - Word Length = 8 Bits
@@ -101,7 +100,7 @@ static void USART_Config(void)
   USART_InitStructure.USART_Parity = USART_Parity_No;
   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-  
+
   FT_EVAL_COMInit(COM1, &USART_InitStructure);
 }
 
@@ -114,16 +113,17 @@ PUTCHAR_PROTOTYPE
 {
   /* Place your implementation of fputc here */
   /* e.g. write a character to the USART */
-  USART_SendData(EVAL_COM1, (uint8_t) ch);
+  USART_SendData(EVAL_COM1, (uint8_t)ch);
 
   /* Loop until transmit data register is empty */
   while (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TXE) == RESET)
-  {}
+  {
+  }
 
   return ch;
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 
 /**
   * @brief  Reports the name of the source file and the source line number
@@ -132,8 +132,8 @@ PUTCHAR_PROTOTYPE
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line)
-{ 
+void assert_failed(uint8_t *file, uint32_t line)
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -146,10 +146,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT FMD *****END OF FILE****/

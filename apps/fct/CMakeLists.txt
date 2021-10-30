@@ -10,9 +10,13 @@ file(GLOB SDK_SOURCE_FILES
     ${DEV_DIR}/ft_lib/i2c/ft_i2c.c
     ${DEV_DIR}/ft_lib/deprecated/ft_delay.c
     ${DEV_DIR}/ft_lib/timer/ft_timer.c
+    ${DEV_DIR}/ft_lib/usart/ft_usart.c
+    ${DEV_DIR}/ft_lib/usart/retarget.c
 
     ${DEV_DIR}/middle_api/mid_bk953x/mid_bk953x.c
     ${DEV_DIR}/middle_api/tft_8080/tft_8080.c
+    ${DEV_DIR}/middle_api/trace/trace.c
+
     ${DEV_DIR}/hardware/st7789/st7789.c
 )
 
@@ -31,6 +35,7 @@ set(SDK_INCLUDE_DIRS
     ${DEV_DIR}/ft_lib/i2c
     ${DEV_DIR}/ft_lib/deprecated
     ${DEV_DIR}/ft_lib/timer
+    ${DEV_DIR}/ft_lib/usart
 
     ${DEV_DIR}/hardware 
     ${DEV_DIR}/hardware/st7789
@@ -38,6 +43,7 @@ set(SDK_INCLUDE_DIRS
     ${DEV_DIR}/middle_api/mid_bk953x
     ${DEV_DIR}/middle_api/queue
     ${DEV_DIR}/middle_api/tft_8080
+    ${DEV_DIR}/middle_api/trace
 
 )
 
@@ -46,11 +52,11 @@ file(GLOB APP_SOURCE_FILES
     # ${CMAKE_CURRENT_SOURCE_DIR}/gpio/main.c
     # ${CMAKE_CURRENT_SOURCE_DIR}/gpio/ft32f0xx_it.c
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/timer/main.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/timer/ft32f0xx_it.c
+    # ${CMAKE_CURRENT_SOURCE_DIR}/timer/main.c
+    # ${CMAKE_CURRENT_SOURCE_DIR}/timer/ft32f0xx_it.c
 
-    # ${CMAKE_CURRENT_SOURCE_DIR}/uart/main.c
-    # ${CMAKE_CURRENT_SOURCE_DIR}/uart/ft32f0xx_it.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/uart/main.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/uart/ft32f0xx_it.c
 
 )
 

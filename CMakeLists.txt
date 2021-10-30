@@ -70,8 +70,8 @@ endif()
 add_subdirectory(sdk)
 
 if(NOT BUILD_HOST)
-    # add_subdirectory(apps/fct)
-    add_subdirectory(apps/keil_proj)
+    add_subdirectory(apps/fct)
+    # add_subdirectory(apps/keil_proj)
 endif()
 
 

@@ -34,7 +34,7 @@ include rules.ninja
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -94,7 +94,7 @@ build menuconfig: phony CMakeFiles/menuconfig
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -130,35 +130,35 @@ build erase: phony CMakeFiles/erase
 # Custom command for CMakeFiles/gdb
 
 build CMakeFiles/gdb: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && arm-none-eabi-gdb .elf -ex 'target remote localhost:3333' -ex 'monitor reset halt' -ex 'load'
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && arm-none-eabi-gdb .elf -ex 'target remote localhost:3333' -ex 'monitor reset halt' -ex 'load'
 
 
 #############################################
 # Custom command for CMakeFiles/gdbs
 
 build CMakeFiles/gdbs: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/support/alarm_host_jlink.cfg
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/support/alarm_host_jlink.cfg
 
 
 #############################################
 # Custom command for CMakeFiles/readapp
 
 build CMakeFiles/readapp: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c 'flash read_bank 0 app_readed.bin 0x20000 0x20000' -c shutdown
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c 'flash read_bank 0 app_readed.bin 0x20000 0x20000' -c shutdown
 
 
 #############################################
 # Custom command for CMakeFiles/erase_cfg
 
 build CMakeFiles/erase_cfg: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c 'flash erase_address 0x08004000 0xC000' -c shutdown
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c 'flash erase_address 0x08004000 0xC000' -c shutdown
 
 
 #############################################
 # Custom command for CMakeFiles/read
 
 build CMakeFiles/read: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c 'flash read_bank 0 fw.bin 0x00000 0x80000' -c shutdown
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c 'flash read_bank 0 fw.bin 0x00000 0x80000' -c shutdown
 
 
 #############################################
@@ -171,14 +171,14 @@ build CMakeFiles/config-sanitycheck: phony .config
 # Custom command for CMakeFiles/pristine
 
 build CMakeFiles/pristine: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -P /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/cmake/pristine.cmake
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -P /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/cmake/pristine.cmake
 
 
 #############################################
 # Custom command for CMakeFiles/menuconfig
 
 build CMakeFiles/menuconfig: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -E env PYTHON_EXECUTABLE=/usr/bin/python3 srctree=/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 KCONFIG_CONFIG=/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/.config /usr/bin/python3 /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/scripts/kconfig/menuconfig.py /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/Kconfig
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -E env PYTHON_EXECUTABLE=/usr/bin/python3 srctree=/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 KCONFIG_CONFIG=/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/.config /usr/bin/python3 /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/scripts/kconfig/menuconfig.py /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/Kconfig
   pool = console
 
 
@@ -186,32 +186,32 @@ build CMakeFiles/menuconfig: CUSTOM_COMMAND
 # Custom command for CMakeFiles/reset
 
 build CMakeFiles/reset: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/support/alarm_host_jlink.cfg -c init -c targets -c 'reset run' -c shutdown
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/support/alarm_host_jlink.cfg -c init -c targets -c 'reset run' -c shutdown
 
 
 #############################################
 # Custom command for CMakeFiles/erase_sec3
 
 build CMakeFiles/erase_sec3: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c 'flash erase_address 0x0800C000 0x4000' -c shutdown
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c 'flash erase_address 0x0800C000 0x4000' -c shutdown
 
 
 #############################################
 # Custom command for CMakeFiles/halt
 
 build CMakeFiles/halt: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c shutdown
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c shutdown
 
 
 #############################################
 # Custom command for CMakeFiles/erase
 
 build CMakeFiles/erase: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c 'flash erase_address 0x08000000 0x80000' -c shutdown
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/support/alarm_host_jlink.cfg -c init -c targets -c 'halt' -c 'flash erase_address 0x08000000 0x80000' -c shutdown
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/CMakeLists.txt
+# /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/CMakeLists.txt
 # =============================================================================
 
 
@@ -219,7 +219,7 @@ build CMakeFiles/erase: CUSTOM_COMMAND
 # Utility command for rebuild_cache
 
 build sdk/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -231,7 +231,7 @@ build sdk/rebuild_cache: phony sdk/CMakeFiles/rebuild_cache.util
 # Utility command for edit_cache
 
 build sdk/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -240,7 +240,7 @@ build sdk/edit_cache: phony sdk/CMakeFiles/edit_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/sdk/CMakeLists.txt
+# /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/sdk/CMakeLists.txt
 # =============================================================================
 
 
@@ -248,7 +248,7 @@ build sdk/edit_cache: phony sdk/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build sdk/external/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk/external && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -260,7 +260,7 @@ build sdk/external/rebuild_cache: phony sdk/external/CMakeFiles/rebuild_cache.ut
 # Utility command for edit_cache
 
 build sdk/external/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk/external && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -269,7 +269,7 @@ build sdk/external/edit_cache: phony sdk/external/CMakeFiles/edit_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/sdk/external/CMakeLists.txt
+# /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/sdk/external/CMakeLists.txt
 # =============================================================================
 
 
@@ -277,7 +277,7 @@ build sdk/external/edit_cache: phony sdk/external/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build sdk/external/nanopb/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external/nanopb && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk/external/nanopb && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -345,7 +345,7 @@ build sdk/external/nanopb/libsdk__external__nanopb.a: C_STATIC_LIBRARY_LINKER__s
 # Utility command for edit_cache
 
 build sdk/external/nanopb/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external/nanopb && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk/external/nanopb && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -354,7 +354,7 @@ build sdk/external/nanopb/edit_cache: phony sdk/external/nanopb/CMakeFiles/edit_
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/sdk/external/CMakeLists.txt
+# /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/sdk/external/CMakeLists.txt
 # =============================================================================
 
 
@@ -362,7 +362,7 @@ build sdk/external/nanopb/edit_cache: phony sdk/external/nanopb/CMakeFiles/edit_
 # Utility command for rebuild_cache
 
 build sdk/external/ntshell/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external/ntshell && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk/external/ntshell && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -480,7 +480,7 @@ build sdk/external/ntshell/libsdk__external__ntshell.a: C_STATIC_LIBRARY_LINKER_
 # Utility command for edit_cache
 
 build sdk/external/ntshell/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external/ntshell && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk/external/ntshell && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -489,32 +489,32 @@ build sdk/external/ntshell/edit_cache: phony sdk/external/ntshell/CMakeFiles/edi
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/CMakeLists.txt
+# /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/CMakeLists.txt
 # =============================================================================
 
 
 #############################################
 # Utility command for edit_cache
 
-build apps/keil_proj/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/keil_proj && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+build apps/fct/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/apps/fct && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake-gui -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
 
-build apps/keil_proj/edit_cache: phony apps/keil_proj/CMakeFiles/edit_cache.util
+build apps/fct/edit_cache: phony apps/fct/CMakeFiles/edit_cache.util
 
 
 #############################################
 # Utility command for rebuild_cache
 
-build apps/keil_proj/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/keil_proj && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+build apps/fct/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/apps/fct && /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
 
-build apps/keil_proj/rebuild_cache: phony apps/keil_proj/CMakeFiles/rebuild_cache.util
+build apps/fct/rebuild_cache: phony apps/fct/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Object build statements for EXECUTABLE target ft32f0
@@ -525,345 +525,375 @@ build apps/keil_proj/rebuild_cache: phony apps/keil_proj/CMakeFiles/rebuild_cach
 
 build cmake_object_order_depends_target_ft32f0: phony || cmake_object_order_depends_target_sdk__external__nanopb cmake_object_order_depends_target_sdk__external__ntshell
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/system_ft32f0xx.o: C_COMPILER__ft32f0 ../Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/system_ft32f0xx.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/system_ft32f0xx.o: C_COMPILER__ft32f0 ../Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/system_ft32f0xx.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/system_ft32f0xx.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/system_ft32f0xx.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/arm/startup_ft32f072xb.o: ASM_COMPILER__ft32f0 ../Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/arm/startup_ft32f072xb.s || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/arm/startup_ft32f072xb.o: ASM_COMPILER__ft32f0 ../Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/arm/startup_ft32f072xb.s || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/arm/startup_ft32f072xb.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/arm/startup_ft32f072xb.o.d
   FLAGS = --cpu=Cortex-M0 --cpreproc --apcs=interwork --pd "__HEAP_SIZE SETA 2048" --pd "__STACK_SIZE SETA 5120" --pd "__MICROLIB SETA 1"
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/arm
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/arm
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Utilities/FT32_EVAL/FT32f072X8_EVAL/FT32F072X8_eval.o: C_COMPILER__ft32f0 ../Utilities/FT32_EVAL/FT32f072X8_EVAL/FT32F072X8_eval.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Utilities/FT32_EVAL/FT32f072X8_EVAL/FT32F072X8_eval.o: C_COMPILER__ft32f0 ../Utilities/FT32_EVAL/FT32f072X8_EVAL/FT32F072X8_eval.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Utilities/FT32_EVAL/FT32f072X8_EVAL/FT32F072X8_eval.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Utilities/FT32_EVAL/FT32f072X8_EVAL/FT32F072X8_eval.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Utilities/FT32_EVAL/FT32f072X8_EVAL
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Utilities/FT32_EVAL/FT32f072X8_EVAL
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt/ft32f0XX_it.o: C_COMPILER__ft32f0 ../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt/ft32f0XX_it.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/uart/ft32f0xx_it.o: C_COMPILER__ft32f0 ../apps/fct/uart/ft32f0xx_it.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt/ft32f0XX_it.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/uart/ft32f0xx_it.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/uart
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt/main.o: C_COMPILER__ft32f0 ../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt/main.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/uart/main.o: C_COMPILER__ft32f0 ../apps/fct/uart/main.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt/main.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/uart/main.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/uart
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_adc.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_adc.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_adc.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_adc.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_adc.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_adc.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_comp.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_comp.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_comp.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_comp.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_comp.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_comp.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crc.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crc.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crc.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crc.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crc.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crc.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crs.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crs.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crs.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crs.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crs.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crs.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dac.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dac.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dac.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dac.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dac.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dac.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dbgmcu.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dbgmcu.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dbgmcu.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dbgmcu.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dbgmcu.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dbgmcu.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dma.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dma.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dma.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dma.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dma.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dma.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_exti.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_exti.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_exti.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_exti.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_exti.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_exti.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_flash.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_flash.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_flash.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_flash.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_flash.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_flash.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_gpio.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_gpio.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_gpio.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_gpio.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_gpio.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_gpio.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_i2c.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_i2c.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_i2c.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_i2c.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_i2c.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_i2c.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_iwdg.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_iwdg.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_iwdg.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_iwdg.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_iwdg.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_iwdg.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_misc.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_misc.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_misc.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_misc.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_misc.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_misc.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_opa.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_opa.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_opa.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_opa.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_opa.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_opa.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_pwr.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_pwr.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_pwr.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_pwr.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_pwr.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_pwr.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rcc.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rcc.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rcc.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rcc.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rcc.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rcc.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rtc.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rtc.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rtc.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rtc.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rtc.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rtc.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_spi.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_spi.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_spi.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_spi.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_spi.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_spi.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_syscfg.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_syscfg.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_syscfg.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_syscfg.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_syscfg.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_syscfg.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_tim.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_tim.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_tim.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_tim.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_tim.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_tim.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_usart.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_usart.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_usart.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_usart.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_usart.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_usart.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_wwdg.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_wwdg.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_wwdg.o: C_COMPILER__ft32f0 ../Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_wwdg.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_wwdg.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_wwdg.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/deprecated/ft_delay.o: C_COMPILER__ft32f0 ../develop_lib/ft_lib/deprecated/ft_delay.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/deprecated/ft_delay.o: C_COMPILER__ft32f0 ../develop_lib/ft_lib/deprecated/ft_delay.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/deprecated/ft_delay.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/deprecated/ft_delay.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/deprecated
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/deprecated
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/gpio/ft_gpio.o: C_COMPILER__ft32f0 ../develop_lib/ft_lib/gpio/ft_gpio.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/gpio/ft_gpio.o: C_COMPILER__ft32f0 ../develop_lib/ft_lib/gpio/ft_gpio.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/gpio/ft_gpio.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/gpio/ft_gpio.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/gpio
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/gpio
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/i2c/ft_i2c.o: C_COMPILER__ft32f0 ../develop_lib/ft_lib/i2c/ft_i2c.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/i2c/ft_i2c.o: C_COMPILER__ft32f0 ../develop_lib/ft_lib/i2c/ft_i2c.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/i2c/ft_i2c.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/i2c/ft_i2c.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/i2c
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/i2c
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/timer/ft_timer.o: C_COMPILER__ft32f0 ../develop_lib/ft_lib/timer/ft_timer.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/timer/ft_timer.o: C_COMPILER__ft32f0 ../develop_lib/ft_lib/timer/ft_timer.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/timer/ft_timer.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/timer/ft_timer.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/timer
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/timer
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/hardware/st7789/st7789.o: C_COMPILER__ft32f0 ../develop_lib/hardware/st7789/st7789.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/usart/ft_usart.o: C_COMPILER__ft32f0 ../develop_lib/ft_lib/usart/ft_usart.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/hardware/st7789/st7789.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/usart/ft_usart.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/hardware/st7789
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/usart
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/mid_bk953x/mid_bk953x.o: C_COMPILER__ft32f0 ../develop_lib/middle_api/mid_bk953x/mid_bk953x.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/usart/retarget.o: C_COMPILER__ft32f0 ../develop_lib/ft_lib/usart/retarget.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/mid_bk953x/mid_bk953x.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/usart/retarget.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/mid_bk953x
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/usart
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
-build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/tft_8080/tft_8080.o: C_COMPILER__ft32f0 ../develop_lib/middle_api/tft_8080/tft_8080.c || cmake_object_order_depends_target_ft32f0
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/hardware/st7789/st7789.o: C_COMPILER__ft32f0 ../develop_lib/hardware/st7789/st7789.c || cmake_object_order_depends_target_ft32f0
   DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
-  DEP_FILE = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/tft_8080/tft_8080.o.d
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/hardware/st7789/st7789.o.d
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/keil_proj -I../apps/keil_proj/config -I../Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  OBJECT_FILE_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/tft_8080
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/hardware/st7789
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
+
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/mid_bk953x/mid_bk953x.o: C_COMPILER__ft32f0 ../develop_lib/middle_api/mid_bk953x/mid_bk953x.c || cmake_object_order_depends_target_ft32f0
+  DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/mid_bk953x/mid_bk953x.o.d
+  FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/mid_bk953x
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
+
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/tft_8080/tft_8080.o: C_COMPILER__ft32f0 ../develop_lib/middle_api/tft_8080/tft_8080.c || cmake_object_order_depends_target_ft32f0
+  DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/tft_8080/tft_8080.o.d
+  FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/tft_8080
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
+
+build apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/trace/trace.o: C_COMPILER__ft32f0 ../develop_lib/middle_api/trace/trace.c || cmake_object_order_depends_target_ft32f0
+  DEFINES = -DBOARD_DEMO -DDEBUG -DDEVICE_TYPE=\"ft32f0\" -DFACTORY_MODE=1 -DFT32 -DFT32F072x8 -DNRF_LOG_USES_RTT=1 -DPB_FIELD_16BIT=1 -DPROJECT_NAME=\"ft32f0\" -DSHELL_UART_TX_BUF_SIZE=1024 -DTARGET_NAME=\"ft32f0\" -DTRACE_ENABLE -DTRACE_LEVEL_DEFAULT=TRACE_LEVEL_DEBUG -DUSE_DEFAULT_TIMEOUT_CALLBACK -DUSE_STDPERIPH_DRIVER -DVERSION_BUILD_HASH=\"v1.0.0_\" -D__MICROLIB
+  DEP_FILE = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/trace/trace.o.d
+  FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
+  INCLUDES = -I../boards -I../boards/demo -I../Libraries/CMSIS/Include -I../Libraries/CMSIS/Device/FT/FT32F0xx/Include -I../Utilities/FT32_EVAL/Common -I../Utilities/FT32_EVAL/FT32f072X8_EVAL -I../apps/fct -I../apps/fct/config -I../apps/fct/timer -I../sdk/ft32f0_sdk/components/device -I../sdk/ft32f0_sdk/components/toolchain -I../sdk/ft32f0_sdk/components/toolchain/CMSIS -I../sdk/ft32f0_sdk/components/toolchain/CMSIS/Include -I../Libraries/FT32F0xx_StdPeriph_Driver/inc -I../develop_lib -I../develop_lib/ft_lib -I../develop_lib/ft_lib/gpio -I../develop_lib/ft_lib/i2c -I../develop_lib/ft_lib/deprecated -I../develop_lib/ft_lib/timer -I../develop_lib/ft_lib/usart -I../develop_lib/hardware -I../develop_lib/hardware/st7789 -I../develop_lib/middle_api -I../develop_lib/middle_api/mid_bk953x -I../develop_lib/middle_api/queue -I../develop_lib/middle_api/tft_8080 -I../develop_lib/middle_api/trace -I../sdk/external/nanopb -I../sdk/external/ntshell/lib/core -I../sdk/external/ntshell/lib/util
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  OBJECT_FILE_DIR = apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/trace
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
 
 # =============================================================================
@@ -871,41 +901,41 @@ build apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/tft_8080
 
 
 #############################################
-# Link the executable apps/keil_proj/ft32f0.elf
+# Link the executable apps/fct/ft32f0.elf
 
-build apps/keil_proj/ft32f0.elf apps/keil_proj/ft32f0.hex: C_EXECUTABLE_LINKER__ft32f0 apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/system_ft32f0xx.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/arm/startup_ft32f072xb.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Utilities/FT32_EVAL/FT32f072X8_EVAL/FT32F072X8_eval.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt/ft32f0XX_it.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Projects/FT32F0xx_StdPeriph_Examples/USART/USART_HyperTerminalInterrupt/main.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_adc.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_comp.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crc.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crs.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dac.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dbgmcu.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dma.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_exti.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_flash.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_gpio.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_i2c.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_iwdg.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_misc.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_opa.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_pwr.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rcc.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rtc.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_spi.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_syscfg.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_tim.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_usart.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_wwdg.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/deprecated/ft_delay.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/gpio/ft_gpio.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/i2c/ft_i2c.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/timer/ft_timer.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/hardware/st7789/st7789.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/mid_bk953x/mid_bk953x.o apps/keil_proj/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/tft_8080/tft_8080.o | sdk/external/nanopb/libsdk__external__nanopb.a sdk/external/ntshell/libsdk__external__ntshell.a || sdk/external/nanopb/libsdk__external__nanopb.a sdk/external/ntshell/libsdk__external__ntshell.a
+build apps/fct/ft32f0.elf apps/fct/ft32f0.hex: C_EXECUTABLE_LINKER__ft32f0 apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/system_ft32f0xx.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/CMSIS/Device/FT/FT32F0xx/Source/Templates/arm/startup_ft32f072xb.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Utilities/FT32_EVAL/FT32f072X8_EVAL/FT32F072X8_eval.o apps/fct/CMakeFiles/ft32f0.dir/uart/ft32f0xx_it.o apps/fct/CMakeFiles/ft32f0.dir/uart/main.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_adc.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_comp.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crc.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_crs.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dac.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dbgmcu.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_dma.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_exti.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_flash.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_gpio.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_i2c.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_iwdg.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_misc.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_opa.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_pwr.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rcc.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_rtc.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_spi.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_syscfg.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_tim.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_usart.o apps/fct/CMakeFiles/ft32f0.dir/__/__/Libraries/FT32F0xx_StdPeriph_Driver/src/FT32f0xx_wwdg.o apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/deprecated/ft_delay.o apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/gpio/ft_gpio.o apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/i2c/ft_i2c.o apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/timer/ft_timer.o apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/usart/ft_usart.o apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/ft_lib/usart/retarget.o apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/hardware/st7789/st7789.o apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/mid_bk953x/mid_bk953x.o apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/tft_8080/tft_8080.o apps/fct/CMakeFiles/ft32f0.dir/__/__/develop_lib/middle_api/trace/trace.o | sdk/external/nanopb/libsdk__external__nanopb.a sdk/external/ntshell/libsdk__external__ntshell.a || sdk/external/nanopb/libsdk__external__nanopb.a sdk/external/ntshell/libsdk__external__ntshell.a
   FLAGS = --cpu=Cortex-M0 -c --c99 --gnu --apcs=interwork --split_sections -g -O3 --no_debug
-  LINK_FLAGS = --cpu=Cortex-M0 --strict --map --xref --summary_stderr --info summarysizes --info stack --callgraph --symbols --info sizes --info totals --info unused --info veneers --library_type=microlib   --scatter "/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/apps/keil_proj/linker/ft32f0.sct"
+  LINK_FLAGS = --cpu=Cortex-M0 --strict --map --xref --summary_stderr --info summarysizes --info stack --callgraph --symbols --info sizes --info totals --info unused --info veneers --library_type=microlib   --scatter "/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/apps/fct/linker/ft32f0.sct"
   LINK_LIBRARIES = sdk/external/nanopb/libsdk__external__nanopb.a sdk/external/ntshell/libsdk__external__ntshell.a
-  OBJECT_DIR = apps/keil_proj/CMakeFiles/ft32f0.dir
-  POST_BUILD = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/keil_proj && /usr/local/DS-5_v5.26.0/sw/ARMCompiler5.06u4/bin/fromelf --i32combined -o /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/keil_proj/ft32f0.hex /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/keil_proj/ft32f0.elf && /usr/local/DS-5_v5.26.0/sw/ARMCompiler5.06u4/bin/fromelf --bin -o /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/keil_proj/ft32f0.bin /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/keil_proj/ft32f0.elf && /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/scripts/max_stack_usage.sh /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/keil_proj/ft32f0.elf.map
+  OBJECT_DIR = apps/fct/CMakeFiles/ft32f0.dir
+  POST_BUILD = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/apps/fct && /usr/local/DS-5_v5.26.0/sw/ARMCompiler5.06u4/bin/fromelf --i32combined -o /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/apps/fct/ft32f0.hex /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/apps/fct/ft32f0.elf && /usr/local/DS-5_v5.26.0/sw/ARMCompiler5.06u4/bin/fromelf --bin -o /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/apps/fct/ft32f0.bin /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/apps/fct/ft32f0.elf && /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/scripts/max_stack_usage.sh /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/apps/fct/ft32f0.elf.map
   PRE_LINK = :
   RESTAT = 1
-  TARGET_COMPILE_PDB = apps/keil_proj/CMakeFiles/ft32f0.dir/
-  TARGET_FILE = apps/keil_proj/ft32f0.elf
-  TARGET_PDB = apps/keil_proj/ft32f0.pdb
+  TARGET_COMPILE_PDB = apps/fct/CMakeFiles/ft32f0.dir/
+  TARGET_FILE = apps/fct/ft32f0.elf
+  TARGET_PDB = apps/fct/ft32f0.pdb
 
 
 #############################################
 # Utility command for flash_ft32f0
 
-build apps/keil_proj/flash_ft32f0: phony apps/keil_proj/CMakeFiles/flash_ft32f0 apps/keil_proj/ft32f0.elf
+build apps/fct/flash_ft32f0: phony apps/fct/CMakeFiles/flash_ft32f0 apps/fct/ft32f0.elf
 
 
 #############################################
-# Custom command for apps/keil_proj/CMakeFiles/flash_ft32f0
+# Custom command for apps/fct/CMakeFiles/flash_ft32f0
 
-build apps/keil_proj/CMakeFiles/flash_ft32f0: CUSTOM_COMMAND apps/keil_proj/ft32f0.elf || apps/keil_proj/ft32f0.elf sdk/external/nanopb/libsdk__external__nanopb.a sdk/external/ntshell/libsdk__external__ntshell.a
-  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/keil_proj && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/support/alarm_host_jlink.cfg -c init -c targets -c 'reset halt' -c 'flash write_image erase ft32f0.hex' -c 'reset halt' -c 'verify_image ft32f0.hex' -c 'reset run' -c shutdown
+build apps/fct/CMakeFiles/flash_ft32f0: CUSTOM_COMMAND apps/fct/ft32f0.elf || apps/fct/ft32f0.elf sdk/external/nanopb/libsdk__external__nanopb.a sdk/external/ntshell/libsdk__external__ntshell.a
+  COMMAND = cd /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/apps/fct && /usr/local/bin/openocd -f /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/support/alarm_host_jlink.cfg -c init -c targets -c 'reset halt' -c 'flash write_image erase ft32f0.hex' -c 'reset halt' -c 'verify_image ft32f0.hex' -c 'reset run' -c shutdown
 
 # =============================================================================
 # Target aliases.
 
-build flash_ft32f0: phony apps/keil_proj/flash_ft32f0
+build flash_ft32f0: phony apps/fct/flash_ft32f0
 
-build ft32f0: phony apps/keil_proj/ft32f0.elf
+build ft32f0: phony apps/fct/ft32f0.elf
 
-build ft32f0.elf: phony apps/keil_proj/ft32f0.elf
+build ft32f0.elf: phony apps/fct/ft32f0.elf
 
 build libsdk__external__nanopb.a: phony sdk/external/nanopb/libsdk__external__nanopb.a
 
@@ -921,35 +951,35 @@ build sdk__external__ntshell: phony sdk/external/ntshell/libsdk__external__ntshe
 # =============================================================================
 
 #############################################
-# Folder: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/keil_proj
+# Folder: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/apps/fct
 
-build apps/keil_proj/all: phony ft32f0
+build apps/fct/all: phony ft32f0
 
 # =============================================================================
 
 #############################################
-# Folder: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk
+# Folder: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk
 
 build sdk/all: phony sdk/external/all
 
 # =============================================================================
 
 #############################################
-# Folder: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external
+# Folder: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk/external
 
 build sdk/external/all: phony sdk/external/nanopb/all sdk/external/ntshell/all
 
 # =============================================================================
 
 #############################################
-# Folder: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external/nanopb
+# Folder: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk/external/nanopb
 
 build sdk/external/nanopb/all: phony sdk__external__nanopb
 
 # =============================================================================
 
 #############################################
-# Folder: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external/ntshell
+# Folder: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk/external/ntshell
 
 build sdk/external/ntshell/all: phony sdk__external__ntshell
 
@@ -960,7 +990,7 @@ build sdk/external/ntshell/all: phony sdk__external__ntshell
 #############################################
 # The main all target.
 
-build all: phony sdk/external/nanopb/libsdk__external__nanopb.a sdk/external/ntshell/libsdk__external__ntshell.a apps/keil_proj/ft32f0.elf
+build all: phony sdk/external/nanopb/libsdk__external__nanopb.a sdk/external/ntshell/libsdk__external__ntshell.a apps/fct/ft32f0.elf
 
 
 #############################################
@@ -971,14 +1001,14 @@ default all
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../apps/keil_proj/CMakeLists.txt ../apps/keil_proj/version.h.in ../cmake/backports/FindPythonInterp.cmake ../cmake/board.cmake ../cmake/extensions.cmake ../cmake/kconfig.cmake ../cmake/openocd.cmake ../cmake/platform.cmake ../cmake/platform/ft32f07x.cmake ../cmake/python.cmake ../cmake/sdk/ft_sdk.cmake ../cmake/toolchain.cmake ../cmake/toolchain/armcc.cmake ../cmake/version.cmake ../prj.conf ../sdk/CMakeLists.txt ../sdk/external/CMakeLists.txt ../sdk/external/nanopb/CMakeLists.txt ../sdk/external/ntshell/CMakeLists.txt .config /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeASMCompiler.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeASMInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCCompiler.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCCompilerABI.c /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCommonLanguageInclude.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCompilerIdDetection.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineASMCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompileFeatures.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompilerABI.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompilerId.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineSystem.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeFindBinUtils.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeGenericSystem.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeInitializeConfigs.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeLanguageInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeNinjaFindMake.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeParseImplicitLinkInfo.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystem.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystemSpecificInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystemSpecificInitialize.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestASMCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestCCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestCompilerCommon.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-ASM.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-C.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/GNU-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/HP-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/TI-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/XL-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/zOS-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/FindPackageHandleStandardArgs.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/FindPackageMessage.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Platform/Generic.cmake CMakeCache.txt CMakeFiles/3.15.2/CMakeASMCompiler.cmake CMakeFiles/3.15.2/CMakeCCompiler.cmake CMakeFiles/3.15.2/CMakeSystem.cmake include/generated/autoconf.h
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../apps/fct/CMakeLists.txt ../apps/fct/version.h.in ../cmake/backports/FindPythonInterp.cmake ../cmake/board.cmake ../cmake/extensions.cmake ../cmake/kconfig.cmake ../cmake/openocd.cmake ../cmake/platform.cmake ../cmake/platform/ft32f07x.cmake ../cmake/python.cmake ../cmake/sdk/ft_sdk.cmake ../cmake/toolchain.cmake ../cmake/toolchain/armcc.cmake ../cmake/version.cmake ../prj.conf ../sdk/CMakeLists.txt ../sdk/external/CMakeLists.txt ../sdk/external/nanopb/CMakeLists.txt ../sdk/external/ntshell/CMakeLists.txt .config /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeASMCompiler.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeASMInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCCompiler.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCCompilerABI.c /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCommonLanguageInclude.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCompilerIdDetection.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineASMCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompileFeatures.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompilerABI.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompilerId.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineSystem.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeFindBinUtils.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeGenericSystem.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeInitializeConfigs.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeLanguageInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeNinjaFindMake.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeParseImplicitLinkInfo.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystem.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystemSpecificInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystemSpecificInitialize.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestASMCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestCCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestCompilerCommon.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-ASM.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-C.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/GNU-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/HP-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/TI-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/XL-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/zOS-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/FindPackageHandleStandardArgs.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/FindPackageMessage.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Platform/Generic.cmake CMakeCache.txt CMakeFiles/3.15.2/CMakeASMCompiler.cmake CMakeFiles/3.15.2/CMakeCCompiler.cmake CMakeFiles/3.15.2/CMakeSystem.cmake include/generated/autoconf.h
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt ../apps/keil_proj/CMakeLists.txt ../apps/keil_proj/version.h.in ../cmake/backports/FindPythonInterp.cmake ../cmake/board.cmake ../cmake/extensions.cmake ../cmake/kconfig.cmake ../cmake/openocd.cmake ../cmake/platform.cmake ../cmake/platform/ft32f07x.cmake ../cmake/python.cmake ../cmake/sdk/ft_sdk.cmake ../cmake/toolchain.cmake ../cmake/toolchain/armcc.cmake ../cmake/version.cmake ../prj.conf ../sdk/CMakeLists.txt ../sdk/external/CMakeLists.txt ../sdk/external/nanopb/CMakeLists.txt ../sdk/external/ntshell/CMakeLists.txt .config /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeASMCompiler.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeASMInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCCompiler.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCCompilerABI.c /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCommonLanguageInclude.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCompilerIdDetection.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineASMCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompileFeatures.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompilerABI.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompilerId.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineSystem.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeFindBinUtils.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeGenericSystem.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeInitializeConfigs.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeLanguageInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeNinjaFindMake.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeParseImplicitLinkInfo.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystem.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystemSpecificInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystemSpecificInitialize.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestASMCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestCCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestCompilerCommon.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-ASM.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-C.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/GNU-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/HP-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/TI-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/XL-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/zOS-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/FindPackageHandleStandardArgs.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/FindPackageMessage.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Platform/Generic.cmake CMakeCache.txt CMakeFiles/3.15.2/CMakeASMCompiler.cmake CMakeFiles/3.15.2/CMakeCCompiler.cmake CMakeFiles/3.15.2/CMakeSystem.cmake include/generated/autoconf.h: phony
+build ../CMakeLists.txt ../apps/fct/CMakeLists.txt ../apps/fct/version.h.in ../cmake/backports/FindPythonInterp.cmake ../cmake/board.cmake ../cmake/extensions.cmake ../cmake/kconfig.cmake ../cmake/openocd.cmake ../cmake/platform.cmake ../cmake/platform/ft32f07x.cmake ../cmake/python.cmake ../cmake/sdk/ft_sdk.cmake ../cmake/toolchain.cmake ../cmake/toolchain/armcc.cmake ../cmake/version.cmake ../prj.conf ../sdk/CMakeLists.txt ../sdk/external/CMakeLists.txt ../sdk/external/nanopb/CMakeLists.txt ../sdk/external/ntshell/CMakeLists.txt .config /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeASMCompiler.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeASMInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCCompiler.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCCompilerABI.c /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCommonLanguageInclude.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeCompilerIdDetection.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineASMCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompileFeatures.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompilerABI.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineCompilerId.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeDetermineSystem.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeFindBinUtils.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeGenericSystem.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeInitializeConfigs.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeLanguageInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeNinjaFindMake.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeParseImplicitLinkInfo.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystem.cmake.in /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystemSpecificInformation.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeSystemSpecificInitialize.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestASMCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestCCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/CMakeTestCompilerCommon.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-ASM.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-C.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMCC.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/GNU-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/HP-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/TI-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/XL-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Compiler/zOS-C-DetermineCompiler.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/FindPackageHandleStandardArgs.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/FindPackageMessage.cmake /usr/local/cmake-3.15.2-Linux-x86_64/share/cmake-3.15/Modules/Platform/Generic.cmake CMakeCache.txt CMakeFiles/3.15.2/CMakeASMCompiler.cmake CMakeFiles/3.15.2/CMakeCCompiler.cmake CMakeFiles/3.15.2/CMakeSystem.cmake include/generated/autoconf.h: phony
 
 
 #############################################

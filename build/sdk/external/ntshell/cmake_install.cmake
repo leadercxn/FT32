@@ -1,4 +1,4 @@
-# Install script for directory: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/sdk/external/ntshell
+# Install script for directory: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/sdk/external/ntshell
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

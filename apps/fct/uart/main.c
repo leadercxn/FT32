@@ -1,127 +1,85 @@
-/**
-  ******************************************************************************
-  * @file    USART/USART_Printf/main.c 
-  * @author  AE
-  * @version V1.0.0
-  * @date    29-MAR-2021
-  * @brief   Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT 2021 FMD</center></h2>
-  *
-  *
-  *        http://www.fremontmicro.com
-  *
-
-  *
-  ******************************************************************************
-  */
-
-/* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "develop_lib.h"
+#include "trace.h"
 
-/** @addtogroup FT32f0xx_StdPeriph_Examples
-  * @{
-  */
+static void delay(uint32_t n)
+{
+  uint16_t i = 0;
+  uint16_t j = 0;
 
-/** @addtogroup USART_Printf
-  * @{
-  */
+  for (i = 0; i < 300; i++)
+  {
+    for (j = 0; j < n; j++)
+      ;
+  }
+}
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-static void USART_Config(void);
+void timer_handler(void)
+{
+  static uint16_t cnt = 0;
 
-#ifdef __GNUC__
-/* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
-     set to 'Yes') calls __io_putchar() */
-#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
-#else
-#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#endif /* __GNUC__ */
+  cnt++;
 
-/* Private functions ---------------------------------------------------------*/
+  if (cnt > 2000)
+  {
+    cnt = 0;
+  }
 
-/**
-  * @brief  Main program
-  * @param  None
-  * @retval None
-  */
+  if (cnt > 1000)
+  {
+    set_gpio_value(GPIOB, GPIO_Pin_1, 1);
+    // trace_info("set_gpio_value(GPIOB, GPIO_Pin_1, 1)n\r");
+  }
+  else
+  {
+    set_gpio_value(GPIOB, GPIO_Pin_1, 0);
+    // trace_info("set_gpio_value(GPIOB, GPIO_Pin_1, 0)n\r");
+  }
+}
+
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
-       this is done through SystemInit() function which is called from startup
-       file (startup_FT32f0xx.s) before to branch to application main.
-       To reconfigure the default setting of SystemInit() function, refer to
-       system_FT32f0xx.c file
-     */
 
-  /* USART configuration */
-  USART_Config();
+  trace_init();
 
   /* Output a message on Hyperterminal using printf function */
-  printf("\n\rUSART Printf Example: retarget the C library printf function to the USART\n\r");
+  trace_info("\n\rUSART Printf Example: retarget the C library printf function to the USART\n\r");
 
-  /* Loop until the end of transmission */
-  /* The software must wait until TC=1. The TC flag remains cleared during all data
-     transfers and it is set by hardware at the last frame�s end of transmission*/
-  while (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TC) == RESET)
-  {
-  }
+  timer_init();
+
+  timer_handler_register(timer_handler);
+
+  conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_1);
+
+  trace_info("\n\rHello World !!!\n\r");
 
   while (1)
   {
+    ;
   }
-}
+#if 0
+    conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_1);
+    while (1)
+    {
+        set_gpio_value(GPIOB, GPIO_Pin_1,1);
+        delay(5000);
+        set_gpio_value(GPIOB, GPIO_Pin_1,0);
+        delay(5000);
+    }
+#endif
 
-/**
-  * @brief Configure the USART Device
-  * @param  None
-  * @retval None
-  */
-static void USART_Config(void)
-{
-  USART_InitTypeDef USART_InitStructure;
-
-  /* USARTx configured as follow:
-  - BaudRate = 115200 baud  
-  - Word Length = 8 Bits
-  - Stop Bit = 1 Stop Bit
-  - Parity = No Parity
-  - Hardware flow control disabled (RTS and CTS signals)
-  - Receive and transmit enabled
-  */
-  USART_InitStructure.USART_BaudRate = 115200;
-  USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-  USART_InitStructure.USART_StopBits = USART_StopBits_1;
-  USART_InitStructure.USART_Parity = USART_Parity_No;
-  USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-  USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-
-  FT_EVAL_COMInit(COM1, &USART_InitStructure);
-}
-
-/**
-  * @brief  Retargets the C library printf function to the USART.
-  * @param  None
-  * @retval None
-  */
-PUTCHAR_PROTOTYPE
-{
-  /* Place your implementation of fputc here */
-  /* e.g. write a character to the USART */
-  USART_SendData(EVAL_COM1, (uint8_t)ch);
-
-  /* Loop until transmit data register is empty */
-  while (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TXE) == RESET)
+#if 0
+  conf_whole_gpios_output(RCC_AHBPeriph_GPIOC, GPIOC, 0xff);
+  while (1)
   {
+      //set_gpio_value(GPIOB, GPIO_Pin_1,1);
+      set_halt_gpios_value(GPIOC ,0xff, true);
+      delay(5000);
+      //set_gpio_value(GPIOB, GPIO_Pin_1,0);
+      set_halt_gpios_value(GPIOC ,0x00, true);
+      delay(5000);
   }
-
-  return ch;
+#endif
 }
 
 #ifdef USE_FULL_ASSERT
@@ -144,13 +102,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   }
 }
 #endif
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-/************************ (C) COPYRIGHT FMD *****END OF FILE****/

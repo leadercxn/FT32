@@ -90,7 +90,7 @@ rule C_EXECUTABLE_LINKER__ft32f0
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build
+  command = /usr/local/cmake-3.15.2-Linux-x86_64/bin/cmake -S/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32 -B/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build
   description = Re-running CMake...
   generator = 1
 
