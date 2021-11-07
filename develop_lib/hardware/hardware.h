@@ -4,6 +4,7 @@
 #ifndef __HARDWARE_H
 #define __HARDWARE_H
 
+#include "bk953x.h"
 #include "st7789.h"
 
 #endif

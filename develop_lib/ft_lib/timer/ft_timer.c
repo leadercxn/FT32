@@ -5,11 +5,8 @@
 #include "ft_timer.h"
 
 
-
-__IO uint16_t CCR1_Val = 40961;
-
 static timer_handler_t m_timer_handler = NULL;
-static uint64_t m_timer_tick = 0;
+static uint64_t m_timer_tick_ms = 0;
 
 void timer_handler_register(timer_handler_t handler)
 {
@@ -47,6 +44,7 @@ void timer_init(void)
     TIM_TimeBaseInit(USER_TIMER, &TIM_TimeBaseStructure);
 
 #if 0
+    uint16_t                    CCR1_Val = 40961;
     TIM_OCInitTypeDef           TIM_OCInitStructure;
 
     /* 配置IO输出 */
@@ -71,7 +69,7 @@ void TIM3_IRQHandler(void)
     {
         TIM_ClearITPendingBit(USER_TIMER, USER_TIMER_CH);
 
-        m_timer_tick++;
+        m_timer_tick_ms++;
 
         if(m_timer_handler)
         {
@@ -82,7 +80,7 @@ void TIM3_IRQHandler(void)
 
 uint64_t ft_timer_tick_get(void)
 {
-    return m_timer_tick;
+    return m_timer_tick_ms;
 }
 
 

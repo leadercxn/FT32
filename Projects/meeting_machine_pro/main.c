@@ -1,6 +1,8 @@
 #include "main.h"
 #include "develop_lib.h"
 
+#include "bk953x_handler.h"
+
 void timer_handler(void)
 {
     static uint16_t cnt = 0;
@@ -14,31 +16,45 @@ void timer_handler(void)
 
     if(cnt > 500)
     {
-        set_gpio_value(GPIOB, GPIO_Pin_1,1);
+        set_gpio_value(GPIOA, GPIO_Pin_12,1);
     }
     else
     {
-        set_gpio_value(GPIOB, GPIO_Pin_1,0);
+        set_gpio_value(GPIOA, GPIO_Pin_12,0);
     }
 
 }
 
 int main(void)
 {
-
+  uint16_t adc_value = 0;
+  trace_init();
   timer_init();
 
+  bk9532_lr_init();
+
+  //timer15_pwm_ch1_init();
   //timer_handler_register(timer_handler);
 
-  conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_1);
+  //conf_gpio_output(RCC_AHBPeriph_GPIOA, GPIOA, GPIO_Pin_12);
 
+  exit_init();
+  adc_init();
 
+  trace_info("Start loop\n\r");
   while(1)
   {
-      set_gpio_value(GPIOB, GPIO_Pin_1,1);
-      ft_delay_ms(200);
-      set_gpio_value(GPIOB, GPIO_Pin_1,0);
-      ft_delay_ms(200);
+      #if 0
+      set_gpio_value(GPIOA , GPIO_Pin_12 ,0);
+      delay_ms(100);
+      set_gpio_value(GPIOA , GPIO_Pin_12 ,1);
+      delay_ms(100);
+      #endif
+
+      adc_value = adc_ch_value_get(0);
+      trace_debug("adc_value = %d\n\r",adc_value);
+
+      ft_delay_ms(1000);
   }
 }
 

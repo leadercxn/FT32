@@ -12,6 +12,7 @@ typedef enum
     I2C_TYPE_VIRT2,
 } i2c_type_e;
 
+void mid_bk953x_res_init(void);
 int mid_bk953x_read_one_reg(i2c_type_e i2c_type,uint8_t device_id,uint8_t reg,uint32_t *p_data);
 int mid_bk953x_write_one_reg(i2c_type_e i2c_type,uint8_t device_id,uint8_t reg,uint32_t *p_data);
 

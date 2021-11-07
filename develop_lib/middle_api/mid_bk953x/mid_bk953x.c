@@ -4,6 +4,8 @@
 #include "ft32f0xx.h"
 #endif
 
+
+#include "trace.h"
 #include "mid_bk953x.h"
 
 
@@ -23,16 +25,20 @@ static int ft_virt1_i2c_bk953x_read_one_reg(uint8_t device_id,uint8_t reg,uint32
     virt1_i2c_start();
 
     virt1_i2c_send_byte(device_id);
+
     err = virt1_i2c_wait_ack();
     if(err)
     {
+        trace_error("slaver no ack!\n\r");
         return err;
     }
 
     virt1_i2c_send_byte(temp);
+
     err = virt1_i2c_wait_ack();
     if(err)
     {
+        trace_error("slaver no ack!\n\r");
         return err;
     }
 
@@ -40,6 +46,8 @@ static int ft_virt1_i2c_bk953x_read_one_reg(uint8_t device_id,uint8_t reg,uint32
     p[1] = virt1_i2c_read_byte(true);
     p[2] = virt1_i2c_read_byte(true);
     p[3] = virt1_i2c_read_byte(false);
+
+    virt1_i2c_stop();
 
     return err;
 }
@@ -59,6 +67,7 @@ int ft_virt1_i2c_bk953x_write_one_reg(uint8_t device_id,uint8_t reg,uint32_t *p_
     err = virt1_i2c_wait_ack();
     if(err)
     {
+        trace_error("slaver no ack!\n\r");
         return err;
     }
 
@@ -75,6 +84,7 @@ int ft_virt1_i2c_bk953x_write_one_reg(uint8_t device_id,uint8_t reg,uint32_t *p_
         err = virt1_i2c_wait_ack();
         if(err)
         {
+            trace_error("slaver no ack!\n\r");
             return err;
         }
     }
@@ -139,4 +149,10 @@ int mid_bk953x_write_one_reg(i2c_type_e i2c_type,uint8_t device_id,uint8_t reg,u
     return err;
 }
 
+void mid_bk953x_res_init(void)
+{
+#ifdef FT32
+    virt_i2c_init();
+#endif
+}
 

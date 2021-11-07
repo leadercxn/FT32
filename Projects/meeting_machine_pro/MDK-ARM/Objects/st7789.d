@@ -38,4 +38,8 @@
 .\objects\st7789.o: ..\..\..\develop_lib\middle_api\queue\queue.h
 .\objects\st7789.o: ..\..\..\develop_lib\middle_api\tft_8080\tft_8080.h
 .\objects\st7789.o: ..\..\..\develop_lib\middle_api\mid_bk953x\mid_bk953x.h
+.\objects\st7789.o: ..\..\..\develop_lib\middle_api\trace\trace.h
+.\objects\st7789.o: ..\..\..\develop_lib\middle_api\pwm\mid_pwm.h
+.\objects\st7789.o: ..\..\..\develop_lib\middle_api\ir\ir_tx_encode.h
+.\objects\st7789.o: ..\..\..\develop_lib\middle_api\ir\ir_rx_decode.h
 .\objects\st7789.o: ..\..\..\develop_lib\hardware\st7789\st7789.h

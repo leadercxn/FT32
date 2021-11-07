@@ -5,7 +5,10 @@
 #include "ft_i2c.h"
 #include "ft_delay.h"
 #include "ft_timer.h"
-
+#include "ft_usart.h"
+#include "ft_timer_pwm.h"
+#include "ft_exit.h"
+#include "ft_adc.h"
 
 #endif
 

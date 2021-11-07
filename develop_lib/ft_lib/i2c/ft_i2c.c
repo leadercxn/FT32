@@ -7,7 +7,7 @@
 #include "ft_delay.h"
 #include "util.h"
 #include "lib_error.h"
-
+#include "trace.h"
 
 
 #define I2C_TRANFS_TIMEOUT  1000
@@ -292,7 +292,7 @@ int i2c1_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data)
 static void ft_i2c_delay(void)
 {
     uint8_t i;
-    for(i = 0; i < 1; i++);
+    for(i = 0; i < 2; i++);
 }
 
 /**
@@ -309,7 +309,7 @@ void virt_i2c_init(void)
 
 void virt1_i2c_start(void)
 {
-    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
+//    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
     set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
 
@@ -323,7 +323,7 @@ void virt1_i2c_start(void)
 
 void virt1_i2c_stop(void)
 {
-    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
+//    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
     set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 0);
     set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
 
@@ -410,6 +410,8 @@ void virt1_i2c_send_byte(uint8_t byte)
 
         byte <<= 1;
     }
+
+    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
 }
 
 /**
