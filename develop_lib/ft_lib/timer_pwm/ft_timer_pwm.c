@@ -6,7 +6,7 @@
 
 
 
-void timer15_pwm_ch1_init(uint32_t freq , uint8_t duty_cycle)
+void timer15_ch1_pwm_init(uint32_t freq , uint8_t duty_cycle)
 {
     uint32_t timer_period = 0;
     uint32_t chan1_pulse = 0;

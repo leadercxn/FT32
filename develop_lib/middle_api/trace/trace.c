@@ -1,8 +1,10 @@
-#include "ft32f0xx.h"
-#include "ft_usart.h"
-#include "util.h"
 #include "stdbool.h"
 
+#ifdef FT32
+#include "ft_lib.h"
+#endif
+
+#include "util.h"
 #include "trace.h"
 
 #ifdef TRACE_ENABLE

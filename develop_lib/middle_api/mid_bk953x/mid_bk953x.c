@@ -1,7 +1,7 @@
 #include "stdbool.h"
 
 #ifdef FT32
-#include "ft32f0xx.h"
+#include "ft_lib.h"
 #endif
 
 

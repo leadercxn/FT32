@@ -33,7 +33,9 @@ int main(void)
 
   bk9532_lr_init();
 
-  //timer15_pwm_ch1_init();
+  //timer15_ch1_pwm_init(39000,50);
+  //timer15_ch1_pwn_output_enable_set(true);
+
   //timer_handler_register(timer_handler);
 
   //conf_gpio_output(RCC_AHBPeriph_GPIOA, GPIOA, GPIO_Pin_12);

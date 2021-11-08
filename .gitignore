@@ -1,3 +1,5 @@
+# ignore_files
+
 .vscode/
 Projects/meeting_machine_pro/MDK-ARM/Listings/
 Projects/meeting_machine_pro/MDK-ARM/Objects/
