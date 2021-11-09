@@ -6,4 +6,6 @@
 
 #include "ir_tx_encode.h"
 
+static bool m_frame_data_start = false;
+
 

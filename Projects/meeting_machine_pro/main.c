@@ -3,33 +3,13 @@
 
 #include "bk953x_handler.h"
 
-void timer_handler(void)
-{
-    static uint16_t cnt = 0;
-
-    cnt ++;
-
-    if(cnt > 1000)
-    {
-        cnt = 0;
-    }
-
-    if(cnt > 500)
-    {
-        set_gpio_value(GPIOA, GPIO_Pin_12,1);
-    }
-    else
-    {
-        set_gpio_value(GPIOA, GPIO_Pin_12,0);
-    }
-
-}
 
 int main(void)
 {
   uint16_t adc_value = 0;
   trace_init();
-  timer_init();
+
+  mid_timer_init();
 
   bk9532_lr_init();
 
@@ -53,10 +33,12 @@ int main(void)
       delay_ms(100);
       #endif
 
+      #if 0
       adc_value = adc_ch_value_get(0);
       trace_debug("adc_value = %d\n\r",adc_value);
 
       ft_delay_ms(1000);
+      #endif
   }
 }
 

@@ -19,7 +19,7 @@ void timer_handler_register(timer_handler_t handler)
  * 定时器中端周期 period = SystemCoreClock/TIM_Prescaler * TIM_Period;
  * 48000000/48*1000 = 1K = 1ms
  */
-void timer_init(void)
+void timer3_init(void)
 {
     static uint16_t prescaler_value = 0;
 
@@ -42,20 +42,6 @@ void timer_init(void)
     TIM_TimeBaseStructure.TIM_CounterMode   = TIM_CounterMode_Up;
 
     TIM_TimeBaseInit(USER_TIMER, &TIM_TimeBaseStructure);
-
-#if 0
-    uint16_t                    CCR1_Val = 40961;
-    TIM_OCInitTypeDef           TIM_OCInitStructure;
-
-    /* 配置IO输出 */
-    TIM_OCInitStructure.TIM_OCMode      = TIM_OCMode_Timing;
-    TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Disable;
-    TIM_OCInitStructure.TIM_Pulse       = CCR1_Val;
-    TIM_OCInitStructure.TIM_OCPolarity  = TIM_OCPolarity_High;
-
-    TIM_OC1Init(USER_TIMER, &TIM_OCInitStructure);
-    TIM_OC1PreloadConfig(USER_TIMER, TIM_OCPreload_Disable);
-#endif
 
     TIM_ITConfig(USER_TIMER, USER_TIMER_CH, ENABLE);
     TIM_Cmd(USER_TIMER, ENABLE);

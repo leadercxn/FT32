@@ -11,5 +11,6 @@
 #include "mid_pwm.h"
 #include "ir_tx_encode.h"
 #include "ir_rx_decode.h"
+#include "mid_timer.h"
 
 #endif
