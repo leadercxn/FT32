@@ -1,4 +1,4 @@
-# Install script for directory: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/sdk
+# Install script for directory: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/sdk
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,6 +34,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/ft32/build/sdk/external/cmake_install.cmake")
+  include("/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external/cmake_install.cmake")
 endif()
 

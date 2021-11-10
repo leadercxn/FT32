@@ -12,6 +12,7 @@ file(GLOB SDK_SOURCE_FILES
     ${DEV_DIR}/ft_lib/timer/ft_timer.c
     ${DEV_DIR}/ft_lib/usart/ft_usart.c
     ${DEV_DIR}/ft_lib/usart/retarget.c
+    ${DEV_DIR}/ft_lib/LetterShell/*.c
 
     ${DEV_DIR}/middle_api/mid_bk953x/mid_bk953x.c
     ${DEV_DIR}/middle_api/tft_8080/tft_8080.c
@@ -36,6 +37,7 @@ set(SDK_INCLUDE_DIRS
     ${DEV_DIR}/ft_lib/deprecated
     ${DEV_DIR}/ft_lib/timer
     ${DEV_DIR}/ft_lib/usart
+    ${DEV_DIR}/ft_lib/LetterShell
 
     ${DEV_DIR}/hardware 
     ${DEV_DIR}/hardware/st7789
@@ -58,14 +60,18 @@ file(GLOB APP_SOURCE_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/uart/main.c
     ${CMAKE_CURRENT_SOURCE_DIR}/uart/ft32f0xx_it.c
 
+    # ${CMAKE_CURRENT_SOURCE_DIR}/shell/main.c
+    # ${CMAKE_CURRENT_SOURCE_DIR}/shell/ft32f0xx_it.c
+
 )
 
 set(APP_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/config
     # ${CMAKE_CURRENT_SOURCE_DIR}/gpio
-    ${CMAKE_CURRENT_SOURCE_DIR}/timer
-    # ${CMAKE_CURRENT_SOURCE_DIR}/uart
+    # ${CMAKE_CURRENT_SOURCE_DIR}/timer
+    ${CMAKE_CURRENT_SOURCE_DIR}/uart
+    # ${CMAKE_CURRENT_SOURCE_DIR}/shell
 )
 
 set(USER_DEFINITIONS

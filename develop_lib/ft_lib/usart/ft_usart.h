@@ -4,6 +4,35 @@
 #include "ft32f0xx.h"
 #include "stdbool.h"
 
+#define FT_UART2 USART2
+#define FT_UART2_CLK RCC_APB1Periph_USART2
+
+#define FT_UART2_TX_PIN GPIO_Pin_2
+#define FT_UART2_TX_GPIO_PORT GPIOA
+#define FT_UART2_TX_GPIO_CLK RCC_AHBPeriph_GPIOA
+#define FT_UART2_TX_SOURCE GPIO_PinSource2
+#define FT_UART2_TX_AF GPIO_AF_1
+
+#define FT_UART2_RX_PIN GPIO_Pin_3
+#define FT_UART2_RX_GPIO_PORT GPIOA
+#define FT_UART2_RX_GPIO_CLK RCC_AHBPeriph_GPIOA
+#define FT_UART2_RX_SOURCE GPIO_PinSource3
+#define FT_UART2_RX_AF GPIO_AF_1
+
+#define FT_UART2_CTS_PIN GPIO_Pin_0
+#define FT_UART2_CTS_GPIO_PORT GPIOA
+#define FT_UART2_CTS_GPIO_CLK RCC_AHBPeriph_GPIOA
+#define FT_UART2_CTS_SOURCE GPIO_PinSource0
+#define FT_UART2_CTS_AF GPIO_AF_1
+
+#define FT_UART2_RTS_PIN GPIO_Pin_1
+#define FT_UART2_RTS_GPIO_PORT GPIOA
+#define FT_UART2_RTS_GPIO_CLK RCC_AHBPeriph_GPIOA
+#define FT_UART2_RTS_SOURCE GPIO_PinSource1
+#define FT_UART2_RTS_AF GPIO_AF_1
+
+#define FT_UART2_IRQn USART2_IRQn
+
 /**
  * @enum ft_uart_id_t
  * @brief ID supported by UART.
@@ -55,5 +84,7 @@ typedef struct
 void ft_uart_init(uint8_t uart_id, ft_uart_info_t uart_info, ft_uart_config_t const *p_config);
 
 void ft_uart_put(uint8_t uart_id, char ch);
+
+void ft_uart_info_get(uint8_t uart_id, ft_uart_info_t *p_uart_info);
 
 #endif

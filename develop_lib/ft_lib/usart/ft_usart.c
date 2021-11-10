@@ -81,3 +81,36 @@ void ft_uart_put(uint8_t uart_id, char ch)
     {
     }
 }
+
+void ft_uart_info_get(uint8_t uart_id, ft_uart_info_t *p_uart_info)
+{
+    if (FT_UART_1 == uart_id)
+    {
+        return;
+    }
+
+    p_uart_info->uart = FT_UART2;
+    p_uart_info->tx_port = FT_UART2_TX_GPIO_PORT;
+    p_uart_info->rx_port = FT_UART2_RX_GPIO_PORT;
+
+    p_uart_info->clk = FT_UART2_CLK;
+    p_uart_info->tx_clk = FT_UART2_TX_GPIO_CLK;
+    p_uart_info->rx_clk = FT_UART2_RX_GPIO_CLK;
+
+    p_uart_info->tx_pin = FT_UART2_TX_PIN;
+    p_uart_info->rx_pin = FT_UART2_RX_PIN;
+
+    p_uart_info->tx_pin_source = FT_UART2_TX_SOURCE;
+    p_uart_info->rx_pin_source = FT_UART2_RX_SOURCE;
+
+    p_uart_info->tx_af = FT_UART2_TX_AF;
+    p_uart_info->rx_af = FT_UART2_RX_AF;
+}
+
+void USART1_IRQHandler(void)
+{
+}
+
+void USART2_IRQHandler(void)
+{
+}
