@@ -29,70 +29,67 @@ extern void shellVars(void);
 extern void shellKeys(void);
 extern void shellClear(void);
 
-
 /**
  * @brief shell命令表
  * 
  */
-const ShellCommand shellCommandList[] = 
-{
-    {.attr.value=SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_USER),
-    .data.user.name = SHELL_DEFAULT_USER,
-    .data.user.password = SHELL_DEFAULT_USER_PASSWORD,
-    .data.user.desc = "defalut user"},
-    SHELL_CMD_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC),
-                   setVar, shellSetVar, set var),
-    SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0), 0x1B5B4100, shellUp, up),
-    SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0), 0x1B5B4200, shellDown, down),
-    SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_ENABLE_UNCHECKED,
-                   0x1B5B4300, shellRight, right),
-    SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_ENABLE_UNCHECKED,
-                   0x1B5B4400, shellLeft, left),
-    SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0), 0x09000000, shellTab, tab),
-    SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_ENABLE_UNCHECKED,
-                   0x08000000, shellBackspace, backspace),
-    SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_ENABLE_UNCHECKED,
-                   0x7F000000, shellDelete, delete),
-    SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_ENABLE_UNCHECKED,
-                   0x1B5B337E, shellDelete, delete),
+const ShellCommand shellCommandList[] =
+    {
+        {.attr.value = SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_USER),
+         .data.user.name = SHELL_DEFAULT_USER,
+         .data.user.password = SHELL_DEFAULT_USER_PASSWORD,
+         .data.user.desc = "defalut user"},
+        SHELL_CMD_ITEM(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC),
+                       setVar, shellSetVar, set var),
+        SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0), 0x1B5B4100, shellUp, up),
+        SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0), 0x1B5B4200, shellDown, down),
+        SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0) | SHELL_CMD_ENABLE_UNCHECKED,
+                       0x1B5B4300, shellRight, right),
+        SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0) | SHELL_CMD_ENABLE_UNCHECKED,
+                       0x1B5B4400, shellLeft, left),
+        SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0), 0x09000000, shellTab, tab),
+        SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0) | SHELL_CMD_ENABLE_UNCHECKED,
+                       0x08000000, shellBackspace, backspace),
+        SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0) | SHELL_CMD_ENABLE_UNCHECKED,
+                       0x7F000000, shellDelete, delete),
+        SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0) | SHELL_CMD_ENABLE_UNCHECKED,
+                       0x1B5B337E, shellDelete, delete),
 #if SHELL_ENTER_LF == 1
-    SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_ENABLE_UNCHECKED,
-                   0x0A000000, shellEnter, enter),
+        SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0) | SHELL_CMD_ENABLE_UNCHECKED,
+                       0x0A000000, shellEnter, enter),
 #endif
 #if SHELL_ENTER_CR == 1
-    SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_ENABLE_UNCHECKED,
-                   0x0D000000, shellEnter, enter),
+        SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0) | SHELL_CMD_ENABLE_UNCHECKED,
+                       0x0D000000, shellEnter, enter),
 #endif
 #if SHELL_ENTER_CRLF == 1
-    SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_ENABLE_UNCHECKED,
-                   0x0D0A0000, shellEnter, enter),
+        SHELL_KEY_ITEM(SHELL_CMD_PERMISSION(0) | SHELL_CMD_ENABLE_UNCHECKED,
+                       0x0D0A0000, shellEnter, enter),
 #endif
-    SHELL_CMD_ITEM(
-                   SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN)|SHELL_CMD_DISABLE_RETURN,
-                   help, shellHelp, show command info\r\nhelp [cmd]),
-    SHELL_CMD_ITEM(
-                   SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC)|SHELL_CMD_DISABLE_RETURN,
-                   users, shellUsers, list all user),
-    SHELL_CMD_ITEM(
-                   SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC)|SHELL_CMD_DISABLE_RETURN,
-                   cmds, shellCmds, list all cmd),
-    SHELL_CMD_ITEM(
-                   SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC)|SHELL_CMD_DISABLE_RETURN,
-                   vars, shellVars, list all var),
-    SHELL_CMD_ITEM(
-                   SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC)|SHELL_CMD_DISABLE_RETURN,
-                   keys, shellKeys, list all key),
-    SHELL_CMD_ITEM(
-                   SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC)|SHELL_CMD_DISABLE_RETURN,
-                   clear, shellClear, clear console),
+        SHELL_CMD_ITEM(
+            SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN) | SHELL_CMD_DISABLE_RETURN,
+            help, shellHelp, show command info\r\nhelp[cmd]),
+        SHELL_CMD_ITEM(
+            SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC) | SHELL_CMD_DISABLE_RETURN,
+            users, shellUsers, list all user),
+        SHELL_CMD_ITEM(
+            SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC) | SHELL_CMD_DISABLE_RETURN,
+            cmds, shellCmds, list all cmd),
+        SHELL_CMD_ITEM(
+            SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC) | SHELL_CMD_DISABLE_RETURN,
+            vars, shellVars, list all var),
+        SHELL_CMD_ITEM(
+            SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC) | SHELL_CMD_DISABLE_RETURN,
+            keys, shellKeys, list all key),
+        SHELL_CMD_ITEM(
+            SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC) | SHELL_CMD_DISABLE_RETURN,
+            clear, shellClear, clear console),
 };
-
 
 /**
  * @brief shell命令表大小
  * 
  */
-const unsigned short shellCommandCount 
-    = sizeof(shellCommandList) / sizeof(ShellCommand);
+const unsigned short shellCommandCount = sizeof(shellCommandList) / sizeof(ShellCommand);
 
 #endif

@@ -12,7 +12,7 @@
   *         contains the configuration information for the specified USART peripheral.
   * @retval None
   */
-void ft_uart_init(uint8_t uart_id, ft_uart_info_t uart_info, ft_uart_config_t const *p_config)
+void ft_uart_init(USART_TypeDef *uart, ft_uart_info_t uart_info, ft_uart_config_t const *p_config)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
 
@@ -56,40 +56,23 @@ void ft_uart_init(uint8_t uart_id, ft_uart_info_t uart_info, ft_uart_config_t co
     USART_Cmd(uart_info.uart, ENABLE);
 }
 
-void ft_uart_put(uint8_t uart_id, char ch)
+void ft_uart_put(USART_TypeDef *uart, char ch)
 {
-
-    if (FT_UART_1 == uart_id)
-    {
-        /* Place your implementation of fputc here */
-        /* e.g. write a character to the USART */
-        USART_SendData(USART2, (uint8_t)ch);
-
-        /* Loop until transmit data register is empty */
-        while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET)
-        {
-        }
-        return;
-    }
 
     /* Place your implementation of fputc here */
     /* e.g. write a character to the USART */
-    USART_SendData(USART1, (uint8_t)ch);
+    USART_SendData(uart, (uint8_t)ch);
 
     /* Loop until transmit data register is empty */
-    while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
+    while (USART_GetFlagStatus(uart, USART_FLAG_TXE) == RESET)
     {
     }
 }
 
-void ft_uart_info_get(uint8_t uart_id, ft_uart_info_t *p_uart_info)
+void ft_uart_info_get(USART_TypeDef *uart, ft_uart_info_t *p_uart_info)
 {
-    if (FT_UART_1 == uart_id)
-    {
-        return;
-    }
 
-    p_uart_info->uart = FT_UART2;
+    p_uart_info->uart = uart;
     p_uart_info->tx_port = FT_UART2_TX_GPIO_PORT;
     p_uart_info->rx_port = FT_UART2_RX_GPIO_PORT;
 

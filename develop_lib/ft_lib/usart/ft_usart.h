@@ -33,15 +33,15 @@
 
 #define FT_UART2_IRQn USART2_IRQn
 
-/**
- * @enum ft_uart_id_t
- * @brief ID supported by UART.
- */
-enum ft_uart_id_t
-{
-    FT_UART_0 = 0, ///< UART 0.
-    FT_UART_1,     ///< UART 1.
-};
+// /**
+//  * @enum ft_uart_id_t
+//  * @brief ID supported by UART.
+//  */
+// enum ft_uart_id_t
+// {
+//     FT_UART_0 = 0, ///< UART 0.
+//     FT_UART_1,     ///< UART 1.
+// };
 
 typedef struct
 {
@@ -81,10 +81,10 @@ typedef struct
     uint8_t interrupt_priority; ///< Interrupt priority.
 } ft_uart_config_t;
 
-void ft_uart_init(uint8_t uart_id, ft_uart_info_t uart_info, ft_uart_config_t const *p_config);
+void ft_uart_init(USART_TypeDef *uart, ft_uart_info_t uart_info, ft_uart_config_t const *p_config);
 
-void ft_uart_put(uint8_t uart_id, char ch);
+void ft_uart_put(USART_TypeDef *uart, char ch);
 
-void ft_uart_info_get(uint8_t uart_id, ft_uart_info_t *p_uart_info);
+void ft_uart_info_get(USART_TypeDef *uart, ft_uart_info_t *p_uart_info);
 
 #endif

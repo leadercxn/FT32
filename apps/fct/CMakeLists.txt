@@ -57,11 +57,11 @@ file(GLOB APP_SOURCE_FILES
     # ${CMAKE_CURRENT_SOURCE_DIR}/timer/main.c
     # ${CMAKE_CURRENT_SOURCE_DIR}/timer/ft32f0xx_it.c
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/uart/main.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/uart/ft32f0xx_it.c
+    # ${CMAKE_CURRENT_SOURCE_DIR}/uart/main.c
+    # ${CMAKE_CURRENT_SOURCE_DIR}/uart/ft32f0xx_it.c
 
-    # ${CMAKE_CURRENT_SOURCE_DIR}/shell/main.c
-    # ${CMAKE_CURRENT_SOURCE_DIR}/shell/ft32f0xx_it.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/shell/main.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/shell/ft32f0xx_it.c
 
 )
 
@@ -70,8 +70,8 @@ set(APP_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/config
     # ${CMAKE_CURRENT_SOURCE_DIR}/gpio
     # ${CMAKE_CURRENT_SOURCE_DIR}/timer
-    ${CMAKE_CURRENT_SOURCE_DIR}/uart
-    # ${CMAKE_CURRENT_SOURCE_DIR}/shell
+    # ${CMAKE_CURRENT_SOURCE_DIR}/uart
+    ${CMAKE_CURRENT_SOURCE_DIR}/shell
 )
 
 set(USER_DEFINITIONS

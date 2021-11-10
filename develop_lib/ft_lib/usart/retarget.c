@@ -14,6 +14,19 @@ struct __FILE
 FILE __stdout;
 FILE __stdin;
 
+/***********************************************************************
+ * 函数名称: _sys_exit
+ * 功能描述:
+ * 输入参数:
+ * 输出参数:
+ * 返 回 值:
+ *  其   它:
+ ***********************************************************************/
+void _sys_exit(int x)
+{
+  x = x;
+}
+
 #if defined(__CC_ARM) || defined(__ICCARM__)
 // int fgetc(FILE *p_file)
 // {
@@ -26,7 +39,7 @@ int fputc(int ch, FILE *p_file)
 {
   UNUSED_PARAMETER(p_file);
 
-  UNUSED_VARIABLE(ft_uart_put(FT_UART_1, (uint8_t)ch));
+  UNUSED_VARIABLE(ft_uart_put(FT_UART2, (uint8_t)ch));
 
   return ch;
 }
