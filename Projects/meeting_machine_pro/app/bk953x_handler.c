@@ -21,11 +21,11 @@ int bk9532_lr_init(void)
 
     bk953x_chip_id_get(&m_l_bk9532_obj);
 
-    ft_delay_ms(500);
+    //ft_delay_ms(500);
 
     bk953x_chip_id_get(&m_l_bk9532_obj);
 
-    ft_delay_ms(500);
+    //ft_delay_ms(500);
 
     bk953x_chip_id_get(&m_l_bk9532_obj);
 

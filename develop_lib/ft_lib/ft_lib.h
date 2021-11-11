@@ -4,7 +4,7 @@
 #include "ft32f0xx.h"
 #include "ft_gpio.h"
 #include "ft_i2c.h"
-#include "ft_delay.h"
+//#include "ft_delay.h"
 #include "ft_timer.h"
 #include "ft_usart.h"
 #include "ft_timer_pwm.h"

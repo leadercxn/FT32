@@ -3,25 +3,35 @@
 
 #include "bk953x_handler.h"
 
+MID_TIMER_DEF(m_test_timer);
+
+void test_timer_handler(void *p_data)
+{
+    trace_debug("test_timer_handler\n\r");
+}
 
 int main(void)
 {
   uint16_t adc_value = 0;
   trace_init();
 
-  mid_timer_init();
+  TIMER_INIT();
+  trace_debug("mid_timer_init\n\r");
 
-  bk9532_lr_init();
+  TIMER_CREATE(&m_test_timer,true,true,test_timer_handler);
+  trace_debug("mid_timer_create\n\r");
 
-  //timer15_ch1_pwm_init(39000,50);
-  //timer15_ch1_pwn_output_enable_set(true);
-
-  //timer_handler_register(timer_handler);
+  ir_tx_init();
 
   //conf_gpio_output(RCC_AHBPeriph_GPIOA, GPIOA, GPIO_Pin_12);
 
   exit_init();
   adc_init();
+
+  TIMER_START_WITH_PARAM(m_test_timer,500,NULL);
+
+
+  bk9532_lr_init();
 
   trace_info("Start loop\n\r");
   while(1)
@@ -31,13 +41,6 @@ int main(void)
       delay_ms(100);
       set_gpio_value(GPIOA , GPIO_Pin_12 ,1);
       delay_ms(100);
-      #endif
-
-      #if 0
-      adc_value = adc_ch_value_get(0);
-      trace_debug("adc_value = %d\n\r",adc_value);
-
-      ft_delay_ms(1000);
       #endif
   }
 }

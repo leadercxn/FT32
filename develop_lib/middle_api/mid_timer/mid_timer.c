@@ -15,7 +15,7 @@
 
 #include "mid_timer.h"
 
-static bool timer_list_traversing = false;
+static bool m_timer_list_traversing = false;
 
 struct timer_list_node_s
 {
@@ -32,19 +32,49 @@ STAILQ_HEAD(, timer_list_node_s) m_timer_list = STAILQ_HEAD_INITIALIZER(m_timer_
 
 
 /**
- * @brief 每 1ms 回调函数
+ * @brief 每 1ms 回调函数，在中断里的
  */
 static void per_ms_timer_handler(void)
 {
     timer_list_node_t *p_timer_list_node;
 
-    //遍历定时器链表节点执行相关函数
-    STAILQ_FOREACH(p_timer_list_node, &m_timer_list, next)
+    if(m_timer_list_traversing == false)
     {
-        if(p_timer_list_node->p_timer_node->active)
+        m_timer_list_traversing = true;
+        //遍历定时器链表节点执行相关函数
+        STAILQ_FOREACH(p_timer_list_node, &m_timer_list, next)
         {
-            
+            if(p_timer_list_node->p_timer_node->active)
+            {
+                if(p_timer_list_node->p_timer_node->remain_ms > 0)
+                {
+                    p_timer_list_node->p_timer_node->remain_ms--;
+                }
+                else
+                {
+                    if(p_timer_list_node->p_timer_node->single_mode)
+                    {
+                        p_timer_list_node->p_timer_node->active = false;
+                    }
+                    else
+                    {
+                        p_timer_list_node->p_timer_node->remain_ms = p_timer_list_node->p_timer_node->init_ms;
+                    }
+
+                    if(p_timer_list_node->p_timer_node->immediately)
+                    {
+                        //紧急的终端中执行
+                        p_timer_list_node->p_timer_node->handler(p_timer_list_node->p_timer_node->p_data);
+                    }
+                    else
+                    {
+                        //非紧急的放到循环里面执行
+                    }
+                }
+            }
         }
+
+        m_timer_list_traversing = false;
     }
 
 #if 0
@@ -68,7 +98,7 @@ static void timer_node_add(timer_node_id_t timer_id)
     {
         timer_list_node_t *p_timer_list_node =(timer_list_node_t *)malloc(sizeof(timer_list_node_t));
 
-        p_timer_list_node->p_timer_node = timer_id;
+        p_timer_list_node->p_timer_node = (timer_node_t *)timer_id;
 
         /*在队列尾端加入一个定时器节点*/
         STAILQ_INSERT_TAIL(&m_timer_list, p_timer_list_node, next); 
@@ -87,11 +117,10 @@ void mid_timer_init(void)
 }
 
 
-int mid_timer_create( timer_node_id_t const *     p_timer_id,
+int mid_timer_create( timer_node_id_t const      *p_timer_id,
                       bool                        single_mode,
                       bool                        immediately,
-                      timer_node_handler_t        timeout_handler,
-                      void *                      data)
+                      timer_node_handler_t        timeout_handler)
 {
     if(p_timer_id == NULL)
     {
@@ -114,11 +143,6 @@ int mid_timer_create( timer_node_id_t const *     p_timer_id,
     p_node->immediately = immediately;
     p_node->handler = timeout_handler;
 
-    if(data)
-    {
-        p_node->p_data = data;
-    }
-
     return ENONE;
 }
 
@@ -126,6 +150,42 @@ int mid_timer_start(timer_node_id_t timer_id,
                     uint32_t        ms,
                     void *          p_data)
 {
+    timer_node_t *p_node = (timer_node_t *) timer_id;
+
+    if(!p_node)
+    {
+        return -EINVAL; 
+    }
+
+    if(!p_node->handler)
+    {
+        return -ESTATE; 
+    }
+
+    p_node->active = true;
+    p_node->remain_ms = ms;
+    p_node->init_ms = ms;
+
+    if(p_data)
+    {
+        p_node->p_data = p_data;
+    }
+
+    timer_node_add((timer_node_id_t)p_node);
+
+    return ENONE;
+}
+
+int mid_timer_stop(timer_node_id_t timer_id)
+{
+    timer_node_t *p_node = (timer_node_t *) timer_id;
+
+    if(!p_node)
+    {
+        return -EINVAL; 
+    }
+
+    p_node->active = false;
 
     return ENONE;
 }
