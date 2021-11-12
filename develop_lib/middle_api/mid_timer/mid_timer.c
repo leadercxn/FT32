@@ -49,26 +49,27 @@ static void per_ms_timer_handler(void)
                 if(p_timer_list_node->p_timer_node->remain_ms > 0)
                 {
                     p_timer_list_node->p_timer_node->remain_ms--;
-                }
-                else
-                {
-                    if(p_timer_list_node->p_timer_node->single_mode)
-                    {
-                        p_timer_list_node->p_timer_node->active = false;
-                    }
-                    else
-                    {
-                        p_timer_list_node->p_timer_node->remain_ms = p_timer_list_node->p_timer_node->init_ms;
-                    }
 
-                    if(p_timer_list_node->p_timer_node->immediately)
+                    if(p_timer_list_node->p_timer_node->remain_ms == 0)
                     {
-                        //紧急的终端中执行
-                        p_timer_list_node->p_timer_node->handler(p_timer_list_node->p_timer_node->p_data);
-                    }
-                    else
-                    {
-                        //非紧急的放到循环里面执行
+                        if(p_timer_list_node->p_timer_node->single_mode)
+                        {
+                            p_timer_list_node->p_timer_node->active = false;
+                        }
+                        else
+                        {
+                            p_timer_list_node->p_timer_node->remain_ms = p_timer_list_node->p_timer_node->init_ms;
+                        }
+
+                        if(p_timer_list_node->p_timer_node->immediately)
+                        {
+                            //紧急的终端中执行
+                            p_timer_list_node->p_timer_node->handler(p_timer_list_node->p_timer_node->p_data);
+                        }
+                        else
+                        {
+                            //非紧急的放到循环里面执行
+                        }
                     }
                 }
             }
@@ -143,6 +144,8 @@ int mid_timer_create( timer_node_id_t const      *p_timer_id,
     p_node->immediately = immediately;
     p_node->handler = timeout_handler;
 
+    timer_node_add((timer_node_id_t)p_node);
+
     return ENONE;
 }
 
@@ -162,7 +165,6 @@ int mid_timer_start(timer_node_id_t timer_id,
         return -ESTATE; 
     }
 
-    p_node->active = true;
     p_node->remain_ms = ms;
     p_node->init_ms = ms;
 
@@ -171,7 +173,7 @@ int mid_timer_start(timer_node_id_t timer_id,
         p_node->p_data = p_data;
     }
 
-    timer_node_add((timer_node_id_t)p_node);
+    p_node->active = true;
 
     return ENONE;
 }

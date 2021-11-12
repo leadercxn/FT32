@@ -9,10 +9,10 @@
 
 #define TIMER_INIT()    mid_timer_init()                                            \
 
-#define TIMER_CREATE(p_id, mode, immediately, handler)                              \
+#define TIMER_CREATE(p_id, singlemode, immediately, handler)                              \
 {                                                                                   \
     int err_code;                                                                   \
-    err_code = mid_timer_create(p_id, mode, immediately, handler);                  \
+    err_code = mid_timer_create(p_id, singlemode, immediately, handler);                  \
 }                                                                                   \
 
 #define TIMER_START(id, ms)                                                         \

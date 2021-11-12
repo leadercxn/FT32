@@ -1,9 +1,10 @@
 #include "main.h"
 #include "develop_lib.h"
-
+#include "lib_error.h"
 #include "bk953x_handler.h"
 
 MID_TIMER_DEF(m_test_timer);
+uint8_t data[4] = { 0x64,0x23,0x18,0x74 };
 
 void test_timer_handler(void *p_data)
 {
@@ -12,6 +13,7 @@ void test_timer_handler(void *p_data)
 
 int main(void)
 {
+  int err_code = ENONE;
   uint16_t adc_value = 0;
   trace_init();
 
@@ -28,12 +30,17 @@ int main(void)
   exit_init();
   adc_init();
 
-  TIMER_START_WITH_PARAM(m_test_timer,500,NULL);
+  //TIMER_START_WITH_PARAM(m_test_timer,500,NULL);
 
 
-  bk9532_lr_init();
+  //bk9532_lr_init();
 
   trace_info("Start loop\n\r");
+  err_code = ir_tx_start(data, sizeof(data));
+  if(err_code)
+  {
+    trace_error("ir_tx_start error %d\n\r",err_code);
+  }
   while(1)
   {
       #if 0
