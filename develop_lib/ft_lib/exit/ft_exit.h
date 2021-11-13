@@ -12,7 +12,10 @@
 typedef void (*exit_irq_handler_t) (void);
 
 void exit_init(void);
-void exit_irq_handler(exit_irq_handler_t handler);
+
+void exit_irq_enable_set(bool status);
+
+void exit_irq_handler_register(exit_irq_handler_t handler);
 
 #endif
 

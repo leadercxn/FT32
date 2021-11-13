@@ -8,7 +8,7 @@
 
 static exit_irq_handler_t  m_exit_irq_handler = NULL;
 
-void exit_irq_handler(exit_irq_handler_t handler)
+void exit_irq_handler_register(exit_irq_handler_t handler)
 {
     m_exit_irq_handler = handler;
 }
@@ -45,18 +45,27 @@ void exit_init(void)
     NVIC_Init(&NVIC_InitStructure);
 }
 
+void exit_irq_enable_set(bool status)
+{
+    EXTI_InitTypeDef   EXTI_InitStructure;
+
+    EXTI_InitStructure.EXTI_Line = EXIT_LINE;  
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
+    EXTI_InitStructure.EXTI_LineCmd = status;
+    EXTI_Init(&EXTI_InitStructure);
+}
+
 void EXTI4_15_IRQHandler(void)
 {
   if(EXTI_GetITStatus(EXIT_LINE) != RESET)
   {
         EXTI_ClearITPendingBit(EXIT_LINE);
-        trace_debug("EXTI4_15_IRQHandler\n\r");
 
         if(m_exit_irq_handler)
         {
             m_exit_irq_handler();
         }
   }
-
 }
 

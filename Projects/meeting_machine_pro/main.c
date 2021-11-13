@@ -24,10 +24,8 @@ int main(void)
   trace_debug("mid_timer_create\n\r");
 
   ir_tx_init();
+  ir_rx_init();
 
-  //conf_gpio_output(RCC_AHBPeriph_GPIOA, GPIOA, GPIO_Pin_12);
-
-  exit_init();
   adc_init();
 
   //TIMER_START_WITH_PARAM(m_test_timer,500,NULL);
@@ -36,18 +34,22 @@ int main(void)
   //bk9532_lr_init();
 
   trace_info("Start loop\n\r");
+#if 0
   err_code = ir_tx_start(data, sizeof(data));
   if(err_code)
   {
     trace_error("ir_tx_start error %d\n\r",err_code);
   }
+#endif
+
+  //conf_gpio_output(RCC_AHBPeriph_GPIOA, GPIOA, GPIO_Pin_2);
   while(1)
   {
       #if 0
-      set_gpio_value(GPIOA , GPIO_Pin_12 ,0);
-      delay_ms(100);
-      set_gpio_value(GPIOA , GPIO_Pin_12 ,1);
-      delay_ms(100);
+      ft_delay_10us(50);
+      set_gpio_value(GPIOA , GPIO_Pin_2 ,0);
+      ft_delay_10us(50);
+      set_gpio_value(GPIOA , GPIO_Pin_2 ,1);
       #endif
   }
 }

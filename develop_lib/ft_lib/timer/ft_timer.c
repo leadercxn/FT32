@@ -32,7 +32,7 @@ void timer3_init(void)
     RCC_APB1PeriphClockCmd(USER_TIMER_CLK, ENABLE);
 
     NVIC_InitStructure.NVIC_IRQChannel         = USER_TIMER_IRQ;
-    NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelPriority = 1;
     NVIC_InitStructure.NVIC_IRQChannelCmd      = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
 
