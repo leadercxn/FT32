@@ -104,25 +104,6 @@ static void USART_Config(void)
   FT_EVAL_COMInit(COM1, &USART_InitStructure);
 }
 
-/**
-  * @brief  Retargets the C library printf function to the USART.
-  * @param  None
-  * @retval None
-  */
-PUTCHAR_PROTOTYPE
-{
-  /* Place your implementation of fputc here */
-  /* e.g. write a character to the USART */
-  USART_SendData(EVAL_COM1, (uint8_t)ch);
-
-  /* Loop until transmit data register is empty */
-  while (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TXE) == RESET)
-  {
-  }
-
-  return ch;
-}
-
 #ifdef USE_FULL_ASSERT
 
 /**

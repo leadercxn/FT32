@@ -58,16 +58,16 @@ Options:
 Determining if the C compiler works passed with the following output:
 Change Dir: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/ninja cmTC_0e39c && [1/2] Building C object CMakeFiles/cmTC_0e39c.dir/testCCompiler.o
-[2/2] Linking C static library libcmTC_0e39c.a
+Run Build Command(s):/usr/bin/ninja cmTC_25b00 && [1/2] Building C object CMakeFiles/cmTC_25b00.dir/testCCompiler.o
+[2/2] Linking C static library libcmTC_25b00.a
 
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/ninja cmTC_11a16 && [1/2] Building C object CMakeFiles/cmTC_11a16.dir/CMakeCCompilerABI.o
-[2/2] Linking C static library libcmTC_11a16.a
+Run Build Command(s):/usr/bin/ninja cmTC_815cd && [1/2] Building C object CMakeFiles/cmTC_815cd.dir/CMakeCCompilerABI.o
+[2/2] Linking C static library libcmTC_815cd.a
 
 
 

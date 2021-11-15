@@ -12,7 +12,12 @@
  */
 void trace_init(void)
 {
-    ControlUartInit(UART2_CHANNEL, 115200);
+
+#ifdef FT32F072x8
+// ControlUartInit(UART2_CHANNEL, 115200);
+#else
+    ControlUartInit(UART1_CHANNEL, 115200);
+#endif
 }
 
 void trace_dump(void *p_buffer, uint32_t len)

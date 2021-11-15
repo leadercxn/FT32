@@ -208,7 +208,7 @@ MERGEHEX:FILEPATH=/usr/bin/mergehex
 OPENOCD:FILEPATH=/usr/local/bin/openocd
 
 //Choose the target platform to build for.
-PLATFORM:STRING=ft32f07x
+PLATFORM:STRING=ft32f03x
 
 //Path to a program.
 PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python3

@@ -20,4 +20,5 @@ void ControlUartIrqEnable(unsigned char ucChannel, unsigned char ucData);
 
 void shell_uart_getc(char *p_byte);
 void shell_uart_putc(uint8_t ch);
+
 #endif
