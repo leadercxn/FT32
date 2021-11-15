@@ -2,6 +2,7 @@
 #include "develop_lib.h"
 #include "lib_error.h"
 #include "bk953x_handler.h"
+#include "adc_button_handler.h"
 
 MID_TIMER_DEF(m_test_timer);
 uint8_t data[4] = { 0x64,0x23,0x18,0x74 };
@@ -20,7 +21,7 @@ int main(void)
   TIMER_INIT();
   trace_debug("mid_timer_init\n\r");
 
-  TIMER_CREATE(&m_test_timer,true,true,test_timer_handler);
+  TIMER_CREATE(&m_test_timer,false,true,test_timer_handler);
   trace_debug("mid_timer_create\n\r");
 
   ir_tx_init();
@@ -28,7 +29,7 @@ int main(void)
 
   adc_init();
 
-  //TIMER_START_WITH_PARAM(m_test_timer,500,NULL);
+  //TIMER_START(m_test_timer,500);
 
 
   //bk9532_lr_init();
@@ -41,32 +42,9 @@ int main(void)
     trace_error("ir_tx_start error %d\n\r",err_code);
   }
 #endif
-
-  //conf_gpio_output(RCC_AHBPeriph_GPIOA, GPIOA, GPIO_Pin_2);
   while(1)
   {
-      #if 0
-      ft_delay_10us(50);
-      set_gpio_value(GPIOA , GPIO_Pin_2 ,0);
-      ft_delay_10us(50);
-      set_gpio_value(GPIOA , GPIO_Pin_2 ,1);
-      #endif
-
-      #if 1
-      adc_value = adc_ch_value_get(ADC_CHANNEL_0);
-
-      trace_debug("ADC Channel 0 value is %d\r\n",adc_value);
-
-      delay_ms(500);
-      #endif
-
-      #if 1
-      adc_value = adc_ch_value_get(ADC_CHANNEL_1);
-
-      trace_debug("ADC Channel 1 value is %d\r\n",adc_value);
-      delay_ms(500);
-      #endif
-
+      adc_button_loop_task();
   }
 }
 

@@ -4,7 +4,7 @@
 #include "util.h"
 #include "ft_adc.h"
 
-void adc_init(void)
+void ft_adc_init(void)
 {
     ADC_InitTypeDef     ADC_InitStructure;
     GPIO_InitTypeDef    GPIO_InitStructure;
@@ -38,10 +38,6 @@ void adc_init(void)
     ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Upward;
     ADC_Init(ADC1, &ADC_InitStructure);
 
-#if 0
-    ADC_ChannelConfig(ADC1, ADC_CHANNEL_0 , ADC_SAMPLETIME_CYCLE);
-    ADC_ChannelConfig(ADC1, ADC_CHANNEL_1 , ADC_SAMPLETIME_CYCLE);
-#endif
     /* ADC Calibration */
     ADC_GetCalibrationFactor(ADC1);
     
@@ -50,12 +46,6 @@ void adc_init(void)
     
     /* Wait the ADRDY flag */
     while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_ADRDY)); 
-    
-#if 0
-    /* ADC1 regular Software Start Conv */ 
-    ADC_StartOfConversion(ADC1);
-#endif
-
 }
 
 uint16_t adc_ch_value_get(uint32_t channel)
