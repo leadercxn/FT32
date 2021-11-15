@@ -25,7 +25,7 @@ char shellBuffer[512];
  */
 void userShellWrite(char data)
 {
-    UNUSED_VARIABLE(ft_uart_put(FT_UART2, (uint8_t)data));
+    shell_uart_putc((uint8_t)data);
 }
 
 /**
@@ -36,11 +36,12 @@ void userShellWrite(char data)
  */
 signed char userShellRead(char *data)
 {
+    // shell_uart_getc(data);
     *data = 0;
-    while (!(USART_GetFlagStatus(FT_UART2, USART_FLAG_RXNE) == SET))
+    while (!(USART_GetFlagStatus(USART2, USART_FLAG_RXNE) == SET))
     {
     }
-    *data = USART_ReceiveData(FT_UART2);
+    *data = USART_ReceiveData(USART2);
     return 0; //返回0标识数据已经准备OK
 }
 /**
@@ -49,22 +50,6 @@ signed char userShellRead(char *data)
  */
 void userShellInit(void)
 {
-    ft_uart_info_t uart_info;
-    ft_uart_config_t uart_config;
-
-    ft_uart_info_get(FT_UART2, &uart_info);
-
-    uart_config.baudrate = 115200;
-    uart_config.databits = USART_WordLength_8b;
-    uart_config.stopbit = USART_StopBits_1;
-    uart_config.parity = USART_Parity_No;
-    uart_config.hwfc = USART_HardwareFlowControl_None;
-    uart_config.mode = USART_Mode_Rx | USART_Mode_Tx;
-    uart_config.interrupt_priority = 0;
-
-    ft_uart_init(FT_UART2, uart_info, &uart_config);
-
-    char data = 0;
     shell.write = userShellWrite;
     shell.read = userShellRead;
     shellInit(&shell, shellBuffer, 512);
@@ -96,10 +81,10 @@ void userShellCmdManualTest(void)
 void userShellRun(void)
 {
     char data = 0;
-    data = 0;
-    while (!(USART_GetFlagStatus(FT_UART2, USART_FLAG_RXNE) == SET))
+    // shell_uart_getc(&data);
+    while (!(USART_GetFlagStatus(USART2, USART_FLAG_RXNE) == SET))
     {
     }
-    data = USART_ReceiveData(FT_UART2);
+    data = USART_ReceiveData(USART2);
     shellHandler(&shell, data);
 }

@@ -12,20 +12,7 @@
  */
 void trace_init(void)
 {
-    ft_uart_info_t uart_info;
-    ft_uart_config_t uart_config;
-
-    ft_uart_info_get(FT_UART2, &uart_info);
-
-    uart_config.baudrate = 115200;
-    uart_config.databits = USART_WordLength_8b;
-    uart_config.stopbit = USART_StopBits_1;
-    uart_config.parity = USART_Parity_No;
-    uart_config.hwfc = USART_HardwareFlowControl_None;
-    uart_config.mode = USART_Mode_Rx | USART_Mode_Tx;
-    uart_config.interrupt_priority = 0;
-
-    ft_uart_init(FT_UART2, uart_info, &uart_config);
+    ControlUartInit(UART2_CHANNEL, 115200);
 }
 
 void trace_dump(void *p_buffer, uint32_t len)

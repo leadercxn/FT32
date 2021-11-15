@@ -1,6 +1,6 @@
 #include "main.h"
 #include "develop_lib.h"
-
+#include "ft_usart.h"
 #include "shell_port.h"
 #include "shell.h"
 
@@ -40,41 +40,19 @@ void timer_handler(void)
 int main(void)
 {
 
-  timer_init();
+  // timer_init();
 
-  timer_handler_register(timer_handler);
+  // timer_handler_register(timer_handler);
 
-  conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_1);
+  // conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_1);
 
+  ControlUartInit(UART2_CHANNEL, 115200);
   userShellInit();
 
   while (1)
   {
     userShellRun();
   }
-#if 0
-    conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_1);
-    while (1)
-    {
-        set_gpio_value(GPIOB, GPIO_Pin_1,1);
-        delay(5000);
-        set_gpio_value(GPIOB, GPIO_Pin_1,0);
-        delay(5000);
-    }
-#endif
-
-#if 0
-  conf_whole_gpios_output(RCC_AHBPeriph_GPIOC, GPIOC, 0xff);
-  while (1)
-  {
-      //set_gpio_value(GPIOB, GPIO_Pin_1,1);
-      set_halt_gpios_value(GPIOC ,0xff, true);
-      delay(5000);
-      //set_gpio_value(GPIOB, GPIO_Pin_1,0);
-      set_halt_gpios_value(GPIOC ,0x00, true);
-      delay(5000);
-  }
-#endif
 }
 
 #ifdef USE_FULL_ASSERT

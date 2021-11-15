@@ -11,7 +11,6 @@ file(GLOB SDK_SOURCE_FILES
     ${DEV_DIR}/ft_lib/deprecated/ft_delay.c
     ${DEV_DIR}/ft_lib/timer/ft_timer.c
     ${DEV_DIR}/ft_lib/usart/ft_usart.c
-    ${DEV_DIR}/ft_lib/usart/retarget.c
     ${DEV_DIR}/ft_lib/LetterShell/*.c
 
     ${DEV_DIR}/middle_api/mid_bk953x/mid_bk953x.c
