@@ -5,11 +5,8 @@
 #include "ft_timer.h"
 
 
-
-__IO uint16_t CCR1_Val = 40961;
-
 static timer_handler_t m_timer_handler = NULL;
-static uint64_t m_timer_tick = 0;
+static uint64_t m_timer_tick_ms = 0;
 
 void timer_handler_register(timer_handler_t handler)
 {
@@ -22,7 +19,7 @@ void timer_handler_register(timer_handler_t handler)
  * 定时器中端周期 period = SystemCoreClock/TIM_Prescaler * TIM_Period;
  * 48000000/48*1000 = 1K = 1ms
  */
-void timer_init(void)
+void timer3_init(void)
 {
     static uint16_t prescaler_value = 0;
 
@@ -35,7 +32,7 @@ void timer_init(void)
     RCC_APB1PeriphClockCmd(USER_TIMER_CLK, ENABLE);
 
     NVIC_InitStructure.NVIC_IRQChannel         = USER_TIMER_IRQ;
-    NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelPriority = 1;
     NVIC_InitStructure.NVIC_IRQChannelCmd      = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
 
@@ -45,19 +42,6 @@ void timer_init(void)
     TIM_TimeBaseStructure.TIM_CounterMode   = TIM_CounterMode_Up;
 
     TIM_TimeBaseInit(USER_TIMER, &TIM_TimeBaseStructure);
-
-#if 0
-    TIM_OCInitTypeDef           TIM_OCInitStructure;
-
-    /* 配置IO输出 */
-    TIM_OCInitStructure.TIM_OCMode      = TIM_OCMode_Timing;
-    TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Disable;
-    TIM_OCInitStructure.TIM_Pulse       = CCR1_Val;
-    TIM_OCInitStructure.TIM_OCPolarity  = TIM_OCPolarity_High;
-
-    TIM_OC1Init(USER_TIMER, &TIM_OCInitStructure);
-    TIM_OC1PreloadConfig(USER_TIMER, TIM_OCPreload_Disable);
-#endif
 
     TIM_ITConfig(USER_TIMER, USER_TIMER_CH, ENABLE);
     TIM_Cmd(USER_TIMER, ENABLE);
@@ -71,7 +55,7 @@ void TIM3_IRQHandler(void)
     {
         TIM_ClearITPendingBit(USER_TIMER, USER_TIMER_CH);
 
-        m_timer_tick++;
+        m_timer_tick_ms++;
 
         if(m_timer_handler)
         {
@@ -82,7 +66,7 @@ void TIM3_IRQHandler(void)
 
 uint64_t ft_timer_tick_get(void)
 {
-    return m_timer_tick;
+    return m_timer_tick_ms;
 }
 
 

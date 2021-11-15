@@ -15,11 +15,9 @@
 
 typedef void (*timer_handler_t) (void);
 
-void timer_init(void);
+void timer3_init(void);
 
 void timer_handler_register(timer_handler_t handler);
-
-void TIM3_IRQHandler(void);
 
 uint64_t ft_timer_tick_get(void);
 

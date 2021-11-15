@@ -106,10 +106,10 @@ void Uart1Init(unsigned int bound)
     USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); //开启相关中断,Letter Shell Demo采用轮询检测,不开启中断。
 
     /* USART1 IRQ Channel configuration */
-    NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPriority = 0x01;
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&NVIC_InitStructure);
+    // NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+    // NVIC_InitStructure.NVIC_IRQChannelPriority = 0x01;
+    // NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    // NVIC_Init(&NVIC_InitStructure);
 }
 
 /***********************************************************************
