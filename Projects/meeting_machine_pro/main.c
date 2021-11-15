@@ -51,6 +51,22 @@ int main(void)
       ft_delay_10us(50);
       set_gpio_value(GPIOA , GPIO_Pin_2 ,1);
       #endif
+
+      #if 1
+      adc_value = adc_ch_value_get(ADC_CHANNEL_0);
+
+      trace_debug("ADC Channel 0 value is %d\r\n",adc_value);
+
+      delay_ms(500);
+      #endif
+
+      #if 1
+      adc_value = adc_ch_value_get(ADC_CHANNEL_1);
+
+      trace_debug("ADC Channel 1 value is %d\r\n",adc_value);
+      delay_ms(500);
+      #endif
+
   }
 }
 

@@ -202,7 +202,13 @@ void ir_rx_init(void)
 #endif
 }
 
-
+/**
+ * @brief 查询ir rx的结果
+ * 
+ * @param [out] p_data接收解码后的数据
+ * 
+ * @return ir 解码后的数据长度
+ */
 uint8_t ir_rx_decode_result_get(uint8_t *p_data)
 {
     if(!p_data)

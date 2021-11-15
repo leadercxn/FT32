@@ -14,7 +14,12 @@ void adc_init(void)
     /* ADC1 Periph clock enable */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 
-    GPIO_InitStructure.GPIO_Pin  = ADC_GPIO_PIN_0;
+    GPIO_InitStructure.GPIO_Pin  = ADC_GPIO_PIN_0 ;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
+    GPIO_Init(ADC_GPIO_PORT, &GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin  = ADC_GPIO_PIN_1;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
     GPIO_Init(ADC_GPIO_PORT, &GPIO_InitStructure);
@@ -33,8 +38,10 @@ void adc_init(void)
     ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Upward;
     ADC_Init(ADC1, &ADC_InitStructure);
 
+#if 0
     ADC_ChannelConfig(ADC1, ADC_CHANNEL_0 , ADC_SAMPLETIME_CYCLE);
-
+    ADC_ChannelConfig(ADC1, ADC_CHANNEL_1 , ADC_SAMPLETIME_CYCLE);
+#endif
     /* ADC Calibration */
     ADC_GetCalibrationFactor(ADC1);
     
@@ -44,12 +51,22 @@ void adc_init(void)
     /* Wait the ADRDY flag */
     while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_ADRDY)); 
     
+#if 0
     /* ADC1 regular Software Start Conv */ 
     ADC_StartOfConversion(ADC1);
+#endif
+
 }
 
 uint16_t adc_ch_value_get(uint32_t channel)
 {
+    ADC_ChannelConfig(ADC1, channel, ADC_SAMPLETIME_CYCLE);
+
+    /**
+     * 启动转换
+     */
+    ADC_StartOfConversion(ADC1);
+
     while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
 
     return ADC_GetConversionValue(ADC1);
