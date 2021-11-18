@@ -7,9 +7,21 @@
 MID_TIMER_DEF(m_test_timer);
 uint8_t data[4] = { 0x64,0x23,0x18,0x74 };
 
+static bool m_is_high = true;
+
 void test_timer_handler(void *p_data)
 {
-    trace_debug("test_timer_handler\n\r");
+    //trace_debug("test_timer_handler\n\r");
+    if(m_is_high)
+    {
+      m_is_high = false;
+      set_gpio_value(GPIOB , GPIO_Pin_0 ,0);
+    }
+    else
+    {
+      m_is_high = true;
+      set_gpio_value(GPIOB , GPIO_Pin_0 ,1);
+    }
 }
 
 int main(void)
@@ -29,7 +41,7 @@ int main(void)
 
   adc_init();
 
-  //TIMER_START(m_test_timer,500);
+//  TIMER_START(m_test_timer,500);
 
 
   //bk9532_lr_init();
@@ -42,9 +54,16 @@ int main(void)
     trace_error("ir_tx_start error %d\n\r",err_code);
   }
 #endif
+  conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_0);
   while(1)
   {
-      adc_button_loop_task();
+      //adc_button_loop_task();
+    #if 1
+      set_gpio_value(GPIOB , GPIO_Pin_0 ,0);
+      delay_ms(100);
+      set_gpio_value(GPIOB , GPIO_Pin_0 ,1);
+      delay_ms(100);
+    #endif
   }
 }
 
