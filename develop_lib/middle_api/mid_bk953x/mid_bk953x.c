@@ -42,10 +42,11 @@ static int ft_virt1_i2c_bk953x_read_one_reg(uint8_t device_id,uint8_t reg,uint32
         return err;
     }
 
-    p[0] = virt1_i2c_read_byte(true);
-    p[1] = virt1_i2c_read_byte(true);
+    //MSB
+    p[3] = virt1_i2c_read_byte(true);
     p[2] = virt1_i2c_read_byte(true);
-    p[3] = virt1_i2c_read_byte(false);
+    p[1] = virt1_i2c_read_byte(true);
+    p[0] = virt1_i2c_read_byte(false);
 
     virt1_i2c_stop();
 
@@ -57,7 +58,7 @@ int ft_virt1_i2c_bk953x_write_one_reg(uint8_t device_id,uint8_t reg,uint32_t *p_
     uint8_t temp = 0;
     uint8_t *p = (uint8_t *)p_data;
     int err = 0;
-    uint8_t i = 0;
+    int i = 0;
 
     temp = (reg << 1) & 0xfe;
 
@@ -78,9 +79,9 @@ int ft_virt1_i2c_bk953x_write_one_reg(uint8_t device_id,uint8_t reg,uint32_t *p_
         return err;
     }
 
-    for(i = 0; i < sizeof(uint32_t); i++)
+    for(i = sizeof(uint32_t); i > 0; i++)
     {
-        virt1_i2c_send_byte(p[i]);
+        virt1_i2c_send_byte(p[i -1]);
         err = virt1_i2c_wait_ack();
         if(err)
         {

@@ -34,17 +34,26 @@ int main(void)
   trace_debug("mid_timer_init\n\r");
 
   TIMER_CREATE(&m_test_timer,false,true,test_timer_handler);
-  trace_debug("mid_timer_create\n\r");
+//  trace_debug("mid_timer_create\n\r");
 
   ir_tx_init();
-  ir_rx_init();
+//  ir_rx_init();
 
   adc_init();
 
 //  TIMER_START(m_test_timer,500);
+  conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_0);
+  conf_gpio_output(RCC_AHBPeriph_GPIOA, GPIOA, GPIO_Pin_8);
 
+  //复位要适当的延时，别太快
+  set_gpio_value(GPIOB , GPIO_Pin_0 ,0);
+  set_gpio_value(GPIOA , GPIO_Pin_8 ,0);
+  delay_ms(50);
+  set_gpio_value(GPIOB , GPIO_Pin_0 ,1);
+  set_gpio_value(GPIOA , GPIO_Pin_8 ,1);
+  delay_ms(50);
 
-  //bk9532_lr_init();
+  bk9532_lr_init();
 
   trace_info("Start loop\n\r");
 #if 0
@@ -54,16 +63,10 @@ int main(void)
     trace_error("ir_tx_start error %d\n\r",err_code);
   }
 #endif
-  conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_0);
+  
   while(1)
   {
-      //adc_button_loop_task();
-    #if 1
-      set_gpio_value(GPIOB , GPIO_Pin_0 ,0);
-      delay_ms(100);
-      set_gpio_value(GPIOB , GPIO_Pin_0 ,1);
-      delay_ms(100);
-    #endif
+      adc_button_loop_task();
   }
 }
 

@@ -21,7 +21,7 @@ typedef enum
 typedef struct 
 {
     i2c_type_e i2c_type;
-    uint16_t   chip_id;
+    uint32_t   chip_id;
     bk953x_band_type_e band_type;
 } bk953x_object_t;
 

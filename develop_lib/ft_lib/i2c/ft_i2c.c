@@ -292,7 +292,7 @@ int i2c1_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data)
 static void ft_i2c_delay(void)
 {
     uint8_t i;
-    for(i = 0; i < 2; i++);
+    for(i = 0; i < 4; i++);
 }
 
 /**
