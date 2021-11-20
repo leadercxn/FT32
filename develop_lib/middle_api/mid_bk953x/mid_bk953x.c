@@ -4,8 +4,7 @@
 #include "ft_lib.h"
 #endif
 
-
-#include "trace.h"
+#include "board_config.h"
 #include "mid_bk953x.h"
 
 
@@ -150,8 +149,25 @@ int mid_bk953x_write_one_reg(i2c_type_e i2c_type,uint8_t device_id,uint8_t reg,u
     return err;
 }
 
+static void mid_bk953x_hw_reset(void)
+{
+#ifdef FT32
+    conf_gpio_output(R_BK9532_CE_PERIPH_CLK, R_BK9532_CE_PORT, R_BK9532_CE_PIN);
+    conf_gpio_output(L_BK9532_CE_PERIPH_CLK, L_BK9532_CE_PORT, L_BK9532_CE_PIN);
+
+    //复位要适当的延时，别太快
+    set_gpio_value(L_BK9532_CE_PORT , L_BK9532_CE_PIN ,0);
+    set_gpio_value(R_BK9532_CE_PORT , R_BK9532_CE_PIN ,0);
+    delay_ms(50);
+    set_gpio_value(L_BK9532_CE_PORT , L_BK9532_CE_PIN ,1);
+    set_gpio_value(R_BK9532_CE_PORT , R_BK9532_CE_PIN ,1);
+    delay_ms(80);
+#endif
+}
+
 void mid_bk953x_res_init(void)
 {
+    mid_bk953x_hw_reset();
 #ifdef FT32
     virt_i2c_init();
 #endif

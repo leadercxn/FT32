@@ -111,12 +111,12 @@
 /** @addtogroup FT32F0xx_System_Private_Defines
   * @{
   */
-/* Select the PLL clock source */
 
-#define PLL_SOURCE_HSI        // HSI (~8MHz) used to clock the PLL, and the PLL is used as system clock source
+/* Select the PLL clock source 选择时钟源 */
+#define PLL_SOURCE_HSI          // HSI (~8MHz) used to clock the PLL, and the PLL is used as system clock source
 //#define PLL_SOURCE_HSE        // HSE (8MHz) used to clock the PLL, and the PLL is used as system clock source
 //#define PLL_SOURCE_HSE_BYPASS // HSE bypassed with an external clock (8MHz, coming from ST-Link) used to clock
-                              // the PLL, and the PLL is used as system clock source
+                                // the PLL, and the PLL is used as system clock source
 
 /**
   * @}
@@ -325,7 +325,7 @@ static void SetSysClock(void)
 
     /* PLL configuration */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL));
-    RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSI_PREDIV | RCC_CFGR_PLLXTPRE_PREDIV1 | RCC_CFGR_PLLMULL9);
+    RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSI_PREDIV | RCC_CFGR_PLLXTPRE_PREDIV1 | RCC_CFGR_PLLMULL9);  // RCC_CFGR_PLLMULL9 倍频参数，影响系统是时钟
             
     /* Enable PLL */
     RCC->CR |= RCC_CR_PLLON;
@@ -400,7 +400,7 @@ static void SetSysClock(void)
 
     /* PLL configuration */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL));
-    RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_PREDIV1 | RCC_CFGR_PLLXTPRE_PREDIV1 | RCC_CFGR_PLLMULL9);
+    RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_PREDIV1 | RCC_CFGR_PLLXTPRE_PREDIV1 | RCC_CFGR_PLLMULL9); // RCC_CFGR_PLLMULL9 倍频参数，影响系统是时钟
             
     /* Enable PLL */
     RCC->CR |= RCC_CR_PLLON;

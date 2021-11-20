@@ -1,7 +1,6 @@
 #include "stdbool.h"
 
-#include "ft32f0xx.h"
-#include "util.h"
+#include "board_config.h"
 #include "ft_adc.h"
 
 void ft_adc_init(void)

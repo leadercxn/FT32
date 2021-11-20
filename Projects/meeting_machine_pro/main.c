@@ -1,61 +1,72 @@
-#include "main.h"
-#include "develop_lib.h"
-#include "lib_error.h"
+#include "board_config.h"
+
 #include "bk953x_handler.h"
 #include "adc_button_handler.h"
 
 MID_TIMER_DEF(m_test_timer);
 uint8_t data[4] = { 0x64,0x23,0x18,0x74 };
 
-static bool m_is_high = true;
+static char * mp_button[BUTTON_EVENT_MAX] = 
+{
+  "BUTTON_R_EVENT_SET_PUSH",
+  "BUTTON_R_EVENT_SET_RELEASE",
+  "BUTTON_R_EVENT_UP_PUSH",
+  "BUTTON_R_EVENT_UP_RELEASE",
+  "BUTTON_R_EVENT_DOWN_PUSH",
+  "BUTTON_R_EVENT_DOWN_RELEASE",
+  "BUTTON_R_EVENT_LONG_SET",
+
+  "BUTTON_L_EVENT_SET_PUSH",
+  "BUTTON_L_EVENT_SET_RELEASE",
+  "BUTTON_L_EVENT_UP_PUSH",
+  "BUTTON_L_EVENT_UP_RELEASE",
+  "BUTTON_L_EVENT_DOWN_PUSH",
+  "BUTTON_L_EVENT_DOWN_RELEASE",
+  "BUTTON_L_EVENT_LONG_SET",
+};
+
 
 void test_timer_handler(void *p_data)
 {
-    //trace_debug("test_timer_handler\n\r");
-    if(m_is_high)
-    {
-      m_is_high = false;
-      set_gpio_value(GPIOB , GPIO_Pin_0 ,0);
-    }
-    else
-    {
-      m_is_high = true;
-      set_gpio_value(GPIOB , GPIO_Pin_0 ,1);
-    }
+    trace_debug("test_timer_handler\n\r");
+}
+
+static void r_adc_button_handler(adc_button_event_e event)
+{
+    trace_debug("r_adc_button_handler event = %s\n\r",mp_button[event]);
+}
+
+static void l_adc_button_handler(adc_button_event_e event)
+{
+    trace_debug("l_adc_button_handler event = %s\n\r",mp_button[event]);
 }
 
 int main(void)
 {
-  int err_code = ENONE;
-  uint16_t adc_value = 0;
   trace_init();
 
+  /*greeting*/
+  trace_debug("\n\r\n\r");
+  trace_debug("       *** Welcome to the Project ***\n\r");
+  trace_debug("\n\r");
+
   TIMER_INIT();
-  trace_debug("mid_timer_init\n\r");
+  trace_debug("TIMER_INIT done\n\r");
 
   TIMER_CREATE(&m_test_timer,false,true,test_timer_handler);
 //  trace_debug("mid_timer_create\n\r");
 
   ir_tx_init();
-//  ir_rx_init();
 
   adc_init();
 
+  l_adc_button_event_handler_register(l_adc_button_handler);
+  r_adc_button_event_handler_register(r_adc_button_handler);
+
+
 //  TIMER_START(m_test_timer,500);
-  conf_gpio_output(RCC_AHBPeriph_GPIOB, GPIOB, GPIO_Pin_0);
-  conf_gpio_output(RCC_AHBPeriph_GPIOA, GPIOA, GPIO_Pin_8);
-
-  //复位要适当的延时，别太快
-  set_gpio_value(GPIOB , GPIO_Pin_0 ,0);
-  set_gpio_value(GPIOA , GPIO_Pin_8 ,0);
-  delay_ms(50);
-  set_gpio_value(GPIOB , GPIO_Pin_0 ,1);
-  set_gpio_value(GPIOA , GPIO_Pin_8 ,1);
-  delay_ms(50);
-
   bk9532_lr_init();
 
-  trace_info("Start loop\n\r");
 #if 0
   err_code = ir_tx_start(data, sizeof(data));
   if(err_code)
@@ -64,9 +75,11 @@ int main(void)
   }
 #endif
   
+  trace_info("Start loop\n\r");
   while(1)
   {
       adc_button_loop_task();
+//      delay_ms(200);
   }
 }
 

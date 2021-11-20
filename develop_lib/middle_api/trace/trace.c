@@ -4,7 +4,7 @@
 #include "ft_lib.h"
 #endif
 
-#include "util.h"
+#include "board_config.h"
 #include "trace.h"
 
 #ifdef TRACE_ENABLE
@@ -12,21 +12,6 @@
 /**
  * @brief Definition for COM port1, connected to USART2
  */
-
-#define FT_UART1                USART1
-#define FT_UART1_CLK            RCC_APB2Periph_USART1
-
-#define FT_UART1_TX_PIN         GPIO_Pin_9
-#define FT_UART1_TX_GPIO_PORT   GPIOA
-#define FT_UART1_TX_GPIO_CLK    RCC_AHBPeriph_GPIOA
-#define FT_UART1_TX_SOURCE      GPIO_PinSource9
-#define FT_UART1_TX_AF          GPIO_AF_1
-
-#define FT_UART1_RX_PIN         GPIO_Pin_10
-#define FT_UART1_RX_GPIO_PORT   GPIOA
-#define FT_UART1_RX_GPIO_CLK    RCC_AHBPeriph_GPIOA
-#define FT_UART1_RX_SOURCE      GPIO_PinSource10
-#define FT_UART1_RX_AF          GPIO_AF_1
 
 void trace_init(void)
 {

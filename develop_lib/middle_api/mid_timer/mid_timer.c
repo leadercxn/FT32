@@ -194,6 +194,6 @@ int mid_timer_stop(timer_node_id_t timer_id)
 uint64_t mid_timer_ticks_get(void)
 {
 #ifdef FT32
-    ft_timer_tick_get();
+    return ft_timer_tick_get();
 #endif
 }

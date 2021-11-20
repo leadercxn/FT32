@@ -1,6 +1,6 @@
 #include "stdio.h"
 
-#include "user_board.h"
+#include "board_config.h"
 #include "util.h"
 #include "trace.h"
 
@@ -18,8 +18,6 @@ int bk9532_lr_init(void)
     m_l_bk9532_obj.i2c_type = I2C_TYPE_VIRT1;
 
     bk953x_res_init();
-
-    delay_ms(10);
 
     bk953x_chip_id_get(&m_l_bk9532_obj);
 

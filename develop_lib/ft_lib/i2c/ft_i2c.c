@@ -1,16 +1,8 @@
 #include "stddef.h"
 #include "stdbool.h"
 
-#include "ft32f0xx.h"
-#include "ft_gpio.h"
+#include "board_config.h"
 #include "ft_i2c.h"
-#include "ft_delay.h"
-#include "util.h"
-#include "lib_error.h"
-#include "trace.h"
-
-
-#define I2C_TRANFS_TIMEOUT  1000
 
 static i2c_transfer_timeout_handler_t m_i2c_transfer_timeout_handler = NULL;
 

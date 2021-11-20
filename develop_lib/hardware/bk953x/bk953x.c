@@ -1,6 +1,8 @@
+/**
+ * 该文件是BK芯片配置相关寄存器接口 
+ */
 #include "stdio.h"
-
-#include "user_board.h"
+#include "board_config.h"
 #include "util.h"
 #include "trace.h"
 

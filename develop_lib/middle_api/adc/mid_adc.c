@@ -8,10 +8,7 @@
 #include "ft_lib.h"
 #endif
 
-#include "util.h"
-#include "trace.h"
-#include "lib_error.h"
-
+#include "board_config.h"
 #include "mid_adc.h"
 
 //ADC初始化宏

@@ -5,10 +5,7 @@
 #include "ft_lib.h"
 #endif
 
-#include "trace.h"
-#include "lib_error.h"
-#include "middle_api.h"
-
+#include "board_config.h"
 #include "ir_rx_decode.h"
 
 //EXIT外部中断初始化

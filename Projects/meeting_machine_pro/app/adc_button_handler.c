@@ -1,15 +1,11 @@
 #include "stdio.h"
 #include "string.h"
 
-#include "user_board.h"
-#include "util.h"
-#include "trace.h"
-#include "middle_api.h"
-
+#include "board_config.h"
 #include "adc_button_handler.h"
 
 #define BUTTON_LONG_TIME_MS    5000
-#define BUTTON_SHORT_TIME_MS   500
+#define BUTTON_SHORT_TIME_MS   20
 
 static adc_button_event_handler_t m_adc_button_event_handler = NULL;
 
@@ -50,20 +46,33 @@ void r_adc_button_event_handler_register(adc_button_event_handler_t r_handler)
 void adc_button_loop_task(void)
 {
     //R
-    uint16_t old_r_adc_mv = 0;
-    uint16_t r_adc_mv = adc_ch_result_get(ADC_CHANNEL_0) / 4095 * 3300;
+    static adc_button_event_e old_r_button_event = BUTTON_EVENT_MAX;
+    adc_button_event_e r_button_event = BUTTON_EVENT_MAX;
+
+    uint16_t r_adc_mv = adc_ch_result_get(ADC_CHANNEL_0) * 3300 / 4095;
+//    trace_debug("r_adc_mv = %d\n\r",r_adc_mv);
     if(r_adc_mv > BUTTON_RELEASE_MIN)
     {
-        //
         if(m_is_r_adc_button_start)
         {
             m_is_r_adc_button_start = false;
-            if((old_r_adc_mv > BUTTON_SET_LEVEL_MIN) && (old_r_adc_mv < BUTTON_SET_LEVEL_MAX))
+            switch(old_r_button_event)
             {
-                if(mid_timer_ticks_get() - m_r_button_start_time < BUTTON_LONG_TIME_MS)
-                {
-                    m_r_adc_button_event_handler(BUTTON_R_EVENT_SET);
-                }
+                case BUTTON_R_EVENT_SET_PUSH:
+                case BUTTON_R_EVENT_LONG_SET:
+                    r_button_event = BUTTON_R_EVENT_SET_RELEASE;
+                    break;
+
+                case BUTTON_R_EVENT_UP_PUSH:
+                    r_button_event = BUTTON_R_EVENT_UP_RELEASE;
+                    break;
+
+                case BUTTON_R_EVENT_DOWN_PUSH:
+                    r_button_event = BUTTON_R_EVENT_DOWN_RELEASE;
+                    break;
+
+                default:
+                    break;
             }
         }
     }
@@ -80,12 +89,17 @@ void adc_button_loop_task(void)
             {
                 if(mid_timer_ticks_get() - m_r_button_start_time > BUTTON_LONG_TIME_MS)
                 {
-                    m_r_adc_button_event_handler(BUTTON_R_EVENT_LONG_SET);
+                    r_button_event = BUTTON_R_EVENT_LONG_SET;
+                }
+                else
+                {
+                    r_button_event = BUTTON_R_EVENT_SET_PUSH;
                 }
             }
         }
         else if((r_adc_mv > BUTTON_UP_LEVEL_MIN) && (r_adc_mv < BUTTON_UP_LEVEL_MAX))
         {
+//            trace_debug("r_adc_button up push\n\r");
             if(!m_is_r_adc_button_start)
             {
                 m_is_r_adc_button_start = true;
@@ -96,12 +110,13 @@ void adc_button_loop_task(void)
                 if(mid_timer_ticks_get() - m_r_button_start_time > BUTTON_SHORT_TIME_MS)
                 {
                     m_r_button_start_time = mid_timer_ticks_get();
-                    m_r_adc_button_event_handler(BUTTON_R_EVENT_UP);
+                    r_button_event = BUTTON_R_EVENT_UP_PUSH;
                 }
             }
         }
         else if((r_adc_mv > BUTTON_DOWN_LEVEL_MIN) && (r_adc_mv < BUTTON_DOWN_LEVEL_MAX))
         {
+//            trace_debug("r_adc_button down push\n\r");
             if(!m_is_r_adc_button_start)
             {
                 m_is_r_adc_button_start = true;
@@ -112,27 +127,47 @@ void adc_button_loop_task(void)
                 if(mid_timer_ticks_get() - m_r_button_start_time > BUTTON_SHORT_TIME_MS)
                 {
                     m_r_button_start_time = mid_timer_ticks_get();
-                    m_r_adc_button_event_handler(BUTTON_R_EVENT_DOWN);
+                    r_button_event = BUTTON_R_EVENT_DOWN_PUSH;
                 }
             }
         }
     }
-    old_r_adc_mv = r_adc_mv;
+
+    if((m_r_adc_button_event_handler) && (r_button_event != BUTTON_EVENT_MAX))
+    {
+        m_r_adc_button_event_handler(r_button_event);
+        old_r_button_event = r_button_event;
+    }
+
 
     //L
-    uint16_t old_l_adc_mv = 0;
-    uint16_t l_adc_mv = adc_ch_result_get(ADC_CHANNEL_1) / 4095 * 3300;
+    static adc_button_event_e old_l_button_event = BUTTON_EVENT_MAX;
+    adc_button_event_e l_button_event = BUTTON_EVENT_MAX;
+
+    uint16_t l_adc_mv = adc_ch_result_get(ADC_CHANNEL_1) * 3300 / 4095;
+//    trace_debug("l_adc_mv = %d\n\r",l_adc_mv);
     if(l_adc_mv > BUTTON_RELEASE_MIN)
     {
         if(m_is_l_adc_button_start)
         {
             m_is_l_adc_button_start = false;
-            if((old_l_adc_mv > BUTTON_SET_LEVEL_MIN) && (old_l_adc_mv < BUTTON_SET_LEVEL_MAX))
+            switch(old_l_button_event)
             {
-                if(mid_timer_ticks_get() - m_l_button_start_time < BUTTON_LONG_TIME_MS)
-                {
-                    m_l_adc_button_event_handler(BUTTON_L_EVENT_SET);
-                }
+                case BUTTON_L_EVENT_SET_PUSH:
+                case BUTTON_L_EVENT_LONG_SET:
+                    l_button_event = BUTTON_L_EVENT_SET_RELEASE;
+                    break;
+
+                case BUTTON_R_EVENT_UP_PUSH:
+                    l_button_event = BUTTON_L_EVENT_UP_RELEASE;
+                    break;
+
+                case BUTTON_R_EVENT_DOWN_PUSH:
+                    l_button_event = BUTTON_L_EVENT_DOWN_RELEASE;
+                    break;
+
+                default:
+                    break;
             }
         }
     }
@@ -140,6 +175,7 @@ void adc_button_loop_task(void)
     {
         if((l_adc_mv > BUTTON_SET_LEVEL_MIN) && (l_adc_mv < BUTTON_SET_LEVEL_MAX))
         {
+//            trace_debug("l_adc_button set push\n\r");
             if(!m_is_l_adc_button_start)
             {
                 m_is_l_adc_button_start = true;
@@ -149,12 +185,17 @@ void adc_button_loop_task(void)
             {
                 if(mid_timer_ticks_get() - m_l_button_start_time > BUTTON_LONG_TIME_MS)
                 {
-                    m_l_adc_button_event_handler(BUTTON_L_EVENT_LONG_SET);
+                    l_button_event = BUTTON_L_EVENT_LONG_SET;
+                }
+                else
+                {
+                    l_button_event = BUTTON_L_EVENT_SET_PUSH;
                 }
             }
         }
         else if((l_adc_mv > BUTTON_UP_LEVEL_MIN) && (l_adc_mv < BUTTON_UP_LEVEL_MAX))
         {
+//            trace_debug("l_adc_button up push\n\r");
             if(!m_is_l_adc_button_start)
             {
                 m_is_l_adc_button_start = true;
@@ -165,12 +206,13 @@ void adc_button_loop_task(void)
                 if(mid_timer_ticks_get() - m_l_button_start_time > BUTTON_SHORT_TIME_MS)
                 {
                     m_l_button_start_time = mid_timer_ticks_get();
-                    m_l_adc_button_event_handler(BUTTON_L_EVENT_UP);
+                    l_button_event = BUTTON_L_EVENT_UP_PUSH;
                 }
             }
         }
         else if((l_adc_mv > BUTTON_DOWN_LEVEL_MIN) && (l_adc_mv < BUTTON_DOWN_LEVEL_MAX))
         {
+//            trace_debug("l_adc_button down push\n\r");
             if(!m_is_l_adc_button_start)
             {
                 m_is_l_adc_button_start = true;
@@ -181,11 +223,17 @@ void adc_button_loop_task(void)
                 if(mid_timer_ticks_get() - m_l_button_start_time > BUTTON_SHORT_TIME_MS)
                 {
                     m_l_button_start_time = mid_timer_ticks_get();
-                    m_l_adc_button_event_handler(BUTTON_L_EVENT_DOWN);
+                    l_button_event = BUTTON_L_EVENT_DOWN_PUSH;
                 }
             }
         }
     }
-    old_l_adc_mv = l_adc_mv;
+
+    if((m_l_adc_button_event_handler) && (l_button_event != BUTTON_EVENT_MAX))
+    {
+        m_l_adc_button_event_handler(l_button_event);
+        old_l_button_event = l_button_event;
+    }
+
 }
 

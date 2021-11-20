@@ -1,10 +1,8 @@
 #include "stddef.h"
 #include "stdbool.h"
 
-#include "ft32f0xx.h"
+#include "board_config.h"
 #include "ft_timer_pwm.h"
-
-
 
 void timer15_ch1_pwm_init(uint32_t freq , uint8_t duty_cycle)
 {
