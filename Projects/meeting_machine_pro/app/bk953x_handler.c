@@ -1,48 +1,57 @@
 #include "stdio.h"
 
 #include "board_config.h"
-#include "util.h"
-#include "trace.h"
-
-#include "hardware.h"
 #include "bk953x_handler.h"
 
 
 static bk953x_object_t m_l_bk9532_obj;
 static bk953x_object_t m_r_bk9532_obj;
 
+static gpio_object_t   m_l_bk9532_rst;
+static gpio_object_t   m_r_bk9532_rst;
+
 /**
  * @warning 复位要适当的延时，别太快
  */
 static void r_bk953x_hw_reset(void)
 {
-#ifdef FT32
-    conf_gpio_output(R_BK9532_CE_PERIPH_CLK, R_BK9532_CE_PORT, R_BK9532_CE_PIN);
+    gpio_config(&m_r_bk9532_rst);
 
-    set_gpio_value(R_BK9532_CE_PORT , R_BK9532_CE_PIN ,0);
+    gpio_output_set(&m_r_bk9532_rst, 0);
     delay_ms(50);
-    set_gpio_value(R_BK9532_CE_PORT , R_BK9532_CE_PIN ,1);
+    gpio_output_set(&m_r_bk9532_rst, 1);
     delay_ms(100);
-    trace_debug("r_bk953x_hw_reset\n\r");
-#endif
 }
 
 static void l_bk953x_hw_reset(void)
 {
-#ifdef FT32
-    conf_gpio_output(L_BK9532_CE_PERIPH_CLK, L_BK9532_CE_PORT, L_BK9532_CE_PIN);
+    gpio_config(&m_l_bk9532_rst);
 
-    set_gpio_value(L_BK9532_CE_PORT , L_BK9532_CE_PIN ,0);
+    gpio_output_set(&m_l_bk9532_rst, 0);
     delay_ms(50);
-    set_gpio_value(L_BK9532_CE_PORT , L_BK9532_CE_PIN ,1);
+    gpio_output_set(&m_l_bk9532_rst, 1);
     delay_ms(100);
-    trace_debug("l_bk953x_hw_reset\n\r");
-#endif
 }
 
 int bk9532_lr_init(void)
 {
     int err_code = 0;
+
+#ifdef FT32
+    m_l_bk9532_rst.gpio_port_periph_clk = L_BK9532_CE_PERIPH_CLK;
+    m_l_bk9532_rst.p_gpio_port = L_BK9532_CE_PORT;
+
+    m_r_bk9532_rst.gpio_port_periph_clk = R_BK9532_CE_PERIPH_CLK;
+    m_r_bk9532_rst.p_gpio_port = R_BK9532_CE_PORT;
+#endif
+
+    m_l_bk9532_rst.gpio_dir = GPIO_DIR_OUTPUR;
+    m_l_bk9532_rst.gpio_pin = L_BK9532_CE_PIN;
+
+    m_r_bk9532_rst.gpio_dir = GPIO_DIR_OUTPUR;
+    m_r_bk9532_rst.gpio_pin = R_BK9532_CE_PIN;
+
+
 
     m_r_bk9532_obj.hw_reset_handler = r_bk953x_hw_reset;
     m_l_bk9532_obj.hw_reset_handler = l_bk953x_hw_reset;

@@ -24,6 +24,14 @@
 #define R_BK9532_CE_PORT                GPIOA
 #define R_BK9532_CE_PERIPH_CLK          RCC_AHBPeriph_GPIOA
 
+#define L_AD22650_EN_PIN                GPIO_Pin_3
+#define L_AD22650_EN_PORT               GPIOA
+#define L_AD22650_EN_PORT_PERIPH_CLK    RCC_AHBPeriph_GPIOA
+
+#define R_AD22650_EN_PIN                GPIO_Pin_3
+#define R_AD22650_EN_PORT               GPIOB
+#define R_AD22650_EN_PORT_PERIPH_CLK    RCC_AHBPeriph_GPIOB
+
 /* ADC */
 #define ADC_CHANNEL_0                   ADC_Channel_0
 #define ADC_CHANNEL_1                   ADC_Channel_1

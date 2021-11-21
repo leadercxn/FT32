@@ -114,7 +114,7 @@ int bk953x_soft_reset(bk953x_object_t *p_bk953x_object)
         SET_BIT(value,5);
         mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
     }
-    else
+    else if(p_bk953x_object->chip_id == BK9531_CHID_ID)
     {
         
     }

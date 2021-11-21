@@ -14,5 +14,6 @@
 #include "mid_timer.h"
 #include "mid_delay.h"
 #include "mid_adc.h"
+#include "mid_gpio.h"
 
 #endif

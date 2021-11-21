@@ -2,6 +2,8 @@
 
 #include "bk953x_handler.h"
 #include "adc_button_handler.h"
+#include "ad22650_handler.h"
+#include "flash_handler.h"
 
 MID_TIMER_DEF(m_test_timer);
 uint8_t data[4] = { 0x64,0x23,0x18,0x74 };
@@ -43,6 +45,8 @@ static void l_adc_button_handler(adc_button_event_e event)
 
 int main(void)
 {
+  int err_code = 0;
+
   trace_init();
 
   /*greeting*/
@@ -53,19 +57,53 @@ int main(void)
   TIMER_INIT();
   trace_debug("TIMER_INIT done\n\r");
 
-  TIMER_CREATE(&m_test_timer,false,true,test_timer_handler);
-//  trace_debug("mid_timer_create\n\r");
+//  TIMER_CREATE(&m_test_timer,false,true,test_timer_handler);
 
   ir_tx_init();
 
   adc_init();
-
   l_adc_button_event_handler_register(l_adc_button_handler);
   r_adc_button_event_handler_register(r_adc_button_handler);
 
-
-//  TIMER_START(m_test_timer,500);
   bk9532_lr_init();
+  ad22650_lr_init();
+
+#if 1
+  /**
+   * flash test
+   */
+  uint8_t w_data[4] = {1,2,3,4};
+  uint8_t r_data[4] = {0};
+
+  err_code = ft_flash_read(FLASH_APP_PARAM_ADDRESS, 4, r_data);
+//  err_code = ft_flash_read_word(FLASH_APP_PARAM_ADDRESS,1, (uint32_t *)r_data);
+  if(err_code)
+  {
+      trace_error("ft_flash_read error %d\n\r",err_code);
+  }
+  delay_ms(100);
+
+  trace_error("read address 0x%08x:\n\r",FLASH_APP_PARAM_ADDRESS);
+  trace_dump(r_data,4);
+
+  err_code = ft_flash_write_word(FLASH_APP_PARAM_ADDRESS, 1, (uint32_t *)w_data);
+  if(err_code)
+  {
+      trace_error("ft_flash_write error %d\n\r",err_code);
+  }
+  delay_ms(100);
+
+  err_code = ft_flash_read(FLASH_APP_PARAM_ADDRESS, 3, r_data);
+//  err_code = ft_flash_read_word(FLASH_APP_PARAM_ADDRESS,1, (uint32_t *)r_data);
+  if(err_code)
+  {
+      trace_error("ft_flash_read error %d\n\r",err_code);
+  }
+  delay_ms(100);
+  trace_error("read address 0x%08x:\n\r",FLASH_APP_PARAM_ADDRESS);
+  trace_dump(r_data,3);
+
+#endif
 
 #if 0
   err_code = ir_tx_start(data, sizeof(data));
@@ -74,12 +112,12 @@ int main(void)
     trace_error("ir_tx_start error %d\n\r",err_code);
   }
 #endif
-  
+
   trace_info("Start loop\n\r");
+
   while(1)
   {
       adc_button_loop_task();
-//      delay_ms(200);
   }
 }
 
