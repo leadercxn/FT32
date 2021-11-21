@@ -287,123 +287,156 @@ static void ft_i2c_delay(void)
     for(i = 0; i < 4; i++);
 }
 
-/**
- * @brief 模拟i2c初始化
- */
-void virt_i2c_init(void)
-{
-  conf_gpio_output(VIRT_SCL_GPIO_CLK, VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN);
-  set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
 
-  conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
-  set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
+
+/* 
+ * 
+ * summary 
+ * 
+ * */
+void ft_virt_i2c_init(ft_virt_i2c_t *p_virt_i2c)
+{
+    if(!p_virt_i2c)
+    {
+        trace_error("p_virt_i2c is NULL\n\r");
+        return;
+    }
+
+    conf_gpio_output(p_virt_i2c->scl_port_periph_clk, p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin);
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 1);
+
+    conf_gpio_output(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin);
+    set_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, 1);
 }
 
-void virt1_i2c_start(void)
+void ft_virt_i2c_start(ft_virt_i2c_t *p_virt_i2c)
 {
-//    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
-    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+    if(!p_virt_i2c)
+    {
+        return;
+    }
+
+//    conf_gpio_output(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin);
+    set_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, 1);
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 1);
 
     ft_i2c_delay();
-
-    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 0);
+    set_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, 0);
 
     ft_i2c_delay();
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 0);
 }
 
-void virt1_i2c_stop(void)
+void ft_virt_i2c_stop(ft_virt_i2c_t *p_virt_i2c)
 {
-//    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
-    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 0);
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+    if(!p_virt_i2c)
+    {
+        return;
+    }
+
+//    conf_gpio_output(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin);
+    set_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, 0);
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 0);
 
     ft_i2c_delay();
-
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 1);
     ft_i2c_delay();
-    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
+    set_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, 1);
 }
 
-int virt1_i2c_wait_ack(void)
+int ft_virt_i2c_wait_ack(ft_virt_i2c_t *p_virt_i2c)
 {
     uint8_t timeout = 0;
     uint8_t sda_value = 0;
-    
-    conf_gpio_input(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, GPIO_PuPd_UP);
 
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+    if(!p_virt_i2c)
+    {
+        return -EINVAL;
+    }
+    
+    conf_gpio_input(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, GPIO_PuPd_UP);
+
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 1);
     ft_i2c_delay();
 
-    get_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, &sda_value);
+    get_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, &sda_value);
     while(sda_value)
     {
         timeout++;
         if(timeout > 250)
         {
-            virt1_i2c_stop();
+            ft_virt_i2c_stop(p_virt_i2c);
             return -EIO;
         }
 
-        get_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, &sda_value);
+        get_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, &sda_value);
         ft_i2c_delay();
     }
 
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 0);
 
     return ENONE;
 }
 
-void virt1_i2c_set_ack(void)
+void ft_virt_i2c_set_ack(ft_virt_i2c_t *p_virt_i2c)
 {
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
-    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
-    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 0);
+    if(!p_virt_i2c)
+    {
+        return;
+    }
+
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 0);
+    conf_gpio_output(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin);
+    set_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, 0);
 
     ft_i2c_delay();
 
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 1);
     ft_i2c_delay();
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 0);
 }
 
-void virt1_i2c_set_nack(void)
+void ft_virt_i2c_set_nack(ft_virt_i2c_t *p_virt_i2c)
 {
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
-    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
-    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
+    if(!p_virt_i2c)
+    {
+        return;
+    }
+
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 0);
+    conf_gpio_output(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin);
+    set_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, 1);
 
     ft_i2c_delay();
 
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 1);
     ft_i2c_delay();
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 0);
 }
 
-void virt1_i2c_send_byte(uint8_t byte)
+void ft_virt_i2c_send_byte(ft_virt_i2c_t *p_virt_i2c, uint8_t byte)
 {
     uint8_t i = 0;
     uint8_t temp = 0;
 
-    conf_gpio_output(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN);
-    set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+    conf_gpio_output(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin);
+    set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 0);
 
     for(i = 0; i < 8; i++)
     {
         temp = (byte & 0x80) >> 7;
 
-        set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, temp);
+        set_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, temp);
         ft_i2c_delay();
-        set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+        set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 1);
         ft_i2c_delay();
-        set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+        set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 0);
         ft_i2c_delay();
 
         byte <<= 1;
     }
 
-    set_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, 1);
+    set_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, 1);
 }
 
 /**
@@ -411,22 +444,22 @@ void virt1_i2c_send_byte(uint8_t byte)
  * 
  * @param ack 读取完一个字节后是否发送一个应答信号
  */
-uint8_t virt1_i2c_read_byte(bool ack)
+uint8_t ft_virt_i2c_read_byte(ft_virt_i2c_t *p_virt_i2c, bool ack)
 {
     uint8_t i = 0,recv_byte = 0;
     uint8_t sda_value = 0;
 
-    conf_gpio_input(VIRT_SDA_GPIO_CLK, VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, GPIO_PuPd_UP);
+    conf_gpio_input(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, GPIO_PuPd_UP);
 
     for(i = 0; i < 8; i++)
     {
         recv_byte <<= 1;
 
-        set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 0);
+        set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 0);
         ft_i2c_delay();
-        set_gpio_value(VIRT_SCL_GPIO_PORT, VIRT_SCL_PIN, 1);
+        set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 1);
 
-        get_gpio_value(VIRT_SDA_GPIO_PORT, VIRT_SDA_PIN, &sda_value);
+        get_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, &sda_value);
         if(sda_value)
         {
             recv_byte++;
@@ -436,60 +469,13 @@ uint8_t virt1_i2c_read_byte(bool ack)
 
     if(ack)
     {
-        virt1_i2c_set_ack();
+        ft_virt_i2c_set_ack(p_virt_i2c);
     }
     else
     {
-        virt1_i2c_set_nack();
+        ft_virt_i2c_set_nack(p_virt_i2c);
     }
 
     return recv_byte;
 }
 
-
-/**
- * @brief 模拟i2c往从设备指定的寄存器写入1字节数据
- * 
- * 模式: 从设备地址+寄存器地址+从设备地址+数据(1B)
- */
-void virt1_i2c_write_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t data)
-{
-    uint8_t address = (slaver_addr << 1);
-
-    virt1_i2c_start();
-
-    virt1_i2c_send_byte(address);
-    virt1_i2c_wait_ack();
-    virt1_i2c_send_byte(reg);
-    virt1_i2c_wait_ack();
-    virt1_i2c_send_byte(data);
-    virt1_i2c_wait_ack();
-    virt1_i2c_stop();
-}
-
-
-/**
- * @brief 模拟i2c往从设备指定的寄存器读出1字节数据
- * 
- * 模式: 从设备地址+寄存器地址+开始+从设备地址+数据(1B)
- */
-void virt1_i2c_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data)
-{
-    uint8_t address = (slaver_addr << 1);
-
-    virt1_i2c_start();
-
-    virt1_i2c_send_byte(address);
-    virt1_i2c_wait_ack();
-    virt1_i2c_send_byte(reg);
-    virt1_i2c_wait_ack();
-
-    virt1_i2c_start();
-    address = (slaver_addr << 1) | 0x01 ;
-    virt1_i2c_send_byte(address);
-    virt1_i2c_wait_ack();
-
-    *p_data = virt1_i2c_read_byte(false);
-
-    virt1_i2c_stop();
-}

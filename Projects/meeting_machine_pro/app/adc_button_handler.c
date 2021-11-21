@@ -5,7 +5,7 @@
 #include "adc_button_handler.h"
 
 #define BUTTON_LONG_TIME_MS    5000
-#define BUTTON_SHORT_TIME_MS   20
+#define BUTTON_SHORT_TIME_MS   50
 
 static adc_button_event_handler_t m_adc_button_event_handler = NULL;
 
@@ -43,6 +43,9 @@ void r_adc_button_event_handler_register(adc_button_event_handler_t r_handler)
     }
 }
 
+/**
+ * @warning 目前DOWN按键在释放时，由于旁路电容电放电缓慢，导致有些小bug
+ */
 void adc_button_loop_task(void)
 {
     //R
@@ -50,7 +53,6 @@ void adc_button_loop_task(void)
     adc_button_event_e r_button_event = BUTTON_EVENT_MAX;
 
     uint16_t r_adc_mv = adc_ch_result_get(ADC_CHANNEL_0) * 3300 / 4095;
-//    trace_debug("r_adc_mv = %d\n\r",r_adc_mv);
     if(r_adc_mv > BUTTON_RELEASE_MIN)
     {
         if(m_is_r_adc_button_start)
@@ -78,6 +80,7 @@ void adc_button_loop_task(void)
     }
     else
     {
+//        trace_debug("r_adc_mv = %d\n\r",r_adc_mv);
         if((r_adc_mv > BUTTON_SET_LEVEL_MIN) && (r_adc_mv < BUTTON_SET_LEVEL_MAX))
         {
             if(!m_is_r_adc_button_start)
@@ -99,7 +102,6 @@ void adc_button_loop_task(void)
         }
         else if((r_adc_mv > BUTTON_UP_LEVEL_MIN) && (r_adc_mv < BUTTON_UP_LEVEL_MAX))
         {
-//            trace_debug("r_adc_button up push\n\r");
             if(!m_is_r_adc_button_start)
             {
                 m_is_r_adc_button_start = true;
@@ -116,7 +118,6 @@ void adc_button_loop_task(void)
         }
         else if((r_adc_mv > BUTTON_DOWN_LEVEL_MIN) && (r_adc_mv < BUTTON_DOWN_LEVEL_MAX))
         {
-//            trace_debug("r_adc_button down push\n\r");
             if(!m_is_r_adc_button_start)
             {
                 m_is_r_adc_button_start = true;
@@ -145,7 +146,6 @@ void adc_button_loop_task(void)
     adc_button_event_e l_button_event = BUTTON_EVENT_MAX;
 
     uint16_t l_adc_mv = adc_ch_result_get(ADC_CHANNEL_1) * 3300 / 4095;
-//    trace_debug("l_adc_mv = %d\n\r",l_adc_mv);
     if(l_adc_mv > BUTTON_RELEASE_MIN)
     {
         if(m_is_l_adc_button_start)
@@ -158,11 +158,11 @@ void adc_button_loop_task(void)
                     l_button_event = BUTTON_L_EVENT_SET_RELEASE;
                     break;
 
-                case BUTTON_R_EVENT_UP_PUSH:
+                case BUTTON_L_EVENT_UP_PUSH:
                     l_button_event = BUTTON_L_EVENT_UP_RELEASE;
                     break;
 
-                case BUTTON_R_EVENT_DOWN_PUSH:
+                case BUTTON_L_EVENT_DOWN_PUSH:
                     l_button_event = BUTTON_L_EVENT_DOWN_RELEASE;
                     break;
 
@@ -173,9 +173,9 @@ void adc_button_loop_task(void)
     }
     else
     {
+//        trace_debug("l_adc_mv = %d\n\r",l_adc_mv);
         if((l_adc_mv > BUTTON_SET_LEVEL_MIN) && (l_adc_mv < BUTTON_SET_LEVEL_MAX))
         {
-//            trace_debug("l_adc_button set push\n\r");
             if(!m_is_l_adc_button_start)
             {
                 m_is_l_adc_button_start = true;
@@ -195,7 +195,6 @@ void adc_button_loop_task(void)
         }
         else if((l_adc_mv > BUTTON_UP_LEVEL_MIN) && (l_adc_mv < BUTTON_UP_LEVEL_MAX))
         {
-//            trace_debug("l_adc_button up push\n\r");
             if(!m_is_l_adc_button_start)
             {
                 m_is_l_adc_button_start = true;
@@ -212,7 +211,6 @@ void adc_button_loop_task(void)
         }
         else if((l_adc_mv > BUTTON_DOWN_LEVEL_MIN) && (l_adc_mv < BUTTON_DOWN_LEVEL_MAX))
         {
-//            trace_debug("l_adc_button down push\n\r");
             if(!m_is_l_adc_button_start)
             {
                 m_is_l_adc_button_start = true;
@@ -234,6 +232,5 @@ void adc_button_loop_task(void)
         m_l_adc_button_event_handler(l_button_event);
         old_l_button_event = l_button_event;
     }
-
 }
 

@@ -9,11 +9,9 @@
 
 
 #ifdef FT32
-//ft32芯片依赖的头文件
-#include "ft_lib.h"
 
-//ft32做成bk953x芯片的API
-static int ft_virt1_i2c_bk953x_read_one_reg(uint8_t device_id,uint8_t reg,uint32_t *p_data)
+/* VIRT */
+static int ft_virt_i2c_bk953x_read_one_reg(ft_virt_i2c_t *p_ft_virt_i2c, uint8_t device_id, uint8_t reg, uint32_t *p_data)
 {
     uint8_t temp = 0;
     uint8_t *p = (uint8_t *)p_data;
@@ -21,20 +19,20 @@ static int ft_virt1_i2c_bk953x_read_one_reg(uint8_t device_id,uint8_t reg,uint32
 
     temp = (reg << 1) | 0x01;
 
-    virt1_i2c_start();
+    ft_virt_i2c_start(p_ft_virt_i2c);
 
-    virt1_i2c_send_byte(device_id);
+    ft_virt_i2c_send_byte(p_ft_virt_i2c, device_id);
 
-    err = virt1_i2c_wait_ack();
+    err = ft_virt_i2c_wait_ack(p_ft_virt_i2c);
     if(err)
     {
         trace_error("slaver no ack!\n\r");
         return err;
     }
 
-    virt1_i2c_send_byte(temp);
+    ft_virt_i2c_send_byte(p_ft_virt_i2c, temp);
 
-    err = virt1_i2c_wait_ack();
+    err = ft_virt_i2c_wait_ack(p_ft_virt_i2c);
     if(err)
     {
         trace_error("slaver no ack!\n\r");
@@ -42,17 +40,17 @@ static int ft_virt1_i2c_bk953x_read_one_reg(uint8_t device_id,uint8_t reg,uint32
     }
 
     //MSB
-    p[3] = virt1_i2c_read_byte(true);
-    p[2] = virt1_i2c_read_byte(true);
-    p[1] = virt1_i2c_read_byte(true);
-    p[0] = virt1_i2c_read_byte(false);
+    p[3] = ft_virt_i2c_read_byte(p_ft_virt_i2c, true);
+    p[2] = ft_virt_i2c_read_byte(p_ft_virt_i2c, true);
+    p[1] = ft_virt_i2c_read_byte(p_ft_virt_i2c, true);
+    p[0] = ft_virt_i2c_read_byte(p_ft_virt_i2c, false);
 
-    virt1_i2c_stop();
+    ft_virt_i2c_stop(p_ft_virt_i2c);
 
     return err;
 }
 
-int ft_virt1_i2c_bk953x_write_one_reg(uint8_t device_id,uint8_t reg,uint32_t *p_data)
+int ft_virt_i2c_bk953x_write_one_reg(ft_virt_i2c_t *p_ft_virt_i2c, uint8_t device_id,uint8_t reg,uint32_t *p_data)
 {
     uint8_t temp = 0;
     uint8_t *p = (uint8_t *)p_data;
@@ -61,18 +59,19 @@ int ft_virt1_i2c_bk953x_write_one_reg(uint8_t device_id,uint8_t reg,uint32_t *p_
 
     temp = (reg << 1) & 0xfe;
 
-    virt1_i2c_start();
+    ft_virt_i2c_start(p_ft_virt_i2c);
 
-    virt1_i2c_send_byte(device_id);
-    err = virt1_i2c_wait_ack();
+    ft_virt_i2c_send_byte(p_ft_virt_i2c, device_id);
+    err = ft_virt_i2c_wait_ack(p_ft_virt_i2c);
     if(err)
     {
         trace_error("slaver no ack!\n\r");
         return err;
     }
 
-    virt1_i2c_send_byte(temp);
-    err = virt1_i2c_wait_ack();
+    ft_virt_i2c_send_byte(p_ft_virt_i2c, temp);
+
+    err = ft_virt_i2c_wait_ack(p_ft_virt_i2c);
     if(err)
     {
         return err;
@@ -80,8 +79,8 @@ int ft_virt1_i2c_bk953x_write_one_reg(uint8_t device_id,uint8_t reg,uint32_t *p_
 
     for(i = sizeof(uint32_t); i > 0; i++)
     {
-        virt1_i2c_send_byte(p[i -1]);
-        err = virt1_i2c_wait_ack();
+        ft_virt_i2c_send_byte(p_ft_virt_i2c, p[i -1]);
+        err = ft_virt_i2c_wait_ack(p_ft_virt_i2c);
         if(err)
         {
             trace_error("slaver no ack!\n\r");
@@ -89,87 +88,41 @@ int ft_virt1_i2c_bk953x_write_one_reg(uint8_t device_id,uint8_t reg,uint32_t *p_
         }
     }
 
-    virt1_i2c_stop();
+    ft_virt_i2c_stop(p_ft_virt_i2c);
 
     return err;
 }
 
-int ft_i2c1_i2c_bk953x_read_one_reg(uint8_t device_id,uint8_t reg,uint32_t *p_data)
-{
-    int err = 0;
-
-    return err;
-}
-
-int ft_i2c1_i2c_bk953x_write_one_reg(uint8_t device_id,uint8_t reg,uint32_t *p_data)
-{
-    int err = 0;
-
-    return err;
-}
 
 #endif
 
 
-int mid_bk953x_read_one_reg(i2c_type_e i2c_type,uint8_t device_id,uint8_t reg,uint32_t *p_data)
+int mid_bk953x_read_one_reg(mid_bk953x_t *p_mid_bk953x, uint8_t device_id, uint8_t reg, uint32_t *p_data)
 {
     int err = 0;
 
 #ifdef FT32
-    switch(i2c_type)
-    {
-        case I2C_TYPE_I2C1:
-
-            break;
-
-        case I2C_TYPE_VIRT1:
-            err = ft_virt1_i2c_bk953x_read_one_reg(device_id,reg,p_data);
-            break;
-    }
+    err = ft_virt_i2c_bk953x_read_one_reg(&p_mid_bk953x->virt_i2c_object, device_id, reg, p_data);
 #endif
 
     return err;
 }
 
-int mid_bk953x_write_one_reg(i2c_type_e i2c_type,uint8_t device_id,uint8_t reg,uint32_t *p_data)
+int mid_bk953x_write_one_reg(mid_bk953x_t *p_mid_bk953x, uint8_t device_id, uint8_t reg, uint32_t *p_data)
 {
     int err = 0;
 #ifdef FT32
-    switch(i2c_type)
-    {
-        case I2C_TYPE_I2C1:
-
-            break;
-
-        case I2C_TYPE_VIRT1:
-            err = ft_virt1_i2c_bk953x_write_one_reg(device_id,reg,p_data);
-            break;
-    }
+    err = ft_virt_i2c_bk953x_write_one_reg(&p_mid_bk953x->virt_i2c_object, device_id, reg, p_data);
 #endif
     return err;
 }
 
-static void mid_bk953x_hw_reset(void)
+
+void mid_bk953x_res_init(mid_bk953x_t *p_mid_bk953x)
 {
 #ifdef FT32
-    conf_gpio_output(R_BK9532_CE_PERIPH_CLK, R_BK9532_CE_PORT, R_BK9532_CE_PIN);
-    conf_gpio_output(L_BK9532_CE_PERIPH_CLK, L_BK9532_CE_PORT, L_BK9532_CE_PIN);
-
-    //复位要适当的延时，别太快
-    set_gpio_value(L_BK9532_CE_PORT , L_BK9532_CE_PIN ,0);
-    set_gpio_value(R_BK9532_CE_PORT , R_BK9532_CE_PIN ,0);
-    delay_ms(50);
-    set_gpio_value(L_BK9532_CE_PORT , L_BK9532_CE_PIN ,1);
-    set_gpio_value(R_BK9532_CE_PORT , R_BK9532_CE_PIN ,1);
-    delay_ms(80);
+    ft_virt_i2c_init(&p_mid_bk953x->virt_i2c_object);
 #endif
-}
 
-void mid_bk953x_res_init(void)
-{
-    mid_bk953x_hw_reset();
-#ifdef FT32
-    virt_i2c_init();
-#endif
 }
 

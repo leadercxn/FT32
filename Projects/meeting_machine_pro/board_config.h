@@ -76,12 +76,20 @@
 #define I2C1_SDA_SOURCE                 GPIO_PinSource7
 #define I2C1_SDA_AF                     GPIO_AF_1
 
-#define VIRT_SCL_PIN                    GPIO_Pin_12                  /* 模拟I2C-SCL */
-#define VIRT_SCL_GPIO_PORT              GPIOA                       /* GPIOA */
-#define VIRT_SCL_GPIO_CLK               RCC_AHBPeriph_GPIOA
-#define VIRT_SDA_PIN                    GPIO_Pin_11                  /* 模拟I2C-SDA */
-#define VIRT_SDA_GPIO_PORT              GPIOA                       /* GPIOA */
-#define VIRT_SDA_GPIO_CLK               RCC_AHBPeriph_GPIOA
+#define R_VIRT_SCL_PIN                    GPIO_Pin_12                  /* 模拟I2C-SCL */
+#define R_VIRT_SCL_GPIO_PORT              GPIOA                       /* GPIOA */
+#define R_VIRT_SCL_GPIO_CLK               RCC_AHBPeriph_GPIOA
+#define R_VIRT_SDA_PIN                    GPIO_Pin_11                  /* 模拟I2C-SDA */
+#define R_VIRT_SDA_GPIO_PORT              GPIOA                       /* GPIOA */
+#define R_VIRT_SDA_GPIO_CLK               RCC_AHBPeriph_GPIOA
+
+#define L_VIRT_SCL_PIN                    GPIO_Pin_6                  /* 模拟I2C-SCL */
+#define L_VIRT_SCL_GPIO_PORT              GPIOB                       /* GPIOB */
+#define L_VIRT_SCL_GPIO_CLK               RCC_AHBPeriph_GPIOB
+#define L_VIRT_SDA_PIN                    GPIO_Pin_7                  /* 模拟I2C-SDA */
+#define L_VIRT_SDA_GPIO_PORT              GPIOB                       /* GPIOB */
+#define L_VIRT_SDA_GPIO_CLK               RCC_AHBPeriph_GPIOB
+
 
 #define I2C_TRANFS_TIMEOUT              1000
 
@@ -107,7 +115,7 @@
 #define PWM_CH1_GPIO_CLK                RCC_AHBPeriph_GPIOA
 #define PWM_CH1_PIN_SOURCE              GPIO_PinSource2
 #define PWM_CH1_AF                      GPIO_AF_0
-    
+
 #define PWM_TIM                         TIM15
 
 

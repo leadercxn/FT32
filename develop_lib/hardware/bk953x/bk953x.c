@@ -108,11 +108,11 @@ int bk953x_soft_reset(bk953x_object_t *p_bk953x_object)
     uint32_t value = 0;
     if(p_bk953x_object->chip_id == BK9532_CHID_ID)
     {
-        mid_bk953x_read_one_reg(p_bk953x_object->i2c_type, BK953X_DEVICE_ID, 0x3F, &value);
+        mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
         CLR_BIT(value,5);
-        mid_bk953x_write_one_reg(p_bk953x_object->i2c_type, BK953X_DEVICE_ID, 0x3F, &value);
+        mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
         SET_BIT(value,5);
-        mid_bk953x_write_one_reg(p_bk953x_object->i2c_type, BK953X_DEVICE_ID, 0x3F, &value);
+        mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
     }
     else
     {
@@ -125,7 +125,7 @@ int bk953x_chip_id_get(bk953x_object_t *p_bk953x_object)
     uint32_t value = 0;
     int err_code = 0;
 
-    err_code = mid_bk953x_read_one_reg(p_bk953x_object->i2c_type, BK953X_DEVICE_ID, REG_CHIP_ID, &value);
+    err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, REG_CHIP_ID, &value);
     if(err_code == 0)
     {
         p_bk953x_object->chip_id = value;
@@ -135,7 +135,7 @@ int bk953x_chip_id_get(bk953x_object_t *p_bk953x_object)
     return err_code;
 }
 
-void bk953x_res_init(void)
+void bk953x_res_init(bk953x_object_t *p_bk953x_object)
 {
-    mid_bk953x_res_init();
+    mid_bk953x_res_init(&p_bk953x_object->mid_bk953x_object);
 }

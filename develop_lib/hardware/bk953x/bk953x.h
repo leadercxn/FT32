@@ -18,11 +18,14 @@ typedef enum
 } bk953x_band_type_e;
 
 
+typedef void (*bk953x_hw_reset_handler) (void);
+
 typedef struct 
 {
-    i2c_type_e i2c_type;
-    uint16_t   chip_id;
-    bk953x_band_type_e band_type;
+    uint16_t                    chip_id;
+    bk953x_band_type_e          band_type;
+    mid_bk953x_t                mid_bk953x_object;
+    bk953x_hw_reset_handler     hw_reset_handler;
 } bk953x_object_t;
 
 typedef struct
@@ -39,7 +42,7 @@ typedef struct
 #define REG_CHIP_ID 0x70
 
 
-void bk953x_res_init(void);
+void bk953x_res_init(bk953x_object_t *p_bk953x_object);
 int bk953x_soft_reset(bk953x_object_t *p_bk953x_object);
 int bk953x_chip_id_get(bk953x_object_t *p_bk953x_object);
 
