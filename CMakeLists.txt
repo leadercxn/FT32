@@ -22,6 +22,7 @@ set(UTIL_DIR ${CMAKE_SOURCE_DIR}/Utilities)
 set(CMSIS_DIR ${CMAKE_SOURCE_DIR}/Libraries/CMSIS)
 set(EXAMPLE_DIR ${CMAKE_SOURCE_DIR}/Projects/FT32F0xx_StdPeriph_Examples)
 
+
 set(AUTOCONF_H ${PROJECT_BINARY_DIR}/include/generated/autoconf.h)
 # Re-configure (Re-execute all CMakeLists.txt code) when autoconf.h changes
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${AUTOCONF_H})
