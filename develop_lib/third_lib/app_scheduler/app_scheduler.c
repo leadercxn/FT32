@@ -13,14 +13,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include "nrf_soc.h"
-#include "nrf_assert.h"
-#include "app_util.h"
-// #include "app_util_platform.h"
 
+#include "board_config.h"
 #include "app_scheduler.h"
 
-STATIC_ASSERT(sizeof(event_header_t) <= APP_SCHED_EVENT_HEADER_SIZE);
 
 /**@brief Function for incrementing a queue index, and handle wrap-around.
  *
@@ -54,14 +50,14 @@ static __INLINE uint8_t app_sched_queue_empty(app_scheduler_t * p_sched)
 #define APP_SCHED_QUEUE_EMPTY(x) app_sched_queue_empty(x)
 
 
-uint32_t app_sched_init(app_scheduler_t * p_sched, uint16_t event_size, uint16_t queue_size, void * p_event_buffer)
+int app_sched_init(app_scheduler_t * p_sched, uint16_t event_size, uint16_t queue_size, void * p_event_buffer)
 {
     uint16_t data_start_index = (queue_size + 1) * sizeof(event_header_t);
 
     // Check that buffer is correctly aligned
     if (!is_word_aligned(p_event_buffer))
     {
-        return NRF_ERROR_INVALID_PARAM;
+        return -EINVAL;
     }
 
     // Initialize event scheduler
@@ -72,17 +68,13 @@ uint32_t app_sched_init(app_scheduler_t * p_sched, uint16_t event_size, uint16_t
     p_sched->m_queue_event_size    = event_size;
     p_sched->m_queue_size          = queue_size;
 
-#ifdef APP_SCHEDULER_WITH_PROFILER
     p_sched->m_max_queue_utilization = 0;
-#endif
 
-    p_sched->m_SemHandle = osSemaphoreNew(1, 1, NULL);
+//    p_sched->m_SemHandle = osSemaphoreNew(1, 1, NULL);
 
-    return NRF_SUCCESS;
+    return ENONE;
 }
 
-
-#ifdef APP_SCHEDULER_WITH_PROFILER
 static void queue_utilization_check(app_scheduler_t * p_sched)
 {
     uint16_t start = p_sched->m_queue_start_index;
@@ -100,37 +92,33 @@ uint16_t app_sched_queue_utilization_get(app_scheduler_t * p_sched)
 {
     return p_sched->m_max_queue_utilization;
 }
-#endif
 
-
-uint32_t app_sched_event_put(app_scheduler_t         * p_sched,
+int app_sched_event_put(app_scheduler_t              * p_sched,
                              void                    * p_event_data,
                              uint16_t                  event_data_size,
                              app_sched_event_handler_t handler)
 {
-    uint32_t err_code;
+    int err_code;
 
     if (event_data_size <= p_sched->m_queue_event_size)
     {
         uint16_t event_index = 0xFFFF;
 
         // CRITICAL_REGION_ENTER();
-        osSemaphoreAcquire(p_sched->m_SemHandle, 0);
+//        osSemaphoreAcquire(p_sched->m_SemHandle, 0);
 
         if (!APP_SCHED_QUEUE_FULL(p_sched))
         {
             event_index       = p_sched->m_queue_end_index;
             p_sched->m_queue_end_index = next_index(p_sched, p_sched->m_queue_end_index);
 
-        #ifdef APP_SCHEDULER_WITH_PROFILER
             // This function call must be protected with critical region because
             // it modifies 'p_sched->m_max_queue_utilization'.
             queue_utilization_check(p_sched);
-        #endif
         }
 
         // CRITICAL_REGION_EXIT();
-        osSemaphoreRelease(p_sched->m_SemHandle);
+//        osSemaphoreRelease(p_sched->m_SemHandle);
 
         if (event_index != 0xFFFF)
         {
@@ -149,16 +137,16 @@ uint32_t app_sched_event_put(app_scheduler_t         * p_sched,
                 p_sched->m_queue_event_headers[event_index].event_data_size = 0;
             }
 
-            err_code = NRF_SUCCESS;
+            err_code = ENONE;
         }
         else
         {
-            err_code = NRF_ERROR_NO_MEM;
+            err_code = -ENOMEM;
         }
     }
     else
     {
-        err_code = NRF_ERROR_INVALID_LENGTH;
+        err_code = -EINVAL;
     }
 
     return err_code;
@@ -173,12 +161,12 @@ uint32_t app_sched_event_put(app_scheduler_t         * p_sched,
  *
  * @return      NRF_SUCCESS if new event, NRF_ERROR_NOT_FOUND if event queue is empty.
  */
-static uint32_t app_sched_event_get(app_scheduler_t           * p_sched,
+static int app_sched_event_get(app_scheduler_t                * p_sched,
                                     void                     ** pp_event_data,
                                     uint16_t *                  p_event_data_size,
                                     app_sched_event_handler_t * p_event_handler)
 {
-    uint32_t err_code = NRF_ERROR_NOT_FOUND;
+    int err_code = ECHILD;
 
     if (!APP_SCHED_QUEUE_EMPTY(p_sched))
     {
@@ -195,7 +183,7 @@ static uint32_t app_sched_event_get(app_scheduler_t           * p_sched,
         *p_event_data_size = p_sched->m_queue_event_headers[event_index].event_data_size;
         *p_event_handler   = p_sched->m_queue_event_headers[event_index].handler;
 
-        err_code = NRF_SUCCESS;
+        err_code = ENONE;
     }
 
     return err_code;
@@ -209,8 +197,8 @@ void app_sched_execute(app_scheduler_t * p_sched)
     app_sched_event_handler_t event_handler;
 
     // Get next event (if any), and execute handler
-    while ((app_sched_event_get(p_sched, &p_event_data, &event_data_size, &event_handler) == NRF_SUCCESS))
+    while ((app_sched_event_get(p_sched, &p_event_data, &event_data_size, &event_handler) == ENONE))
     {
-        event_handler(p_event_data, event_data_size);
+        event_handler(p_event_data);
     }
 }

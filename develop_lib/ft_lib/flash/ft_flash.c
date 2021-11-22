@@ -47,15 +47,7 @@ int ft_flash_write_word(uint32_t address, uint16_t len, uint32_t *p_data)
     {
         number_of_page++;
     }
-#if 0
-    for(i = 0; (i < number_of_page) && (m_flash_status == FLASH_COMPLETE); i++ )
-    {
-        if(FLASH_ErasePage(address + (FLASH_PAGE_SIZE * i)) != FLASH_COMPLETE)
-        {
 
-        }
-    }
-#endif
     do
     {
         if(FLASH_ErasePage(address + (FLASH_PAGE_SIZE * i)) != FLASH_COMPLETE)
@@ -117,45 +109,6 @@ int ft_flash_read_word(uint32_t address, uint16_t len, uint32_t *p_data)
     return 0;
 }
 
-
-
-
-
-
-
-static FLASH_Status flash_program(uint32_t address, uint8_t data)
-{
-    FLASH_Status status = FLASH_COMPLETE;
-    __IO uint32_t tmp = 0;
-
-    /* Check the parameters */
-    assert_param(IS_FLASH_PROGRAM_ADDRESS(address));
-
-    FLASH_PrefetchBufferCmd(DISABLE);
-    __ASM("ISB");
-
-    /* Wait for last operation to be completed */
-    status = FLASH_WaitForLastOperation(FLASH_ER_PRG_TIMEOUT);
-    
-    if(status == FLASH_COMPLETE)
-    {
-        /* If the previous operation is completed, proceed to program the new first word */
-        FLASH->CR |= FLASH_CR_PG;
-    
-        *(__IO uint32_t*)address = (uint32_t)data;
-        
-        /* Wait for last operation to be completed */
-        status = FLASH_WaitForLastOperation(FLASH_ER_PRG_TIMEOUT);
-    
-        /* Disable the PG Bit */
-        FLASH->CR &= ~FLASH_CR_PG;
-    }
-
-    FLASH_PrefetchBufferCmd(ENABLE);
-    
-    /* Return the Program Status */
-    return status;
-}
 
 /**
  * FT32不支持半字,字节的写操作
@@ -278,4 +231,3 @@ int ft_flash_read(uint32_t address, uint16_t len, uint8_t *p_data)
 
     return 0;
 }
-
