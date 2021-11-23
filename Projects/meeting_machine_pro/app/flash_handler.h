@@ -1,8 +1,6 @@
 #ifndef __FLASH_HANDLER_H
 #define __FLASH_HANDLER_H
 
-#define FLASH_APP_PARAM_ADDRESS     0x8005000 //0x800F800
-//#define FLASH_APP_PARAM_ADDRESS       0x8008000
-#define FLASH_APP_PARAM_LEN_MAX     0x800
+
 
 #endif

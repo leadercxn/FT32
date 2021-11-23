@@ -73,7 +73,8 @@ int main(void)
   TIMER_INIT();
   trace_debug("TIMER_INIT done\n\r");
 
-//  TIMER_CREATE(&m_test_timer,false,true,test_timer_handler);
+  TIMER_CREATE(&m_test_timer,false,false,test_timer_handler);
+//  TIMER_START(m_test_timer, 1000);
 
   ir_tx_init();
 
@@ -84,16 +85,14 @@ int main(void)
   bk9532_lr_init();
   ad22650_lr_init();
 
-#if 1
+#if 0
   /**
    * flash test
    */
   uint8_t w_data[4] = {1,2,3,4};
   uint8_t r_data[4] = {0};
 
-  err_code = ft_flash_read(FLASH_APP_PARAM_ADDRESS, 4, r_data);
-//  err_code = ft_flash_read_word(FLASH_APP_PARAM_ADDRESS,1, (uint32_t *)r_data);
-//  FLASH_Read(FLASH_APP_PARAM_ADDRESS,FLASH_APP_PARAM_ADDRESS + 4,(uint32_t *)r_data);
+  err_code = mid_flash_read(FLASH_APP_PARAM_ADDRESS, 4, r_data);
   if(err_code)
   {
       trace_error("ft_flash_read error %d\n\r",err_code);
@@ -103,24 +102,21 @@ int main(void)
   trace_error("read address 0x%08x:\n\r",FLASH_APP_PARAM_ADDRESS);
   trace_dump(r_data,4);
 
-  err_code = ft_flash_write_word(FLASH_APP_PARAM_ADDRESS, 1, (uint32_t *)w_data);
-//  FLASH_Write(FLASH_APP_PARAM_ADDRESS,FLASH_APP_PARAM_ADDRESS + 4,(uint32_t *)w_data);
+  err_code = mid_flash_write(FLASH_APP_PARAM_ADDRESS, 4, (uint32_t *)w_data);
   if(err_code)
   {
       trace_error("ft_flash_write error %d\n\r",err_code);
   }
   delay_ms(100);
 
-  err_code = ft_flash_read(FLASH_APP_PARAM_ADDRESS, 3, r_data);
-//  err_code = ft_flash_read_word(FLASH_APP_PARAM_ADDRESS,1, (uint32_t *)r_data);
-//  FLASH_Read(FLASH_APP_PARAM_ADDRESS,FLASH_APP_PARAM_ADDRESS + 4,(uint32_t *)r_data);
+  err_code = mid_flash_read(FLASH_APP_PARAM_ADDRESS, 4, r_data);
   if(err_code)
   {
       trace_error("ft_flash_read error %d\n\r",err_code);
   }
   delay_ms(100);
   trace_error("read address 0x%08x:\n\r",FLASH_APP_PARAM_ADDRESS);
-  trace_dump(r_data,3);
+  trace_dump(r_data,4);
 
 #endif
 
@@ -142,6 +138,7 @@ int main(void)
   {
       app_sched_execute(&m_app_scheduler);
       adc_button_loop_task();
+      mid_timer_loop_task();
   }
 }
 

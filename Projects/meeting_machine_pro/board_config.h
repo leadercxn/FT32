@@ -126,6 +126,13 @@
 
 #define PWM_TIM                         TIM15
 
+/* FLASH */
+#define FLASH_ADDRESS_MAX           0x8007FFF
+
+#define FLASH_APP_PARAM_ADDRESS     0x8007800
+#define FLASH_APP_PARAM_LEN_MAX     0x800
+
+#define FLASH_PAGE_SIZE 0x00000200
 
 #endif
 

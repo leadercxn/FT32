@@ -6,10 +6,6 @@
 #include "lib_error.h"
 #include "board_config.h"
 
-#define FLASH_PAGE_SIZE 0x00000200
-
-static FLASH_Status m_flash_status = FLASH_COMPLETE;
-
 /**
  * @brief 往flash 写入 len 个 字
  * 
@@ -17,19 +13,14 @@ static FLASH_Status m_flash_status = FLASH_COMPLETE;
  */
 int ft_flash_write_word(uint32_t address, uint16_t len, uint32_t *p_data)
 {
-    if(address > 0x800FFFF)
+    if(address > FLASH_ADDRESS_MAX)
     {
         return -EINVAL;
     }
 
-    if( (address + len * sizeof(uint32_t) ) > 0x800FFFF)
+    if( (address + len * sizeof(uint32_t) ) > FLASH_ADDRESS_MAX)
     {
         return -EFBIG;
-    }
-
-    if(m_flash_status != FLASH_COMPLETE)
-    {
-        return -EBUSY;
     }
 
     uint16_t number_of_page = 0;
@@ -56,7 +47,7 @@ int ft_flash_write_word(uint32_t address, uint16_t len, uint32_t *p_data)
         }
 
         i++;
-    } while ((i < number_of_page) && (m_flash_status == FLASH_COMPLETE));
+    } while (i < number_of_page);
 
     write_address = address;
     for(i = 0; i < len; i++)
@@ -71,7 +62,9 @@ int ft_flash_write_word(uint32_t address, uint16_t len, uint32_t *p_data)
     
     /* Lock the Flash to disable the flash control register access (recommended
      to protect the FLASH memory against possible unwanted operation) *********/
-    FLASH_Lock(); 
+    FLASH_Lock();
+
+    return ENONE;
 }
 
 /**
@@ -81,19 +74,14 @@ int ft_flash_write_word(uint32_t address, uint16_t len, uint32_t *p_data)
  */
 int ft_flash_read_word(uint32_t address, uint16_t len, uint32_t *p_data)
 {
-    if(address > 0x800FFFF)
+    if(address > FLASH_ADDRESS_MAX)
     {
         return -EINVAL;
     }
 
-    if( (address + len * sizeof(uint32_t) ) > 0x800FFFF)
+    if( (address + len * sizeof(uint32_t) ) > FLASH_ADDRESS_MAX)
     {
         return -EFBIG;
-    }
-
-    if(m_flash_status != FLASH_COMPLETE)
-    {
-        return -EBUSY;
     }
 
     uint8_t     i = 0;
@@ -199,19 +187,14 @@ int ft_flash_write(uint32_t address, uint16_t len, uint8_t *p_data)
  */
 int ft_flash_read(uint32_t address, uint16_t len, uint8_t *p_data)
 {
-    if(address > 0x800FFFF)
+    if(address > FLASH_ADDRESS_MAX)
     {
         return -EINVAL;
     }
 
-    if( (address + len) > 0x800FFFF)
+    if( (address + len) > FLASH_ADDRESS_MAX)
     {
         return -EFBIG;
-    }
-
-    if(m_flash_status != FLASH_COMPLETE)
-    {
-        return -EBUSY;
     }
 
     if(!p_data)

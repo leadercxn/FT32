@@ -9,7 +9,7 @@
 #include "middle_api.h"
 #include "bk953x.h"
 
-bk953x_reg_value_t g_bk9532_init_config[54] = {
+const bk953x_reg_value_t g_bk9532_init_config[54] = {
     {0x00 , 0xDFFFFFF8 },
     {0x01 , 0x04D28057 },
     {0x02 , 0x0890E028 },
@@ -103,6 +103,17 @@ int bk953x_chan_set(bk953x_object_t *p_bk953x_object, uint16_t chan)
 
 }
 
+int bk953x_config_init(bk953x_object_t *p_bk953x_object)
+{
+    uint8_t i = 0;
+
+    for(i = 0 ; i < ARRAY_SIZE(g_bk9532_init_config) ; i ++)
+    {
+        mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, g_bk9532_init_config[i].reg, &g_bk9532_init_config[i].value);
+    }
+}
+
+
 int bk953x_soft_reset(bk953x_object_t *p_bk953x_object)
 {
     uint32_t value = 0;
@@ -111,25 +122,40 @@ int bk953x_soft_reset(bk953x_object_t *p_bk953x_object)
         mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
         CLR_BIT(value,5);
         mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        delay_ms(100);
         SET_BIT(value,5);
         mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        delay_ms(100);
     }
     else if(p_bk953x_object->chip_id == BK9531_CHID_ID)
     {
         
+    }
+    else
+    {
+        return -ENODEV;
     }
 }
 
 int bk953x_chip_id_get(bk953x_object_t *p_bk953x_object)
 {
     uint32_t value = 0;
+    uint8_t rty = 0;
+
     int err_code = 0;
 
-    err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, REG_CHIP_ID, &value);
-    if(err_code == 0)
+    /* 重试 5 次 */
+    for(rty = 0; rty < 5; rty++)
     {
-        p_bk953x_object->chip_id = value;
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, REG_CHIP_ID, &value);
+        if(err_code == 0)
+        {
+            p_bk953x_object->chip_id = value;
+            break;
+        }
+        delay_ms(100);
     }
+    
 
     trace_debug("bk953x_chip_id_get err_code = %d , chip_id = 0x%08x\n\r",err_code,p_bk953x_object->chip_id);
     return err_code;

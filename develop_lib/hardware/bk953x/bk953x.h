@@ -23,6 +23,7 @@ typedef void (*bk953x_hw_reset_handler) (void);
 typedef struct 
 {
     uint16_t                    chip_id;
+    uint8_t                     device_id;
     bk953x_band_type_e          band_type;
     mid_bk953x_t                mid_bk953x_object;
     bk953x_hw_reset_handler     hw_reset_handler;
