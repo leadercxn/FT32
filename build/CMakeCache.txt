@@ -196,6 +196,8 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 DEBUGGER:STRING=jlink
 
+FT32F0XX_VERSION:STRING=v1.0.0
+
 FT_SDK_ROOT:STRING=/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/sdk/ft32f0_sdk
 
 //No help, variable specified on the command line.
@@ -223,8 +225,6 @@ ft32f0_BINARY_DIR:STATIC=/home/chenkanuo/Desktop/Shared/Home/Documents/project/0
 
 //Value Computed by CMake
 ft32f0_SOURCE_DIR:STATIC=/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32
-
-ft32f0_VERSION:STRING=v1.0.0
 
 
 ########################

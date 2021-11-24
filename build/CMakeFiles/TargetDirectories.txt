@@ -22,7 +22,7 @@
 /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external/ntshell/CMakeFiles/rebuild_cache.dir
 /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external/ntshell/CMakeFiles/sdk__external__ntshell.dir
 /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/sdk/external/ntshell/CMakeFiles/edit_cache.dir
-/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/fct/CMakeFiles/edit_cache.dir
 /home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/fct/CMakeFiles/rebuild_cache.dir
-/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/fct/CMakeFiles/ft32f0.dir
-/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/fct/CMakeFiles/flash_ft32f0.dir
+/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/fct/CMakeFiles/edit_cache.dir
+/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/fct/CMakeFiles/FT32F0XX.dir
+/home/chenkanuo/Desktop/Shared/Home/Documents/project/0036_ft32/source/FT32/build/apps/fct/CMakeFiles/flash_FT32F0XX.dir

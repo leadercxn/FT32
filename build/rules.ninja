@@ -60,7 +60,7 @@ rule C_STATIC_LIBRARY_LINKER__sdk__external__ntshell
 #############################################
 # Rule for compiling ASM files.
 
-rule ASM_COMPILER__ft32f0
+rule ASM_COMPILER__FT32F0XX
   depfile = $DEP_FILE
   deps = gcc
   command = /usr/local/DS-5_v5.26.0/sw/ARMCompiler5.06u4/bin/armasm $INCLUDES $FLAGS -o $out $in
@@ -70,7 +70,7 @@ rule ASM_COMPILER__ft32f0
 #############################################
 # Rule for compiling C files.
 
-rule C_COMPILER__ft32f0
+rule C_COMPILER__FT32F0XX
   depfile = $DEP_FILE
   deps = gcc
   command = /usr/local/DS-5_v5.26.0/sw/ARMCompiler5.06u4/bin/armcc $DEFINES $INCLUDES $FLAGS --depend=$DEP_FILE --depend_single_line --no_depend_system_headers -o $out   -c $in
@@ -80,7 +80,7 @@ rule C_COMPILER__ft32f0
 #############################################
 # Rule for linking C executable.
 
-rule C_EXECUTABLE_LINKER__ft32f0
+rule C_EXECUTABLE_LINKER__FT32F0XX
   command = $PRE_LINK && /usr/local/DS-5_v5.26.0/sw/ARMCompiler5.06u4/bin/armlink  $LINK_FLAGS $LINK_PATH $LINK_LIBRARIES $in -o $TARGET_FILE --list $TARGET_FILE.map && $POST_BUILD
   description = Linking C executable $TARGET_FILE
   restat = $RESTAT

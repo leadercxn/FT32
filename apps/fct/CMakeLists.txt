@@ -1,4 +1,4 @@
-set(target "ft32f0")
+set(target "FT32F0XX")
 
 version_target(${target})
 configure_file(version.h.in ${CMAKE_CURRENT_SOURCE_DIR}/config/version.h)
