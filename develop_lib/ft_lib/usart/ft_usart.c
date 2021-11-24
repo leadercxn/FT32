@@ -1,290 +1,79 @@
-
-#include <stdio.h>
-#include "stdbool.h"
 #include "ft32f0xx.h"
-#include "util.h"
 #include "ft_usart.h"
-#include "FT32f0xx.h"
+#include "util.h"
+#include "stdbool.h"
 
-// #include "util.h"
-// #include "ft_usart.h"
-// #include "stdbool.h"
-
-/***************************************************
-* 重定向代码
-***************************************************/
-#pragma import(__use_no_semihosting)
-struct __FILE
-{
-    int handle;
-};
-/***********************************************************************
- * 函数名称: _ttywrch
- * 功能描述:
- * 输入参数:
- * 输出参数:
- * 返 回 值:
- *  其   它:
- ***********************************************************************/
-#if 0
-_ttywrch(int ch)
-{
-    ch = ch;
-}
-#endif
-FILE __stdout;
-/***********************************************************************
- * 函数名称: _sys_exit
- * 功能描述:
- * 输入参数:
- * 输出参数:
- * 返 回 值:
- *  其   它:
- ***********************************************************************/
-void _sys_exit(int x)
-{
-    x = x;
-}
-
-/***********************************************************************
- * 函数名称: fputc
- * 功能描述: UART1串口重定向作为调试串口,printf函数将会调用到它
- * 输入参数:
- * 输出参数:
- * 返 回 值:
- *  其   它:
- ***********************************************************************/
-int fputc(int ch, FILE *f)
-{
-    shell_uart_putc(ch);
-
-    return ch;
-}
-
-/***********************************************************************
- * 函数名称: Uart1Init
- * 功能描述: UART1初始化
- * 输入参数:
- * 输出参数:
- * 返 回 值:
- *  其   它:
- ***********************************************************************/
-void Uart1Init(unsigned int bound)
+/**
+  * @brief  Configures COM port.
+  * @param  uart_id: Specifies the COM port to be configured.
+  *          This parameter can be one of following parameters:    
+  *            @arg COM1
+  * @param  USART_InitStruct: pointer to a USART_InitTypeDef structure that
+  *         contains the configuration information for the specified USART peripheral.
+  * @retval None
+  */
+void ft_uart_init(uint8_t uart_id, ft_uart_info_t uart_info, ft_uart_config_t const *p_config)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
-    USART_InitTypeDef USART_InitStructure;
-    NVIC_InitTypeDef NVIC_InitStructure;
+
+    USART_InitTypeDef USART_InitStruct;
 
     /* Enable GPIO clock */
-    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-    /* Enable USART clock */
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+    RCC_AHBPeriphClockCmd(uart_info.tx_clk | uart_info.rx_clk, ENABLE);
 
-    //串口2对应引脚复用映射
-    GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_1);  //GPIOA9复用为USART1
-    GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_1); //GPIOA10复用为USART1
+    /* Enable USART clock 不同串口不同的外设时钟 */
+    //RCC_APB1PeriphClockCmd(uart_info.clk, ENABLE);
 
-    //USART1端口配置
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10; //GPIOA2与GPIOA3
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;            //复用功能
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;       //速度50MHz
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;          //推挽复用输出
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;            //上拉
-    GPIO_Init(GPIOA, &GPIO_InitStructure);                  //初始化PA9，PA10
+    RCC_APB2PeriphClockCmd(uart_info.clk, ENABLE);
 
-    //USART2 初始化设置
-    USART_InitStructure.USART_BaudRate = bound;                                     //波特率设置
-    USART_InitStructure.USART_WordLength = USART_WordLength_8b;                     //字长为8位数据格式
-    USART_InitStructure.USART_StopBits = USART_StopBits_1;                          //一个停止位
-    USART_InitStructure.USART_Parity = USART_Parity_No;                             //无奇偶校验位
-    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; //无硬件数据流控制
-    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;                 //收发模式
-    USART_Init(USART1, &USART_InitStructure);                                       //初始化串口2
-    USART_Cmd(USART1, ENABLE);                                                      //使能串口2
+    /* Connect PXx to USARTx_Tx */
+    GPIO_PinAFConfig(uart_info.tx_port, uart_info.tx_pin_source, uart_info.tx_af);
 
-    USART_ClearFlag(USART1, USART_FLAG_TC);
-    USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); //开启相关中断,Letter Shell Demo采用轮询检测,不开启中断。
+    /* Connect PXx to USARTx_Rx */
+    GPIO_PinAFConfig(uart_info.rx_port, uart_info.rx_pin_source, uart_info.rx_af);
 
-    /* USART1 IRQ Channel configuration */
-    // NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-    // NVIC_InitStructure.NVIC_IRQChannelPriority = 0x01;
-    // NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-    // NVIC_Init(&NVIC_InitStructure);
+    /* Configure USART Tx as alternate function push-pull */
+    GPIO_InitStructure.GPIO_Pin = uart_info.tx_pin;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+    GPIO_Init(uart_info.tx_port, &GPIO_InitStructure);
+
+    /* Configure USART Rx as alternate function push-pull */
+    GPIO_InitStructure.GPIO_Pin = uart_info.rx_pin;
+    GPIO_Init(uart_info.rx_port, &GPIO_InitStructure);
+
+    /* USART configuration */
+    USART_InitStruct.USART_BaudRate = p_config->baudrate;
+    USART_InitStruct.USART_WordLength = p_config->databits;
+    USART_InitStruct.USART_StopBits = p_config->stopbit;
+    USART_InitStruct.USART_Parity = p_config->parity;
+    USART_InitStruct.USART_Mode = p_config->mode;
+    USART_InitStruct.USART_HardwareFlowControl = p_config->hwfc;
+
+    USART_Init(uart_info.uart, &USART_InitStruct);
+
+    /* Enable USART */
+    USART_Cmd(uart_info.uart, ENABLE);
 }
 
-/***********************************************************************
- * 函数名称: Uart2Init
- * 功能描述: UART2初始化
- * 输入参数:
- * 输出参数:
- * 返 回 值:
- *  其   它:
- ***********************************************************************/
-void Uart2Init(unsigned int bound)
+void ft_uart_put(uint8_t uart_id, char ch)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    USART_InitTypeDef USART_InitStructure;
-    NVIC_InitTypeDef NVIC_InitStructure;
 
-    /* Enable GPIO clock */
-    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-    /* Enable USART clock */
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
-
-    //串口2对应引脚复用映射
-    GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_1); //GPIOA2复用为USART1
-    GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_1); //GPIOA2复用为USART1
-
-    //USART1端口配置
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3; //GPIOA2与GPIOA3
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;           //复用功能
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;      //速度50MHz
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;         //推挽复用输出
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;           //上拉
-    GPIO_Init(GPIOA, &GPIO_InitStructure);                 //初始化PA9，PA10
-
-    //USART2 初始化设置
-    USART_InitStructure.USART_BaudRate = bound;                                     //波特率设置
-    USART_InitStructure.USART_WordLength = USART_WordLength_8b;                     //字长为8位数据格式
-    USART_InitStructure.USART_StopBits = USART_StopBits_1;                          //一个停止位
-    USART_InitStructure.USART_Parity = USART_Parity_No;                             //无奇偶校验位
-    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; //无硬件数据流控制
-    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;                 //收发模式
-    USART_Init(USART2, &USART_InitStructure);                                       //初始化串口2
-    USART_Cmd(USART2, ENABLE);                                                      //使能串口2
-
-    USART_ClearFlag(USART2, USART_FLAG_TC);
-    USART_ITConfig(USART2, USART_IT_RXNE, ENABLE); //开启相关中断,Letter Shell Demo采用轮询检测,不开启中断。
-
-    // /* USART2 IRQ Channel configuration */
-    // NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
-    // NVIC_InitStructure.NVIC_IRQChannelPriority = 0x01;
-    // NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-    // NVIC_Init(&NVIC_InitStructure);
-}
-
-/***********************************************************************
- * 函数名称: ControlUartInit
- * 功能描述:
- * 输入参数:
- * 输出参数:
- * 返 回 值:
- *  其   它:
- ***********************************************************************/
-void ControlUartInit(unsigned char ucChannel, unsigned int bound)
-{
-    switch (ucChannel)
+    if (FT_UART_1 == uart_id)
     {
-    case UART0_CHANNEL:
-        break;
-    case UART1_CHANNEL:
-        Uart1Init(bound);
-        break;
-    case UART2_CHANNEL:
-        Uart2Init(bound);
-        break;
-    case UART3_CHANNEL:
+        /* Place your implementation of fputc here */
+        /* e.g. write a character to the USART */
+        USART_SendData(USART2, (uint8_t)ch);
 
-        break;
-    }
-}
-
-/***********************************************************************
- * 函数名称: ControlUartSendData
- * 功能描述:
- * 输入参数:
- * 输出参数:
- * 返 回 值:
- *  其   它:
- ***********************************************************************/
-void ControlUartSendData(unsigned char ucChannel, unsigned char ucData)
-{
-    switch (ucChannel)
-    {
-    case UART0_CHANNEL:
-        break;
-
-    case UART1_CHANNEL:
-        USART_ClearFlag(USART1, USART_FLAG_TC);
-        USART_SendData(USART1, ucData);
-        while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET)
-            ;
-
-        break;
-    case UART2_CHANNEL:
-        USART_ClearFlag(USART2, USART_FLAG_TC);
-        USART_SendData(USART2, ucData);
-        while (USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET)
-            ;
-        break;
-    case UART3_CHANNEL:
-
-        break;
-    }
-}
-
-/***********************************************************************
- * 函数名称: ControlUartSwIRQ
- * 功能描述: 中断使能
- * 输入参数: 
- * 输出参数: 
- * 返 回 值: 
- *  其   它: 
- ***********************************************************************/
-void ControlUartIrqEnable(unsigned char ucChannel, unsigned char ucData)
-{
-    switch (ucChannel)
-    {
-    case UART0_CHANNEL:
-        break;
-    case UART1_CHANNEL:
-        if (ucData == ENABLE)
+        /* Loop until transmit data register is empty */
+        while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET)
         {
-            USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); //开启相关中断
         }
-        else
-        {
-            USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); //开启相关中断
-        }
-        break;
-    case UART2_CHANNEL:
-        if (ucData == ENABLE)
-        {
-            USART_ITConfig(USART2, USART_IT_RXNE, ENABLE); //开启相关中断
-        }
-        else
-        {
-            USART_ITConfig(USART2, USART_IT_RXNE, ENABLE); //开启相关中断
-        }
-        break;
-    case UART3_CHANNEL:
-
-        break;
-    }
-}
-
-void USART1_IRQHandler(void)
-{
-}
-
-void USART2_IRQHandler(void)
-{
-}
-
-void shell_uart_putc(uint8_t ch)
-{
-
-#ifdef FT32F072x8
-    /* Place your implementation of fputc here */
-    /* e.g. write a character to the USART */
-    USART_SendData(USART2, (uint8_t)ch);
-
-    /* Loop until transmit data register is empty */
-    while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET)
-    {
+        return;
     }
 
-#else
     /* Place your implementation of fputc here */
     /* e.g. write a character to the USART */
     USART_SendData(USART1, (uint8_t)ch);
@@ -293,14 +82,4 @@ void shell_uart_putc(uint8_t ch)
     while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
     {
     }
-#endif
-}
-
-void shell_uart_getc(char *p_byte)
-{
-    *p_byte = 0;
-    while (!(USART_GetFlagStatus(USART2, USART_FLAG_RXNE) == SET))
-    {
-    }
-    *p_byte = USART_ReceiveData(USART2);
 }

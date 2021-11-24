@@ -21,7 +21,7 @@ set(LIB_DIR ${CMAKE_SOURCE_DIR}/Libraries/FT32F0xx_StdPeriph_Driver)
 set(UTIL_DIR ${CMAKE_SOURCE_DIR}/Utilities)
 set(CMSIS_DIR ${CMAKE_SOURCE_DIR}/Libraries/CMSIS)
 set(EXAMPLE_DIR ${CMAKE_SOURCE_DIR}/Projects/FT32F0xx_StdPeriph_Examples)
-
+set(TEST_DIR ${CMAKE_SOURCE_DIR}/Projects/meeting_machine_pro)
 
 set(AUTOCONF_H ${PROJECT_BINARY_DIR}/include/generated/autoconf.h)
 # Re-configure (Re-execute all CMakeLists.txt code) when autoconf.h changes

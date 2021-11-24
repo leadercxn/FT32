@@ -1,10 +1,7 @@
-
-
-
 #include "stddef.h"
 #include "stdbool.h"
 
-#include "ft32f0xx.h"
+#include "board_config.h"
 #include "ft_timer.h"
 
 

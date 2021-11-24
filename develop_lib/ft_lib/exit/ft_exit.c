@@ -1,10 +1,8 @@
 #include "stddef.h"
 #include "stdbool.h"
 
-#include "ft32f0xx.h"
+#include "board_config.h"
 #include "ft_exit.h"
-
-#include "trace.h"
 
 static exit_irq_handler_t  m_exit_irq_handler = NULL;
 

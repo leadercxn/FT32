@@ -117,7 +117,6 @@ void mid_timer_init(void)
 
 }
 
-
 int mid_timer_create( timer_node_id_t const      *p_timer_id,
                       bool                        single_mode,
                       bool                        immediately,
@@ -190,4 +189,11 @@ int mid_timer_stop(timer_node_id_t timer_id)
     p_node->active = false;
 
     return ENONE;
+}
+
+uint64_t mid_timer_ticks_get(void)
+{
+#ifdef FT32
+    return ft_timer_tick_get();
+#endif
 }

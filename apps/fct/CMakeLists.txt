@@ -8,30 +8,33 @@ file(GLOB SDK_SOURCE_FILES
 
     ${DEV_DIR}/ft_lib/adc/*.c
     ${DEV_DIR}/ft_lib/common/*.c
-    # ${DEV_DIR}/ft_lib/deprecated/*.c
     ${DEV_DIR}/ft_lib/exit/*.c
     ${DEV_DIR}/ft_lib/gpio/*.c
     ${DEV_DIR}/ft_lib/i2c/*.c
     ${DEV_DIR}/ft_lib/spi/*.c
     ${DEV_DIR}/ft_lib/timer/*.c
     ${DEV_DIR}/ft_lib/timer_pwm/*.c
-    ${DEV_DIR}/ft_lib/usart/*.c
-    ${DEV_DIR}/ft_lib/LetterShell/*.c
+    ${DEV_DIR}/ft_lib/flash/*.c
 
+    ${DEV_DIR}/middle_api/adc/*.c
     ${DEV_DIR}/middle_api/delay/*.c
-    # ${DEV_DIR}/middle_api/ir/*.c
+    ${DEV_DIR}/middle_api/ir/*.c
+
     ${DEV_DIR}/middle_api/mid_bk953x/*.c
+    ${DEV_DIR}/middle_api/mid_flash/*.c
+    ${DEV_DIR}/middle_api/mid_gpio/*.c
     ${DEV_DIR}/middle_api/mid_timer/*.c
+
     # ${DEV_DIR}/middle_api/pwm/*.c
     ${DEV_DIR}/middle_api/queue/*.c
     ${DEV_DIR}/middle_api/tft_8080/*.c
-    ${DEV_DIR}/middle_api/trace/*.c
 
-    ${DEV_DIR}/hardware/bk953xe/*.c
-    ${DEV_DIR}/hardware/st7789e/*.c
+    ${DEV_DIR}/hardware/bk953x/*.c
+    ${DEV_DIR}/hardware/st7789/*.c
 
-    # ${DEV_DIR}/third_lib/app_scheduler/*.c
     ${DEV_DIR}/third_lib/app_timer/*.c
+    # ${DEV_DIR}/third_lib/app_error/*.c
+    ${DEV_DIR}/third_lib/app_scheduler/*.c
 )
 
 
@@ -47,25 +50,26 @@ set(SDK_INCLUDE_DIRS
     ${DEV_DIR}/ft_lib
     ${DEV_DIR}/ft_lib/adc
     ${DEV_DIR}/ft_lib/common
-    # ${DEV_DIR}/ft_lib/deprecated
     ${DEV_DIR}/ft_lib/exit
     ${DEV_DIR}/ft_lib/gpio
     ${DEV_DIR}/ft_lib/i2c
     ${DEV_DIR}/ft_lib/spi
     ${DEV_DIR}/ft_lib/timer
     ${DEV_DIR}/ft_lib/timer_pwm
-    ${DEV_DIR}/ft_lib/usart
-    ${DEV_DIR}/ft_lib/LetterShell
+    ${DEV_DIR}/ft_lib/flash
 
     ${DEV_DIR}/middle_api
+    ${DEV_DIR}/middle_api/adc
     ${DEV_DIR}/middle_api/delay
     ${DEV_DIR}/middle_api/ir
     ${DEV_DIR}/middle_api/mid_bk953x
+    ${DEV_DIR}/middle_api/mid_flash
+    ${DEV_DIR}/middle_api/mid_gpio
     ${DEV_DIR}/middle_api/mid_timer
+
     ${DEV_DIR}/middle_api/pwm
     ${DEV_DIR}/middle_api/queue
     ${DEV_DIR}/middle_api/tft_8080
-    ${DEV_DIR}/middle_api/trace
 
     ${DEV_DIR}/hardware 
     ${DEV_DIR}/hardware/bk953x
@@ -74,34 +78,36 @@ set(SDK_INCLUDE_DIRS
     ${DEV_DIR}/third_lib/
     ${DEV_DIR}/third_lib/app_scheduler
     ${DEV_DIR}/third_lib/app_timer
-
+    ${DEV_DIR}/third_lib/app_error
 )
 
 
 file(GLOB APP_SOURCE_FILES
+
     # ${CMAKE_CURRENT_SOURCE_DIR}/gpio/main.c
     # ${CMAKE_CURRENT_SOURCE_DIR}/gpio/ft32f0xx_it.c
 
-    # ${CMAKE_CURRENT_SOURCE_DIR}/timer/main.c
-    # ${CMAKE_CURRENT_SOURCE_DIR}/timer/ft32f0xx_it.c
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/app/main.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/app/ft32f0xx_it.c
-
-    # ${CMAKE_SOURCE_DIR}/apps/app_common/*.c
+    ${TEST_DIR}/main.c
+    ${TEST_DIR}/ft32f0XX_it.c
+    ${TEST_DIR}/app/*.c
+    ${CMAKE_SOURCE_DIR}/apps/app_common/trace/*.c
+    ${CMAKE_SOURCE_DIR}/apps/app_common/usart/*.c
+    ${CMAKE_SOURCE_DIR}/apps/app_common/LetterShell/*.c
 
 )
 
 set(APP_INCLUDE_DIRS
+    ${TEST_DIR}
+    ${TEST_DIR}/app
+
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/config
+    # ${CMAKE_CURRENT_SOURCE_DIR}/config
     # ${CMAKE_CURRENT_SOURCE_DIR}/gpio
-    # ${CMAKE_CURRENT_SOURCE_DIR}/timer
-    ${CMAKE_CURRENT_SOURCE_DIR}/app
 
     ${CMAKE_SOURCE_DIR}/apps/app_common
-    
-
+    ${CMAKE_SOURCE_DIR}/apps/app_common/trace
+    ${CMAKE_SOURCE_DIR}/apps/app_common/usart
+    ${CMAKE_SOURCE_DIR}/apps/app_common/LetterShell
 )
 
 set(USER_DEFINITIONS

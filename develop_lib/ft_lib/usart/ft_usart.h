@@ -4,21 +4,56 @@
 #include "ft32f0xx.h"
 #include "stdbool.h"
 
-enum UART_CHANNEL
+/**
+ * @enum ft_uart_id_t
+ * @brief ID supported by UART.
+ */
+enum ft_uart_id_t
 {
-    UART0_CHANNEL = 0,
-    UART1_CHANNEL = 1,
-    UART2_CHANNEL = 2,
-    UART3_CHANNEL = 3,
-    UART4_CHANNEL = 4,
-    UART5_CHANNEL = 5,
+    FT_UART_0 = 0, ///< UART 0.
+    FT_UART_1,     ///< UART 1.
 };
 
-void ControlUartInit(unsigned char ucChannel, unsigned int bound);
-void ControlUartSendData(unsigned char ucChannel, unsigned char ucData);
-void ControlUartIrqEnable(unsigned char ucChannel, unsigned char ucData);
+typedef struct
+{
+    USART_TypeDef *uart;
 
-void shell_uart_getc(char *p_byte);
-void shell_uart_putc(uint8_t ch);
+    GPIO_TypeDef *tx_port;
+
+    GPIO_TypeDef *rx_port;
+
+    uint32_t clk;
+    uint32_t tx_clk;
+    uint32_t rx_clk;
+
+    uint16_t tx_pin;
+    uint16_t rx_pin;
+
+    uint16_t tx_pin_source;
+    uint16_t rx_pin_source;
+
+    uint16_t tx_af;
+    uint16_t rx_af;
+} ft_uart_info_t;
+
+/**
+ * @brief Structure for UART configuration.
+ * 
+ */
+typedef struct
+{
+    // void *p_context; ///< Context passed to interrupt handler.
+    uint32_t baudrate; ///< Baudrate configuration.
+    uint32_t databits; ///< Data bits for one character configuration.
+    uint32_t stopbit;  ///< Stopbit configuration.
+    uint32_t parity;   ///< Parity configuration.
+    uint32_t hwfc;     ///< Flow control configuration.
+    uint32_t mode;
+    uint8_t interrupt_priority; ///< Interrupt priority.
+} ft_uart_config_t;
+
+void ft_uart_init(uint8_t uart_id, ft_uart_info_t uart_info, ft_uart_config_t const *p_config);
+
+void ft_uart_put(uint8_t uart_id, char ch);
 
 #endif

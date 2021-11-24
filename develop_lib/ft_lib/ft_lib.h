@@ -10,6 +10,8 @@
 #include "ft_timer_pwm.h"
 #include "ft_exit.h"
 #include "ft_adc.h"
+#include "ft_flash.h"
+#include "bsp_flash.h"
 
 #endif
 

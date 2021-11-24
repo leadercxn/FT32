@@ -51,10 +51,8 @@
 #define APP_SCHEDULER_H__
 
 #include <stdint.h>
-#include "app_error.h"
-#include "app_util.h"
+#include "util.h"
 
-#include "cmsis_os.h"
 
 #define APP_SCHED_EVENT_HEADER_SIZE 8       /**< Size of app_scheduler.event_header_t (only for use inside APP_SCHED_BUF_SIZE()). */
 
@@ -70,7 +68,7 @@
             (((EVENT_SIZE) + APP_SCHED_EVENT_HEADER_SIZE) * ((QUEUE_SIZE) + 1))
 
 /**@brief Scheduler event handler type. */
-typedef void (*app_sched_event_handler_t)(void * p_event_data, uint16_t event_size);
+typedef void (*app_sched_event_handler_t)(void * p_event_data);
 
 /**@brief Structure for holding a scheduled event header. */
 typedef struct
@@ -88,11 +86,7 @@ typedef struct
     uint16_t         m_queue_event_size;     /**< Maximum event size in queue. */
     uint16_t         m_queue_size;           /**< Number of queue entries. */
 
-#ifdef APP_SCHEDULER_WITH_PROFILER
-    uint16_t m_max_queue_utilization;    /**< Maximum observed queue utilization. */
-#endif
-
-    osSemaphoreId_t         m_SemHandle;
+    uint16_t m_max_queue_utilization;        /**< Maximum observed queue utilization. */
 } app_scheduler_t;
 
 /**@brief Macro for initializing the event scheduler.
@@ -107,58 +101,34 @@ typedef struct
  * @note Since this macro allocates a buffer, it must only be called once (it is OK to call it
  *       several times as long as it is from the same location, e.g. to do a reinitialization).
  */
-#define APP_SCHED_INIT(P_SCHED, EVENT_SIZE, QUEUE_SIZE)                                                     \
+#define APP_SCHED_INIT(P_SCHED, EVENT_SIZE, QUEUE_SIZE)                                            \
     do                                                                                             \
     {                                                                                              \
         static uint32_t APP_SCHED_BUF[CEIL_DIV(APP_SCHED_BUF_SIZE((EVENT_SIZE), (QUEUE_SIZE)),     \
                                                sizeof(uint32_t))];                                 \
-        uint32_t ERR_CODE = app_sched_init(P_SCHED, (EVENT_SIZE), (QUEUE_SIZE), APP_SCHED_BUF);             \
-        APP_ERROR_CHECK(ERR_CODE);                                                                 \
+        uint32_t ERR_CODE = app_sched_init(P_SCHED, (EVENT_SIZE), (QUEUE_SIZE), APP_SCHED_BUF);    \
     } while (0)
 
-/**@brief Function for initializing the Scheduler.
- *
- * @details It must be called before entering the main loop.
- *
- * @param[in]   max_event_size   Maximum size of events to be passed through the scheduler.
- * @param[in]   queue_size       Number of entries in scheduler queue (i.e. the maximum number of
- *                               events that can be scheduled for execution).
- * @param[in]   p_evt_buffer   Pointer to memory buffer for holding the scheduler queue. It must
- *                               be dimensioned using the APP_SCHED_BUFFER_SIZE() macro. The buffer
- *                               must be aligned to a 4 byte boundary.
- *
- * @note Normally initialization should be done using the APP_SCHED_INIT() macro, as that will both
- *       allocate the scheduler buffer, and also align the buffer correctly.
- *
- * @retval      NRF_SUCCESS               Successful initialization.
- * @retval      NRF_ERROR_INVALID_PARAM   Invalid parameter (buffer not aligned to a 4 byte
- *                                        boundary).
- */
-uint32_t app_sched_init(app_scheduler_t * p_sched, uint16_t max_event_size, uint16_t queue_size, void * p_evt_buffer);
 
-/**@brief Function for executing all scheduled events.
- *
- * @details This function must be called from within the main loop. It will execute all events
- *          scheduled since the last time it was called.
- */
+int app_sched_init(app_scheduler_t * p_sched, uint16_t max_event_size, uint16_t queue_size, void * p_evt_buffer);
+
+
 void app_sched_execute(app_scheduler_t * p_sched);
 
-/**@brief Function for scheduling an event.
- *
- * @details Puts an event into the event queue.
- *
- * @param[in]   p_event_data   Pointer to event data to be scheduled.
- * @param[in]   event_size   Size of event data to be scheduled.
- * @param[in]   handler        Event handler to receive the event.
- *
- * @return      NRF_SUCCESS on success, otherwise an error code.
- */
-uint32_t app_sched_event_put(app_scheduler_t         * p_sched,
+
+int app_sched_event_put(app_scheduler_t         * p_sched,
                              void *                    p_event_data,
                              uint16_t                  event_size,
                              app_sched_event_handler_t handler);
 
-#ifdef APP_SCHEDULER_WITH_PROFILER
+
+
+
+
+
+
+
+
 /**@brief Function for getting the maximum observed queue utilization.
  *
  * Function for tuning the module and determining QUEUE_SIZE value and thus module RAM usage.
@@ -166,9 +136,7 @@ uint32_t app_sched_event_put(app_scheduler_t         * p_sched,
  * @return Maximum number of events in queue observed so far.
  */
 uint16_t app_sched_queue_utilization_get(app_scheduler_t * p_sched);
-#endif
 
-#ifdef APP_SCHEDULER_WITH_PAUSE
 /**@brief A function to pause the scheduler.
  *
  * @details When the scheduler is paused events are not pulled from the scheduler queue for
@@ -183,7 +151,8 @@ void app_sched_pause(app_scheduler_t * p_sched);
  *          @ref app_sched_pause function.
  */
 void app_sched_resume(app_scheduler_t * p_sched);
-#endif
-#endif // APP_SCHEDULER_H__
 
-/** @} */
+
+
+
+#endif // APP_SCHEDULER_H__

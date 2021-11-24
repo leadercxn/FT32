@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>FT32F030x8,USE_STDPERIPH_DRIVER,USE_FT32F072X8_EVAL,USE_DEFAULT_TIMEOUT_CALLBACK,FT32</Define>
               <Undefine></Undefine>
-              <IncludePath>..\;..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include;..\..\..\Libraries\CMSIS\Include;..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc;..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc;..\..\..\Utilities\FT32_EVAL\Common;..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\ft_lib\gpio;..\..\..\develop_lib\hardware;..\..\..\develop_lib\middle_api;..\..\..\develop_lib\middle_api\tft_8080;..\..\..\develop_lib\ft_lib;..\..\..\develop_lib;..\..\meeting_machine_pro;..\..\..\develop_lib\ft_lib\i2c;..\..\..\develop_lib\ft_lib\common;..\..\..\develop_lib\ft_lib\timer;..\..\..\develop_lib\middle_api\queue;..\..\..\develop_lib\ft_lib\deprecated;..\..\..\develop_lib\middle_api\mid_bk953x</IncludePath>
+              <IncludePath>..\;..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include;..\..\..\Libraries\CMSIS\Include;..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc;..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc;..\..\..\Utilities\FT32_EVAL\Common;..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\ft_lib\gpio;..\..\..\develop_lib\hardware;..\..\..\develop_lib\middle_api;..\..\..\develop_lib\middle_api\tft_8080;..\..\..\develop_lib\ft_lib;..\..\..\develop_lib;..\..\meeting_machine_pro;..\..\..\develop_lib\ft_lib\i2c;..\..\..\develop_lib\ft_lib\common;..\..\..\develop_lib\ft_lib\timer;..\..\..\develop_lib\middle_api\queue;..\..\..\develop_lib\middle_api\mid_bk953x;..\..\..\develop_lib\ft_lib\usart;..\..\..\develop_lib\middle_api\trace;..\app;..\..\..\develop_lib\hardware\bk953x;..\..\..\develop_lib\ft_lib\timer_pwm;..\..\..\develop_lib\ft_lib\exit;..\..\..\develop_lib\ft_lib\adc;..\..\..\develop_lib\middle_api\pwm;..\..\..\develop_lib\middle_api\ir;..\..\..\develop_lib\middle_api\mid_timer;..\..\..\develop_lib\third_lib;..\..\..\develop_lib\third_lib\app_timer;..\..\..\develop_lib\middle_api\delay;..\..\..\develop_lib\middle_api\adc;..\..\..\develop_lib\middle_api\mid_gpio;..\..\..\develop_lib\ft_lib\flash;..\..\..\develop_lib\middle_api\mid_flash;..\..\..\develop_lib\third_lib\app_scheduler</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -408,6 +408,31 @@
               <FileType>1</FileType>
               <FilePath>..\ft32f0xx_it.c</FilePath>
             </File>
+            <File>
+              <FileName>bk953x_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\bk953x_handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc_button_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\adc_button_handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>ir_tx_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\ir_tx_handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>ad22650_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\ad22650_handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>flash_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\flash_handler.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -417,11 +442,6 @@
               <FileName>FT32f0xx_adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>FT32f0xx_comp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_comp.c</FilePath>
             </File>
             <File>
               <FileName>FT32f0xx_crc.c</FileName>
@@ -434,19 +454,9 @@
               <FilePath>..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_crs.c</FilePath>
             </File>
             <File>
-              <FileName>FT32f0xx_dac.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_dac.c</FilePath>
-            </File>
-            <File>
               <FileName>FT32f0xx_dbgmcu.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_dbgmcu.c</FilePath>
-            </File>
-            <File>
-              <FileName>FT32f0xx_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_dma.c</FilePath>
             </File>
             <File>
               <FileName>FT32f0xx_exti.c</FileName>
@@ -489,11 +499,6 @@
               <FilePath>..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_rcc.c</FilePath>
             </File>
             <File>
-              <FileName>FT32f0xx_rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_rtc.c</FilePath>
-            </File>
-            <File>
               <FileName>FT32f0xx_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_spi.c</FilePath>
@@ -513,11 +518,6 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_usart.c</FilePath>
             </File>
-            <File>
-              <FileName>FT32f0xx_wwdg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\src\FT32f0xx_wwdg.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -527,6 +527,11 @@
               <FileName>st7789.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\hardware\st7789\st7789.c</FilePath>
+            </File>
+            <File>
+              <FileName>bk953x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\hardware\bk953x\bk953x.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -549,9 +554,44 @@
               <FilePath>..\..\..\develop_lib\ft_lib\timer\ft_timer.c</FilePath>
             </File>
             <File>
+              <FileName>ft_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\ft_lib\usart\ft_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>retarget.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\ft_lib\usart\retarget.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft_timer_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\ft_lib\timer_pwm\ft_timer_pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft_exit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\ft_lib\exit\ft_exit.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\ft_lib\adc\ft_adc.c</FilePath>
+            </File>
+            <File>
               <FileName>ft_delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\develop_lib\ft_lib\deprecated\ft_delay.c</FilePath>
+              <FilePath>..\..\..\develop_lib\ft_lib\common\ft_delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\ft_lib\flash\ft_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\ft_lib\flash\bsp_flash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -567,6 +607,56 @@
               <FileName>mid_bk953x.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\middle_api\mid_bk953x\mid_bk953x.c</FilePath>
+            </File>
+            <File>
+              <FileName>trace.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api\trace\trace.c</FilePath>
+            </File>
+            <File>
+              <FileName>mid_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api\mid_timer\mid_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>ir_tx_encode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api\ir\ir_tx_encode.c</FilePath>
+            </File>
+            <File>
+              <FileName>ir_rx_decode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api\ir\ir_rx_decode.c</FilePath>
+            </File>
+            <File>
+              <FileName>mid_delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api\delay\mid_delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>mid_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api\adc\mid_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>mid_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api\mid_gpio\mid_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>mid_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api\mid_flash\mid_flash.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>third_lib</GroupName>
+          <Files>
+            <File>
+              <FileName>app_scheduler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\third_lib\app_scheduler\app_scheduler.c</FilePath>
             </File>
           </Files>
         </Group>
