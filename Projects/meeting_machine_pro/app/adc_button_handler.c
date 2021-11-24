@@ -5,7 +5,7 @@
 #include "adc_button_handler.h"
 
 #define BUTTON_LONG_TIME_MS    5000
-#define BUTTON_SHORT_TIME_MS   50
+#define BUTTON_SHORT_TIME_MS   40
 
 static adc_button_event_handler_t m_adc_button_event_handler = NULL;
 
@@ -80,6 +80,13 @@ void adc_button_loop_task(void)
     }
     else
     {
+        /* 简单的滤波 */
+        delay_ms(10);
+        r_adc_mv = adc_ch_result_get(ADC_CHANNEL_0) * 3300 / 4095;
+        if(r_adc_mv > BUTTON_RELEASE_MIN)
+        {
+            return;
+        }
 //        trace_debug("r_adc_mv = %d\n\r",r_adc_mv);
         if((r_adc_mv > BUTTON_SET_LEVEL_MIN) && (r_adc_mv < BUTTON_SET_LEVEL_MAX))
         {
@@ -173,6 +180,13 @@ void adc_button_loop_task(void)
     }
     else
     {
+        /* 简单的滤波 */
+        delay_ms(10);
+        l_adc_mv = adc_ch_result_get(ADC_CHANNEL_1) * 3300 / 4095;
+        if(l_adc_mv > BUTTON_RELEASE_MIN)
+        {
+            return;
+        }
 //        trace_debug("l_adc_mv = %d\n\r",l_adc_mv);
         if((l_adc_mv > BUTTON_SET_LEVEL_MIN) && (l_adc_mv < BUTTON_SET_LEVEL_MAX))
         {

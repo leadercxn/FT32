@@ -9,7 +9,8 @@
 #include "middle_api.h"
 #include "bk953x.h"
 
-const bk953x_reg_value_t g_bk9532_init_config[54] = {
+bk953x_reg_value_t g_bk9532_init_config[54] = {
+//寄存器 0x00 ~ 0x0D 是只写寄存器，所以全局可以使用
     {0x00 , 0xDFFFFFF8 },
     {0x01 , 0x04D28057 },
     {0x02 , 0x0890E028 },
@@ -78,6 +79,16 @@ const bk953x_reg_value_t g_bk9532_init_config[54] = {
     {0x7D , 0x0032A8FF },
 };
 
+static uint32_t bk9532_analog_reg_value_get(uint8_t reg)
+{
+    if(reg > 0x0F)
+    {
+        return 0;
+    }
+
+    return g_bk9532_init_config[reg].value;
+}
+
 int bk953x_sample_rate_set(bk953x_object_t *p_bk953x_object, bk953x_sample_rate_e rate)
 {
 
@@ -103,39 +114,181 @@ int bk953x_chan_set(bk953x_object_t *p_bk953x_object, uint16_t chan)
 
 }
 
-int bk953x_config_init(bk953x_object_t *p_bk953x_object)
+/**
+ * @brief 接收软复位
+ */
+static int bk953x_rx_reset(bk953x_object_t *p_bk953x_object)
 {
-    uint8_t i = 0;
-
-    for(i = 0 ; i < ARRAY_SIZE(g_bk9532_init_config) ; i ++)
-    {
-        mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, g_bk9532_init_config[i].reg, &g_bk9532_init_config[i].value);
-    }
-}
-
-
-int bk953x_soft_reset(bk953x_object_t *p_bk953x_object)
-{
+    int err_code = 0;
     uint32_t value = 0;
     if(p_bk953x_object->chip_id == BK9532_CHID_ID)
     {
-        mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_reset read error %d\n\r",err_code);
+            return err_code;
+        }
+
+        CLR_BIT(value,31);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_reset write error %d\n\r",err_code);
+            return err_code;
+        }
+        delay_ms(10);
+
+        SET_BIT(value,31);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_reset write error %d\n\r",err_code);
+            return err_code;
+        }
+        delay_ms(10);
+    }
+    else
+    {
+
+    }
+    return err_code;
+}
+
+static int bk953x_rx_plc_reset(bk953x_object_t *p_bk953x_object)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_plc_reset read error %d\n\r",err_code);
+            return err_code;
+        }
+
+        SET_BIT(value,28);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_plc_reset write error %d\n\r",err_code);
+            return err_code;
+        }
+        delay_ms(10);
+
+        CLR_BIT(value,28);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_plc_reset write error %d\n\r",err_code);
+            return err_code;
+        }
+        delay_ms(10);
+    }
+    else
+    {
+
+    }
+    return err_code;
+}
+
+static int bk953x_rx_calibration_trigger(bk953x_object_t *p_bk953x_object)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        value = bk9532_analog_reg_value_get(0x06);
+        CLR_BIT(value,28);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x06, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_calibration_trigger write error %d\n\r",err_code);
+            return err_code;
+        }
+
+        SET_BIT(value,28);
+
+    }
+    else
+    {
+
+    }
+    return err_code;
+}
+
+
+/**
+ * @brief BK953X 软复位
+ */
+int bk953x_soft_reset(bk953x_object_t *p_bk953x_object)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_soft_reset read error %d\n\r",err_code);
+            return err_code;
+        }
+
         CLR_BIT(value,5);
-        mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
-        delay_ms(100);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_soft_reset write error %d\n\r",err_code);
+            return err_code;
+        }
+        delay_ms(50);
+
         SET_BIT(value,5);
-        mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
-        delay_ms(100);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_soft_reset write error %d\n\r",err_code);
+            return err_code;
+        }
+        delay_ms(50);
     }
     else if(p_bk953x_object->chip_id == BK9531_CHID_ID)
     {
-        
+
     }
     else
     {
         return -ENODEV;
     }
+
+    return err_code;
 }
+
+/**
+ * @brief BK953X 芯片寄存器配置
+ */
+int bk953x_config_init(bk953x_object_t *p_bk953x_object)
+{
+    int err_code = 0;
+    uint8_t i = 0;
+
+    for(i = 0 ; i < ARRAY_SIZE(g_bk9532_init_config) ; i ++)
+    {
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, g_bk9532_init_config[i].reg, &g_bk9532_init_config[i].value);
+        if(err_code)
+        {
+            trace_warn("bk953x_config_init  wite reg 0x%02x fail\n\r",g_bk9532_init_config[i].reg);
+        }
+    }
+
+    delay_ms(50);
+
+    err_code = bk953x_soft_reset(p_bk953x_object);
+
+    return err_code;
+}
+
 
 int bk953x_chip_id_get(bk953x_object_t *p_bk953x_object)
 {
@@ -155,7 +308,6 @@ int bk953x_chip_id_get(bk953x_object_t *p_bk953x_object)
         }
         delay_ms(100);
     }
-    
 
     trace_debug("bk953x_chip_id_get err_code = %d , chip_id = 0x%08x\n\r",err_code,p_bk953x_object->chip_id);
     return err_code;
