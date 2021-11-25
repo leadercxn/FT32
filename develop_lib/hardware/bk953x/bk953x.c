@@ -2,6 +2,7 @@
  * 该文件是BK芯片配置相关寄存器接口 
  */
 #include "stdio.h"
+#include "stdbool.h"
 #include "board_config.h"
 #include "util.h"
 #include "trace.h"
@@ -78,16 +79,6 @@ bk953x_reg_value_t g_bk9532_init_config[54] = {
     {0x7C , 0x0F860074 },
     {0x7D , 0x0032A8FF },
 };
-
-static uint32_t bk9532_analog_reg_value_get(uint8_t reg)
-{
-    if(reg > 0x0F)
-    {
-        return 0;
-    }
-
-    return g_bk9532_init_config[reg].value;
-}
 
 int bk953x_sample_rate_set(bk953x_object_t *p_bk953x_object, bk953x_sample_rate_e rate)
 {
@@ -193,22 +184,92 @@ static int bk953x_rx_plc_reset(bk953x_object_t *p_bk953x_object)
     return err_code;
 }
 
+/**
+ * @brief  RX mode,trigger chip to calibrate 接收模式下的校准
+ * 
+ */
 static int bk953x_rx_calibration_trigger(bk953x_object_t *p_bk953x_object)
 {
     int err_code = 0;
-    uint32_t value = 0;
     if(p_bk953x_object->chip_id == BK9532_CHID_ID)
     {
-        value = bk9532_analog_reg_value_get(0x06);
-        CLR_BIT(value,28);
-        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x06, &value);
+        /* Tune the RF loop LDO voltage to 0x0 */
+        CLR_BIT(g_bk9532_init_config[6].value, 29);
+        CLR_BIT(g_bk9532_init_config[6].value, 30);
+        CLR_BIT(g_bk9532_init_config[6].value, 31);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x06, &g_bk9532_init_config[6].value);
         if(err_code)
         {
             trace_error("bk953x_rx_calibration_trigger write error %d\n\r",err_code);
             return err_code;
         }
 
-        SET_BIT(value,28);
+        delay_ms(1);
+
+        /* Enable calibration clock */
+        SET_BIT(g_bk9532_init_config[7].value, 25);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x07, &g_bk9532_init_config[7].value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_calibration_trigger write error %d\n\r",err_code);
+            return err_code;
+        }
+
+        /*Calibrate RF VCO*/
+        CLR_BIT(g_bk9532_init_config[3].value, 22);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x03, &g_bk9532_init_config[3].value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_calibration_trigger write error %d\n\r",err_code);
+            return err_code;
+        }
+        SET_BIT(g_bk9532_init_config[3].value, 22);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x03, &g_bk9532_init_config[3].value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_calibration_trigger write error %d\n\r",err_code);
+            return err_code;
+        }
+
+        delay_ms(5);
+
+        /* Calibrate Digital VCO */
+        CLR_BIT(g_bk9532_init_config[4].value, 25);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x04, &g_bk9532_init_config[4].value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_calibration_trigger write error %d\n\r",err_code);
+            return err_code;
+        }
+        SET_BIT(g_bk9532_init_config[4].value, 25);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x04, &g_bk9532_init_config[4].value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_calibration_trigger write error %d\n\r",err_code);
+            return err_code;
+        }
+
+        /* Disable calibration clock */
+        CLR_BIT(g_bk9532_init_config[7].value, 25);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x07, &g_bk9532_init_config[7].value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_calibration_trigger write error %d\n\r",err_code);
+            return err_code;
+        }
+
+        delay_ms(2);
+
+         /* load the default RF loop LDO voltage */
+        SET_BIT(g_bk9532_init_config[6].value, 29);
+        SET_BIT(g_bk9532_init_config[6].value, 30);
+        SET_BIT(g_bk9532_init_config[6].value, 31);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x06, &g_bk9532_init_config[6].value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_calibration_trigger write error %d\n\r",err_code);
+            return err_code;
+        }
 
     }
     else
@@ -217,6 +278,190 @@ static int bk953x_rx_calibration_trigger(bk953x_object_t *p_bk953x_object)
     }
     return err_code;
 }
+
+/**
+ * @brief  bk953x设置频点的信道
+ * 
+ */
+int bk953x_freq_chan_set(bk953x_object_t *p_bk953x_object, freq_chan_object_t *p_freq_chan_object)
+{
+    if(!p_freq_chan_object)
+    {
+        return -EINVAL;
+    }
+
+    if(!p_bk953x_object)
+    {
+        return -EINVAL;
+    }
+
+    p_bk953x_object->band_type = p_freq_chan_object->band_type;
+    p_bk953x_object->freq_chan_index = p_freq_chan_object->chan_index;
+
+    int err_code = 0;
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        CLR_BIT(g_bk9532_init_config[3].value, 15);
+        CLR_BIT(g_bk9532_init_config[3].value, 14);
+        CLR_BIT(g_bk9532_init_config[3].value, 13);
+        CLR_BIT(g_bk9532_init_config[3].value, 21);
+        SET_BIT(g_bk9532_init_config[3].value, 20);
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x03, &g_bk9532_init_config[3].value);
+        if(err_code)
+        {
+            trace_error("bk953x_freq_chan_set write error %d\n\r",err_code);
+            return err_code;
+        }
+
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x0D, &p_freq_chan_object->reg_value);
+        if(err_code)
+        {
+            trace_error("bk953x_freq_chan_set write error %d\n\r",err_code);
+            return err_code;
+        }
+
+        bk953x_rx_calibration_trigger(p_bk953x_object);
+        bk953x_rx_reset(p_bk953x_object);
+        bk953x_rx_plc_reset(p_bk953x_object);
+    }
+    else
+    {
+
+    }
+}
+
+/**
+ * @brief  bk953x设置接收天线的模式
+ * 
+ */
+int bk953x_rx_antena_set(bk953x_object_t *p_bk953x_object, antenna_type_e antenna_type)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+
+    if(!p_bk953x_object)
+    {
+        return -EINVAL;
+    }
+
+    p_bk953x_object->antenna_type = antenna_type;
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        if(err_code)
+        {
+            trace_warn("bk953x_antena_set read fail %d\n\r",err_code);
+        }
+
+        if(DA_AUTO == antenna_type)
+        {
+            SET_BIT(value, 17);
+        }
+        else if(SA_ANT2_PIN5 == antenna_type)
+        {
+            CLR_BIT(value, 17);
+            SET_BIT(value, 16);
+        }
+        else
+        {
+            CLR_BIT(value, 17);
+            CLR_BIT(value, 16);
+        }
+
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3F, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_antena_set write error %d\n\r",err_code);
+            return err_code;
+        }
+    }
+    else
+    {
+
+    }
+
+    return err_code;
+}
+
+int bk953x_rx_adpcm_mode_set(bk953x_object_t *p_bk953x_object, adpcm_mode_e adpcm_mode)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+
+    if(!p_bk953x_object)
+    {
+        return -EINVAL;
+    }
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3D, &value);
+        if(err_code)
+        {
+            trace_warn("bk953x_rx_adpcm_mode_set read fail %d\n\r",err_code);
+        }
+
+        CLR_BIT(value, 14);
+        if(ADPCM_ZERO == adpcm_mode)
+        {
+            SET_BIT(value,14);
+        }
+
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3D, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_adpcm_mode_set write error %d\n\r",err_code);
+            return err_code;
+        }
+    }
+    else
+    {
+
+    }
+}
+
+int bk953x_rx_plc_enable(bk953x_object_t *p_bk953x_object, bool enable_status)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+
+    if(!p_bk953x_object)
+    {
+        return -EINVAL;
+    }
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3B, &value);
+        if(err_code)
+        {
+            trace_warn("bk953x_rx_plc_enable read fail %d\n\r",err_code);
+        }
+
+        CLR_BIT(value, 19);
+
+        if(enable_status)
+        {
+            SET_BIT(value,19);
+        }
+
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x3B, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_plc_enable write error %d\n\r",err_code);
+            return err_code;
+        }
+
+        bk953x_rx_plc_reset(p_bk953x_object);
+    }
+    else
+    {
+
+    }
+
+}
+
 
 
 /**

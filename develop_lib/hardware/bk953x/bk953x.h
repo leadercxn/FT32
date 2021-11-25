@@ -17,23 +17,49 @@ typedef enum
     BK953X_BAND_U   //U段
 } bk953x_band_type_e;
 
-
-typedef void (*bk953x_hw_reset_handler) (void);
-
-typedef struct 
+typedef enum
 {
-    uint16_t                    chip_id;
-    uint8_t                     device_id;
-    bk953x_band_type_e          band_type;
-    mid_bk953x_t                mid_bk953x_object;
-    bk953x_hw_reset_handler     hw_reset_handler;
-} bk953x_object_t;
+    SA_ANT1_PIN6 = 0,                   //使用PIN6作为天线输入口    2020-05-26
+    SA_ANT2_PIN5,                       //使用PIN5作为天线输入口    2020-05-26
+    DA_AUTO,                            //自动天线模式
+} antenna_type_e;
+
+typedef enum
+{
+    ADPCM_NORMAL = 0,                   //PLC常规处理
+    ADPCM_ZERO,                         //PLC补0处理 
+} adpcm_mode_e;
 
 typedef struct
 {
     uint8_t  reg;
     uint32_t value;
 } bk953x_reg_value_t;
+
+typedef struct
+{
+    bk953x_band_type_e  band_type;
+    uint16_t            chan_index;
+    uint32_t            freq;
+    uint32_t            reg_value;
+} freq_chan_object_t;
+
+
+
+
+typedef void (*bk953x_hw_reset_handler) (void);
+typedef struct 
+{
+    uint16_t                    chip_id;
+    uint8_t                     device_id;
+    bk953x_band_type_e          band_type;
+    antenna_type_e              antenna_type;
+    uint16_t                    freq_chan_index;
+    mid_bk953x_t                mid_bk953x_object;
+    bk953x_hw_reset_handler     hw_reset_handler;
+} bk953x_object_t;
+
+
 
 
 #define BK953X_DEVICE_ID    0x26
