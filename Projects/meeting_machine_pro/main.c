@@ -5,6 +5,8 @@
 #include "ad22650_handler.h"
 #include "flash_handler.h"
 
+#include "ht1621.h"
+
 #define SCHED_MAX_EVENT_DATA_SIZE   8
 #define SCHED_QUEUE_SIZE            20
 
@@ -84,6 +86,15 @@ int main(void)
 
   bk9532_lr_init();
   ad22650_lr_init();
+
+  mid_system_tick_init();
+  HT1621_Init();
+
+  uint8_t Ht1621Tab[] = {0x00, 0x00, 0x00, 0x00};
+  HT1621_WriteAllData(0, Ht1621Tab, 16); //清除LCD显示数据
+
+  Delay_ms(10);
+//  Display();
 
 #if 0
   /**

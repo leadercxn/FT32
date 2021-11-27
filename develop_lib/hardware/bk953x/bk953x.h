@@ -44,6 +44,10 @@ typedef struct
     uint32_t            reg_value;
 } freq_chan_object_t;
 
+typedef struct
+{
+    /* data */
+} bk953x_pcm_config_t;
 
 
 

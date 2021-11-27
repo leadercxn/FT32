@@ -60,7 +60,7 @@ static void exit_irq_handler(void)
     do
     {
         get_gpio_value(EXIT_GPIO_PORT, EXIT_GPIO_PIN, &pin_status);
-        delay_10us(500);
+        delay_us(500);
         time_cnt ++;
         //超过5ms低电平，退出红外解码
         if(time_cnt > 11)
@@ -75,7 +75,7 @@ static void exit_irq_handler(void)
     do
     {
         get_gpio_value(EXIT_GPIO_PORT, EXIT_GPIO_PIN, &pin_status);
-        delay_10us(500);
+        delay_us(500);
         time_cnt ++;
         //超过5ms低电平，退出红外解码
         if(time_cnt > 11)
@@ -95,7 +95,7 @@ static void exit_irq_handler(void)
         do
         {
             get_gpio_value(EXIT_GPIO_PORT, EXIT_GPIO_PIN, &pin_status);
-            delay_10us(500);
+            delay_us(500);
             time_cnt ++;
             if(time_cnt > 11)
             {
@@ -122,7 +122,7 @@ static void exit_irq_handler(void)
             do
             {
                 get_gpio_value(EXIT_GPIO_PORT, EXIT_GPIO_PIN, &pin_status);
-                delay_10us(500);
+                delay_us(500);
                 time_cnt ++;
                 //H 电平超过 2ms ，认为是错误
                 if(time_cnt > 4)

@@ -80,31 +80,6 @@ bk953x_reg_value_t g_bk9532_init_config[54] = {
     {0x7D , 0x0032A8FF },
 };
 
-int bk953x_sample_rate_set(bk953x_object_t *p_bk953x_object, bk953x_sample_rate_e rate)
-{
-
-}
-
-int bk953x_band_type_set(bk953x_object_t *p_bk953x_object, bk953x_band_type_e band_type)
-{
-
-}
-
-int bk953x_power_set(bk953x_object_t *p_bk953x_object, uint8_t power)
-{
-
-}
-
-int bk953x_freq_set(bk953x_object_t *p_bk953x_object, uint32_t freq)
-{
-
-}
-
-int bk953x_chan_set(bk953x_object_t *p_bk953x_object, uint16_t chan)
-{
-
-}
-
 /**
  * @brief 接收软复位
  */
@@ -276,6 +251,7 @@ static int bk953x_rx_calibration_trigger(bk953x_object_t *p_bk953x_object)
     {
 
     }
+
     return err_code;
 }
 
@@ -328,6 +304,8 @@ int bk953x_freq_chan_set(bk953x_object_t *p_bk953x_object, freq_chan_object_t *p
     {
 
     }
+
+    return err_code;
 }
 
 /**
@@ -419,6 +397,8 @@ int bk953x_rx_adpcm_mode_set(bk953x_object_t *p_bk953x_object, adpcm_mode_e adpc
     {
 
     }
+
+    return err_code;
 }
 
 int bk953x_rx_plc_enable(bk953x_object_t *p_bk953x_object, bool enable_status)
@@ -460,9 +440,220 @@ int bk953x_rx_plc_enable(bk953x_object_t *p_bk953x_object, bool enable_status)
 
     }
 
+    return err_code;
 }
 
+int bk953x_rx_reverb_enable(bk953x_object_t *p_bk953x_object, bool enable_status)
+{
+    int err_code = 0;
+    uint32_t value = 0;
 
+    if(!p_bk953x_object)
+    {
+        return -EINVAL;
+    }
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x36, &value);
+        if(err_code)
+        {
+            trace_warn("bk953x_rx_reverb_enable read fail %d\n\r",err_code);
+        }
+
+        if(enable_status)
+        {
+            CLR_BIT(value, 6);
+            SET_BIT(value, 25);
+            mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x36, &value);
+
+            CLR_BIT(value, 25);
+        }
+        else
+        {
+            SET_BIT(value, 6);
+        }
+
+
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x36, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_reverb_enable write error %d\n\r",err_code);
+            return err_code;
+        }
+
+    }
+    else
+    {
+
+    }
+
+    return err_code;
+}
+
+/**
+ * @brief eq_gain
+ */
+int bk953x_rx_volume_set(bk953x_object_t *p_bk953x_object, uint8_t vol)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+
+    if(!p_bk953x_object)
+    {
+        return -EINVAL;
+    }
+
+    if(vol > 31)
+    {
+        vol = 31;
+    }
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x32, &value);
+        if(err_code)
+        {
+            trace_warn("bk953x_rx_volume_set read fail %d\n\r",err_code);
+        }
+
+        /**
+         * eq_gain & duf_gain
+         */
+        value &= ~ 0x3ff;
+
+        /**
+         * duf_gain
+         */
+        value |= 0x07;
+
+        /**
+         * eq_gain
+         */
+        value |= ((uint32_t) vol << 5)
+
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x32, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_volume_set write error %d\n\r",err_code);
+            return err_code;
+        }
+    }
+    else
+    {
+
+    }
+
+    return err_code;
+}
+
+/**
+ * @brief mute enable
+ */
+int bk953x_mute_enable(bk953x_object_t *p_bk953x_object, bool enable_status)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+
+    if(!p_bk953x_object)
+    {
+        return -EINVAL;
+    }
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x32, &value);
+        if(err_code)
+        {
+            trace_warn("bk953x_rx_volume_set read fail %d\n\r",err_code);
+        }
+
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x32, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_volume_set write error %d\n\r",err_code);
+            return err_code;
+        }
+    }
+    else
+    {
+
+    }
+
+    return err_code;
+}
+
+/**
+ * @brief mute enable
+ */
+int bk953x_rx_afc_enable(bk953x_object_t *p_bk953x_object, bool enable_status)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+
+    if(!p_bk953x_object)
+    {
+        return -EINVAL;
+    }
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x32, &value);
+        if(err_code)
+        {
+            trace_warn("bk953x_rx_volume_set read fail %d\n\r",err_code);
+        }
+
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x32, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_volume_set write error %d\n\r",err_code);
+            return err_code;
+        }
+    }
+    else
+    {
+
+    }
+
+    return err_code;
+}
+
+/**
+ * @brief mute enable
+ */
+int bk953x_rx_i2s_open(bk953x_object_t *p_bk953x_object, bk953x_pcm_config_t *p_pcm_config)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+
+    if(!p_bk953x_object)
+    {
+        return -EINVAL;
+    }
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        err_code = mid_bk953x_read_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x32, &value);
+        if(err_code)
+        {
+            trace_warn("bk953x_rx_volume_set read fail %d\n\r",err_code);
+        }
+
+        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, 0x32, &value);
+        if(err_code)
+        {
+            trace_error("bk953x_rx_volume_set write error %d\n\r",err_code);
+            return err_code;
+        }
+    }
+    else
+    {
+
+    }
+
+    return err_code;
+}
 
 /**
  * @brief BK953X 软复位

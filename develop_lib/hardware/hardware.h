@@ -6,5 +6,6 @@
 
 #include "bk953x.h"
 #include "st7789.h"
+#include "ht1621.h"
 
 #endif
