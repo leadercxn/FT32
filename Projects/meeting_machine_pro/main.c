@@ -54,12 +54,11 @@ static void l_adc_button_handler(adc_button_event_e event)
 static void app_evt_schedule(void * p_event_data)
 {
     trace_debug("app_evt_schedule\n\r");
-    delay_ms(1000);
 }
 
 
 
-
+uint8_t Ht1621Tab[] = {0x00, 0x00, 0x00, 0x00};
 
 int main(void)
 {
@@ -78,6 +77,11 @@ int main(void)
   TIMER_CREATE(&m_test_timer,false,false,test_timer_handler);
 //  TIMER_START(m_test_timer, 1000);
 
+  /**
+   * delay 函数的初始化
+   */
+  mid_system_tick_init();
+
   ir_tx_init();
 
   adc_init();
@@ -87,13 +91,10 @@ int main(void)
   bk9532_lr_init();
   ad22650_lr_init();
 
-  mid_system_tick_init();
   HT1621_Init();
-
-  uint8_t Ht1621Tab[] = {0x00, 0x00, 0x00, 0x00};
   HT1621_WriteAllData(0, Ht1621Tab, 16); //清除LCD显示数据
 
-  Delay_ms(10);
+  delay_ms(10);
 //  Display();
 
 #if 0
@@ -150,6 +151,7 @@ int main(void)
       app_sched_execute(&m_app_scheduler);
       adc_button_loop_task();
       mid_timer_loop_task();
+      bk953x_loop_task();
   }
 }
 

@@ -3,6 +3,11 @@
 
 #include "mid_bk953x.h"
 
+/**
+ * BK953X GPIO4 作为静音输出IO
+ */
+#define  BK953X_GPIO4_MUTE_FUN
+
 typedef enum
 {
     BK953X_SAMPLE_RATE_48K,
@@ -44,11 +49,49 @@ typedef struct
     uint32_t            reg_value;
 } freq_chan_object_t;
 
+
+/**
+ * I2S 相关配置
+ */
+typedef enum
+{
+    PCM_SLAVE = 0,
+    PCM_MASTER,
+} bk953x_pcm_mode_e;
+
+typedef enum
+{
+    PCM_SDA_O = 0,
+    PCM_SDA_I = 4,
+} bk953x_pcm_data_cfg_e;
+
+typedef enum
+{
+    PCM_SCK_O = 0,
+    PCM_SCK_I = 4,
+} bk953x_pcm_bclk_cfg_e;
+
+typedef enum
+{
+    PCM_LRCK_O = 0,
+    PCM_LRCK_I = 4,
+} bk953x_pcm_lrclk_cfg_e;
+
+typedef enum
+{
+    PCM_LEFT = 0,       //左声道（LRCK=0时输出音频数据）
+    PCM_RIGHT,          //右声道（LRCK=1时输出音频数据）
+    PCM_MONO,           //单声道（在LRCK高电平和低电平期间均输出音频数据）
+} bk953x_pcm_channel_cfg_e;
+
 typedef struct
 {
-    /* data */
+    bk953x_pcm_mode_e           mode;
+    bk953x_pcm_data_cfg_e       data;
+    bk953x_pcm_bclk_cfg_e       bclk;
+    bk953x_pcm_lrclk_cfg_e      lrclk;
+    bk953x_pcm_channel_cfg_e    channel;
 } bk953x_pcm_config_t;
-
 
 
 typedef void (*bk953x_hw_reset_handler) (void);

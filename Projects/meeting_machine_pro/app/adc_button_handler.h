@@ -41,5 +41,6 @@ typedef void (*adc_button_event_handler_t)(adc_button_event_e event);
 void adc_button_event_handler_register(adc_button_event_handler_t handler);
 void l_adc_button_event_handler_register(adc_button_event_handler_t l_handler);
 void r_adc_button_event_handler_register(adc_button_event_handler_t r_handler);
+void adc_button_loop_task(void);
 
 #endif

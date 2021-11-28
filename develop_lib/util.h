@@ -179,6 +179,12 @@ extern "C"
  */
 #define ALIGN_NUM(alignment, number) ((number - 1) + alignment - ((number - 1) % alignment))
 
+#define IS_NULL(p_data)                 \
+    if(!p_data)                         \
+    {                                   \
+        return -EINVAL;                 \
+    }                                   \
+
 
 /**@brief Function for changing the value unit.
  *
