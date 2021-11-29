@@ -77,7 +77,7 @@ int ft_virt_i2c_bk953x_write_one_reg(ft_virt_i2c_t *p_ft_virt_i2c, uint8_t devic
         return err;
     }
 
-    for(i = sizeof(uint32_t); i > 0; i++)
+    for(i = sizeof(uint32_t); i > 0; i--)
     {
         ft_virt_i2c_send_byte(p_ft_virt_i2c, p[i -1]);
         err = ft_virt_i2c_wait_ack(p_ft_virt_i2c);

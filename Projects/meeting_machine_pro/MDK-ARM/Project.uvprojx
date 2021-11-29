@@ -433,6 +433,11 @@
               <FileType>1</FileType>
               <FilePath>..\app\flash_handler.c</FilePath>
             </File>
+            <File>
+              <FileName>lcd_display_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\lcd_display_handler.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

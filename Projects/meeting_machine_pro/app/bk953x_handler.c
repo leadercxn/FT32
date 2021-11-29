@@ -26,10 +26,12 @@ typedef struct
 
 static bk953x_task_t m_l_bk953x_task = {
     .p_bk953x_object = &m_l_bk9532_obj,
+    .stage = BK_STAGE_INIT,
 };
 
 static bk953x_task_t m_r_bk953x_task = {
     .p_bk953x_object = &m_r_bk9532_obj,
+    .stage = BK_STAGE_INIT,
 };
 
 /**
@@ -98,12 +100,17 @@ int bk9532_lr_init(void)
     m_r_bk9532_obj.hw_reset_handler();
     m_l_bk9532_obj.hw_reset_handler();
 
-//    delay_ms(100);
+    delay_ms(100);
 
     bk953x_chip_id_get(&m_r_bk9532_obj);
     bk953x_chip_id_get(&m_l_bk9532_obj);
 
     trace_debug("r_chip_id = 0x%08x , l_chip_id = 0x%08x\n\r",m_r_bk9532_obj.chip_id, m_l_bk9532_obj.chip_id);
+
+    /**
+     * 初始化任务
+     */
+
 
     return err_code;
 }
@@ -121,10 +128,17 @@ static int bk953x_rx_channel_search(bk953x_object_t *p_bk953x_object)
 
 static void bk953x_stage_task_run(bk953x_task_t *p_task)
 {
+    int err_code = 0;
+
     switch(p_task->stage)
     {
         case BK_STAGE_INIT:
-
+            err_code = bk953x_config_init(p_task->p_bk953x_object);
+            if(err_code == 0)
+            {
+                trace_debug("bk953x_config_init success\n\r");
+            }
+            p_task->stage++;
             break;
 
         default:

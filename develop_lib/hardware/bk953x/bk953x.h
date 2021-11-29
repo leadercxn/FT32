@@ -118,6 +118,8 @@ typedef struct
 
 void bk953x_res_init(bk953x_object_t *p_bk953x_object);
 int bk953x_soft_reset(bk953x_object_t *p_bk953x_object);
+
+int bk953x_config_init(bk953x_object_t *p_bk953x_object);
 int bk953x_chip_id_get(bk953x_object_t *p_bk953x_object);
 
 #endif

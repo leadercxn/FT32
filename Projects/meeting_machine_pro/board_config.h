@@ -32,6 +32,14 @@
 #define R_AD22650_EN_PORT               GPIOB
 #define R_AD22650_EN_PORT_PERIPH_CLK    RCC_AHBPeriph_GPIOB
 
+#define LCD_BACK_LIGHT_PIN              GPIO_Pin_1
+#define LCD_BACK_LIGHT_PORT             GPIOF
+#define LCD_BACK_LIGHT_PORT_PERIPH_CLK  RCC_AHBPeriph_GPIOF
+
+#define LCD_CTRL_PIN                    GPIO_Pin_0
+#define LCD_CTRL_PORT                   GPIOF
+#define LCD_CTRL_PORT_PERIPH_CLK        RCC_AHBPeriph_GPIOF
+
 /* ADC */
 #define ADC_CHANNEL_0                   ADC_Channel_0
 #define ADC_CHANNEL_1                   ADC_Channel_1

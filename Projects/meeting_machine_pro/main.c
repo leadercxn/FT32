@@ -4,6 +4,7 @@
 #include "adc_button_handler.h"
 #include "ad22650_handler.h"
 #include "flash_handler.h"
+#include "lcd_display_handler.h"
 
 #include "ht1621.h"
 
@@ -58,7 +59,6 @@ static void app_evt_schedule(void * p_event_data)
 
 
 
-uint8_t Ht1621Tab[] = {0x00, 0x00, 0x00, 0x00};
 
 int main(void)
 {
@@ -77,6 +77,8 @@ int main(void)
   TIMER_CREATE(&m_test_timer,false,false,test_timer_handler);
 //  TIMER_START(m_test_timer, 1000);
 
+  lcd_init();
+
   /**
    * delay 函数的初始化
    */
@@ -91,11 +93,7 @@ int main(void)
   bk9532_lr_init();
   ad22650_lr_init();
 
-  HT1621_Init();
-  HT1621_WriteAllData(0, Ht1621Tab, 16); //清除LCD显示数据
-
-  delay_ms(10);
-//  Display();
+  Display();
 
 #if 0
   /**
@@ -144,7 +142,6 @@ int main(void)
 
   app_sched_event_put(&m_app_scheduler, NULL, 0, app_evt_schedule);
 
-
   trace_info("Start loop\n\r");
   while(1)
   {
@@ -152,6 +149,15 @@ int main(void)
       adc_button_loop_task();
       mid_timer_loop_task();
       bk953x_loop_task();
+
+#if 0
+      gpio_output_set(&m_lcd_ctrl_pin, 0);
+      gpio_output_set(&m_lcd_light_pin, 0);
+      delay_ms(1000);
+      gpio_output_set(&m_lcd_ctrl_pin, 1);
+      gpio_output_set(&m_lcd_light_pin, 1);
+      delay_ms(1000);
+#endif
   }
 }
 

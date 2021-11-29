@@ -187,7 +187,7 @@ void HT1621_WriteAllData(uint8_t addr, uint8_t *p, uint8_t cnt)
 		p++;
 	}
 	CS(High);
-	Delay_ms(2);
+	Delay_ms(1);
 }
 
 void Display(void)
