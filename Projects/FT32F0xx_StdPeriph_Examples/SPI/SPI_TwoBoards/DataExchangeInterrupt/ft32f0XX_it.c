@@ -34,7 +34,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern uint8_t TxBuffer[];
-extern  uint8_t RxBuffer[];
+extern uint8_t RxBuffer[];
 extern __IO uint8_t Rx_Idx;
 extern __IO uint8_t Tx_Idx;
 
@@ -104,7 +104,7 @@ void SysTick_Handler(void)
   {
     TimeOut--;
   }
-    
+
   if (Counter < 10)
   {
     Counter++;
@@ -126,8 +126,8 @@ void SysTick_Handler(void)
   */
 void SPI1_IRQHandler(void)
 {
-#if defined (SPI_SLAVE)  
-  
+#if defined(SPI_SLAVE)
+
   /* SPI in Slave Tramitter mode--------------------------------------- */
   if (SPI_I2S_GetITStatus(SPIx, SPI_I2S_IT_TXE) == SET)
   {
@@ -138,7 +138,7 @@ void SPI1_IRQHandler(void)
       SPI_I2S_ITConfig(SPIx, SPI_I2S_IT_TXE, DISABLE);
     }
   }
-  
+
   /* SPI in Slave Receiver mode--------------------------------------- */
   if (SPI_I2S_GetITStatus(SPIx, SPI_I2S_IT_RXNE) == SET)
   {
@@ -152,18 +152,18 @@ void SPI1_IRQHandler(void)
       RxBuffer[Rx_Idx++] = SPI_ReceiveData8(SPIx);
     }
   }
-  
+
   /* SPI Error interrupt--------------------------------------- */
   if (SPI_I2S_GetITStatus(SPIx, SPI_I2S_IT_OVR) == SET)
   {
     SPI_ReceiveData8(SPIx);
     SPI_I2S_GetITStatus(SPIx, SPI_I2S_IT_OVR);
   }
-  
+
 #endif /* SPI_SLAVE*/
-  
-#if defined (SPI_MASTER)
-  
+
+#if defined(SPI_MASTER)
+
   /* SPI in Master Tramitter mode--------------------------------------- */
   if (SPI_I2S_GetITStatus(SPIx, SPI_I2S_IT_TXE) == SET)
   {
@@ -182,7 +182,7 @@ void SPI1_IRQHandler(void)
       }
     }
   }
-  
+
   /* SPI in Master Receiver mode--------------------------------------- */
   if (SPI_I2S_GetITStatus(SPIx, SPI_I2S_IT_RXNE) == SET)
   {
@@ -196,14 +196,14 @@ void SPI1_IRQHandler(void)
       RxBuffer[Rx_Idx++] = SPI_ReceiveData8(SPIx);
     }
   }
-  
+
   /* SPI Error interrupt--------------------------------------- */
   if (SPI_I2S_GetITStatus(SPIx, SPI_I2S_IT_OVR) == SET)
   {
     SPI_ReceiveData8(SPIx);
     SPI_I2S_GetITStatus(SPIx, SPI_I2S_IT_OVR);
   }
-  
+
 #endif /* SPI_MASTER*/
 }
 /******************************************************************************/
@@ -228,7 +228,6 @@ void SPI1_IRQHandler(void)
 
 /**
   * @}
-  */ 
-
+  */
 
 /************************ (C) COPYRIGHT FMD *****END OF FILE****/

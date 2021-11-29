@@ -12,6 +12,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "ft32f0xx_it.h"
 
+__IO uint8_t Counter = 0x00;
+extern __IO uint32_t TimeOut;
+
 /** @addtogroup Template_Project
   * @{
   */
@@ -34,7 +37,6 @@
   */
 void NMI_Handler(void)
 {
- 
 }
 
 /**
@@ -44,7 +46,6 @@ void NMI_Handler(void)
   */
 void HardFault_Handler(void)
 {
-
 }
 
 /**
@@ -65,14 +66,31 @@ void PendSV_Handler(void)
 {
 }
 
-/**
-  * @brief  This function handles SysTick Handler.
-  * @param  None
-  * @retval None
-  */
+// /**
+//   * @brief  This function handles SysTick Handler.
+//   * @param  None
+//   * @retval None
+//   */
+// void SysTick_Handler(void)
+// {
+// }
+
 void SysTick_Handler(void)
 {
+  // /* Decrement the timeout value */
+  // if (TimeOut != 0x0)
+  // {
+  //   TimeOut--;
+  // }
 
+  // if (Counter < 10)
+  // {
+  //   Counter++;
+  // }
+  // else
+  // {
+  //   Counter = 0x00;
+  // }
 }
 
 /******************************************************************************/
@@ -93,16 +111,14 @@ void SysTick_Handler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
-
+  */
 
 /**
   * @}
-  */ 
-
+  */
 
 /************************ (C) COPYRIGHT FMD *****END OF FILE****/

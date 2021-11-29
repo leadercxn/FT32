@@ -84,15 +84,15 @@ set(SDK_INCLUDE_DIRS
 
 file(GLOB APP_SOURCE_FILES
 
-    # ${CMAKE_CURRENT_SOURCE_DIR}/gpio/main.c
-    # ${CMAKE_CURRENT_SOURCE_DIR}/gpio/ft32f0xx_it.c
-
+    ${CMAKE_CURRENT_SOURCE_DIR}/*.c
     ${TEST_DIR}/main.c
     ${TEST_DIR}/ft32f0XX_it.c
     ${TEST_DIR}/app/*.c
     ${CMAKE_SOURCE_DIR}/apps/app_common/trace/*.c
     ${CMAKE_SOURCE_DIR}/apps/app_common/usart/*.c
     ${CMAKE_SOURCE_DIR}/apps/app_common/LetterShell/*.c
+    ${CMAKE_SOURCE_DIR}/apps/app_common/ht1621/*.c
+    # ${CMAKE_SOURCE_DIR}/apps/app_common/LCD/*.c 
 
 )
 
@@ -101,13 +101,13 @@ set(APP_INCLUDE_DIRS
     ${TEST_DIR}/app
 
     ${CMAKE_CURRENT_SOURCE_DIR}
-    # ${CMAKE_CURRENT_SOURCE_DIR}/config
-    # ${CMAKE_CURRENT_SOURCE_DIR}/gpio
 
     ${CMAKE_SOURCE_DIR}/apps/app_common
     ${CMAKE_SOURCE_DIR}/apps/app_common/trace
     ${CMAKE_SOURCE_DIR}/apps/app_common/usart
     ${CMAKE_SOURCE_DIR}/apps/app_common/LetterShell
+    ${CMAKE_SOURCE_DIR}/apps/app_common/ht1621
+    # ${CMAKE_SOURCE_DIR}/apps/app_common/LCD
 )
 
 set(USER_DEFINITIONS
