@@ -5,11 +5,7 @@
 #include "ad22650_handler.h"
 #include "flash_handler.h"
 
-#include "ht1621.h"
-#include "systick.h"
-#include "ft32f0xx.h"
-
-uint8_t Ht1621Tab[] = {0x00, 0x00, 0x00, 0x00};
+#include "dis_handler.h"
 
 int main(void)
 {
@@ -24,12 +20,7 @@ int main(void)
 
   trace_debug("LCD Test\r\n");
 
-  SysTick_Init();
-  HT1621_Init();
-  HT1621_WriteAllData(0, Ht1621Tab, 16); //清除LCD显示数据
-
-  Delay_ms(10);
-  Display();
+  Display_Init();
 
   trace_debug("please input hh：mm：ss to change time\r\n");
 
