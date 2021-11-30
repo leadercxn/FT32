@@ -65,6 +65,9 @@
 #define LCD_WR_0() GPIO_ResetBits(HT1621_WR_PORT, HT1621_WR_PIN)
 #define LCD_WR_1() GPIO_SetBits(HT1621_WR_PORT, HT1621_WR_PIN)
 
+void Clean_All(ht1621_t *p_dev);
+void Diaplay_ShowAll(ht1621_t *p_dev);
+
 #define COMMAND_CODE 0x80    // 命令码
 #define WRITE_DATA_CODE 0xA0 // 写命令
 
