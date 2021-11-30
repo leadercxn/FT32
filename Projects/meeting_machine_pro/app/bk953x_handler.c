@@ -100,8 +100,6 @@ int bk9532_lr_init(void)
     m_r_bk9532_obj.hw_reset_handler();
     m_l_bk9532_obj.hw_reset_handler();
 
-    delay_ms(100);
-
     bk953x_chip_id_get(&m_r_bk9532_obj);
     bk953x_chip_id_get(&m_l_bk9532_obj);
 

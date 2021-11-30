@@ -2,8 +2,8 @@
 #include "ft32f0xx.h"
 #include "ft_systick.h"
 
-static uint8_t sysclk = 72;
-static uint8_t fac_us = 0;
+static uint16_t sysclk = 288;	//还不确定为啥是 72*4 才可以较为精准的延时
+static uint16_t fac_us = 0;
 static uint16_t fac_ms = 0;
 
 /*SysTick时钟源由HCLK/8提供，当系统频率为72MHz时最小计数周期为1/9MHz,
@@ -11,7 +11,7 @@ static uint16_t fac_ms = 0;
 void SysTick_Init(void)
 {
 	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //72MHz/8 = 9MHz
-	NVIC_SetPriority(SysTick_IRQn, 0);
+	NVIC_SetPriority(SysTick_IRQn, 3);
 
 	fac_us = sysclk / 8; //72/8 = 9,9次1uS
 	fac_ms = (uint16_t)fac_us * 1000;
@@ -49,7 +49,7 @@ void Delay_ms(uint32_t ms)
 void ft_systick_init(void)
 {
 	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //72MHz/8 = 9MHz
-	NVIC_SetPriority(SysTick_IRQn, 0);
+	NVIC_SetPriority(SysTick_IRQn, 3);
 
 	fac_us = sysclk / 8; //72/8 = 9,9次1uS
 	fac_ms = (uint16_t)fac_us * 1000;

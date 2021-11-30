@@ -13,7 +13,6 @@
 
 static app_scheduler_t  m_app_scheduler;
 
-
 MID_TIMER_DEF(m_test_timer);
 uint8_t data[4] = { 0x64,0x23,0x18,0x74 };
 
@@ -77,12 +76,12 @@ int main(void)
   TIMER_CREATE(&m_test_timer,false,false,test_timer_handler);
 //  TIMER_START(m_test_timer, 1000);
 
-  lcd_init();
-
   /**
    * delay 函数的初始化
    */
   mid_system_tick_init();
+
+  lcd_init();
 
   ir_tx_init();
 
@@ -142,22 +141,34 @@ int main(void)
 
   app_sched_event_put(&m_app_scheduler, NULL, 0, app_evt_schedule);
 
+#if 0
+  static gpio_object_t   m_gpio_test = 
+                {
+                    .gpio_port_periph_clk = L_VIRT_SCL_GPIO_CLK,
+                    .p_gpio_port = L_VIRT_SCL_GPIO_PORT,
+                    .gpio_dir = GPIO_DIR_OUTPUR,
+                    .gpio_pin = L_VIRT_SCL_PIN,
+                };
+  gpio_config(&m_gpio_test);
+#endif
+
   trace_info("Start loop\n\r");
   while(1)
   {
+#if 1
       app_sched_execute(&m_app_scheduler);
       adc_button_loop_task();
       mid_timer_loop_task();
       bk953x_loop_task();
+#endif
 
 #if 0
-      gpio_output_set(&m_lcd_ctrl_pin, 0);
-      gpio_output_set(&m_lcd_light_pin, 0);
-      delay_ms(1000);
-      gpio_output_set(&m_lcd_ctrl_pin, 1);
-      gpio_output_set(&m_lcd_light_pin, 1);
-      delay_ms(1000);
+      gpio_output_set(&m_gpio_test, 0);
+      delay_ms(100);
+      gpio_output_set(&m_gpio_test, 1);
+      delay_ms(100);
 #endif
+
   }
 }
 
