@@ -92,7 +92,7 @@ file(GLOB APP_SOURCE_FILES
     ${CMAKE_SOURCE_DIR}/apps/app_common/usart/*.c
     ${CMAKE_SOURCE_DIR}/apps/app_common/LetterShell/*.c
     ${CMAKE_SOURCE_DIR}/apps/app_common/ht1621/*.c
-    # ${CMAKE_SOURCE_DIR}/apps/app_common/LCD/*.c 
+    ${CMAKE_SOURCE_DIR}/apps/app_common/LCD/*.c 
 
 )
 
@@ -107,7 +107,7 @@ set(APP_INCLUDE_DIRS
     ${CMAKE_SOURCE_DIR}/apps/app_common/usart
     ${CMAKE_SOURCE_DIR}/apps/app_common/LetterShell
     ${CMAKE_SOURCE_DIR}/apps/app_common/ht1621
-    # ${CMAKE_SOURCE_DIR}/apps/app_common/LCD
+    ${CMAKE_SOURCE_DIR}/apps/app_common/LCD
 )
 
 set(USER_DEFINITIONS

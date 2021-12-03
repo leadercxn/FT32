@@ -1,16 +1,22 @@
 /*********************************************************************
  * INCLUDES
  */
-#include "stdbool.h"
+
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "board_ht1621.h"
-#include "mid_delay.h"
-#include "systick.h"
+#include "ht1621.h"
 
-void vTaskDelay(uint16_t ms)
-{
-    Delay_ms(ms);
-}
+#define DELAY_10_US 10 * 4
+#define DELAY_500_MS 500 * 4
 
+#define DELAY_1_MS 1
+#define DELAY_10_MS 10
+#define DELAY_100_MS 400
 /*********************************************************************
  * PUBLIC FUNCTIONS
  */
@@ -19,22 +25,24 @@ void vTaskDelay(uint16_t ms)
  @param 无
  @return 无
 */
-void HT1621_Init(void)
+void Board_HT1621_Init(ht1621_t *p_dev)
 {
 
-    vTaskDelay(10);
+    p_dev->gpio_config();
 
-    LCD_CS_1();
-    LCD_DATA_1();
-    LCD_WR_1();
+    p_dev->delay_ms(DELAY_10_MS); // - - 延时使LCD工作电压稳定
 
-    vTaskDelay(100); // 延时使LCD工作电压稳定
+    p_dev->CS_HIGH();
+    p_dev->DATA_HIGH();
+    p_dev->WR_HIGH();
 
-    HT1621_WriteCommand(HT1621_SYS_EN); // 打开系统振荡器
-    HT1621_WriteCommand(HT1621_BIAS);   // BIAS 13 4个公共口
-    HT1621_WriteCommand(HT1621_RC256);  // 使用RC_256K系统时钟源，片内RC振荡器
-    HT1621_WriteCommand(HT1621_WDT_DIS);
-    HT1621_WriteCommand(HT1621_LCD_ON);
+    p_dev->delay_ms(DELAY_100_MS); // - - 延时使LCD工作电压稳定
+
+    Board_HT1621_WriteCommand(p_dev, HT1621_SYS_EN); // 打开系统振荡器
+    Board_HT1621_WriteCommand(p_dev, HT1621_BIAS);   // BIAS 13 4个公共口
+    Board_HT1621_WriteCommand(p_dev, HT1621_RC256);  // 使用RC_256K系统时钟源，片内RC振荡器
+    Board_HT1621_WriteCommand(p_dev, HT1621_WDT_DIS);
+    Board_HT1621_WriteCommand(p_dev, HT1621_LCD_ON);
 }
 
 /**
@@ -42,63 +50,63 @@ void HT1621_Init(void)
  @param cmd -[in] 命令数据
  @return 无
 */
-void HT1621_WriteCommand(uint8_t cmd)
+void Board_HT1621_WriteCommand(ht1621_t *p_dev, uint8_t cmd)
 {
     uint8_t i;
 
-    LCD_CS_0(); // CS = 0
-    vTaskDelay(1);
+    p_dev->CS_LOW(); // CS = 0
+    p_dev->delay_ms(DELAY_1_MS);
 
     // 写入命令标志,DATA:100
-    LCD_WR_0(); // WR = 0
-    vTaskDelay(1);
-    LCD_DATA_1(); // DATA = 1
-    vTaskDelay(1);
-    LCD_WR_1(); // WR = 1
-    vTaskDelay(1);
+    p_dev->WR_LOW();             // WR = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->DATA_HIGH();          // DATA = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->WR_HIGH();            // WR = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 
-    LCD_WR_0(); // WR = 0
-    vTaskDelay(1);
-    LCD_DATA_0(); // DATA = 0
-    vTaskDelay(1);
-    LCD_WR_1(); // WR = 1
-    vTaskDelay(1);
+    p_dev->WR_LOW();             // WR = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->DATA_LOW();           // DATA = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->WR_HIGH();            // WR = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 
-    LCD_WR_0(); // WR = 0
-    vTaskDelay(1);
-    LCD_DATA_0(); // DATA = 0
-    vTaskDelay(1);
-    LCD_WR_1(); // WR = 1
-    vTaskDelay(1);
+    p_dev->WR_LOW();             // WR = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->DATA_LOW();           // DATA = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->WR_HIGH();            // WR = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 
     // Datasheet中命令后的C8为0
-    LCD_WR_0(); // WR = 0
-    vTaskDelay(1);
-    LCD_DATA_0(); // DATA = 0
-    vTaskDelay(1);
-    LCD_WR_1(); // WR = 1
-    vTaskDelay(1);
+    p_dev->WR_LOW();             // WR = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->DATA_LOW();           // DATA = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->WR_HIGH();            // WR = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 
     // Datasheet中命令后的C7~C0
     for (i = 0; i < 8; i++)
     {
-        LCD_WR_0(); // WR = 0
-        vTaskDelay(1);
+        p_dev->WR_LOW();             // WR = 0
+        p_dev->delay_ms(DELAY_1_MS); //延时
         if ((cmd << i) & 0x80)
         {
-            LCD_DATA_1(); // DATA = 1
+            p_dev->DATA_HIGH(); // DATA = 1
         }
         else
         {
-            LCD_DATA_0(); // DATA = 0
+            p_dev->DATA_LOW(); // DATA = 0
         }
-        vTaskDelay(1);
-        LCD_WR_1(); // WR = 1
-        vTaskDelay(1);
+        p_dev->delay_ms(DELAY_1_MS); //延时
+        p_dev->WR_HIGH();            // WR = 1
+        p_dev->delay_ms(DELAY_1_MS); //延时
     }
 
-    LCD_CS_1(); // CS = 1
-    vTaskDelay(1);
+    p_dev->CS_HIGH();            // CS = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 }
 
 /**
@@ -107,72 +115,71 @@ void HT1621_WriteCommand(uint8_t cmd)
  @param data -[in] 写入数据，因为HT1621的数据位4位，所以实际写入数据为参数的后4位
  @return 无
 */
-void HT1621_WriteData4Bit(uint8_t addr, uint8_t data)
+void Board_HT1621_WriteData4Bit(ht1621_t *p_dev, uint8_t addr, uint8_t data)
 {
     uint8_t i;
 
-    LCD_CS_0(); // CS = 0
-    vTaskDelay(1);
+    p_dev->CS_LOW(); // CS = 0
+    p_dev->delay_ms(DELAY_1_MS);
 
     // 写入数据标志,DATA:101
-    LCD_WR_0(); // WR = 0
-    vTaskDelay(1);
-    LCD_DATA_1(); // DATA = 1
-    vTaskDelay(1);
-    LCD_WR_1(); // WR = 1
-    vTaskDelay(1);
+    p_dev->WR_LOW();             // WR = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->DATA_HIGH();          // DATA = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->WR_HIGH();            // WR = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 
-    LCD_WR_0(); // WR = 0
-    vTaskDelay(1);
-    LCD_DATA_0(); // DATA = 0
-    vTaskDelay(1);
-    LCD_WR_1(); // WR = 1
-    vTaskDelay(1);
+    p_dev->WR_LOW();             // WR = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->DATA_LOW();           // DATA = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->WR_HIGH();            // WR = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 
-    LCD_WR_0(); // WR = 0
-    vTaskDelay(1);
-    LCD_DATA_1(); // DATA = 1
-    vTaskDelay(1);
-    LCD_WR_1(); // WR = 1
-    vTaskDelay(1);
-
+    p_dev->WR_LOW();             // WR = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+                                 // LCD_DATA_1(); // DATA = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->WR_HIGH();            // WR = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
     // 写入地址,Datasheet中A5~A0
     for (i = 0; i < 6; i++)
     {
-        LCD_WR_0(); // WR = 0
-        vTaskDelay(1);
+        p_dev->WR_LOW();             // WR = 0
+        p_dev->delay_ms(DELAY_1_MS); //延时
         if ((addr << i) & 0x80)
         {
-            LCD_DATA_1(); // DATA = 1
+            p_dev->DATA_HIGH(); // DATA = 1
         }
         else
         {
-            LCD_DATA_0(); // DATA = 0
+            p_dev->DATA_LOW(); // DATA = 0
         }
-        vTaskDelay(1);
-        LCD_WR_1(); // WR = 1
-        vTaskDelay(1);
+        p_dev->delay_ms(DELAY_1_MS); //延时
+        p_dev->WR_HIGH();            // WR = 1
+        p_dev->delay_ms(DELAY_1_MS); //延时
     }
     // 写入数据,Datasheet中D0~D3
     for (i = 0; i < 4; i++)
     {
-        LCD_WR_0(); // WR = 0
-        vTaskDelay(1);
+        p_dev->WR_LOW();             // WR = 0
+        p_dev->delay_ms(DELAY_1_MS); //延时
         if ((data >> (3 - i)) & 0x01)
         {
-            LCD_DATA_1(); // DATA = 1
+            p_dev->DATA_HIGH(); // DATA = 1
         }
         else
         {
-            LCD_DATA_0(); // DATA = 0
+            p_dev->DATA_LOW(); // DATA = 0
         }
-        vTaskDelay(1);
-        LCD_WR_1(); // WR = 1
-        vTaskDelay(1);
+        p_dev->delay_ms(DELAY_1_MS); //延时
+        p_dev->WR_HIGH();            // WR = 1
+        p_dev->delay_ms(DELAY_1_MS); //延时
     }
 
-    LCD_CS_1(); // CS = 1
-    vTaskDelay(1);
+    p_dev->CS_HIGH();            // CS = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 }
 
 /**
@@ -181,70 +188,70 @@ void HT1621_WriteData4Bit(uint8_t addr, uint8_t data)
  @param data -[in] 写入数据
  @return 无
 */
-void HT1621_WriteData8Bit(uint8_t addr, uint8_t data)
+void Board_HT1621_WriteData8Bit(ht1621_t *p_dev, uint8_t addr, uint8_t data)
 {
     uint8_t i;
 
-    LCD_CS_0(); // CS = 0
-    vTaskDelay(1);
+    p_dev->CS_LOW();             // CS = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
 
     // 写入数据标志,DATA:101
-    LCD_WR_0(); // WR = 0
-    vTaskDelay(1);
-    LCD_DATA_1(); // DATA = 1
-    vTaskDelay(1);
-    LCD_WR_1(); // WR = 1
-    vTaskDelay(1);
+    p_dev->WR_LOW();             // WR = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->DATA_HIGH();          // DATA = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->WR_HIGH();            // WR = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 
-    LCD_WR_0(); // WR = 0
-    vTaskDelay(1);
-    LCD_DATA_0(); // DATA = 0
-    vTaskDelay(1);
-    LCD_WR_1(); // WR = 1
-    vTaskDelay(1);
+    p_dev->WR_LOW();             // WR = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->DATA_LOW();           // DATA = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->WR_HIGH();            // WR = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 
-    LCD_WR_0(); // WR = 0
-    vTaskDelay(1);
-    LCD_DATA_1(); // DATA = 1
-    vTaskDelay(1);
-    LCD_WR_1(); // WR = 1
-    vTaskDelay(1);
+    p_dev->WR_LOW();             // WR = 0
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->DATA_HIGH();          // DATA = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
+    p_dev->WR_HIGH();            // WR = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 
     // 写入地址,Datasheet中A5~A0
     for (i = 0; i < 6; i++)
     {
-        LCD_WR_0(); // WR = 0
-        vTaskDelay(1);
+        p_dev->WR_LOW();             // WR = 0
+        p_dev->delay_ms(DELAY_1_MS); //延时
         if ((addr << i) & 0x80)
         {
-            LCD_DATA_1(); // DATA = 1
+            p_dev->DATA_HIGH(); // DATA = 1
         }
         else
         {
-            LCD_DATA_0(); // DATA = 0
+            p_dev->DATA_LOW(); // DATA = 0
         }
-        vTaskDelay(1);
-        LCD_WR_1(); // WR = 1
-        vTaskDelay(1);
+        p_dev->delay_ms(DELAY_1_MS); //延时
+        p_dev->WR_HIGH();            // WR = 1
+        p_dev->delay_ms(DELAY_1_MS); //延时
     }
     // 写入数据,Datasheet中两组D0~D3
     for (i = 0; i < 8; i++)
     {
-        LCD_WR_0(); // WR = 0
-        vTaskDelay(1);
+        p_dev->WR_LOW();             // WR = 0
+        p_dev->delay_ms(DELAY_1_MS); //延时
         if ((data >> (7 - i)) & 0x01)
         {
-            LCD_DATA_1(); // DATA = 1
+            p_dev->DATA_HIGH(); // DATA = 1
         }
         else
         {
-            LCD_DATA_0(); // DATA = 0
+            p_dev->DATA_LOW(); // DATA = 0
         }
-        vTaskDelay(1);
-        LCD_WR_1(); // WR = 1
-        vTaskDelay(1);
+        p_dev->delay_ms(DELAY_1_MS); //延时
+        p_dev->WR_HIGH();            // WR = 1
+        p_dev->delay_ms(DELAY_1_MS); //延时
     }
 
-    LCD_CS_1(); // CS = 1
-    vTaskDelay(1);
+    p_dev->CS_HIGH();            // CS = 1
+    p_dev->delay_ms(DELAY_1_MS); //延时
 }
