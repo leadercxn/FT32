@@ -543,6 +543,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\hardware\ht1621\ht1621.c</FilePath>
             </File>
+            <File>
+              <FileName>seg_code.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\hardware\ht1621\seg_code.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

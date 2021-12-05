@@ -6,15 +6,12 @@
 #include "flash_handler.h"
 #include "lcd_display_handler.h"
 
-#include "ht1621.h"
-
 #define SCHED_MAX_EVENT_DATA_SIZE   8
 #define SCHED_QUEUE_SIZE            20
 
 static app_scheduler_t  m_app_scheduler;
 
-MID_TIMER_DEF(m_test_timer);
-uint8_t data[4] = { 0x64,0x23,0x18,0x74 };
+uint8_t data[4] = {0x64, 0x23, 0x18, 0x74};
 
 static char * mp_button[BUTTON_EVENT_MAX] = 
 {
@@ -34,12 +31,6 @@ static char * mp_button[BUTTON_EVENT_MAX] =
   "BUTTON_L_EVENT_DOWN_RELEASE",
   "BUTTON_L_EVENT_LONG_SET",
 };
-
-
-void test_timer_handler(void *p_data)
-{
-    trace_debug("test_timer_handler\n\r");
-}
 
 static void r_adc_button_handler(adc_button_event_e event)
 {
@@ -73,15 +64,12 @@ int main(void)
   TIMER_INIT();
   trace_debug("TIMER_INIT done\n\r");
 
-  TIMER_CREATE(&m_test_timer,false,false,test_timer_handler);
-//  TIMER_START(m_test_timer, 1000);
-
   /**
    * delay 函数的初始化
    */
   mid_system_tick_init();
 
-  lcd_init();
+  lcd_display_init();
 
   ir_tx_init();
 
@@ -91,8 +79,6 @@ int main(void)
 
   bk9532_lr_init();
   ad22650_lr_init();
-
-  Display();
 
 #if 0
   /**
@@ -155,12 +141,10 @@ int main(void)
   trace_info("Start loop\n\r");
   while(1)
   {
-#if 1
-      app_sched_execute(&m_app_scheduler);
-      adc_button_loop_task();
-      mid_timer_loop_task();
-      bk953x_loop_task();
-#endif
+    app_sched_execute(&m_app_scheduler);
+    adc_button_loop_task();
+    mid_timer_loop_task();
+    bk953x_loop_task();
 
 #if 0
       gpio_output_set(&m_gpio_test, 0);

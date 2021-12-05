@@ -7,5 +7,6 @@
 #include "bk953x.h"
 #include "st7789.h"
 #include "ht1621.h"
+#include "seg_code.h"
 
 #endif

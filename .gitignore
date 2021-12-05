@@ -5,4 +5,5 @@ Projects/meeting_machine_pro/MDK-ARM/Listings/
 Projects/meeting_machine_pro/MDK-ARM/Objects/
 Projects/meeting_machine_pro/MDK-ARM/DebugConfig/
 Projects/meeting_machine_pro/MDK-ARM/Project.uvguix.*
+*.DS_Store/
 

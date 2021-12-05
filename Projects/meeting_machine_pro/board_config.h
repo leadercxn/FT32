@@ -142,6 +142,19 @@
 
 #define FLASH_PAGE_SIZE 0x00000200
 
+/* HT1621 */
+#define HT1621_DATA_PIN                 GPIO_Pin_7
+#define HT1621_DATA_PORT                GPIOA
+#define HT1621_DATA_PORT_PERIPH_CLK     RCC_AHBPeriph_GPIOA
+
+#define HT1621_WR_PIN                   GPIO_Pin_5
+#define HT1621_WR_PORT                  GPIOA
+#define HT1621_WR_PORT_PERIPH_CLK       RCC_AHBPeriph_GPIOA
+
+#define HT1621_CS_PIN                   GPIO_Pin_4
+#define HT1621_CS_PORT                  GPIOA
+#define HT1621_CS_PORT_PERIPH_CLK       RCC_AHBPeriph_GPIOA
+
 #endif
 
 
