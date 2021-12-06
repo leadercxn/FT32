@@ -19,7 +19,7 @@ static uint8_t m_seg_code[16] = {
     0x7D, //[6]    [0111 1101]
     0x07, //[7]    [0000 0111]
     0x7F, //[8]    [0111 1111]
-    0x67, //[9]    [0110 0111]
+    0x6F, //[9]    [0110 0111]
     0x77, //[A]    [0111 0111]
     0x7C, //[B]    [0111 1100]
     0x39, //[C]    [0011 1001]
@@ -40,8 +40,8 @@ void digital_to_segdata(encode_seg_code_t *seg_code, uint8_t digital)
     seg_code->seg_f = data & BIT_5 ? 1 : 0;
     seg_code->seg_g = data & BIT_6 ? 1 : 0;
     seg_code->seg_x = 0;
-    trace_debug("data =0x%02x\r\n", data);
-    trace_debug("seg_code->xgfedcba=%d%d%d%d %d%d%d%d\r\n",
+    trace_verbose("data =0x%02x\r\n", data);
+    trace_verbose("seg_code->xgfedcba=%d%d%d%d %d%d%d%d\r\n",
                seg_code->seg_x,
                seg_code->seg_g,
                seg_code->seg_f,
@@ -52,6 +52,7 @@ void digital_to_segdata(encode_seg_code_t *seg_code, uint8_t digital)
                seg_code->seg_a);
 }
 
+//仅适用于数码管1.2.3
 void segdata_to_segcom_mode_0(encode_seg_code_t seg_code, uint8_t *com_data_h, uint8_t *com_data_l)
 {
     seg_com_t seg_high, seg_low;
@@ -82,11 +83,11 @@ void segdata_to_segcom_mode_0(encode_seg_code_t seg_code, uint8_t *com_data_h, u
                   (seg_low.com3 << 2) & BIT_2 |
                   (seg_low.com4 << 3) & BIT_3;
 
-    trace_debug("seg_high.com1com2com3com4 %d%d%d%d\r\n", seg_high.com1, seg_high.com2, seg_high.com3, seg_high.com4);
-    trace_debug("seg_low.com1com2com3com4 %d%d%d%d\r\n", seg_low.com1, seg_low.com2, seg_low.com3, seg_low.com4);
+    trace_verbose("seg_high.com1com2com3com4 %d%d%d%d\r\n", seg_high.com1, seg_high.com2, seg_high.com3, seg_high.com4);
+    trace_verbose("seg_low.com1com2com3com4 %d%d%d%d\r\n", seg_low.com1, seg_low.com2, seg_low.com3, seg_low.com4);
 
-    trace_debug("com_data_h =0x%02x\r\n", *com_data_h);
-    trace_debug("com_data_l =0x%02x\r\n", *com_data_l);
+    trace_verbose("com_data_h =0x%02x\r\n", *com_data_h);
+    trace_verbose("com_data_l =0x%02x\r\n", *com_data_l);
 }
 
 //仅适用于数码管4.5.6
@@ -121,11 +122,11 @@ void segdata_to_segcom_mode_1(encode_seg_code_t seg_code, uint8_t *com_data_h, u
                   (seg_low.com3 << 2) & BIT_2 |
                   (seg_low.com4 << 3) & BIT_3;
 
-    trace_debug("seg_high.com1com2com3com4 %d%d%d%d\r\n", seg_high.com1, seg_high.com2, seg_high.com3, seg_high.com4);
-    trace_debug("seg_low.com1com2com3com4 %d%d%d%d\r\n", seg_low.com1, seg_low.com2, seg_low.com3, seg_low.com4);
+    trace_verbose("seg_high.com1com2com3com4 %d%d%d%d\r\n", seg_high.com1, seg_high.com2, seg_high.com3, seg_high.com4);
+    trace_verbose("seg_low.com1com2com3com4 %d%d%d%d\r\n", seg_low.com1, seg_low.com2, seg_low.com3, seg_low.com4);
 
-    trace_debug("com_data_h =0x%02x\r\n", *com_data_h);
-    trace_debug("com_data_l =0x%02x\r\n", *com_data_l);
+    trace_verbose("com_data_h =0x%02x\r\n", *com_data_h);
+    trace_verbose("com_data_l =0x%02x\r\n", *com_data_l);
 }
 
 //仅适用于数码管7.8.9.10.11.12.13.14.15
@@ -160,10 +161,19 @@ void segdata_to_segcom_mode_2(encode_seg_code_t seg_code, uint8_t *com_data_h, u
                   (seg_low.com3 << 2) & BIT_2 |
                   (seg_low.com4 << 3) & BIT_3;
 
-    trace_debug("seg_high.com1com2com3com4 %d%d%d%d\r\n", seg_high.com1, seg_high.com2, seg_high.com3, seg_high.com4);
-    trace_debug("seg_low.com1com2com3com4 %d%d%d%d\r\n", seg_low.com1, seg_low.com2, seg_low.com3, seg_low.com4);
+    trace_verbose("seg_high.com1com2com3com4 %d%d%d%d\r\n", seg_high.com1, seg_high.com2, seg_high.com3, seg_high.com4);
+    trace_verbose("seg_low.com1com2com3com4 %d%d%d%d\r\n", seg_low.com1, seg_low.com2, seg_low.com3, seg_low.com4);
 
-    trace_debug("com_data_h =0x%02x\r\n", *com_data_h);
-    trace_debug("com_data_l =0x%02x\r\n", *com_data_l);
+    trace_verbose("com_data_h =0x%02x\r\n", *com_data_h);
+    trace_verbose("com_data_l =0x%02x\r\n", *com_data_l);
 }
 
+void segdata_convertor(uint32_t value, seg_data_t *seg_data)
+{
+    seg_data->high = (value % 1000) / 100;
+    seg_data->mid = (value % 100) / 10;
+    seg_data->low = value % 10;
+    trace_verbose("seg_data->high =%d\r\n", seg_data->high);
+    trace_verbose("seg_data->mid =%d\r\n", seg_data->mid);
+    trace_verbose("seg_data->low =%d\r\n", seg_data->low);
+}

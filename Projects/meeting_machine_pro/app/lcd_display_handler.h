@@ -8,7 +8,6 @@ typedef struct
     gpio_object_t   lcd_back_light_pin;
 } lcd_display_obj_t;
 
-
-void lcd_display_init(void);
+int lcd_display_init(void);
 
 #endif

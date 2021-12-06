@@ -3,8 +3,8 @@
 #include "ft_systick.h"
 
 static uint16_t sysclk = 288;	//还不确定为啥是 72*4 才可以较为精准的延时
-static uint16_t fac_us = 0;
-static uint16_t fac_ms = 0;
+static uint32_t fac_us = 0;
+static uint32_t fac_ms = 0;
 
 /*SysTick时钟源由HCLK/8提供，当系统频率为72MHz时最小计数周期为1/9MHz,
 计满9次为1us，fac_us以9为单位*/

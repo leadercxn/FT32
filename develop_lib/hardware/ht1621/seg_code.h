@@ -98,9 +98,16 @@ typedef struct
     uint8_t com4;
 } seg_com_t;
 
+typedef struct
+{
+    uint8_t high; //高位
+    uint8_t mid;  //中间位
+    uint8_t low;  //低位
+} seg_data_t;
+
 void digital_to_segdata(encode_seg_code_t *seg_code, uint8_t digital);
 void segdata_to_segcom_mode_0(encode_seg_code_t seg_code, uint8_t *com_data_h, uint8_t *com_data_l);
 void segdata_to_segcom_mode_1(encode_seg_code_t seg_code, uint8_t *com_data_h, uint8_t *com_data_l);
 void segdata_to_segcom_mode_2(encode_seg_code_t seg_code, uint8_t *com_data_h, uint8_t *com_data_l);
-
+void segdata_convertor(uint32_t value, seg_data_t *seg_data);
 #endif
