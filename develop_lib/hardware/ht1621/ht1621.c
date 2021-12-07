@@ -33,9 +33,7 @@ int ht162x_bit_send(ht162x_t *p_dev, uint8_t data, uint8_t cnt)
 			gpio_output_set(&p_dev->data_pin, 1);
 		}
 
-		delay_us(10);
 		gpio_output_set(&p_dev->wr_clk_pin, 1);
-		delay_us(10);
 		data <<= 1; //左移一位，丢弃已经写入的最高位
 	}
 }
@@ -68,11 +66,8 @@ int ht162x_data_bit_send(ht162x_t *p_dev, uint8_t data, uint8_t cnt)
 			gpio_output_set(&p_dev->data_pin, 1);
 		}
 
-		delay_us(10);
 		gpio_output_set(&p_dev->wr_clk_pin, 0);
-		delay_us(10);
 		gpio_output_set(&p_dev->wr_clk_pin, 1);
-		delay_us(10);
 		data >>= 1;
 	}
 }
@@ -182,8 +177,6 @@ int ht162x_init(ht162x_t *p_dev)
 	gpio_output_set(&p_dev->cs_pin, 1);
 	gpio_output_set(&p_dev->wr_clk_pin, 1);
 	gpio_output_set(&p_dev->data_pin, 1);
-
-	delay_ms(500);
 
 	ht162x_cmd_send(p_dev, 0x52);
 	ht162x_cmd_send(p_dev, 0X30); // - - 使用内部振荡器 0X30

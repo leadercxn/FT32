@@ -145,7 +145,7 @@ int main(void)
     adc_button_loop_task();
     mid_timer_loop_task();
     bk953x_loop_task();
-
+    lcd_display_loop_task();
 #if 0
       gpio_output_set(&m_gpio_test, 0);
       delay_ms(100);

@@ -75,6 +75,18 @@
 #define DigitalSeg15_L 0x16 //数码管15 seg23
 #define DigitalSeg15_H 0x17 //数码管15 seg24
 
+#define DigitalSegRF_LEFT_H 0x02
+#define DigitalSegRF_LEFT_L 0x06
+
+#define DigitalSegAF_LEFT_H 0x00
+#define DigitalSegAF_LEFT_L 0x07
+
+#define DigitalSegRF_RIGHT_H 0x1C
+#define DigitalSegRF_RIGHT_L 0x19
+
+#define DigitalSegAF_RIGHT_H 0x1A
+#define DigitalSegAF_RIGHT_L 0x18
+
 /**@brief Structure encode dev_status
  */
 typedef struct
