@@ -1,16 +1,26 @@
 #include "board_config.h"
 #include "lcd_display_handler.h"
 
+union data 
+{
+    uint8_t byte;
+
+    struct
+    {   
+        uint8_t com1 : 1;       //低位
+        uint8_t com2 : 1;
+        uint8_t com3 : 1;
+        uint8_t com4 : 1;
+        uint8_t reserve : 4;
+    } seg;
+};
+
 typedef struct
 {
-    uint8_t seg_index;
+    uint8_t         seg_index;
+    union data      seg_data;
+} lcd_seg_cell_t;
 
-    uint8_t reserve : 4;
-    uint8_t com4 : 1;
-    uint8_t com3 : 1;
-    uint8_t com2 : 1;
-    uint8_t com1 : 1;
-} __attribute__((__packed__)) lcd_seg_cell_t;
 
 /* seg 表 */
 static lcd_seg_cell_t m_seg_table[] = {
@@ -341,7 +351,17 @@ int lcd_display_init(void)
 
     l_rf_show();
 
-    trace_debug("len = %d \n\r",sizeof(lcd_seg_cell_t));
+#if 0
+    m_seg_table[0].seg_data.byte = 0xC4;
+
+    trace_debug("union data len = %d , len = %d \n\r",sizeof(union data),sizeof(lcd_seg_cell_t));
+
+    trace_debug("reserve = %d \n\r",m_seg_table[0].seg_data.seg.reserve);
+    trace_debug("com4 = %d \n\r",m_seg_table[0].seg_data.seg.com4);
+    trace_debug("com3 = %d \n\r",m_seg_table[0].seg_data.seg.com3);
+    trace_debug("com2 = %d \n\r",m_seg_table[0].seg_data.seg.com2);
+    trace_debug("com1 = %d \n\r",m_seg_table[0].seg_data.seg.com1);
+#endif
 
     return err_code;
 }
