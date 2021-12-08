@@ -52,7 +52,7 @@ void adc_button_loop_task(void)
     static adc_button_event_e old_r_button_event = BUTTON_EVENT_MAX;
     adc_button_event_e r_button_event = BUTTON_EVENT_MAX;
 
-    uint16_t r_adc_mv = adc_ch_result_get(ADC_CHANNEL_0) * 3300 / 4095;
+    uint16_t r_adc_mv = adc_ch_result_get(ADC_CHANNEL_1) * 3300 / 4095;
     if(r_adc_mv > BUTTON_RELEASE_MIN)
     {
         if(m_is_r_adc_button_start)
@@ -82,7 +82,7 @@ void adc_button_loop_task(void)
     {
         /* 简单的滤波 */
         delay_ms(10);
-        r_adc_mv = adc_ch_result_get(ADC_CHANNEL_0) * 3300 / 4095;
+        r_adc_mv = adc_ch_result_get(ADC_CHANNEL_1) * 3300 / 4095;
         if(r_adc_mv > BUTTON_RELEASE_MIN)
         {
             return;
@@ -152,7 +152,7 @@ void adc_button_loop_task(void)
     static adc_button_event_e old_l_button_event = BUTTON_EVENT_MAX;
     adc_button_event_e l_button_event = BUTTON_EVENT_MAX;
 
-    uint16_t l_adc_mv = adc_ch_result_get(ADC_CHANNEL_1) * 3300 / 4095;
+    uint16_t l_adc_mv = adc_ch_result_get(ADC_CHANNEL_0) * 3300 / 4095;
     if(l_adc_mv > BUTTON_RELEASE_MIN)
     {
         if(m_is_l_adc_button_start)
@@ -182,7 +182,7 @@ void adc_button_loop_task(void)
     {
         /* 简单的滤波 */
         delay_ms(10);
-        l_adc_mv = adc_ch_result_get(ADC_CHANNEL_1) * 3300 / 4095;
+        l_adc_mv = adc_ch_result_get(ADC_CHANNEL_0) * 3300 / 4095;
         if(l_adc_mv > BUTTON_RELEASE_MIN)
         {
             return;

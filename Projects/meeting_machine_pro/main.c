@@ -34,7 +34,43 @@ static char * mp_button[BUTTON_EVENT_MAX] =
 
 static void r_adc_button_handler(adc_button_event_e event)
 {
+    uint16_t r_index = 0;
+    uint16_t r_freq = 0;
     trace_debug("r_adc_button_handler event = %s\n\r",mp_button[event]);
+    switch(event)
+    {
+        case BUTTON_R_EVENT_UP_RELEASE:
+        case BUTTON_R_EVENT_DOWN_RELEASE:
+            r_index = channel_index_lr_get(SCREEN_R);
+            r_freq = channel_freq_lr_get(SCREEN_R);
+
+            if(BUTTON_R_EVENT_UP_RELEASE == event)
+            {
+              r_index += 1;
+
+              if(r_index > SCREEN_R_CHANNEL_INDEX_MAX)
+              {
+                r_index = SCREEN_R_CHANNEL_INDEX_MIN;
+              }
+            }
+            else
+            {
+              r_index -= 1;
+
+              if(r_index < SCREEN_R_CHANNEL_INDEX_MIN)
+              {
+                r_index = SCREEN_R_CHANNEL_INDEX_MAX;
+              }
+            }
+        
+            r_freq = SCREEN_R_CHANNEL_FREQ_MIN + (r_index - SCREEN_R_CHANNEL_INDEX_MIN) * 3;
+
+            channel_index_lr_set(SCREEN_R, r_index);
+            channel_freq_lr_set(SCREEN_R,r_freq);
+          break;
+
+        
+    }
 }
 
 static void l_adc_button_handler(adc_button_event_e event)

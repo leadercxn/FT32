@@ -14,101 +14,73 @@
 #define BIT_6 0x40 /**< The value of bit 6 */
 #define BIT_7 0x80 /**< The value of bit 7 */
 
-#define Digital_1 0x00 //数码管1
-#define Digital_2 0x01 //数码管2
-#define Digital_3 0x02 //数码管3
+/**
+ * LCD 上可显示的数码管
+ */
+typedef enum
+{
+    DIGITAL_1,
+    DIGITAL_2,
+    DIGITAL_3,
+    DIGITAL_4,
+    DIGITAL_5,
+    DIGITAL_6,
+    DIGITAL_7,
+    DIGITAL_8,
+    DIGITAL_9,
+    DIGITAL_10,
+    DIGITAL_11,
+    DIGITAL_12,
+    DIGITAL_13,
+    DIGITAL_14,
+    DIGITAL_15,
+    DIGITAL_16,
+    DIGITAL_S3,
+    DIGITAL_S4,
 
-#define DigitalSeg3_L 0x00 //数码管3 seg1
-#define DigitalSeg3_H 0x01 //数码管3 seg2
+    DIGITAL_S1,
+    DIGITAL_S2,
 
-#define DigitalSeg2_L 0x02 //数码管3 seg3
-#define DigitalSeg2_H 0x03 //数码管3 seg4
+    DIGITAL_T1,
+    DIGITAL_T2,
+    DIGITAL_T3,
+    DIGITAL_T4,
+    DIGITAL_T5,
 
-#define DigitalSeg1_L 0x04 //数码管3 seg5
-#define DigitalSeg1_H 0x05 //数码管3 seg6
+    DIGITAL_X1,
+    DIGITAL_X2,
+    DIGITAL_X3,
+    DIGITAL_X4,
+    DIGITAL_X5,
 
-#define Digital_4 0x00 //数码管4
-#define Digital_5 0x01 //数码管5
-#define Digital_6 0x02 //数码管6
+    DIGITAL_M1,
+    DIGITAL_M2,
+    DIGITAL_M3,
+    DIGITAL_M4,
+    DIGITAL_M5,
 
-#define DigitalSeg4_L 0x1E //数码管4 seg31
-#define DigitalSeg4_H 0x1F //数码管4 seg32
+    DIGITAL_W1,
+    DIGITAL_W2,
+    DIGITAL_W3,
+    DIGITAL_W4,
+    DIGITAL_W5,
+} lcd_part_e;
 
-#define DigitalSeg5_L 0x1C //数码管5 seg29
-#define DigitalSeg5_H 0x1D //数码管5 seg30
-
-#define DigitalSeg6_L 0x1A //数码管6 seg27
-#define DigitalSeg6_H 0x1B //数码管6 seg28
-
-#define Digital_7 0x00  //数码管7
-#define Digital_8 0x01  //数码管8
-#define Digital_9 0x02  //数码管9
-#define Digital_10 0x03 //数码管10
-#define Digital_11 0x04 //数码管11
-#define Digital_S3 0x05 //数码管S3
-#define Digital_12 0x06 //数码管12
-#define Digital_13 0x07 //数码管13
-#define Digital_14 0x08 //数码管14
-#define Digital_15 0x09 //数码管15
-#define Digital_16 0x0A //数码管16
-#define Digital_S4 0x0B //数码管S4
-
-#define DigitalSeg7_L 0x08 //数码管7 seg9
-#define DigitalSeg7_H 0x09 //数码管7 seg10
-#define DigitalSeg8_L 0x0A //数码管8 seg11
-#define DigitalSeg8_H 0x0B //数码管8 seg12
-#define DigitalSeg9_L 0x0C //数码管9 seg13
-#define DigitalSeg9_H 0x0D //数码管9 seg14
-
-#define DigitalSeg10_L 0x0E //数码管10 seg15
-#define DigitalSeg10_H 0x0F //数码管10 seg16
-
-#define DigitalSeg12_L 0x10 //数码管12 seg17
-#define DigitalSeg12_H 0x11 //数码管12 seg18
-
-#define DigitalSeg13_L 0x12 //数码管13 seg19
-#define DigitalSeg13_H 0x13 //数码管13 seg20
-
-#define DigitalSeg14_L 0x14 //数码管14 seg21
-#define DigitalSeg14_H 0x15 //数码管14 seg22
-
-#define DigitalSeg15_L 0x16 //数码管15 seg23
-#define DigitalSeg15_H 0x17 //数码管15 seg24
-
-#define DigitalSegRF_LEFT_H 0x02
-#define DigitalSegRF_LEFT_L 0x06
-
-#define DigitalSegAF_LEFT_H 0x00
-#define DigitalSegAF_LEFT_L 0x07
-
-#define DigitalSegRF_RIGHT_H 0x1C
-#define DigitalSegRF_RIGHT_L 0x19
-
-#define DigitalSegAF_RIGHT_H 0x1A
-#define DigitalSegAF_RIGHT_L 0x18
 
 /**@brief Structure encode dev_status
  */
 typedef struct
 {
     //---- 段显示   -gfe dcba
-    uint8_t seg_a; //BIT:0
-    uint8_t seg_b; //BIT:1
-    uint8_t seg_c; //BIT:2
-    uint8_t seg_d; //BIT:3
-    uint8_t seg_e; //BIT:4
-    uint8_t seg_f; //BIT:5
-    uint8_t seg_g; //BIT:6
-    uint8_t seg_x; //BIT:7
+    uint8_t seg_a :1; //BIT:0
+    uint8_t seg_b :1; //BIT:1
+    uint8_t seg_c :1; //BIT:2
+    uint8_t seg_d :1; //BIT:3
+    uint8_t seg_e :1; //BIT:4
+    uint8_t seg_f :1; //BIT:5
+    uint8_t seg_g :1; //BIT:6
+    uint8_t seg_x :1; //BIT:7
 } __attribute__((__packed__)) encode_seg_code_t;
-
-typedef struct
-{
-    uint8_t com1;
-    uint8_t com2;
-    uint8_t com3;
-    uint8_t com4;
-} seg_com_t;
 
 typedef struct
 {
@@ -118,8 +90,5 @@ typedef struct
 } seg_data_t;
 
 void digital_to_segdata(encode_seg_code_t *seg_code, uint8_t digital);
-void segdata_to_segcom_mode_0(encode_seg_code_t seg_code, uint8_t *com_data_h, uint8_t *com_data_l);
-void segdata_to_segcom_mode_1(encode_seg_code_t seg_code, uint8_t *com_data_h, uint8_t *com_data_l);
-void segdata_to_segcom_mode_2(encode_seg_code_t seg_code, uint8_t *com_data_h, uint8_t *com_data_l);
 void segdata_convertor(uint32_t value, seg_data_t *seg_data);
 #endif

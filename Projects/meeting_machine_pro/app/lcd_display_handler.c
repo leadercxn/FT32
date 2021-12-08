@@ -22,40 +22,43 @@ typedef struct
 } lcd_seg_cell_t;
 
 
-/* seg 表 */
+/* seg 表 
+ *
+ * seg_index + 1 = LCD图中的 SEG
+ */
 static lcd_seg_cell_t m_seg_table[] = {
-    {.seg_index = 0,},  //seg1
-    {.seg_index = 1,},  //seg2
-    {.seg_index = 2,},
-    {.seg_index = 3,},
-    {.seg_index = 4,},
-    {.seg_index = 5,},
-    {.seg_index = 6,},
-    {.seg_index = 7,},
-    {.seg_index = 8,},
-    {.seg_index = 9,},
-    {.seg_index = 10,},
-    {.seg_index = 11,},
-    {.seg_index = 12,},
-    {.seg_index = 13,},
-    {.seg_index = 14,},
-    {.seg_index = 15,},
-    {.seg_index = 16,},
-    {.seg_index = 17,},
-    {.seg_index = 18,},
-    {.seg_index = 19,},
-    {.seg_index = 20,},
-    {.seg_index = 21,},
-    {.seg_index = 22,},
-    {.seg_index = 23,},
-    {.seg_index = 24,},
-    {.seg_index = 25,},
-    {.seg_index = 26,},
-    {.seg_index = 27,},
-    {.seg_index = 28,},
-    {.seg_index = 29,},
-    {.seg_index = 30,},
-    {.seg_index = 31,}, //seg32
+    {.seg_index = 0, .seg_data.byte = 0},  //seg1
+    {.seg_index = 1, .seg_data.byte = 0},  //seg2
+    {.seg_index = 2, .seg_data.byte = 0},
+    {.seg_index = 3, .seg_data.byte = 0},
+    {.seg_index = 4, .seg_data.byte = 0},
+    {.seg_index = 5, .seg_data.byte = 0},
+    {.seg_index = 6, .seg_data.byte = 0},
+    {.seg_index = 7, .seg_data.byte = 0},
+    {.seg_index = 8, .seg_data.byte = 0},
+    {.seg_index = 9, .seg_data.byte = 0},
+    {.seg_index = 10, .seg_data.byte = 0},
+    {.seg_index = 11, .seg_data.byte = 0},
+    {.seg_index = 12, .seg_data.byte = 0},
+    {.seg_index = 13, .seg_data.byte = 0},
+    {.seg_index = 14, .seg_data.byte = 0},
+    {.seg_index = 15, .seg_data.byte = 0},
+    {.seg_index = 16, .seg_data.byte = 0},
+    {.seg_index = 17, .seg_data.byte = 0},
+    {.seg_index = 18, .seg_data.byte = 0},
+    {.seg_index = 19, .seg_data.byte = 0},
+    {.seg_index = 20, .seg_data.byte = 0},
+    {.seg_index = 21, .seg_data.byte = 0},
+    {.seg_index = 22, .seg_data.byte = 0},
+    {.seg_index = 23, .seg_data.byte = 0},
+    {.seg_index = 24, .seg_data.byte = 0},
+    {.seg_index = 25, .seg_data.byte = 0},
+    {.seg_index = 26, .seg_data.byte = 0},
+    {.seg_index = 27, .seg_data.byte = 0},
+    {.seg_index = 28, .seg_data.byte = 0},
+    {.seg_index = 29, .seg_data.byte = 0},
+    {.seg_index = 30, .seg_data.byte = 0},
+    {.seg_index = 31, .seg_data.byte = 0}, //seg32
 };
 
 static uint16_t m_l_ch_index = 1;
@@ -102,151 +105,321 @@ static lcd_display_obj_t    m_lcd_display_obj = {
     .lcd_ctrl_pin.gpio_pin = LCD_CTRL_PIN,
 };
 
-static void digital_mode_0_set(uint8_t digital, uint8_t data, uint8_t seg_x)
+/**
+ *@brief 适用于 显示数字channel index 和 channel freq 的数码管
+ */
+static void digital_number_show(lcd_part_e part, uint8_t data)
 {
-	encode_seg_code_t seg_code;
-	uint8_t com_data_h, com_data_l;
+    if(part > DIGITAL_S4)
+    {
+        return;
+    }
+
+    encode_seg_code_t seg_code;
 	digital_to_segdata(&seg_code, data);
-	seg_code.seg_x = seg_x;
-	segdata_to_segcom_mode_0(seg_code, &com_data_h, &com_data_l);
 
-	switch (digital)
-	{
-        case Digital_1:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg1_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg1_L, com_data_l);
+    lcd_seg_cell_t seg_cell_l;
+    lcd_seg_cell_t seg_cell_h;
+
+    switch (part)
+    {
+        case DIGITAL_1:
+        case DIGITAL_2:
+        case DIGITAL_3:
+                if(part == DIGITAL_1)
+                {
+                    seg_cell_l.seg_index = 4;
+                    seg_cell_h.seg_index = 5;
+                }
+                else if(part == DIGITAL_2)
+                {
+                    seg_cell_l.seg_index = 2;
+                    seg_cell_h.seg_index = 3;
+                }
+                else
+                {
+                    seg_cell_l.seg_index = 0;
+                    seg_cell_h.seg_index = 1;
+                }
+
+                //    m_seg_table[seg_cell_l.seg_index].seg_data.seg.com1   //com1保留旧值
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com2 = seg_code.seg_c;
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com3 = seg_code.seg_g;
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com4 = seg_code.seg_b;
+
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com1 = seg_code.seg_d;
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com2 = seg_code.seg_e;
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com3 = seg_code.seg_f;
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com4 = seg_code.seg_a;
             break;
 
-        case Digital_2:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg2_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg2_L, com_data_l);
+        case DIGITAL_4:
+        case DIGITAL_5:
+        case DIGITAL_6:
+                if(part == DIGITAL_4)
+                {
+                    seg_cell_l.seg_index = 30;
+                    seg_cell_h.seg_index = 31;
+                }
+                else if(part == DIGITAL_5)
+                {
+                    seg_cell_l.seg_index = 28;
+                    seg_cell_h.seg_index = 29;
+                }
+                else
+                {
+                    seg_cell_l.seg_index = 26;
+                    seg_cell_h.seg_index = 27;
+                }
+
+                //    m_seg_table[seg_cell_l.seg_index].seg_data.seg.com1   //com1保留旧值
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com2 = seg_code.seg_b;
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com3 = seg_code.seg_g;
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com4 = seg_code.seg_c;
+
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com1 = seg_code.seg_a;
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com2 = seg_code.seg_f;
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com3 = seg_code.seg_e;
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com4 = seg_code.seg_d;
+            break;
+        
+        case DIGITAL_7:
+        case DIGITAL_8:
+        case DIGITAL_9:
+        case DIGITAL_10:
+        case DIGITAL_12:
+        case DIGITAL_13:
+        case DIGITAL_14:
+        case DIGITAL_15:
+                if(part == DIGITAL_7)
+                {
+                    seg_cell_l.seg_index = 8;
+                    seg_cell_h.seg_index = 9;
+                }
+                else if(part == DIGITAL_8)
+                {
+                    seg_cell_l.seg_index = 10;
+                    seg_cell_h.seg_index = 11;
+                }
+                else if(part == DIGITAL_9)
+                {
+                    seg_cell_l.seg_index = 12;
+                    seg_cell_h.seg_index = 13;
+                }
+                else if(part == DIGITAL_10)
+                {
+                    seg_cell_l.seg_index = 14;
+                    seg_cell_h.seg_index = 15;
+                }
+                else if(part == DIGITAL_12)
+                {
+                    seg_cell_l.seg_index = 16;
+                    seg_cell_h.seg_index = 17;
+                }
+                else if(part == DIGITAL_13)
+                {
+                    seg_cell_l.seg_index = 18;
+                    seg_cell_h.seg_index = 19;
+                }
+                else if(part == DIGITAL_14)
+                {
+                    seg_cell_l.seg_index = 20;
+                    seg_cell_h.seg_index = 21;
+                }
+                else
+                {
+                    seg_cell_l.seg_index = 22;
+                    seg_cell_h.seg_index = 23;
+                }
+
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com1 = seg_code.seg_a;
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com2 = seg_code.seg_f;
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com3 = seg_code.seg_e;
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com4 = seg_code.seg_d;
+
+                //m_seg_table[seg_cell_h.seg_index].seg_data.seg.com1 = seg_code.seg_a; //com1保留旧值
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com2 = seg_code.seg_b;
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com3 = seg_code.seg_g;
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com4 = seg_code.seg_c;
             break;
 
-        case Digital_3:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg3_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg3_L, com_data_l);
+        //显示0
+        case DIGITAL_11:
+        case DIGITAL_16:
+                if(part == DIGITAL_11)
+                {
+                    seg_cell_l.seg_index = 13;
+                    seg_cell_h.seg_index = 15;
+                }
+                else
+                {
+                    seg_cell_l.seg_index = 21;
+                    seg_cell_h.seg_index = 23;
+                }
+
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com1 = 1;
+                m_seg_table[seg_cell_h.seg_index].seg_data.seg.com1 = 1;
+            break;
+
+        //显示0
+        case DIGITAL_S3:
+        case DIGITAL_S4:
+                if(part == DIGITAL_S3)
+                {
+                    seg_cell_l.seg_index = 9;
+                }
+                else
+                {
+                    seg_cell_l.seg_index = 17;
+                }
+
+                m_seg_table[seg_cell_l.seg_index].seg_data.seg.com1 = 1;
             break;
 
         default:
             break;
-	}
+    }
+
+    trace_verbose("l.byte = 0x%02x\n\r",m_seg_table[seg_cell_l.seg_index].seg_data.byte);
+    ht162x_write(&m_lcd_display_obj.ht162x, seg_cell_l.seg_index, m_seg_table[seg_cell_l.seg_index].seg_data.byte);
+
+    if((part != DIGITAL_S3) && (part != DIGITAL_S4))
+    {
+        trace_verbose("h.byte = 0x%02x\n\r",m_seg_table[seg_cell_h.seg_index].seg_data.byte);
+        ht162x_write(&m_lcd_display_obj.ht162x, seg_cell_h.seg_index, m_seg_table[seg_cell_h.seg_index].seg_data.byte);
+    }
+    
 }
 
-static void digital_mode_1_Set(uint8_t digital, uint8_t data, uint8_t seg_x)
+/**
+ * @brief 适用于特别的字符显示
+ */
+static void digital_special_show(lcd_part_e part , bool enable)
 {
-	encode_seg_code_t seg_code;
-	uint8_t com_data_h, com_data_l;
-	digital_to_segdata(&seg_code, data);
-	seg_code.seg_x = seg_x;
-	segdata_to_segcom_mode_1(seg_code, &com_data_h, &com_data_l);
+    if(part < DIGITAL_S4)
+    {
+        return;
+    }
 
-	switch (digital)
-	{
-        case Digital_4:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg4_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg4_L, com_data_l);
+    lcd_seg_cell_t seg_cell;
+
+    switch(part)
+    {
+        case DIGITAL_S1:
+                seg_cell.seg_index = 30;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
             break;
 
-        case Digital_5:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg5_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg5_L, com_data_l);
+        case DIGITAL_S2:
+                seg_cell.seg_index = 4;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
             break;
 
-        case Digital_6:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg6_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg6_L, com_data_l);
+        case DIGITAL_T1:
+                seg_cell.seg_index = 2;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
             break;
 
-        default:
-            break;
-	}
-}
-
-static void digital_mode_2_Set(uint8_t digital, uint8_t data, uint8_t seg_x)
-{
-	encode_seg_code_t seg_code;
-	uint8_t com_data_h, com_data_l;
-	digital_to_segdata(&seg_code, data);
-	seg_code.seg_x = seg_x;
-	segdata_to_segcom_mode_2(seg_code, &com_data_h, &com_data_l);
-
-	switch (digital)
-	{
-        case Digital_7:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg7_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg7_L, com_data_l);
+        case DIGITAL_T2:
+                seg_cell.seg_index = 6;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
             break;
 
-        case Digital_8:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg8_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg8_L, com_data_l);
+        case DIGITAL_T3:
+                seg_cell.seg_index = 6;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com2 = enable;
             break;
 
-        case Digital_9:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg9_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg9_L, com_data_l);
+        case DIGITAL_T4:
+                seg_cell.seg_index = 6;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com3 = enable;
             break;
 
-        case Digital_10:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg10_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg10_L, com_data_l);
+        case DIGITAL_T5:
+                seg_cell.seg_index = 6;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com4 = enable;
             break;
 
-        case Digital_12:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg12_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg12_L, com_data_l);
+
+        case DIGITAL_X1:
+                seg_cell.seg_index = 0;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
             break;
 
-        case Digital_13:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg13_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg13_L, com_data_l);
+        case DIGITAL_X2:
+                seg_cell.seg_index = 7;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
             break;
 
-        case Digital_14:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg14_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg14_L, com_data_l);
+        case DIGITAL_X3:
+                seg_cell.seg_index = 7;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com2 = enable;
             break;
-        case Digital_15:
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg15_H, com_data_h);
-            ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg15_L, com_data_l);
+
+        case DIGITAL_X4:
+                seg_cell.seg_index = 7;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com3 = enable;
             break;
-        default:
+
+        case DIGITAL_X5:
+                seg_cell.seg_index = 7;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com4 = enable;
             break;
-	}
-}
-
-static void l_rf_show(void)
-{
-    ht162x_write(&m_lcd_display_obj.ht162x, DigitalSegRF_LEFT_H, 0x01);
-
-    ht162x_write(&m_lcd_display_obj.ht162x, DigitalSegRF_LEFT_L, 0x0f);
-    ht162x_write(&m_lcd_display_obj.ht162x, DigitalSegAF_LEFT_L, 0x0f);
-
-    ht162x_write(&m_lcd_display_obj.ht162x, DigitalSegRF_RIGHT_L, 0x0f);
-    ht162x_write(&m_lcd_display_obj.ht162x, DigitalSegAF_RIGHT_L, 0x0e);
-}
 
 
-void display_serach_clean(void)
-{
-	ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg12_L, 0x00);
-	ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg13_L, 0x00);
-	ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg14_L, 0x00);
-	ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg15_L, 0x00);
-}
+        case DIGITAL_M1:
+                seg_cell.seg_index = 26;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
+            break;
 
-void display_serach(uint32_t freq)
-{
-	ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg12_L, 0x08);
-	delay_ms(freq);
-	ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg13_L, 0x08);
-	delay_ms(freq);
-	ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg14_L, 0x08);
-	delay_ms(freq);
-	ht162x_write(&m_lcd_display_obj.ht162x, DigitalSeg15_L, 0x08);
-	delay_ms(freq);
-	display_serach_clean();
-	delay_ms(freq);
+        case DIGITAL_M2:
+                seg_cell.seg_index = 24;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
+            break;
+
+        case DIGITAL_M3:
+                seg_cell.seg_index = 24;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com2 = enable;
+            break;
+
+        case DIGITAL_M4:
+                seg_cell.seg_index = 24;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com3 = enable;
+            break;
+
+        case DIGITAL_M5:
+                seg_cell.seg_index = 24;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com4 = enable;
+            break;
+
+
+        case DIGITAL_W1:
+                seg_cell.seg_index = 28;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
+            break;
+
+        case DIGITAL_W2:
+                seg_cell.seg_index = 25;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
+            break;
+
+        case DIGITAL_W3:
+                seg_cell.seg_index = 25;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com2 = enable;
+            break;
+
+        case DIGITAL_W4:
+                seg_cell.seg_index = 25;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com3 = enable;
+            break;
+
+        case DIGITAL_W5:
+                seg_cell.seg_index = 25;
+                m_seg_table[seg_cell.seg_index].seg_data.seg.com4 = enable;
+            break;
+    }
+
+    ht162x_write(&m_lcd_display_obj.ht162x, seg_cell.seg_index, m_seg_table[seg_cell.seg_index].seg_data.byte);
 }
 
 /**
@@ -259,15 +432,15 @@ static void channel_index_lr_show(screen_lr_e lr, uint16_t index)
 
     if(SCREEN_L == lr)
     {
-        digital_mode_0_set(Digital_1, seg_data.high, 1); //此处S2显示
-	    digital_mode_0_set(Digital_2, seg_data.mid, 0);
-	    digital_mode_0_set(Digital_3, seg_data.low, 0);
+        digital_number_show(DIGITAL_1, seg_data.high);
+        digital_number_show(DIGITAL_2, seg_data.mid);
+        digital_number_show(DIGITAL_3, seg_data.low);
     }
     else
     {
-        digital_mode_1_Set(Digital_4, seg_data.high, 0);
-	    digital_mode_1_Set(Digital_5, seg_data.mid, 0);
-	    digital_mode_1_Set(Digital_6, seg_data.low, 0);
+        digital_number_show(DIGITAL_4, seg_data.high);
+        digital_number_show(DIGITAL_5, seg_data.mid);
+        digital_number_show(DIGITAL_6, seg_data.low);
     }
 }
 
@@ -285,17 +458,23 @@ static void channel_freq_lr_show(screen_lr_e lr, uint16_t hund_freq)
 
     if(SCREEN_L == lr)
     {
-        digital_mode_2_Set(Digital_7, hundred, 1);
-        digital_mode_2_Set(Digital_8, decade, 0);
-        digital_mode_2_Set(Digital_9, unit, 1); //BC
-        digital_mode_2_Set(Digital_10, point, 1); //BC
+        digital_number_show(DIGITAL_7, hundred);
+        digital_number_show(DIGITAL_8, decade);
+        digital_number_show(DIGITAL_9, unit);
+        digital_number_show(DIGITAL_10, point);
+
+        digital_number_show(DIGITAL_11, 0);
+        digital_number_show(DIGITAL_S3, 0);
     }
     else
     {
-        digital_mode_2_Set(Digital_12, hundred, 1);
-        digital_mode_2_Set(Digital_13, decade, 0);
-        digital_mode_2_Set(Digital_14, unit, 1); //BC
-        digital_mode_2_Set(Digital_15, point, 1); //BC
+        digital_number_show(DIGITAL_12, hundred);
+        digital_number_show(DIGITAL_13, decade);
+        digital_number_show(DIGITAL_14, unit);
+        digital_number_show(DIGITAL_15, point);
+
+        digital_number_show(DIGITAL_16, 0);
+        digital_number_show(DIGITAL_S4, 0);
     }
 }
 
@@ -306,11 +485,94 @@ static void channel_af_lr_show(screen_lr_e lr, uint8_t level)
 {
     if(SCREEN_L == lr)
     {
+        if(level > 4)
+        {
+            digital_special_show(DIGITAL_X1 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_X1 , 0);
+        }
+        if(level > 3)
+        {
+            digital_special_show(DIGITAL_X2 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_X2 , 0);
+        }       
+        if(level > 2)
+        {
+            digital_special_show(DIGITAL_X3 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_X3 , 0);
+        }
+        if(level > 1)
+        {
+            digital_special_show(DIGITAL_X4 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_X4 , 0);
+        }
 
+        if(level > 0)
+        {
+            digital_special_show(DIGITAL_X5 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_X5 , 0);
+        }
     }
     else
     {
-        
+        if(level > 4)
+        {
+            digital_special_show(DIGITAL_M1 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_M1 , 0);
+        }
+
+        if(level > 3)
+        {
+            digital_special_show(DIGITAL_M2 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_M2 , 0);
+        }
+
+        if(level > 2)
+        {
+            digital_special_show(DIGITAL_M3 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_M3 , 0);
+        }
+
+        if(level > 1)
+        {
+            digital_special_show(DIGITAL_M4 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_M4 , 0);
+        }
+
+        if(level > 0)
+        {
+            digital_special_show(DIGITAL_M5 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_M5 , 0);
+        }
     }
 }
 
@@ -321,11 +583,97 @@ static void channel_rf_lr_show(screen_lr_e lr, uint8_t level)
 {
     if(SCREEN_L == lr)
     {
+        if(level > 4)
+        {
+            digital_special_show(DIGITAL_T1 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_T1 , 0);
+        }
 
+        if(level > 3)
+        {
+            digital_special_show(DIGITAL_T2 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_T2 , 0);
+        }
+
+        if(level > 2)
+        {
+            digital_special_show(DIGITAL_T3 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_T3 , 0);
+        }
+
+        if(level > 1)
+        {
+            digital_special_show(DIGITAL_T4 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_T4 , 0);
+        }
+
+        if(level > 0)
+        {
+            digital_special_show(DIGITAL_T5 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_T5 , 0);
+        }
     }
     else
     {
-        
+        if(level > 4)
+        {
+            digital_special_show(DIGITAL_W1 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_W1 , 0);
+        }
+
+        if(level > 3)
+        {
+            digital_special_show(DIGITAL_W2 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_W2 , 0);
+        }
+
+        if(level > 2)
+        {
+            digital_special_show(DIGITAL_W3 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_W3 , 0);
+        }
+
+        if(level > 1)
+        {
+            digital_special_show(DIGITAL_W4 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_W4 , 0);
+        }
+
+        if(level > 0)
+        {
+            digital_special_show(DIGITAL_W5 , 1);
+        }
+        else
+        {
+            digital_special_show(DIGITAL_W5 , 0);
+        }
     }
 }
 
@@ -343,25 +691,20 @@ int lcd_display_init(void)
     gpio_output_set(&m_lcd_display_obj.lcd_ctrl_pin, 0);
     gpio_output_set(&m_lcd_display_obj.lcd_back_light_pin, 1);
 
+
+    digital_special_show(DIGITAL_S2 , true);
+
     channel_index_lr_show(SCREEN_L, m_l_ch_index);
     channel_index_lr_show(SCREEN_R, m_r_ch_index);
 
     channel_freq_lr_show(SCREEN_L,m_l_ch_freq);
     channel_freq_lr_show(SCREEN_R,m_r_ch_freq);
 
-    l_rf_show();
+    channel_af_lr_show(SCREEN_L, 5);
+    channel_rf_lr_show(SCREEN_L, 5);
 
-#if 0
-    m_seg_table[0].seg_data.byte = 0xC4;
-
-    trace_debug("union data len = %d , len = %d \n\r",sizeof(union data),sizeof(lcd_seg_cell_t));
-
-    trace_debug("reserve = %d \n\r",m_seg_table[0].seg_data.seg.reserve);
-    trace_debug("com4 = %d \n\r",m_seg_table[0].seg_data.seg.com4);
-    trace_debug("com3 = %d \n\r",m_seg_table[0].seg_data.seg.com3);
-    trace_debug("com2 = %d \n\r",m_seg_table[0].seg_data.seg.com2);
-    trace_debug("com1 = %d \n\r",m_seg_table[0].seg_data.seg.com1);
-#endif
+    channel_af_lr_show(SCREEN_R, 5);
+    channel_rf_lr_show(SCREEN_R, 5);
 
     return err_code;
 }
