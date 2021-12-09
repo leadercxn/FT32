@@ -1,5 +1,4 @@
 #include "stdio.h"
-
 #include "board_config.h"
 #include "bk953x_handler.h"
 

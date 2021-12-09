@@ -17,65 +17,136 @@ static char * mp_button[BUTTON_EVENT_MAX] =
 {
   "BUTTON_R_EVENT_SET_PUSH",
   "BUTTON_R_EVENT_SET_RELEASE",
+  "BUTTON_R_EVENT_LONG_SET",
+
   "BUTTON_R_EVENT_UP_PUSH",
   "BUTTON_R_EVENT_UP_RELEASE",
   "BUTTON_R_EVENT_DOWN_PUSH",
   "BUTTON_R_EVENT_DOWN_RELEASE",
-  "BUTTON_R_EVENT_LONG_SET",
+  
 
   "BUTTON_L_EVENT_SET_PUSH",
   "BUTTON_L_EVENT_SET_RELEASE",
+  "BUTTON_L_EVENT_LONG_SET",
+
   "BUTTON_L_EVENT_UP_PUSH",
   "BUTTON_L_EVENT_UP_RELEASE",
   "BUTTON_L_EVENT_DOWN_PUSH",
   "BUTTON_L_EVENT_DOWN_RELEASE",
-  "BUTTON_L_EVENT_LONG_SET",
 };
 
+/**
+ * @brief 右侧adc按键回调
+ */
 static void r_adc_button_handler(adc_button_event_e event)
 {
     uint16_t r_index = 0;
     uint16_t r_freq = 0;
-    trace_debug("r_adc_button_handler event = %s\n\r",mp_button[event]);
-    switch(event)
+
+    static uint64_t pre_ticks = 0;
+    uint64_t now_ticks = mid_timer_ticks_get();
+
+    /**
+     * 两个时间得间隔200ms
+     */
+    if(now_ticks - pre_ticks > 200)
     {
-        case BUTTON_R_EVENT_UP_RELEASE:
-        case BUTTON_R_EVENT_DOWN_RELEASE:
-            r_index = channel_index_lr_get(SCREEN_R);
-            r_freq = channel_freq_lr_get(SCREEN_R);
+      pre_ticks = now_ticks;
+    }
+    else
+    {
+      return;
+    }
 
-            if(BUTTON_R_EVENT_UP_RELEASE == event)
-            {
-              r_index += 1;
+    trace_debug("r_adc_button_handler event = %s\n\r",mp_button[event]);
 
-              if(r_index > SCREEN_R_CHANNEL_INDEX_MAX)
-              {
-                r_index = SCREEN_R_CHANNEL_INDEX_MIN;
-              }
-            }
-            else
-            {
-              r_index -= 1;
+    if((event >= BUTTON_R_EVENT_UP_PUSH) && (event <= BUTTON_R_EVENT_DOWN_RELEASE))
+    {
+        r_index = channel_index_lr_get(SCREEN_R);
+        r_freq = channel_freq_lr_get(SCREEN_R);
 
-              if(r_index < SCREEN_R_CHANNEL_INDEX_MIN)
-              {
-                r_index = SCREEN_R_CHANNEL_INDEX_MAX;
-              }
-            }
-        
-            r_freq = SCREEN_R_CHANNEL_FREQ_MIN + (r_index - SCREEN_R_CHANNEL_INDEX_MIN) * 3;
+        /* 右边 */
+        if((BUTTON_R_EVENT_UP_RELEASE == event) || (BUTTON_R_EVENT_UP_PUSH == event))
+        {
+          r_index += 1;
 
-            channel_index_lr_set(SCREEN_R, r_index);
-            channel_freq_lr_set(SCREEN_R,r_freq);
-          break;
+          if(r_index > SCREEN_R_CHANNEL_INDEX_MAX)
+          {
+            r_index = SCREEN_R_CHANNEL_INDEX_MIN;
+          }
+        }
+        else
+        {
+          r_index -= 1;
 
-        
+          if(r_index < SCREEN_R_CHANNEL_INDEX_MIN)
+          {
+            r_index = SCREEN_R_CHANNEL_INDEX_MAX;
+          }
+        }
+      
+        r_freq = SCREEN_R_CHANNEL_FREQ_MIN + (r_index - SCREEN_R_CHANNEL_INDEX_MIN) * 3;
+
+        channel_index_lr_set(SCREEN_R, r_index);
+        channel_freq_lr_set(SCREEN_R,r_freq);
     }
 }
 
+/**
+ * @brief 左侧adc按键回调
+ */
 static void l_adc_button_handler(adc_button_event_e event)
 {
+    uint16_t l_index = 0;
+    uint16_t l_freq = 0;
+
+    static uint64_t pre_ticks = 0;
+    uint64_t now_ticks = mid_timer_ticks_get();
+
+    /**
+     * 两个时间得间隔200ms
+     */
+    if(now_ticks - pre_ticks > 200)
+    {
+      pre_ticks = now_ticks;
+    }
+    else
+    {
+      return;
+    }
+
     trace_debug("l_adc_button_handler event = %s\n\r",mp_button[event]);
+
+    /* 左边 */
+    if((event >= BUTTON_L_EVENT_UP_PUSH) && (event <= BUTTON_L_EVENT_DOWN_RELEASE))
+    {
+        l_index = channel_index_lr_get(SCREEN_L);
+        l_freq = channel_freq_lr_get(SCREEN_L);
+
+        if((BUTTON_L_EVENT_UP_RELEASE == event)||(BUTTON_L_EVENT_UP_PUSH == event))
+        {
+          l_index += 1;
+
+          if(l_index > SCREEN_L_CHANNEL_INDEX_MAX)
+          {
+            l_index = SCREEN_L_CHANNEL_INDEX_MIN;
+          }
+        }
+        else
+        {
+          l_index -= 1;
+
+          if(l_index < SCREEN_L_CHANNEL_INDEX_MIN)
+          {
+            l_index = SCREEN_L_CHANNEL_INDEX_MAX;
+          }
+        }
+      
+        l_freq = SCREEN_L_CHANNEL_FREQ_MIN + (l_index - SCREEN_L_CHANNEL_INDEX_MIN) * 3;
+
+        channel_index_lr_set(SCREEN_L, l_index);
+        channel_freq_lr_set(SCREEN_L,l_freq);
+    }
 }
 
 static void app_evt_schedule(void * p_event_data)
@@ -89,6 +160,12 @@ static void app_evt_schedule(void * p_event_data)
 int main(void)
 {
   int err_code = 0;
+
+  uint8_t l_af_level = 0;
+  uint8_t r_af_level = 0;
+  uint8_t l_rf_level = 0;
+  uint8_t r_rf_level = 0;
+
 
   trace_init();
 
@@ -177,6 +254,42 @@ int main(void)
   trace_info("Start loop\n\r");
   while(1)
   {
+
+#if 1
+    l_af_level ++;
+    r_af_level ++;
+    l_rf_level ++;
+    r_rf_level ++;
+
+    if(l_af_level > 5)
+    {
+        l_af_level = 0;
+    }
+
+    if(r_af_level > 5)
+    {
+        r_af_level = 0;
+    }
+
+    if(l_rf_level > 5)
+    {
+        l_rf_level = 0;
+    }
+
+    if(r_rf_level > 5)
+    {
+        r_rf_level = 0;
+    }
+
+    channel_af_level_lr_set(SCREEN_L, l_af_level);
+    channel_af_level_lr_set(SCREEN_R, r_af_level);
+
+    channel_rf_level_lr_set(SCREEN_L, l_rf_level);
+    channel_rf_level_lr_set(SCREEN_R, r_rf_level);
+
+    delay_ms(100);
+#endif
+
     app_sched_execute(&m_app_scheduler);
     adc_button_loop_task();
     mid_timer_loop_task();
