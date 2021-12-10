@@ -61,8 +61,8 @@ static lcd_seg_cell_t m_seg_table[] = {
     {.seg_index = 31, .seg_data.byte = 0}, //seg32
 };
 
-static uint16_t m_l_ch_index = 1;
-static uint16_t m_r_ch_index = 101;
+static uint16_t m_l_ch_index = 2;
+static uint16_t m_r_ch_index = 102;
 
 static uint16_t m_l_ch_freq = 6320;
 static uint16_t m_r_ch_freq = 6600;
@@ -72,6 +72,9 @@ static uint8_t m_r_ch_af_level = 0;
 
 static uint8_t m_l_ch_rf_level = 0;
 static uint8_t m_r_ch_rf_level = 0;
+
+static lcd_set_mode_e current_set_mode = EXIT_SET_MODE;
+static lcd_set_mode_e old_set_mode = EXIT_SET_MODE;
 
 static bool refresh = false;
 
@@ -681,8 +684,6 @@ static void channel_rf_lr_show(screen_lr_e lr, uint8_t level)
 
 int lcd_display_init(void)
 {
-    int err_code = 0;
-
     ht162x_init(&m_lcd_display_obj.ht162x);
     ht162x_all_clean(&m_lcd_display_obj.ht162x);
 
@@ -694,27 +695,41 @@ int lcd_display_init(void)
 
     digital_special_show(DIGITAL_S2 , true);
 
+    m_l_ch_freq = SCREEN_L_CHANNEL_FREQ_MIN + (m_l_ch_index - SCREEN_L_CHANNEL_INDEX_MIN) * 3;
+    m_r_ch_freq = SCREEN_R_CHANNEL_FREQ_MIN + (m_r_ch_index - SCREEN_R_CHANNEL_INDEX_MIN) * 3;
+
     channel_index_lr_show(SCREEN_L, m_l_ch_index);
     channel_index_lr_show(SCREEN_R, m_r_ch_index);
 
     channel_freq_lr_show(SCREEN_L,m_l_ch_freq);
     channel_freq_lr_show(SCREEN_R,m_r_ch_freq);
 
-    channel_af_lr_show(SCREEN_L, 5);
-    channel_rf_lr_show(SCREEN_L, 5);
-
-    channel_af_lr_show(SCREEN_R, 5);
-    channel_rf_lr_show(SCREEN_R, 5);
-
-    return err_code;
+    return 0;
 }
+
+/**
+ * @brief 扫频显示
+ */
+void lcd_set_channel_display(void)
+{
+    
+}
+
+
 
 
 void lcd_display_loop_task(void)
 {
-    if(refresh)
+    if(current_set_mode != EXIT_SET_MODE)
+    {
+        lcd_set_channel_display(void);
+    }
+    else if(refresh)
     {
         refresh = false;
+
+        m_l_ch_freq = SCREEN_L_CHANNEL_FREQ_MIN + (m_l_ch_index - SCREEN_L_CHANNEL_INDEX_MIN) * 3;
+        m_r_ch_freq = SCREEN_R_CHANNEL_FREQ_MIN + (m_r_ch_index - SCREEN_R_CHANNEL_INDEX_MIN) * 3;
 
         channel_index_lr_show(SCREEN_L, m_l_ch_index);
         channel_index_lr_show(SCREEN_R, m_r_ch_index);
@@ -741,16 +756,6 @@ uint16_t channel_index_lr_get(screen_lr_e lr)
     return m_r_ch_index;
 }
 
-uint16_t channel_freq_lr_get(screen_lr_e lr)
-{
-    if(SCREEN_L == lr)
-    {
-        return m_l_ch_freq;
-    }
-
-    return m_r_ch_freq;
-}
-
 void channel_index_lr_set(screen_lr_e lr, uint16_t index)
 {
     if(SCREEN_L == lr)
@@ -760,20 +765,6 @@ void channel_index_lr_set(screen_lr_e lr, uint16_t index)
     else
     {
         m_r_ch_index = index;
-    }
-
-    refresh = true;
-}
-
-void channel_freq_lr_set(screen_lr_e lr, uint16_t freq)
-{
-    if(SCREEN_L == lr)
-    {
-        m_l_ch_freq = freq;
-    }
-    else
-    {
-        m_r_ch_freq = freq;
     }
 
     refresh = true;

@@ -219,7 +219,7 @@ void adc_button_loop_task(void)
                 if(mid_timer_ticks_get() - m_l_button_start_time > BUTTON_SHORT_TIME_MS)
                 {
                     m_l_button_start_time = mid_timer_ticks_get();
-                    l_button_event = BUTTON_L_EVENT_UP_PUSH;
+                    l_button_event = BUTTON_L_EVENT_DOWN_PUSH;  //左边由于硬件电阻贴反，上下调转
                 }
             }
         }
@@ -235,7 +235,7 @@ void adc_button_loop_task(void)
                 if(mid_timer_ticks_get() - m_l_button_start_time > BUTTON_SHORT_TIME_MS)
                 {
                     m_l_button_start_time = mid_timer_ticks_get();
-                    l_button_event = BUTTON_L_EVENT_DOWN_PUSH;
+                    l_button_event = BUTTON_L_EVENT_UP_PUSH;    //左边由于硬件电阻贴反，上下调转
                 }
             }
         }

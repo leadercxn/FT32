@@ -41,7 +41,6 @@ static char * mp_button[BUTTON_EVENT_MAX] =
 static void r_adc_button_handler(adc_button_event_e event)
 {
     uint16_t r_index = 0;
-    uint16_t r_freq = 0;
 
     static uint64_t pre_ticks = 0;
     uint64_t now_ticks = mid_timer_ticks_get();
@@ -63,8 +62,6 @@ static void r_adc_button_handler(adc_button_event_e event)
     if((event >= BUTTON_R_EVENT_UP_PUSH) && (event <= BUTTON_R_EVENT_DOWN_RELEASE))
     {
         r_index = channel_index_lr_get(SCREEN_R);
-        r_freq = channel_freq_lr_get(SCREEN_R);
-
         /* 右边 */
         if((BUTTON_R_EVENT_UP_RELEASE == event) || (BUTTON_R_EVENT_UP_PUSH == event))
         {
@@ -84,11 +81,8 @@ static void r_adc_button_handler(adc_button_event_e event)
             r_index = SCREEN_R_CHANNEL_INDEX_MAX;
           }
         }
-      
-        r_freq = SCREEN_R_CHANNEL_FREQ_MIN + (r_index - SCREEN_R_CHANNEL_INDEX_MIN) * 3;
 
         channel_index_lr_set(SCREEN_R, r_index);
-        channel_freq_lr_set(SCREEN_R,r_freq);
     }
 }
 
@@ -98,7 +92,6 @@ static void r_adc_button_handler(adc_button_event_e event)
 static void l_adc_button_handler(adc_button_event_e event)
 {
     uint16_t l_index = 0;
-    uint16_t l_freq = 0;
 
     static uint64_t pre_ticks = 0;
     uint64_t now_ticks = mid_timer_ticks_get();
@@ -121,7 +114,6 @@ static void l_adc_button_handler(adc_button_event_e event)
     if((event >= BUTTON_L_EVENT_UP_PUSH) && (event <= BUTTON_L_EVENT_DOWN_RELEASE))
     {
         l_index = channel_index_lr_get(SCREEN_L);
-        l_freq = channel_freq_lr_get(SCREEN_L);
 
         if((BUTTON_L_EVENT_UP_RELEASE == event)||(BUTTON_L_EVENT_UP_PUSH == event))
         {
@@ -142,10 +134,7 @@ static void l_adc_button_handler(adc_button_event_e event)
           }
         }
       
-        l_freq = SCREEN_L_CHANNEL_FREQ_MIN + (l_index - SCREEN_L_CHANNEL_INDEX_MIN) * 3;
-
         channel_index_lr_set(SCREEN_L, l_index);
-        channel_freq_lr_set(SCREEN_L,l_freq);
     }
 }
 
@@ -154,7 +143,14 @@ static void app_evt_schedule(void * p_event_data)
     trace_debug("app_evt_schedule\n\r");
 }
 
-
+/**
+ * @brief 参数初始化
+ */
+static void app_param_init(void)
+{
+    channel_index_lr_set(SCREEN_L, g_app_param.l_ch_index);
+    channel_index_lr_set(SCREEN_R, g_app_param.r_ch_index);
+}
 
 
 int main(void)
@@ -182,6 +178,10 @@ int main(void)
    */
   mid_system_tick_init();
 
+
+  app_param_flash_init();
+  app_param_init();
+
   lcd_display_init();
 
   ir_tx_init();
@@ -193,40 +193,6 @@ int main(void)
   bk9532_lr_init();
   ad22650_lr_init();
 
-#if 0
-  /**
-   * flash test
-   */
-  uint8_t w_data[4] = {1,2,3,4};
-  uint8_t r_data[4] = {0};
-
-  err_code = mid_flash_read(FLASH_APP_PARAM_ADDRESS, 4, r_data);
-  if(err_code)
-  {
-      trace_error("ft_flash_read error %d\n\r",err_code);
-  }
-  delay_ms(100);
-
-  trace_error("read address 0x%08x:\n\r",FLASH_APP_PARAM_ADDRESS);
-  trace_dump(r_data,4);
-
-  err_code = mid_flash_write(FLASH_APP_PARAM_ADDRESS, 4, (uint32_t *)w_data);
-  if(err_code)
-  {
-      trace_error("ft_flash_write error %d\n\r",err_code);
-  }
-  delay_ms(100);
-
-  err_code = mid_flash_read(FLASH_APP_PARAM_ADDRESS, 4, r_data);
-  if(err_code)
-  {
-      trace_error("ft_flash_read error %d\n\r",err_code);
-  }
-  delay_ms(100);
-  trace_error("read address 0x%08x:\n\r",FLASH_APP_PARAM_ADDRESS);
-  trace_dump(r_data,4);
-
-#endif
 
 #if 0
   err_code = ir_tx_start(data, sizeof(data));
@@ -255,7 +221,7 @@ int main(void)
   while(1)
   {
 
-#if 1
+#if 0
     l_af_level ++;
     r_af_level ++;
     l_rf_level ++;
@@ -287,7 +253,7 @@ int main(void)
     channel_rf_level_lr_set(SCREEN_L, l_rf_level);
     channel_rf_level_lr_set(SCREEN_R, r_rf_level);
 
-    delay_ms(100);
+    delay_ms(1000);
 #endif
 
     app_sched_execute(&m_app_scheduler);
@@ -295,11 +261,12 @@ int main(void)
     mid_timer_loop_task();
     bk953x_loop_task();
     lcd_display_loop_task();
+
 #if 0
       gpio_output_set(&m_gpio_test, 0);
-      delay_ms(100);
+      delay_ms(1000);
       gpio_output_set(&m_gpio_test, 1);
-      delay_ms(100);
+      delay_ms(1000);
 #endif
 
   }

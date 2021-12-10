@@ -68,15 +68,22 @@ void ft_delay_us(uint32_t us)
 	SysTick->VAL = 0x00;  //清空计数器
 }
 
+/**
+ * @brief 当ms过大，导致溢出，是个BUG
+ */
 void ft_delay_ms(uint32_t ms)
 {
-	//	volatile uint32_t temp;
-	SysTick->LOAD = (uint32_t)ms * fac_ms;
-	SysTick->VAL = 0x00;  //清空计数器
-	SysTick->CTRL = 0x01; //开始计数
-						  //	temp  = SysTick->VAL;
-	//当计数器的值减小到0的时候，CTRL寄存器的位16会置1
-	while ((SysTick->CTRL & (0x01 << 16)) == 0);
-	SysTick->CTRL = 0x00; //停止计数
-	SysTick->VAL = 0x00;  //清空计数器
+	uint32_t i = 0;
+	for(i = 0; i < ms; i++)
+	{
+		//	volatile uint32_t temp;
+		SysTick->LOAD = (uint32_t)1 * fac_ms;
+		SysTick->VAL = 0x00;  //清空计数器
+		SysTick->CTRL = 0x01; //开始计数
+							//	temp  = SysTick->VAL;
+		//当计数器的值减小到0的时候，CTRL寄存器的位16会置1
+		while ((SysTick->CTRL & (0x01 << 16)) == 0);
+		SysTick->CTRL = 0x00; //停止计数
+		SysTick->VAL = 0x00;  //清空计数器
+	}
 }

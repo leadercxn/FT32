@@ -15,7 +15,7 @@ typedef struct
 
 extern app_param_t g_app_param;
 
-
+void app_param_flash_init(void);
 
 
 #endif

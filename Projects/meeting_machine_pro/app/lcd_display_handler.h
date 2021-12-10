@@ -24,13 +24,18 @@ typedef enum
     SCREEN_R,
 } screen_lr_e;
 
+typedef enum
+{
+    EXIT_SET_MODE,
+    L_SET_MODE,
+    R_SET_MODE,
+} lcd_set_mode_e;
+
 int lcd_display_init(void);
 void lcd_display_loop_task(void);
 
 uint16_t channel_index_lr_get(screen_lr_e lr);
-uint16_t channel_freq_lr_get(screen_lr_e lr);
 void channel_index_lr_set(screen_lr_e lr, uint16_t index);
-void channel_freq_lr_set(screen_lr_e lr, uint16_t freq);
 void channel_af_level_lr_set(screen_lr_e lr, uint8_t level);
 void channel_rf_level_lr_set(screen_lr_e lr, uint8_t level);
 void lcd_black_light_enable(bool enable);
