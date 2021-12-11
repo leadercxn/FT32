@@ -42,5 +42,7 @@ void lcd_black_light_enable(bool enable);
 
 lcd_settings_mode_e channel_settings_mode_get(void);
 void channel_settings_mode_set(lcd_settings_mode_e mode);
+bool lcd_off_status_get(void);
+void lcd_off_status_set(bool enable);
 
 #endif

@@ -82,6 +82,8 @@ static bool l_channel_index_refresh = false;
 static bool r_channel_index_refresh = false;
 static bool l_channel_freq_refresh = false;
 static bool r_channel_freq_refresh = false;
+static bool m_lcd_off = false;
+static bool m_old_lcd_off = false;
 
 /**
  * 相关IO配置
@@ -471,6 +473,38 @@ static void channel_freq_lr_clear(screen_lr_e lr)
 }
 
 /**
+ * @brief 显示关机logo
+ */
+static void channel_off_show(void)
+{
+    uint8_t i = 0;
+
+    /**
+     * 清屏
+     */
+    for(i = 0; i < 32; i++)
+    {
+        m_seg_table[i].seg_data.byte = 0;
+        ht162x_write(&m_lcd_display_obj.ht162x, i, m_seg_table[i].seg_data.byte);
+    }
+
+    /**
+     * 两边显示OFF
+     */
+    digital_number_show(DIGITAL_7,0x0);
+    digital_number_show(DIGITAL_8,0xF);
+    digital_number_show(DIGITAL_9,0xF);
+
+    digital_number_show(DIGITAL_12,0x0);
+    digital_number_show(DIGITAL_13,0xF);
+    digital_number_show(DIGITAL_14,0xF);
+
+    delay_ms(500);
+    gpio_output_set(&m_lcd_display_obj.lcd_ctrl_pin, 1);
+    gpio_output_set(&m_lcd_display_obj.lcd_back_light_pin, 0);
+}
+
+/**
  * @brief 显示通道数
  */
 static void channel_index_lr_show(screen_lr_e lr, uint16_t index)
@@ -747,8 +781,8 @@ int lcd_display_init(void)
     channel_index_lr_show(SCREEN_L, m_l_ch_index);
     channel_index_lr_show(SCREEN_R, m_r_ch_index);
 
-    channel_freq_lr_show(SCREEN_L,m_l_ch_freq);
-    channel_freq_lr_show(SCREEN_R,m_r_ch_freq);
+    channel_freq_lr_show(SCREEN_L, m_l_ch_freq);
+    channel_freq_lr_show(SCREEN_R, m_r_ch_freq);
 
     return 0;
 }
@@ -938,6 +972,29 @@ void lcd_display_loop_task(void)
         channel_af_lr_show(SCREEN_R, m_r_ch_af_level);
         channel_rf_lr_show(SCREEN_R, m_r_ch_rf_level);
     }
+
+    if(m_lcd_off != m_old_lcd_off)
+    {
+        if(m_lcd_off)
+        {
+            channel_off_show();
+        }
+        else
+        {
+            gpio_output_set(&m_lcd_display_obj.lcd_ctrl_pin, 0);
+            gpio_output_set(&m_lcd_display_obj.lcd_back_light_pin, 1);
+
+            delay_ms(10);
+
+            digital_special_show(DIGITAL_S2 , true);
+            l_channel_index_refresh = true;
+            r_channel_index_refresh = true;
+            l_channel_freq_refresh = true;
+            r_channel_freq_refresh = true;
+        }
+
+        m_old_lcd_off = m_lcd_off;
+    }
 }
 
 
@@ -957,7 +1014,7 @@ void channel_index_lr_set(screen_lr_e lr, uint16_t index)
     {
         m_l_ch_index = index;
         l_channel_index_refresh = true;
-        if((current_settings_mode == EXIT_SET_MODE) && (old_settings_mode == EXIT_SET_MODE))
+        if(((current_settings_mode == EXIT_SET_MODE) && (old_settings_mode == EXIT_SET_MODE)) || (current_settings_mode == R_SETTING_MODE))
         {
             l_channel_freq_refresh = true;
         }
@@ -966,7 +1023,7 @@ void channel_index_lr_set(screen_lr_e lr, uint16_t index)
     {
         m_r_ch_index = index;
         r_channel_index_refresh = true;
-        if((current_settings_mode == EXIT_SET_MODE) && (old_settings_mode == EXIT_SET_MODE))
+        if(((current_settings_mode == EXIT_SET_MODE) && (old_settings_mode == EXIT_SET_MODE)) ||(current_settings_mode == L_SETTING_MODE))
         {
             r_channel_freq_refresh = true;
         }
@@ -1022,4 +1079,14 @@ void lcd_black_light_enable(bool enable)
     {
         gpio_output_set(&m_lcd_display_obj.lcd_back_light_pin, 0);
     }
+}
+
+bool lcd_off_status_get(void)
+{
+    return m_lcd_off;
+}
+
+void lcd_off_status_set(bool enable)
+{
+    m_lcd_off = enable;
 }

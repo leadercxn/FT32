@@ -13,6 +13,12 @@ static app_scheduler_t  m_app_scheduler;
 
 uint8_t data[4] = {0x64, 0x23, 0x18, 0x74};
 
+/**
+ * 供电开关状态
+ */
+bool g_sys_power_on = true;
+bool g_old_sys_power_on = true;
+
 static char * mp_button[BUTTON_EVENT_MAX] = 
 {
   "BUTTON_R_EVENT_SET_PUSH",
@@ -102,6 +108,11 @@ static void r_adc_button_handler(adc_button_event_e event)
             channel_settings_mode_set(EXIT_SET_MODE);
         }
     }
+
+    /**
+     * LONG_SET
+     */
+
 }
 
 /**
@@ -170,6 +181,10 @@ static void l_adc_button_handler(adc_button_event_e event)
             channel_settings_mode_set(EXIT_SET_MODE);
         }
     }
+
+    /**
+     * LONG_SET
+     */
 }
 
 static void app_evt_schedule(void * p_event_data)
@@ -190,12 +205,8 @@ static void app_param_init(void)
 int main(void)
 {
   int err_code = 0;
-
-  uint8_t l_af_level = 0;
-  uint8_t r_af_level = 0;
-  uint8_t l_rf_level = 0;
-  uint8_t r_rf_level = 0;
-
+  uint8_t pin_level = 0;
+  uint8_t old_pin_level = 0;
 
   trace_init();
 
@@ -240,68 +251,39 @@ int main(void)
 
   app_sched_event_put(&m_app_scheduler, NULL, 0, app_evt_schedule);
 
-#if 0
   static gpio_object_t   m_gpio_test = 
                 {
-                    .gpio_port_periph_clk = L_VIRT_SCL_GPIO_CLK,
-                    .p_gpio_port = L_VIRT_SCL_GPIO_PORT,
-                    .gpio_dir = GPIO_DIR_OUTPUR,
-                    .gpio_pin = L_VIRT_SCL_PIN,
+                    .gpio_port_periph_clk = SYS_POWER_SWITCH_PORT_PERIPH_CLK,
+                    .p_gpio_port = SYS_POWER_SWITCH_PORT,
+                    .gpio_dir = GPIO_DIR_INPUT,
+                    .gpio_pin = SYS_POWER_SWITCH_PIN,
                 };
   gpio_config(&m_gpio_test);
-#endif
 
   trace_info("Start loop\n\r");
   while(1)
   {
-
-#if 0
-    l_af_level ++;
-    r_af_level ++;
-    l_rf_level ++;
-    r_rf_level ++;
-
-    if(l_af_level > 5)
-    {
-        l_af_level = 0;
-    }
-
-    if(r_af_level > 5)
-    {
-        r_af_level = 0;
-    }
-
-    if(l_rf_level > 5)
-    {
-        l_rf_level = 0;
-    }
-
-    if(r_rf_level > 5)
-    {
-        r_rf_level = 0;
-    }
-
-    channel_af_level_lr_set(SCREEN_L, l_af_level);
-    channel_af_level_lr_set(SCREEN_R, r_af_level);
-
-    channel_rf_level_lr_set(SCREEN_L, l_rf_level);
-    channel_rf_level_lr_set(SCREEN_R, r_rf_level);
-
-    delay_ms(1000);
-#endif
-
     app_sched_execute(&m_app_scheduler);
     adc_button_loop_task();
     mid_timer_loop_task();
     bk953x_loop_task();
     lcd_display_loop_task();
+    
 
-#if 0
-      gpio_output_set(&m_gpio_test, 0);
-      delay_ms(1000);
-      gpio_output_set(&m_gpio_test, 1);
-      delay_ms(1000);
-#endif
+    gpio_input_get(&m_gpio_test, &pin_level);
+    if(old_pin_level != pin_level)
+    {
+        if(pin_level)
+        {
+          lcd_off_status_set(true);
+        }
+        else
+        {
+          lcd_off_status_set(false);
+        }
+
+        old_pin_level = pin_level;
+    }
 
   }
 }

@@ -40,6 +40,10 @@
 #define LCD_CTRL_PORT                   GPIOF
 #define LCD_CTRL_PORT_PERIPH_CLK        RCC_AHBPeriph_GPIOF
 
+#define SYS_POWER_SWITCH_PIN            GPIO_Pin_15
+#define SYS_POWER_SWITCH_PORT           GPIOA
+#define SYS_POWER_SWITCH_PORT_PERIPH_CLK        RCC_AHBPeriph_GPIOA
+
 /* ADC */
 #define ADC_CHANNEL_0                   ADC_Channel_0
 #define ADC_CHANNEL_1                   ADC_Channel_1
