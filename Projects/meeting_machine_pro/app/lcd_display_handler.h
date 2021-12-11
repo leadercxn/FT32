@@ -27,9 +27,9 @@ typedef enum
 typedef enum
 {
     EXIT_SET_MODE,
-    L_SET_MODE,
-    R_SET_MODE,
-} lcd_set_mode_e;
+    L_SETTING_MODE,
+    R_SETTING_MODE,
+} lcd_settings_mode_e;
 
 int lcd_display_init(void);
 void lcd_display_loop_task(void);
@@ -39,5 +39,8 @@ void channel_index_lr_set(screen_lr_e lr, uint16_t index);
 void channel_af_level_lr_set(screen_lr_e lr, uint8_t level);
 void channel_rf_level_lr_set(screen_lr_e lr, uint8_t level);
 void lcd_black_light_enable(bool enable);
+
+lcd_settings_mode_e channel_settings_mode_get(void);
+void channel_settings_mode_set(lcd_settings_mode_e mode);
 
 #endif

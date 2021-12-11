@@ -73,10 +73,15 @@ static uint8_t m_r_ch_af_level = 0;
 static uint8_t m_l_ch_rf_level = 0;
 static uint8_t m_r_ch_rf_level = 0;
 
-static lcd_set_mode_e current_set_mode = EXIT_SET_MODE;
-static lcd_set_mode_e old_set_mode = EXIT_SET_MODE;
+static lcd_settings_mode_e current_settings_mode = EXIT_SET_MODE;
+static lcd_settings_mode_e old_settings_mode = EXIT_SET_MODE;
 
-static bool refresh = false;
+static bool l_af_rf_refresh = false;
+static bool r_af_rf_refresh = false;
+static bool l_channel_index_refresh = false;
+static bool r_channel_index_refresh = false;
+static bool l_channel_freq_refresh = false;
+static bool r_channel_freq_refresh = false;
 
 /**
  * 相关IO配置
@@ -426,6 +431,46 @@ static void digital_special_show(lcd_part_e part , bool enable)
 }
 
 /**
+ * @brief 清除freq的显示
+ */
+static void channel_freq_lr_clear(screen_lr_e lr)
+{
+    uint8_t start_index;
+    uint8_t i;
+
+    if(SCREEN_L == lr)
+    {
+        start_index = 8;
+        m_seg_table[8].seg_data.byte = 0;
+        m_seg_table[9].seg_data.byte = 0;
+        m_seg_table[10].seg_data.byte = 0;
+        m_seg_table[11].seg_data.byte = 0;
+        m_seg_table[12].seg_data.byte = 0;
+        m_seg_table[13].seg_data.byte = 0;
+        m_seg_table[14].seg_data.byte = 0;
+        m_seg_table[15].seg_data.byte = 0;
+    }
+    else
+    {
+        start_index = 16;
+        m_seg_table[16].seg_data.byte = 0;
+        m_seg_table[17].seg_data.byte = 0;
+        m_seg_table[18].seg_data.byte = 0;
+        m_seg_table[19].seg_data.byte = 0;
+        m_seg_table[20].seg_data.byte = 0;
+        m_seg_table[21].seg_data.byte = 0;
+        m_seg_table[22].seg_data.byte = 0;
+        m_seg_table[23].seg_data.byte = 0;
+    }
+
+    for(i = 0; i < 8; i++)
+    {
+        ht162x_write(&m_lcd_display_obj.ht162x, start_index + i, m_seg_table[start_index + i].seg_data.byte);
+    }
+    
+}
+
+/**
  * @brief 显示通道数
  */
 static void channel_index_lr_show(screen_lr_e lr, uint16_t index)
@@ -681,7 +726,6 @@ static void channel_rf_lr_show(screen_lr_e lr, uint8_t level)
 }
 
 
-
 int lcd_display_init(void)
 {
     ht162x_init(&m_lcd_display_obj.ht162x);
@@ -692,7 +736,9 @@ int lcd_display_init(void)
     gpio_output_set(&m_lcd_display_obj.lcd_ctrl_pin, 0);
     gpio_output_set(&m_lcd_display_obj.lcd_back_light_pin, 1);
 
-
+    /**
+     * 基本显示
+     */
     digital_special_show(DIGITAL_S2 , true);
 
     m_l_ch_freq = SCREEN_L_CHANNEL_FREQ_MIN + (m_l_ch_index - SCREEN_L_CHANNEL_INDEX_MIN) * 3;
@@ -708,39 +754,188 @@ int lcd_display_init(void)
 }
 
 /**
- * @brief 扫频显示
+ * @brief 设频显示
  */
-void lcd_set_channel_display(void)
+static void lcd_set_channel_display(void)
 {
-    
+    static uint8_t l_setting_mode_stage = 0;
+    static uint8_t r_setting_mode_stage = 0;
+    static uint64_t ticks = 0;
+
+    if(current_settings_mode != old_settings_mode)
+    {
+        switch(old_settings_mode)
+        {
+            case EXIT_SET_MODE:
+                break;
+
+            case L_SETTING_MODE:
+                channel_freq_lr_clear(SCREEN_L);
+                l_channel_freq_refresh = true;
+                l_setting_mode_stage = 0;
+                break;
+
+            case R_SETTING_MODE:
+                channel_freq_lr_clear(SCREEN_R);
+                r_channel_freq_refresh = true;
+                r_setting_mode_stage = 0;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    /* 200ms 刷新一次 */
+    if(mid_timer_ticks_get() - ticks > 200)
+    {
+        ticks = mid_timer_ticks_get();
+    }
+    else
+    {
+        return;
+    }
+
+    if(current_settings_mode == L_SETTING_MODE)
+    {
+        switch(l_setting_mode_stage)
+        {
+            case 0:
+                l_setting_mode_stage++;
+                channel_freq_lr_clear(SCREEN_L);
+                break;
+
+            case 1:
+                l_setting_mode_stage++;
+                m_seg_table[8].seg_data.seg.com3 = 1;
+                m_seg_table[9].seg_data.seg.com3 = 1;
+                ht162x_write(&m_lcd_display_obj.ht162x, 8, m_seg_table[8].seg_data.byte);
+                ht162x_write(&m_lcd_display_obj.ht162x, 9, m_seg_table[9].seg_data.byte);
+                break;
+
+            case 2:
+                l_setting_mode_stage++;
+                m_seg_table[11].seg_data.seg.com3 = 1;
+                ht162x_write(&m_lcd_display_obj.ht162x, 11, m_seg_table[11].seg_data.byte);
+                break;
+
+            case 3:
+                l_setting_mode_stage++;
+                m_seg_table[13].seg_data.seg.com3 = 1;
+                ht162x_write(&m_lcd_display_obj.ht162x, 13, m_seg_table[13].seg_data.byte);
+                break;
+
+            case 4:
+                l_setting_mode_stage++;
+                m_seg_table[15].seg_data.seg.com3 = 1;
+                ht162x_write(&m_lcd_display_obj.ht162x, 15, m_seg_table[15].seg_data.byte);
+                break;
+
+            case 5:
+                l_setting_mode_stage = 0;
+                m_seg_table[11].seg_data.seg.com1 = 1;
+                ht162x_write(&m_lcd_display_obj.ht162x, 11, m_seg_table[11].seg_data.byte);
+                break;
+
+            default:
+                break;
+        }
+    }
+    else if(current_settings_mode == R_SETTING_MODE)
+    {
+        switch(r_setting_mode_stage)
+        {
+            case 0:
+                r_setting_mode_stage++;
+                channel_freq_lr_clear(SCREEN_R);
+                break;
+
+            case 1:
+                r_setting_mode_stage++;
+                m_seg_table[16].seg_data.seg.com3 = 1;
+                m_seg_table[17].seg_data.seg.com3 = 1;
+                ht162x_write(&m_lcd_display_obj.ht162x, 16, m_seg_table[16].seg_data.byte);
+                ht162x_write(&m_lcd_display_obj.ht162x, 17, m_seg_table[17].seg_data.byte);
+                break;
+
+            case 2:
+                r_setting_mode_stage++;
+                m_seg_table[19].seg_data.seg.com3 = 1;
+                ht162x_write(&m_lcd_display_obj.ht162x, 19, m_seg_table[19].seg_data.byte);
+                break;
+
+            case 3:
+                r_setting_mode_stage++;
+                m_seg_table[21].seg_data.seg.com3 = 1;
+                ht162x_write(&m_lcd_display_obj.ht162x, 21, m_seg_table[21].seg_data.byte);
+                break;
+
+            case 4:
+                r_setting_mode_stage++;
+                m_seg_table[23].seg_data.seg.com3 = 1;
+                ht162x_write(&m_lcd_display_obj.ht162x, 23, m_seg_table[23].seg_data.byte);
+                break;
+
+            case 5:
+                r_setting_mode_stage = 0;
+                m_seg_table[19].seg_data.seg.com1 = 1;
+                ht162x_write(&m_lcd_display_obj.ht162x, 19, m_seg_table[19].seg_data.byte);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    old_settings_mode = current_settings_mode;
 }
-
-
 
 
 void lcd_display_loop_task(void)
 {
-    if(current_set_mode != EXIT_SET_MODE)
+    /* 要等settings mode 完全退出才退出刷新 */
+    if((old_settings_mode != EXIT_SET_MODE) || (current_settings_mode != old_settings_mode))
     {
-        lcd_set_channel_display(void);
+        lcd_set_channel_display();
     }
-    else if(refresh)
+
+    if(l_channel_index_refresh)
     {
-        refresh = false;
-
-        m_l_ch_freq = SCREEN_L_CHANNEL_FREQ_MIN + (m_l_ch_index - SCREEN_L_CHANNEL_INDEX_MIN) * 3;
-        m_r_ch_freq = SCREEN_R_CHANNEL_FREQ_MIN + (m_r_ch_index - SCREEN_R_CHANNEL_INDEX_MIN) * 3;
-
+        l_channel_index_refresh = false;
         channel_index_lr_show(SCREEN_L, m_l_ch_index);
+    }
+
+    if(r_channel_index_refresh)
+    {
+        r_channel_index_refresh = false;
         channel_index_lr_show(SCREEN_R, m_r_ch_index);
+    }
 
+    if(l_channel_freq_refresh)
+    {
+        l_channel_freq_refresh = false;
+        m_l_ch_freq = SCREEN_L_CHANNEL_FREQ_MIN + (m_l_ch_index - SCREEN_L_CHANNEL_INDEX_MIN) * 3;
         channel_freq_lr_show(SCREEN_L,m_l_ch_freq);
+    }
+
+    if(r_channel_freq_refresh)
+    {
+        r_channel_freq_refresh = false;
+        m_r_ch_freq = SCREEN_R_CHANNEL_FREQ_MIN + (m_r_ch_index - SCREEN_R_CHANNEL_INDEX_MIN) * 3;
         channel_freq_lr_show(SCREEN_R,m_r_ch_freq);
+    }
 
+    if(l_af_rf_refresh)
+    {
+        l_af_rf_refresh = false;
         channel_af_lr_show(SCREEN_L, m_l_ch_af_level);
-        channel_af_lr_show(SCREEN_R, m_r_ch_af_level);
-
         channel_rf_lr_show(SCREEN_L, m_l_ch_rf_level);
+    }
+
+    if(r_af_rf_refresh)
+    {
+        r_af_rf_refresh = false;
+        channel_af_lr_show(SCREEN_R, m_r_ch_af_level);
         channel_rf_lr_show(SCREEN_R, m_r_ch_rf_level);
     }
 }
@@ -761,13 +956,21 @@ void channel_index_lr_set(screen_lr_e lr, uint16_t index)
     if(SCREEN_L == lr)
     {
         m_l_ch_index = index;
+        l_channel_index_refresh = true;
+        if((current_settings_mode == EXIT_SET_MODE) && (old_settings_mode == EXIT_SET_MODE))
+        {
+            l_channel_freq_refresh = true;
+        }
     }
     else
     {
         m_r_ch_index = index;
+        r_channel_index_refresh = true;
+        if((current_settings_mode == EXIT_SET_MODE) && (old_settings_mode == EXIT_SET_MODE))
+        {
+            r_channel_freq_refresh = true;
+        }
     }
-
-    refresh = true;
 }
 
 void channel_af_level_lr_set(screen_lr_e lr, uint8_t level)
@@ -775,13 +978,13 @@ void channel_af_level_lr_set(screen_lr_e lr, uint8_t level)
     if(SCREEN_L == lr)
     {
         m_l_ch_af_level = level;
+        l_af_rf_refresh = true;
     }
     else
     {
         m_r_ch_af_level = level;
+        r_af_rf_refresh = true;
     }
-
-    refresh = true;
 }
 
 void channel_rf_level_lr_set(screen_lr_e lr, uint8_t level)
@@ -789,13 +992,24 @@ void channel_rf_level_lr_set(screen_lr_e lr, uint8_t level)
     if(SCREEN_L == lr)
     {
         m_l_ch_rf_level = level;
+        l_af_rf_refresh = true;
     }
     else
     {
         m_r_ch_rf_level = level;
+        r_af_rf_refresh = true;
     }
 
-    refresh = true;
+}
+
+lcd_settings_mode_e channel_settings_mode_get(void)
+{
+    return current_settings_mode;
+}
+
+void channel_settings_mode_set(lcd_settings_mode_e mode)
+{
+    current_settings_mode = mode;
 }
 
 void lcd_black_light_enable(bool enable)

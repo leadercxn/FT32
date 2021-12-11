@@ -48,7 +48,7 @@ static void r_adc_button_handler(adc_button_event_e event)
     /**
      * 两个时间得间隔200ms
      */
-    if(now_ticks - pre_ticks > 200)
+    if((now_ticks - pre_ticks > 200) || (event == BUTTON_R_EVENT_SET_RELEASE))
     {
       pre_ticks = now_ticks;
     }
@@ -59,6 +59,9 @@ static void r_adc_button_handler(adc_button_event_e event)
 
     trace_debug("r_adc_button_handler event = %s\n\r",mp_button[event]);
 
+    /**
+     * 上下按键
+     */
     if((event >= BUTTON_R_EVENT_UP_PUSH) && (event <= BUTTON_R_EVENT_DOWN_RELEASE))
     {
         r_index = channel_index_lr_get(SCREEN_R);
@@ -84,6 +87,21 @@ static void r_adc_button_handler(adc_button_event_e event)
 
         channel_index_lr_set(SCREEN_R, r_index);
     }
+
+    /**
+     * SET
+     */
+    if(event == BUTTON_R_EVENT_SET_RELEASE)
+    {
+        if(R_SETTING_MODE != channel_settings_mode_get())
+        {
+            channel_settings_mode_set(R_SETTING_MODE);
+        }
+        else
+        {
+            channel_settings_mode_set(EXIT_SET_MODE);
+        }
+    }
 }
 
 /**
@@ -94,12 +112,13 @@ static void l_adc_button_handler(adc_button_event_e event)
     uint16_t l_index = 0;
 
     static uint64_t pre_ticks = 0;
+
     uint64_t now_ticks = mid_timer_ticks_get();
 
     /**
      * 两个时间得间隔200ms
      */
-    if(now_ticks - pre_ticks > 200)
+    if((now_ticks - pre_ticks > 200) || (event == BUTTON_L_EVENT_SET_RELEASE))
     {
       pre_ticks = now_ticks;
     }
@@ -135,6 +154,21 @@ static void l_adc_button_handler(adc_button_event_e event)
         }
       
         channel_index_lr_set(SCREEN_L, l_index);
+    }
+
+    /**
+     * SET
+     */
+    if(event == BUTTON_L_EVENT_SET_RELEASE)
+    {
+        if(L_SETTING_MODE != channel_settings_mode_get())
+        {
+            channel_settings_mode_set(L_SETTING_MODE);
+        }
+        else
+        {
+            channel_settings_mode_set(EXIT_SET_MODE);
+        }
     }
 }
 
