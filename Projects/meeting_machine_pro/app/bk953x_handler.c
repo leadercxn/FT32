@@ -9,14 +9,6 @@ static bk953x_object_t m_r_bk9532_obj;
 static gpio_object_t   m_l_bk9532_rst;
 static gpio_object_t   m_r_bk9532_rst;
 
-typedef enum
-{
-    BK_STAGE_INIT,
-    BK_STAGE_NORMAL,
-    BK_STAGE_SEARCHING,
-    BK_STAGE_MAX,
-} bk953x_task_stage_e;
-
 typedef struct
 {
     bk953x_task_stage_e stage;
@@ -104,11 +96,6 @@ int bk9532_lr_init(void)
 
     trace_debug("r_chip_id = 0x%08x , l_chip_id = 0x%08x\n\r",m_r_bk9532_obj.chip_id, m_l_bk9532_obj.chip_id);
 
-    /**
-     * 初始化任务
-     */
-
-
     return err_code;
 }
 
@@ -138,6 +125,18 @@ static void bk953x_stage_task_run(bk953x_task_t *p_task)
             p_task->stage++;
             break;
 
+        case BK_STAGE_NORMAL:
+
+            break;
+
+        case BK_STAGE_SEARCHING:
+
+            break;
+
+        case BK_STAGE_POWER_OFF:
+
+            break;
+
         default:
             break;
     }
@@ -147,6 +146,66 @@ void bk953x_loop_task(void)
 {
     bk953x_stage_task_run(&m_l_bk953x_task);
     bk953x_stage_task_run(&m_r_bk953x_task);
+}
+
+void bk953x_task_stage_set(bk953x_lr_e lr, bk953x_task_stage_e stage)
+{
+    if(lr == BK953X_L)
+    {
+        m_l_bk953x_task.stage = stage;
+    }
+    else
+    {
+        m_r_bk953x_task.stage = stage;
+    }
+}
+
+void bk953x_param_cfg_set(bk953x_lr_e lr, bk953x_cfg_option_e option, void *p_data)
+{
+    if(lr == BK953X_L)
+    {
+        switch(option)
+        {
+            case BK953X_CFG_FREQ:
+
+                break;
+
+            case BK953X_CFG_RF_POWER:
+
+                break;
+
+            default:
+                break;
+        }
+    }
+    else
+    {
+
+    }
+}
+
+void bk953x_param_cfg_get(bk953x_lr_e lr, bk953x_cfg_option_e option, void *p_data)
+{
+    if(lr == BK953X_L)
+    {
+        switch(option)
+        {
+            case BK953X_CFG_FREQ:
+
+                break;
+
+            case BK953X_CFG_RF_POWER:
+
+                break;
+
+            default:
+                break;
+        }
+    }
+    else
+    {
+
+    }
 }
 
 

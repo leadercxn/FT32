@@ -759,6 +759,11 @@ static void channel_rf_lr_show(screen_lr_e lr, uint8_t level)
     }
 }
 
+int lcd_hw_init(void)
+{
+    gpio_config(&m_lcd_display_obj.lcd_ctrl_pin);
+    gpio_config(&m_lcd_display_obj.lcd_back_light_pin);
+}
 
 int lcd_display_init(void)
 {
@@ -1078,6 +1083,18 @@ void lcd_black_light_enable(bool enable)
     else
     {
         gpio_output_set(&m_lcd_display_obj.lcd_back_light_pin, 0);
+    }
+}
+
+void lcd_ctrl_enable(bool enable)
+{
+    if(enable)
+    {
+        gpio_output_set(&m_lcd_display_obj.lcd_ctrl_pin, 0);
+    }
+    else
+    {
+        gpio_output_set(&m_lcd_display_obj.lcd_ctrl_pin, 1);
     }
 }
 

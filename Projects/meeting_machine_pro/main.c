@@ -16,8 +16,16 @@ uint8_t data[4] = {0x64, 0x23, 0x18, 0x74};
 /**
  * 供电开关状态
  */
-bool g_sys_power_on = true;
-bool g_old_sys_power_on = true;
+uint8_t g_sys_power_on = 1;
+uint8_t g_old_sys_power_on = 1;
+
+static gpio_object_t   m_sys_power_sw_gpio = 
+                {
+                    .gpio_port_periph_clk = SYS_POWER_SWITCH_PORT_PERIPH_CLK,
+                    .p_gpio_port = SYS_POWER_SWITCH_PORT,
+                    .gpio_dir = GPIO_DIR_INPUT,
+                    .gpio_pin = SYS_POWER_SWITCH_PIN,
+                };
 
 static char * mp_button[BUTTON_EVENT_MAX] = 
 {
@@ -201,32 +209,60 @@ static void app_param_init(void)
     channel_index_lr_set(SCREEN_R, g_app_param.r_ch_index);
 }
 
+static void sys_power_sw_handler(void)
+{
+    gpio_input_get(&m_sys_power_sw_gpio, &g_sys_power_on);
+    
+    if(g_old_sys_power_on != g_sys_power_on)
+    {
+        if(g_sys_power_on)
+        {
+          lcd_off_status_set(true);
+        }
+        else
+        {
+          lcd_off_status_set(false);
+        }
+
+        g_old_sys_power_on = g_sys_power_on;
+    }
+}
 
 int main(void)
 {
   int err_code = 0;
-  uint8_t pin_level = 0;
-  uint8_t old_pin_level = 0;
 
   trace_init();
 
   /*greeting*/
-  trace_debug("\n\r\n\r");
-  trace_debug("       *** Welcome to the Project ***\n\r");
-  trace_debug("\n\r");
+  trace_info("\n\r\n\r");
+  trace_info("       *** Welcome to the Project ***\n\r");
+  trace_info("\n\r");
 
   TIMER_INIT();
-  trace_debug("TIMER_INIT done\n\r");
 
   /**
    * delay 函数的初始化
    */
   mid_system_tick_init();
 
-
   app_param_flash_init();
   app_param_init();
 
+  /* 提前初始化lcd硬件，预防上次掉电后马上插上，会显示旧数据 */
+  lcd_hw_init();
+
+  gpio_config(&m_sys_power_sw_gpio);
+  do
+  {
+      lcd_black_light_enable(false);    //  关掉LCD显示
+      lcd_ctrl_enable(false);
+      delay_ms(50);
+      gpio_input_get(&m_sys_power_sw_gpio, &g_sys_power_on);
+      g_old_sys_power_on = g_sys_power_on;
+  } while(g_sys_power_on);
+  trace_info("Power On\n\r");
+  
   lcd_display_init();
 
   ir_tx_init();
@@ -251,14 +287,6 @@ int main(void)
 
   app_sched_event_put(&m_app_scheduler, NULL, 0, app_evt_schedule);
 
-  static gpio_object_t   m_gpio_test = 
-                {
-                    .gpio_port_periph_clk = SYS_POWER_SWITCH_PORT_PERIPH_CLK,
-                    .p_gpio_port = SYS_POWER_SWITCH_PORT,
-                    .gpio_dir = GPIO_DIR_INPUT,
-                    .gpio_pin = SYS_POWER_SWITCH_PIN,
-                };
-  gpio_config(&m_gpio_test);
 
   trace_info("Start loop\n\r");
   while(1)
@@ -268,23 +296,7 @@ int main(void)
     mid_timer_loop_task();
     bk953x_loop_task();
     lcd_display_loop_task();
-    
-
-    gpio_input_get(&m_gpio_test, &pin_level);
-    if(old_pin_level != pin_level)
-    {
-        if(pin_level)
-        {
-          lcd_off_status_set(true);
-        }
-        else
-        {
-          lcd_off_status_set(false);
-        }
-
-        old_pin_level = pin_level;
-    }
-
+    sys_power_sw_handler();
   }
 }
 

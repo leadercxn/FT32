@@ -31,6 +31,7 @@ typedef enum
     R_SETTING_MODE,
 } lcd_settings_mode_e;
 
+int lcd_hw_init(void);
 int lcd_display_init(void);
 void lcd_display_loop_task(void);
 
@@ -39,6 +40,7 @@ void channel_index_lr_set(screen_lr_e lr, uint16_t index);
 void channel_af_level_lr_set(screen_lr_e lr, uint8_t level);
 void channel_rf_level_lr_set(screen_lr_e lr, uint8_t level);
 void lcd_black_light_enable(bool enable);
+void lcd_ctrl_enable(bool enable);
 
 lcd_settings_mode_e channel_settings_mode_get(void);
 void channel_settings_mode_set(lcd_settings_mode_e mode);
