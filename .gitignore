@@ -3,4 +3,24 @@ Projects/meeting_machine_pro/MDK-ARM/Listings/
 Projects/meeting_machine_pro/MDK-ARM/Objects/
 Projects/meeting_machine_pro/MDK-ARM/DebugConfig/
 Projects/meeting_machine_pro/MDK-ARM/Project.uvguix.*
+images/
+project/_build/
+project/RTE/
+*.bak
+*.uvguix.*
+*JLink*
+test/
+*.bin
+*RTE_Components.h
+.tags
+.tags_sorted_by_file
+Makefile.def
+.vscode
+cmake/custom.cmake
+build
+/sdk/
+.DS_Store
+images
+.pyc
+scripts/kconfig/__pycache__/
 
