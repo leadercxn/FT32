@@ -10,7 +10,7 @@
       <TargetName>FT32F030X</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -48,8 +48,8 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>..\..\..\build\apps\fct\</OutputDirectory>
-          <OutputName>FT32F0XX.hex</OutputName>
+          <OutputDirectory>.\Objects\</OutputDirectory>
+          <OutputName>FT32F0XX</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -184,6 +184,8 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>0</RvdsVP>
+            <RvdsMve>0</RvdsMve>
+            <RvdsCdeCp>0</RvdsCdeCp>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -337,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>FT32F030x8,USE_STDPERIPH_DRIVER,USE_FT32F072X8_EVAL,USE_DEFAULT_TIMEOUT_CALLBACK,FT32</Define>
               <Undefine></Undefine>
-              <IncludePath>..\;..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include;..\..\..\Libraries\CMSIS\Include;..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc;..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc;..\..\..\Utilities\FT32_EVAL\Common;..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\ft_lib\gpio;..\..\..\develop_lib\hardware;..\..\..\develop_lib\middle_api;..\..\..\develop_lib\middle_api\tft_8080;..\..\..\develop_lib\ft_lib;..\..\..\develop_lib;..\..\meeting_machine_pro;..\..\..\develop_lib\ft_lib\i2c;..\..\..\develop_lib\ft_lib\common;..\..\..\develop_lib\ft_lib\timer;..\..\..\develop_lib\middle_api\queue;..\..\..\develop_lib\middle_api\mid_bk953x;..\..\..\develop_lib\ft_lib\usart;..\..\..\develop_lib\middle_api\trace;..\app;..\..\..\develop_lib\hardware\bk953x;..\..\..\develop_lib\ft_lib\timer_pwm;..\..\..\develop_lib\ft_lib\exit;..\..\..\develop_lib\ft_lib\adc;..\..\..\develop_lib\middle_api\pwm;..\..\..\develop_lib\middle_api\ir;..\..\..\develop_lib\middle_api\mid_timer;..\..\..\develop_lib\third_lib;..\..\..\develop_lib\third_lib\app_timer;..\..\..\develop_lib\middle_api\delay;..\..\..\develop_lib\middle_api\adc;..\..\..\develop_lib\middle_api\mid_gpio;..\..\..\develop_lib\ft_lib\flash;..\..\..\develop_lib\middle_api\mid_flash;..\..\..\develop_lib\third_lib\app_scheduler</IncludePath>
+              <IncludePath>..\;..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include;..\..\..\Libraries\CMSIS\Include;..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc;..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc;..\..\..\Utilities\FT32_EVAL\Common;..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\ft_lib\gpio;..\..\..\develop_lib\hardware;..\..\..\develop_lib\middle_api;..\..\..\develop_lib\middle_api\tft_8080;..\..\..\develop_lib\ft_lib;..\..\..\develop_lib;..\..\meeting_machine_pro;..\..\..\develop_lib\ft_lib\i2c;..\..\..\develop_lib\ft_lib\common;..\..\..\develop_lib\ft_lib\timer;..\..\..\develop_lib\middle_api\queue;..\..\..\develop_lib\middle_api\mid_bk953x;..\..\..\develop_lib\ft_lib\usart;..\..\..\develop_lib\middle_api\trace;..\app;..\..\..\develop_lib\hardware\bk953x;..\..\..\develop_lib\ft_lib\timer_pwm;..\..\..\develop_lib\ft_lib\exit;..\..\..\develop_lib\ft_lib\adc;..\..\..\develop_lib\middle_api\pwm;..\..\..\develop_lib\middle_api\ir;..\..\..\develop_lib\middle_api\mid_timer;..\..\..\develop_lib\third_lib;..\..\..\develop_lib\third_lib\app_timer;..\..\..\develop_lib\middle_api\delay;..\..\..\develop_lib\middle_api\adc;..\..\..\develop_lib\middle_api\mid_gpio;..\..\..\develop_lib\ft_lib\flash;..\..\..\develop_lib\middle_api\mid_flash;..\..\..\develop_lib\third_lib\app_scheduler;..\..\..\develop_lib\hardware\ht1621;..\..\..\develop_lib\ft_lib\systick;..\..\..\develop_lib\middle_api\mid_systick;..\..\..\develop_lib\third_lib\crc32</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -350,7 +352,7 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
-            <uClangAs>0</uClangAs>
+            <ClangAsOpt>4</ClangAsOpt>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -430,6 +432,11 @@
               <FileName>flash_handler.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\app\flash_handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_display_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\lcd_display_handler.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -531,6 +538,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\hardware\bk953x\bk953x.c</FilePath>
             </File>
+            <File>
+              <FileName>ht1621.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\hardware\ht1621\ht1621.c</FilePath>
+            </File>
+            <File>
+              <FileName>seg_code.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\hardware\ht1621\seg_code.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -577,19 +594,14 @@
               <FilePath>..\..\..\develop_lib\ft_lib\adc\ft_adc.c</FilePath>
             </File>
             <File>
-              <FileName>ft_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\develop_lib\ft_lib\common\ft_delay.c</FilePath>
-            </File>
-            <File>
               <FileName>ft_flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\ft_lib\flash\ft_flash.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_flash.c</FileName>
+              <FileName>ft_systick.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\develop_lib\ft_lib\flash\bsp_flash.c</FilePath>
+              <FilePath>..\..\..\develop_lib\ft_lib\systick\ft_systick.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -646,6 +658,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\middle_api\mid_flash\mid_flash.c</FilePath>
             </File>
+            <File>
+              <FileName>mid_systick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api\mid_systick\mid_systick.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -655,6 +672,11 @@
               <FileName>app_scheduler.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\third_lib\app_scheduler\app_scheduler.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\third_lib\crc32\crc32.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -667,5 +689,20 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>&lt;Project Info&gt;</LayName>
+        <LayDesc></LayDesc>
+        <LayUrl></LayUrl>
+        <LayKeys></LayKeys>
+        <LayCat></LayCat>
+        <LayLic></LayLic>
+        <LayTarg>0</LayTarg>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

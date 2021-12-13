@@ -1,8 +1,21 @@
 #ifndef __FLASH_HANDLER_H
 #define __FLASH_HANDLER_H
 
-#define FLASH_APP_PARAM_ADDRESS     0x8005000 //0x800F800
-//#define FLASH_APP_PARAM_ADDRESS       0x8008000
-#define FLASH_APP_PARAM_LEN_MAX     0x800
+
+typedef struct
+{
+    uint32_t magic;
+
+    uint8_t l_ch_index;
+    uint8_t r_ch_index;
+    uint8_t parent_band;    //根据不同的地区，选择频段
+
+    uint32_t crc32;
+} __attribute__((aligned(4))) app_param_t;
+
+extern app_param_t g_app_param;
+
+void app_param_flash_init(void);
+
 
 #endif

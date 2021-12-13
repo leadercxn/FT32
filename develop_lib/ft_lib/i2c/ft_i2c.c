@@ -316,7 +316,7 @@ void ft_virt_i2c_start(ft_virt_i2c_t *p_virt_i2c)
         return;
     }
 
-//    conf_gpio_output(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin);
+    conf_gpio_output(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin);
     set_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, 1);
     set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 1);
 
@@ -334,7 +334,7 @@ void ft_virt_i2c_stop(ft_virt_i2c_t *p_virt_i2c)
         return;
     }
 
-//    conf_gpio_output(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin);
+    conf_gpio_output(p_virt_i2c->sda_port_periph_clk, p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin);
     set_gpio_value(p_virt_i2c->p_sda_gpio_port, p_virt_i2c->sda_gpio_pin, 0);
     set_gpio_value(p_virt_i2c->p_scl_gpio_port, p_virt_i2c->scl_gpio_pin, 0);
 

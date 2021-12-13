@@ -32,6 +32,18 @@
 #define R_AD22650_EN_PORT               GPIOB
 #define R_AD22650_EN_PORT_PERIPH_CLK    RCC_AHBPeriph_GPIOB
 
+#define LCD_BACK_LIGHT_PIN              GPIO_Pin_1
+#define LCD_BACK_LIGHT_PORT             GPIOF
+#define LCD_BACK_LIGHT_PORT_PERIPH_CLK  RCC_AHBPeriph_GPIOF
+
+#define LCD_CTRL_PIN                    GPIO_Pin_0
+#define LCD_CTRL_PORT                   GPIOF
+#define LCD_CTRL_PORT_PERIPH_CLK        RCC_AHBPeriph_GPIOF
+
+#define SYS_POWER_SWITCH_PIN            GPIO_Pin_15
+#define SYS_POWER_SWITCH_PORT           GPIOA
+#define SYS_POWER_SWITCH_PORT_PERIPH_CLK        RCC_AHBPeriph_GPIOA
+
 /* ADC */
 #define ADC_CHANNEL_0                   ADC_Channel_0
 #define ADC_CHANNEL_1                   ADC_Channel_1
@@ -126,6 +138,26 @@
 
 #define PWM_TIM                         TIM15
 
+/* FLASH */
+#define FLASH_ADDRESS_MAX               0x8007FFF
+
+#define FLASH_APP_PARAM_SAVE_ADDR       0x8007800           //用户保存数据片区
+#define FLASH_APP_PARAM_LEN_MAX         0x800
+
+#define FLASH_PAGE_SIZE                 0x00000200
+
+/* HT1621 */
+#define HT1621_DATA_PIN                 GPIO_Pin_7
+#define HT1621_DATA_PORT                GPIOA
+#define HT1621_DATA_PORT_PERIPH_CLK     RCC_AHBPeriph_GPIOA
+
+#define HT1621_WR_PIN                   GPIO_Pin_5
+#define HT1621_WR_PORT                  GPIOA
+#define HT1621_WR_PORT_PERIPH_CLK       RCC_AHBPeriph_GPIOA
+
+#define HT1621_CS_PIN                   GPIO_Pin_4
+#define HT1621_CS_PORT                  GPIOA
+#define HT1621_CS_PORT_PERIPH_CLK       RCC_AHBPeriph_GPIOA
 
 #endif
 

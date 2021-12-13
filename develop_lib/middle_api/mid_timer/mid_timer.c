@@ -8,12 +8,17 @@
 #include "ft_lib.h"
 #endif
 
+#include "board_config.h"
+
 #include "queue.h"
 #include "util.h"
 #include "trace.h"
 #include "lib_error.h"
 
 #include "mid_timer.h"
+
+#define SCHED_TIMER_MAX_EVENT_DATA_SIZE   8
+#define SCHED_TIMER_QUEUE_SIZE            20
 
 static bool m_timer_list_traversing = false;
 
@@ -26,6 +31,11 @@ struct timer_list_node_s
 typedef struct timer_list_node_s timer_list_node_t;
 
 /**
+ * timer不紧急的放在scheduler里面调度
+ */
+static app_scheduler_t  m_timer_scheduler;
+
+/**
  * 定义一个单向尾队列
  */
 STAILQ_HEAD(, timer_list_node_s) m_timer_list = STAILQ_HEAD_INITIALIZER(m_timer_list);
@@ -36,6 +46,8 @@ STAILQ_HEAD(, timer_list_node_s) m_timer_list = STAILQ_HEAD_INITIALIZER(m_timer_
  */
 static void per_ms_timer_handler(void)
 {
+    int err_code = ENONE;
+
     timer_list_node_t *p_timer_list_node;
 
     if(m_timer_list_traversing == false)
@@ -69,6 +81,11 @@ static void per_ms_timer_handler(void)
                         else
                         {
                             //非紧急的放到循环里面执行
+                            err_code = app_sched_event_put(&m_timer_scheduler, p_timer_list_node->p_timer_node->p_data, 0, (app_sched_event_handler_t)p_timer_list_node->p_timer_node->handler);
+                            if(err_code)
+                            {
+                                trace_error("app_sched_event_put error %d\n\r",err_code);
+                            }
                         }
                     }
                 }
@@ -114,7 +131,7 @@ void mid_timer_init(void)
     timer3_init();
     timer_handler_register(per_ms_timer_handler);
 #endif
-
+    APP_SCHED_INIT(&m_timer_scheduler, SCHED_TIMER_MAX_EVENT_DATA_SIZE, SCHED_TIMER_QUEUE_SIZE);
 }
 
 int mid_timer_create( timer_node_id_t const      *p_timer_id,
@@ -196,4 +213,9 @@ uint64_t mid_timer_ticks_get(void)
 #ifdef FT32
     return ft_timer_tick_get();
 #endif
+}
+
+void mid_timer_loop_task(void)
+{
+    app_sched_execute(&m_timer_scheduler);
 }

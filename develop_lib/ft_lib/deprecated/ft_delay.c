@@ -1,56 +1,29 @@
 #include "ft32f0xx.h"
 #include "ft_delay.h"
 
-#include "ft_timer.h"
-
-/***
- * 弃用,因为定时器是用TIM3做的中断，再用TIM3演示，会有冲突
- */
-
-
 /**
- * 通过TIM3通用定时器的计数器获得时间
+ * 阻塞式延时
  */
-void ft_delay_us(uint16_t us)
+void ft_delay_10us(uint16_t n_10us)
 {
-/**
- * 通过定时器的计数寄存器来获取us的差值.有点BUG,延时不太准
- */
-    uint16_t start_cnt = USER_TIMER->CNT;
-    uint16_t stop_timestamp = start_cnt + us;
-    uint64_t old_tick = ft_timer_tick_get();
-
-    if(stop_timestamp > USER_TIMER_PERIOD)
+    uint16_t i = 0;
+    uint16_t j = 0;
+    for(j = n_10us; j > 0; j--)
     {
-        uint16_t remaind = us - (USER_TIMER_PERIOD - start_cnt);
-        uint16_t period = remaind / USER_TIMER_PERIOD;
-        uint16_t i = 0;
-        uint16_t remaind2 = remaind - (period * USER_TIMER_PERIOD);
-
-        while(old_tick == ft_timer_tick_get());
-
-        old_tick = ft_timer_tick_get();
-
-        for(i = 0; i < period; i++)
-        {
-            while(old_tick == ft_timer_tick_get());
-            old_tick = ft_timer_tick_get();
-        }
-
-        while(USER_TIMER->CNT < remaind2);
-    }
-    else
-    {
-        while(stop_timestamp > USER_TIMER->CNT);
+        /**
+         * 这延时的取值，要根据具体系统时钟来
+         */
+        for(i =18; i > 0 ; i--);
     }
 }
 
 void ft_delay_ms(uint16_t ms)
 {
     uint16_t i = 0;
-    for(i = 0; i < ms; i++)
+
+    for(i = ms; i > 0 ; i--)
     {
-        ft_delay_us(1000);
+        ft_delay_10us(100);
     }
 }
 

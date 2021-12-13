@@ -15,6 +15,7 @@ file(GLOB SDK_SOURCE_FILES
     ${DEV_DIR}/ft_lib/timer/*.c
     ${DEV_DIR}/ft_lib/timer_pwm/*.c
     ${DEV_DIR}/ft_lib/flash/*.c
+    ${DEV_DIR}/ft_lib/systick/*.c
 
     ${DEV_DIR}/middle_api/adc/*.c
     ${DEV_DIR}/middle_api/delay/*.c
@@ -24,6 +25,7 @@ file(GLOB SDK_SOURCE_FILES
     ${DEV_DIR}/middle_api/mid_flash/*.c
     ${DEV_DIR}/middle_api/mid_gpio/*.c
     ${DEV_DIR}/middle_api/mid_timer/*.c
+    ${DEV_DIR}/middle_api/mid_systick/*.c
 
     # ${DEV_DIR}/middle_api/pwm/*.c
     ${DEV_DIR}/middle_api/queue/*.c
@@ -31,10 +33,13 @@ file(GLOB SDK_SOURCE_FILES
 
     ${DEV_DIR}/hardware/bk953x/*.c
     ${DEV_DIR}/hardware/st7789/*.c
+    ${DEV_DIR}/hardware/ht1621/*.c
 
     ${DEV_DIR}/third_lib/app_timer/*.c
     # ${DEV_DIR}/third_lib/app_error/*.c
     ${DEV_DIR}/third_lib/app_scheduler/*.c
+    ${DEV_DIR}/third_lib/crc16/*.c
+    ${DEV_DIR}/third_lib/crc32/*.c
 )
 
 
@@ -57,6 +62,7 @@ set(SDK_INCLUDE_DIRS
     ${DEV_DIR}/ft_lib/timer
     ${DEV_DIR}/ft_lib/timer_pwm
     ${DEV_DIR}/ft_lib/flash
+    ${DEV_DIR}/ft_lib/systick
 
     ${DEV_DIR}/middle_api
     ${DEV_DIR}/middle_api/adc
@@ -66,6 +72,7 @@ set(SDK_INCLUDE_DIRS
     ${DEV_DIR}/middle_api/mid_flash
     ${DEV_DIR}/middle_api/mid_gpio
     ${DEV_DIR}/middle_api/mid_timer
+    ${DEV_DIR}/middle_api/mid_systick
 
     ${DEV_DIR}/middle_api/pwm
     ${DEV_DIR}/middle_api/queue
@@ -74,11 +81,14 @@ set(SDK_INCLUDE_DIRS
     ${DEV_DIR}/hardware 
     ${DEV_DIR}/hardware/bk953x
     ${DEV_DIR}/hardware/st7789
+    ${DEV_DIR}/hardware/ht1621
 
     ${DEV_DIR}/third_lib/
     ${DEV_DIR}/third_lib/app_scheduler
     ${DEV_DIR}/third_lib/app_timer
     ${DEV_DIR}/third_lib/app_error
+    ${DEV_DIR}/third_lib/crc16
+    ${DEV_DIR}/third_lib/crc32
 )
 
 
@@ -90,9 +100,9 @@ file(GLOB APP_SOURCE_FILES
     ${TEST_DIR}/app/*.c
     ${CMAKE_SOURCE_DIR}/apps/app_common/trace/*.c
     ${CMAKE_SOURCE_DIR}/apps/app_common/usart/*.c
-    ${CMAKE_SOURCE_DIR}/apps/app_common/LetterShell/*.c
-    ${CMAKE_SOURCE_DIR}/apps/app_common/ht1621/*.c
-    ${CMAKE_SOURCE_DIR}/apps/app_common/LCD/*.c 
+    # ${CMAKE_SOURCE_DIR}/apps/app_common/LetterShell/*.c
+    # ${CMAKE_SOURCE_DIR}/apps/app_common/ht1621/*.c
+
 
 )
 
@@ -105,9 +115,8 @@ set(APP_INCLUDE_DIRS
     ${CMAKE_SOURCE_DIR}/apps/app_common
     ${CMAKE_SOURCE_DIR}/apps/app_common/trace
     ${CMAKE_SOURCE_DIR}/apps/app_common/usart
-    ${CMAKE_SOURCE_DIR}/apps/app_common/LetterShell
-    ${CMAKE_SOURCE_DIR}/apps/app_common/ht1621
-    ${CMAKE_SOURCE_DIR}/apps/app_common/LCD
+    # ${CMAKE_SOURCE_DIR}/apps/app_common/LetterShell
+    # ${CMAKE_SOURCE_DIR}/apps/app_common/ht1621
 )
 
 set(USER_DEFINITIONS
