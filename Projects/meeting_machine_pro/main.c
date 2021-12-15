@@ -267,6 +267,7 @@ int main(void)
 
   ir_tx_init();
 
+  /* adc 相关 */
   adc_init();
   l_adc_button_event_handler_register(l_adc_button_handler);
   r_adc_button_event_handler_register(r_adc_button_handler);

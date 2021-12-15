@@ -4,6 +4,7 @@
 #ifndef __HARDWARE_H
 #define __HARDWARE_H
 
+#include "band_freq.h"
 #include "bk953x.h"
 #include "st7789.h"
 #include "ht1621.h"

@@ -116,10 +116,20 @@ typedef struct
 #define REG_CHIP_ID 0x70
 
 
-void bk953x_res_init(bk953x_object_t *p_bk953x_object);
-int bk953x_soft_reset(bk953x_object_t *p_bk953x_object);
+int bk953x_freq_chan_set(bk953x_object_t *p_bk953x_object, freq_chan_object_t *p_freq_chan_object);
+int bk953x_rx_antena_set(bk953x_object_t *p_bk953x_object, antenna_type_e antenna_type);
+int bk953x_rx_reverb_enable(bk953x_object_t *p_bk953x_object, bool enable_status);
+int bk953x_mute_enable(bk953x_object_t *p_bk953x_object, bool enable_status);
+int bk953x_rx_rssi_get(bk953x_object_t *p_bk953x_object, uint8_t *p_rssi);
+int bk953x_rx_vol_get(bk953x_object_t *p_bk953x_object, uint16_t *p_vol);
+int bk953x_user_data_get(bk953x_object_t *p_bk953x_object, uint16_t *p_data);
+int bk953x_rx_id_get(bk953x_object_t *p_bk953x_object, uint32_t *p_rx_id);
+int bk953x_rx_id_set(bk953x_object_t *p_bk953x_object, uint32_t *p_rx_id);
 
+int bk953x_soft_reset(bk953x_object_t *p_bk953x_object);
 int bk953x_config_init(bk953x_object_t *p_bk953x_object);
 int bk953x_chip_id_get(bk953x_object_t *p_bk953x_object);
+void bk953x_res_init(bk953x_object_t *p_bk953x_object);
+
 
 #endif

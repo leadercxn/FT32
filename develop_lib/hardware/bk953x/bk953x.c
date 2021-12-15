@@ -248,14 +248,16 @@ int bk953x_freq_chan_set(bk953x_object_t *p_bk953x_object, freq_chan_object_t *p
     int err_code = 0;
     if(p_bk953x_object->chip_id == BK9532_CHID_ID)
     {
-        CLR_BIT(g_bk9532_init_config[3].value, 15);     //bit[15:13] = 000, 4分频
+        /* bit[15:13] = 001, 6分频 */
+        CLR_BIT(g_bk9532_init_config[3].value, 15);
         CLR_BIT(g_bk9532_init_config[3].value, 14);
-        CLR_BIT(g_bk9532_init_config[3].value, 13);
-        CLR_BIT(g_bk9532_init_config[3].value, 21);     // bit[21:20] = 01, U段
+        SET_BIT(g_bk9532_init_config[3].value, 13);
+
+        /* bit[21:20] = 01, U段 */
+        CLR_BIT(g_bk9532_init_config[3].value, 21);
         SET_BIT(g_bk9532_init_config[3].value, 20);
 
         MID_BK953X_WRITE(0x03, &g_bk9532_init_config[3].value);
-
         MID_BK953X_WRITE(0x0D, &p_freq_chan_object->reg_value);
 
         bk953x_rx_calibration_trigger(p_bk953x_object);

@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "board_config.h"
 #include "bk953x_handler.h"
-
+#include "lcd_display_handler.h"
 
 static bk953x_object_t m_l_bk9532_obj;
 static bk953x_object_t m_r_bk9532_obj;
@@ -159,6 +159,44 @@ void bk953x_task_stage_set(bk953x_lr_e lr, bk953x_task_stage_e stage)
         m_r_bk953x_task.stage = stage;
     }
 }
+
+/**
+ * @brief 设置通道序号来获取对应寄存器的值
+ */
+static int bk953x_ch_index_set(bk953x_lr_e lr, uint16_t chan_index)
+{
+    freq_chan_object_t freq_chan_obj;
+
+    freq_chan_obj.chan_index = chan_index;
+
+    if(lr == BK953X_L)
+    {
+        if((chan_index < 1) && (chan_index > 100))
+        {
+            return -EINVAL;
+        }
+
+        freq_chan_obj.reg_value = BK9532_FREQ_632_MHZ + BK9532_FREQ_0_3_MHZ * (chan_index - SCREEN_L_CHANNEL_INDEX_MIN);
+
+        return bk953x_freq_chan_set(&m_l_bk9532_obj, &freq_chan_obj);
+    }
+    else
+    {
+        if((chan_index < 101) && (chan_index > 200))
+        {
+            return -EINVAL;
+        }
+
+        freq_chan_obj.reg_value = BK9532_FREQ_660_MHZ + BK9532_FREQ_0_3_MHZ * (chan_index - SCREEN_R_CHANNEL_INDEX_MIN);
+
+        return bk953x_freq_chan_set(&m_r_bk9532_obj, &freq_chan_obj);
+    }
+}
+
+
+
+
+
 
 void bk953x_param_cfg_set(bk953x_lr_e lr, bk953x_cfg_option_e option, void *p_data)
 {
