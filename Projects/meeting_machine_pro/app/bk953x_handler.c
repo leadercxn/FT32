@@ -163,7 +163,7 @@ void bk953x_task_stage_set(bk953x_lr_e lr, bk953x_task_stage_e stage)
 /**
  * @brief 设置通道序号来获取对应寄存器的值
  */
-static int bk953x_ch_index_set(bk953x_lr_e lr, uint16_t chan_index)
+int bk953x_ch_index_set(bk953x_lr_e lr, uint16_t chan_index)
 {
     freq_chan_object_t freq_chan_obj;
 
@@ -193,58 +193,101 @@ static int bk953x_ch_index_set(bk953x_lr_e lr, uint16_t chan_index)
     }
 }
 
-
-
-
-
-
-void bk953x_param_cfg_set(bk953x_lr_e lr, bk953x_cfg_option_e option, void *p_data)
+int bk953x_rf_rssi_get(bk953x_lr_e lr, uint8_t *p_level)
 {
+    int err_code = 0;
+    uint8_t rssi = 0;
+
     if(lr == BK953X_L)
     {
-        switch(option)
-        {
-            case BK953X_CFG_FREQ:
+        err_code = bk953x_rx_rssi_get(&m_l_bk9532_obj, &rssi);
 
-                break;
-
-            case BK953X_CFG_RF_POWER:
-
-                break;
-
-            default:
-                break;
-        }
+        trace_debug("l rssi = %d\n\r",rssi);
     }
     else
     {
+        err_code = bk953x_rx_rssi_get(&m_r_bk9532_obj, &rssi);
 
+        trace_debug("r rssi = %d\n\r",rssi);
     }
-}
 
-void bk953x_param_cfg_get(bk953x_lr_e lr, bk953x_cfg_option_e option, void *p_data)
-{
-    if(lr == BK953X_L)
+    /**
+     * rssi: 8 bit
+     */
+    if(rssi > 150)
     {
-        switch(option)
-        {
-            case BK953X_CFG_FREQ:
-
-                break;
-
-            case BK953X_CFG_RF_POWER:
-
-                break;
-
-            default:
-                break;
-        }
+        *p_level = 5;
+    }
+    else if(rssi > 110)
+    {
+        *p_level = 4;
+    }
+    else if(rssi > 90)
+    {
+        *p_level = 3;
+    }
+    else if(rssi > 60)
+    {
+        *p_level = 2;
+    }
+    else if(rssi > 20)
+    {
+        *p_level = 1;
     }
     else
     {
-
+         *p_level = 0;
     }
-}
 
+    return err_code;
+} 
 
+int bk953x_af_get(bk953x_lr_e lr, uint8_t *p_level)
+{
+    int err_code = 0;
+    uint16_t af_vol = 0;
+
+    if(lr == BK953X_L)
+    {
+        err_code = bk953x_rx_vol_get(&m_l_bk9532_obj, &af_vol);
+
+        trace_debug("l af = %d\n\r",af_vol);
+    }
+    else
+    {
+        err_code = bk953x_rx_vol_get(&m_r_bk9532_obj, &af_vol);
+
+        trace_debug("r af = %d\n\r",af_vol);
+    }
+
+    /**
+     * rssi: 16 bit
+     */
+    if(af_vol > 500)
+    {
+        *p_level = 5;
+    }
+    else if(af_vol > 400)
+    {
+        *p_level = 4;
+    }
+    else if(af_vol > 300)
+    {
+        *p_level = 3;
+    }
+    else if(af_vol > 200)
+    {
+        *p_level = 2;
+    }
+    else if(af_vol > 100)
+    {
+        *p_level = 1;
+    }
+    else
+    {
+         *p_level = 0;
+    }
+
+    return err_code;
+} 
 

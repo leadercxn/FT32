@@ -6,6 +6,7 @@
 
 static i2c_transfer_timeout_handler_t m_i2c_transfer_timeout_handler = NULL;
 
+#if 0
 /**
   * @brief  i2c1 资源、IO初始化
   * @param  None
@@ -276,6 +277,9 @@ int i2c1_read_one_byte(uint8_t slaver_addr, uint8_t reg, uint8_t *p_data)
 
     return ENONE;
 }
+
+#endif
+
 
 
 /**

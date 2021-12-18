@@ -108,8 +108,12 @@ typedef struct
 
 
 
+/* BK9532 */
+//#define BK953X_DEVICE_ID    0x26
 
-#define BK953X_DEVICE_ID    0x26
+/* BK9531 */
+#define BK953X_DEVICE_ID    0x25
+
 #define BK9531_CHID_ID      0x9531
 #define BK9532_CHID_ID      0x9532
 

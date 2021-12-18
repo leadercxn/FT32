@@ -228,6 +228,58 @@ static void sys_power_sw_handler(void)
     }
 }
 
+/**
+ * @brief host-task
+ */
+static void host_loop_task(void)
+{
+  int err_code = 0;
+
+  uint8_t l_rf_level = 0;
+  uint8_t r_rf_level = 0;
+
+  uint8_t l_af_level = 0;
+  uint8_t r_af_level = 0;
+
+  static uint64_t old_bk9532_ticks = 0;
+  static uint64_t old_ir_ticks = 0;
+  
+  /* 15ms 刷新一次 */
+  if( mid_timer_ticks_get() - old_bk9532_ticks > 200)
+  {
+    old_bk9532_ticks = mid_timer_ticks_get();
+
+    bk953x_rf_rssi_get(BK953X_L, &l_rf_level);
+    channel_rf_level_lr_set(SCREEN_L, l_rf_level);
+
+    bk953x_rf_rssi_get(BK953X_R, &r_rf_level);
+    channel_rf_level_lr_set(SCREEN_R, r_rf_level);
+
+    bk953x_af_get(BK953X_L, &l_af_level);
+    channel_af_level_lr_set(SCREEN_L, l_af_level);
+
+    bk953x_af_get(BK953X_R, &r_af_level);
+    channel_af_level_lr_set(SCREEN_R, r_af_level);
+  }
+
+  if( mid_timer_ticks_get() - old_ir_ticks > 2000)
+  {
+    old_ir_ticks = mid_timer_ticks_get();
+
+    err_code = ir_tx_start(data, sizeof(data));
+    if(err_code)
+    {
+      trace_error("ir_tx_start error %d\n\r",err_code);
+    }
+    else
+    {
+      trace_debug("ir_tx_start success\n\r");
+    }
+  }
+
+  
+}
+
 int main(void)
 {
   int err_code = 0;
@@ -275,14 +327,25 @@ int main(void)
   bk9532_lr_init();
   ad22650_lr_init();
 
-
-#if 0
-  err_code = ir_tx_start(data, sizeof(data));
+  err_code = bk953x_ch_index_set(BK953X_L, 1);
   if(err_code)
   {
-    trace_error("ir_tx_start error %d\n\r",err_code);
+    trace_error("l ch index set error\n\r");
   }
-#endif
+  else
+  {
+    trace_debug("l ch index set success\n\r");
+  }
+
+  err_code = bk953x_ch_index_set(BK953X_R, 101);
+  if(err_code)
+  {
+    trace_error("r ch index set error\n\r");
+  }
+  else
+  {
+    trace_debug("r ch index set success\n\r");
+  }
 
   APP_SCHED_INIT(&m_app_scheduler, SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
 
@@ -297,6 +360,8 @@ int main(void)
     mid_timer_loop_task();
     bk953x_loop_task();
     lcd_display_loop_task();
+    host_loop_task();
+  
     sys_power_sw_handler();
   }
 }

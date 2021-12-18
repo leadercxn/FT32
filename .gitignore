@@ -5,5 +5,16 @@ Projects/meeting_machine_pro/MDK-ARM/Listings/
 Projects/meeting_machine_pro/MDK-ARM/Objects/
 Projects/meeting_machine_pro/MDK-ARM/DebugConfig/
 Projects/meeting_machine_pro/MDK-ARM/Project.uvguix.*
+Projects/meeting_machine_pro/MDK-ARM/EventRecorderStub.*
+Projects/meeting_machine_pro/MDK-ARM/JLink*
+
+Projects/hand_mic/MDK-ARM/Listings/
+Projects/hand_mic/MDK-ARM/Objects/
+Projects/hand_mic/MDK-ARM/DebugConfig/
+Projects/hand_mic/MDK-ARM/Project.uvguix.*
+Projects/hand_mic/MDK-ARM/EventRecorderStub.*
+Projects/hand_mic/MDK-ARM/JLink*
+Projects/hand_mic/.DS_Store
+
 *.DS_Store/
 

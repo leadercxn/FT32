@@ -34,7 +34,7 @@ typedef enum
     BK953X_CFG_RX_ID,
 } bk953x_cfg_option_e;
 
-int bk9532_lr_init(void);
+int bk9531_init(void);
 
 void bk953x_loop_task(void);
 

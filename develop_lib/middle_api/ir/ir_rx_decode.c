@@ -37,12 +37,18 @@
 static uint8_t m_ir_rx_decode_data[16] = {0};
 static uint8_t m_ir_rx_decode_data_len = 0;
 
+
+/**
+ * @brief
+ * 
+ * 注意: 解码过程中不要添加日志打印，影响解压的时许
+ */
 static void exit_irq_handler(void)
 {
     uint8_t pin_status = 0;
     uint8_t time_cnt = 0;
     uint8_t bit_index = 0;
-    uint8_t byte_index = 0;
+    uint8_t byte_index = 0;     //接收字节的索引,从 0 开始
     bool is_ir_rx_finish = false;
     uint8_t sum_crc = 0;
     uint8_t i;
@@ -65,6 +71,7 @@ static void exit_irq_handler(void)
         //超过5ms低电平，退出红外解码
         if(time_cnt > 11)
         {
+            trace_error("ir start L timeout\r\n");
             EXIT_IRQ_ENABLE(true);
             return;
         }
@@ -80,6 +87,8 @@ static void exit_irq_handler(void)
         //超过5ms低电平，退出红外解码
         if(time_cnt > 11)
         {
+
+            trace_error("ir start H timeout\r\n");
             EXIT_IRQ_ENABLE(true);
             return;
         }
@@ -99,15 +108,16 @@ static void exit_irq_handler(void)
             time_cnt ++;
             if(time_cnt > 11)
             {
+                trace_error("sub state-0 L timeout\r\n");
                 EXIT_IRQ_ENABLE(true);
                 return;
             }
         } while (!pin_status);
 
-        if((time_cnt > 5) && (time_cnt < 12))
+        if((time_cnt > 5) && (time_cnt < 14))
         {
             //测量 2ms < time_cnt < 5ms
-            if(m_ir_rx_decode_data_len)
+            if(byte_index)
             {
                 is_ir_rx_finish = true;
             }
@@ -125,8 +135,9 @@ static void exit_irq_handler(void)
                 delay_us(500);
                 time_cnt ++;
                 //H 电平超过 2ms ，认为是错误
-                if(time_cnt > 4)
+                if(time_cnt > 5)
                 {
+                    trace_error("sub state-1 H timeout\r\n");
                     EXIT_IRQ_ENABLE(true);
                     return;
                 }
@@ -157,8 +168,13 @@ static void exit_irq_handler(void)
         }
         /*  H电平 */
     } while (!is_ir_rx_finish);
-    
-    //长度为奇数，采集出错
+
+#ifdef DEBUG
+    trace_debug("ir rx finish,rx data is\r\n");
+    trace_dump_d(m_ir_rx_decode_data, byte_index);
+#else
+
+    //长度少于规定协议的最小长度，错误
     if(byte_index < 4)
     {
         trace_error("ir rx error data len\r\n");
@@ -174,14 +190,18 @@ static void exit_irq_handler(void)
 
     if(sum_crc == m_ir_rx_decode_data[byte_index - 1])
     {
-        trace_debug("ir rx finish\r\n");
+        trace_debug("ir rx finish,rx data is\r\n");
+
         // 校验通过后才赋值
         m_ir_rx_decode_data_len = byte_index;
+
+        trace_dump_d(m_ir_rx_decode_data, m_ir_rx_decode_data_len);
     }
     else
     {
         trace_error("ir rx error data verify\r\n");
     }
+#endif
 
     EXIT_IRQ_ENABLE(true);
 }
