@@ -24,6 +24,14 @@
 #define BK9531_CE_PORT                  GPIOB
 #define BK9531_CE_PERIPH_CLK            RCC_AHBPeriph_GPIOB
 
+#define POWER_ON_PIN                    GPIO_Pin_2
+#define POWER_ON_PORT                   GPIOA
+#define POWER_ON_PORT_PERIPH_CLK        RCC_AHBPeriph_GPIOA
+
+#define POWER_SW_KEY_PIN                GPIO_Pin_3
+#define POWER_SW_KEY_PORT               GPIOA
+#define POWER_SW_KEY_PORT_PERIPH_CLK    RCC_AHBPeriph_GPIOA           
+
 /* TIMER */
 #define TIM3_CLK                        RCC_APB1Periph_TIM3
 #define TIM3_IRQ                        TIM3_IRQn
@@ -71,9 +79,35 @@
 #define EXIT_GPIO_PORT                  GPIOA
 #define EXIT_LINE                       EXTI_Line8
 
+/* HT1621 */
+#define HT1621_DATA_PIN                 GPIO_Pin_7
+#define HT1621_DATA_PORT                GPIOA
+#define HT1621_DATA_PORT_PERIPH_CLK     RCC_AHBPeriph_GPIOA
+
+#define HT1621_WR_PIN                   GPIO_Pin_5
+#define HT1621_WR_PORT                  GPIOA
+#define HT1621_WR_PORT_PERIPH_CLK       RCC_AHBPeriph_GPIOA
+
+#define HT1621_CS_PIN                   GPIO_Pin_4
+#define HT1621_CS_PORT                  GPIOA
+#define HT1621_CS_PORT_PERIPH_CLK       RCC_AHBPeriph_GPIOA
+
+/* ADC */
+#define ADC_CHANNEL_1                   ADC_Channel_1
+
+#define ADC_GPIO_PORT_CLK               RCC_AHBPeriph_GPIOA
+#define ADC_GPIO_PIN_0                  GPIO_Pin_0
+#define ADC_GPIO_PIN_1                  GPIO_Pin_1
+#define ADC_GPIO_PORT                   GPIOA
+
+#define ADC_SAMPLETIME_CYCLE            ADC_SampleTime_239_5Cycles
+#define ADC_CONTINUOUS_CONV_MODE        DISABLE
 
 #endif
 
+
+/* BK9531 */
+#define BK953X_DEVICE_ID    0x25
 
 /* 选择develop_lib库的头文件 */
 #include "develop_lib.h"

@@ -41,7 +41,9 @@ static uint8_t m_ir_rx_decode_data_len = 0;
 /**
  * @brief
  * 
- * 注意: 解码过程中不要添加日志打印，影响解压的时许
+ * 注意: 解码过程中不要添加日志打印，影响解压的时许，解码过程
+ * 
+ * @bug 因为内部使用了delay函数，假如在外部使用delay时，会引起bug
  */
 static void exit_irq_handler(void)
 {
@@ -53,6 +55,8 @@ static void exit_irq_handler(void)
     uint8_t sum_crc = 0;
     uint8_t i;
 
+    uint64_t ticks = 0;
+
     /**
      * 在外部中断函数里面写红外解码处理过程，用时210～250ms，阻塞式
      * 弊端: 影响其他处理
@@ -63,13 +67,13 @@ static void exit_irq_handler(void)
     EXIT_IRQ_ENABLE(false);
 
     /* ir start的5ms L电平 */
+    ticks = mid_timer_ticks_get();
     do
     {
         get_gpio_value(EXIT_GPIO_PORT, EXIT_GPIO_PIN, &pin_status);
-        delay_us(500);
-        time_cnt ++;
+
         //超过5ms低电平，退出红外解码
-        if(time_cnt > 11)
+        if(mid_timer_ticks_get() - ticks > 6)
         {
             trace_error("ir start L timeout\r\n");
             EXIT_IRQ_ENABLE(true);
@@ -77,18 +81,16 @@ static void exit_irq_handler(void)
         }
     } while (!pin_status);
 
-    time_cnt = 0;
+    ticks = mid_timer_ticks_get();
     /* ir start的5ms H电平 */
     do
     {
         get_gpio_value(EXIT_GPIO_PORT, EXIT_GPIO_PIN, &pin_status);
-        delay_us(500);
-        time_cnt ++;
-        //超过5ms低电平，退出红外解码
-        if(time_cnt > 11)
-        {
 
-            trace_error("ir start H timeout\r\n");
+        //超过5ms低电平，退出红外解码
+        if(mid_timer_ticks_get() - ticks > 6)
+        {
+            trace_error("ir start L timeout\r\n");
             EXIT_IRQ_ENABLE(true);
             return;
         }
@@ -100,13 +102,12 @@ static void exit_irq_handler(void)
         /**
          * sub state-0
          */
-        time_cnt = 0;
+        ticks = mid_timer_ticks_get();
         do
         {
             get_gpio_value(EXIT_GPIO_PORT, EXIT_GPIO_PIN, &pin_status);
-            delay_us(500);
-            time_cnt ++;
-            if(time_cnt > 11)
+
+            if(mid_timer_ticks_get() - ticks > 8)
             {
                 trace_error("sub state-0 L timeout\r\n");
                 EXIT_IRQ_ENABLE(true);
@@ -114,7 +115,7 @@ static void exit_irq_handler(void)
             }
         } while (!pin_status);
 
-        if((time_cnt > 5) && (time_cnt < 14))
+        if((mid_timer_ticks_get() - ticks > 4) && (mid_timer_ticks_get() - ticks < 7))
         {
             //测量 2ms < time_cnt < 5ms
             if(byte_index)
@@ -128,14 +129,15 @@ static void exit_irq_handler(void)
          */
         if(!is_ir_rx_finish)
         {
-            time_cnt = 0;
+            ticks = mid_timer_ticks_get();
             do
             {
                 get_gpio_value(EXIT_GPIO_PORT, EXIT_GPIO_PIN, &pin_status);
-                delay_us(500);
-                time_cnt ++;
+
+                time_cnt = mid_timer_ticks_get() - ticks;
+
                 //H 电平超过 2ms ，认为是错误
-                if(time_cnt > 5)
+                if(time_cnt > 3)
                 {
                     trace_error("sub state-1 H timeout\r\n");
                     EXIT_IRQ_ENABLE(true);
@@ -145,7 +147,7 @@ static void exit_irq_handler(void)
 
             //LSB
             m_ir_rx_decode_data[byte_index] >>= 1;
-            if(time_cnt > 2)
+            if(time_cnt > 1)
             {
                 m_ir_rx_decode_data[byte_index] |= 0x80;
             }
@@ -168,6 +170,7 @@ static void exit_irq_handler(void)
         }
         /*  H电平 */
     } while (!is_ir_rx_finish);
+
 
 #ifdef DEBUG
     trace_debug("ir rx finish,rx data is\r\n");

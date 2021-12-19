@@ -38,7 +38,7 @@ void exit_init(void)
 
     /* Enable and set EXTI4_15 Interrupt */
     NVIC_InitStructure.NVIC_IRQChannel = EXTI4_15_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPriority = 0x00;
+    NVIC_InitStructure.NVIC_IRQChannelPriority = 0x01;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
 }

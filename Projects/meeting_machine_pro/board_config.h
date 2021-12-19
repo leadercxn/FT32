@@ -162,6 +162,9 @@
 #endif
 
 
+/* BK9532 */
+#define BK953X_DEVICE_ID    0x26
+
 /* 选择develop_lib库的头文件 */
 #include "develop_lib.h"
 #include "lib_error.h"

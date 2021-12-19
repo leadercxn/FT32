@@ -1,18 +1,115 @@
 #include "board_config.h"
 
 #include "bk953x_handler.h"
+#include "lcd_display_handler.h"
+#include "button_handler.h"
+#include "battery_handler.h"
 
 #define SCHED_MAX_EVENT_DATA_SIZE   8
 #define SCHED_QUEUE_SIZE            20
 
 static app_scheduler_t  m_app_scheduler;
 
-uint8_t ir_rx_data[4] = {0};
-uint8_t ir_rx_len = 0;
+static gpio_object_t   m_power_on_gpio = 
+{
+    .gpio_port_periph_clk = POWER_ON_PORT_PERIPH_CLK,
+    .p_gpio_port = POWER_ON_PORT,
+    .gpio_dir = GPIO_DIR_OUTPUR,
+    .gpio_pin = POWER_ON_PIN,
+};
+
+static bool m_sys_power_on = false;
+
+static char * mp_button[BUTTON_EVENT_MAX] = {
+    "BUTTON_EVENT_PUSH",
+    "BUTTON_EVENT_LONG_PUSH",
+    "BUTTON_EVENT_RELEASE",
+};
+
+
+/**
+ * @brief 按键回调
+ */
+static void button_handler(button_event_e event)
+{
+    static uint64_t pre_ticks = 0;
+    uint64_t now_ticks = mid_timer_ticks_get();
+
+    static button_event_e old_event = BUTTON_EVENT_MAX;
+
+    /**
+     * 两个时间得间隔200ms
+     */
+    if(old_event != event)
+    {
+        old_event = event;
+    }
+    else if(event == BUTTON_EVENT_LONG_PUSH)
+    {
+        if(now_ticks - pre_ticks > 2000)
+        {
+            pre_ticks = now_ticks;
+        }
+        else
+        {
+          return;
+        }
+    }
+    else if(now_ticks - pre_ticks > 200)
+    {
+        pre_ticks = now_ticks;
+    }
+    else
+    {
+      return;
+    }
+
+    switch(event)
+    {
+        case BUTTON_EVENT_PUSH:
+          if(m_sys_power_on)
+          {
+            lcd_black_light_enable(true);
+
+            trace_debug("turn on lcd led\n\r");
+          }
+
+          break;
+
+        case BUTTON_EVENT_LONG_PUSH:
+
+            if(m_sys_power_on)
+            {
+                m_sys_power_on = false;
+                lcd_black_light_enable(false);
+
+                gpio_output_set(&m_power_on_gpio, 0);
+                trace_debug("system power off\n\r");
+            }
+            else
+            {
+                m_sys_power_on = true;
+                lcd_black_light_enable(true);
+
+                gpio_output_set(&m_power_on_gpio, 1);
+                trace_debug("system power on\n\r");
+            }
+          break;
+    }
+}
+
 
 static void app_evt_schedule(void * p_event_data)
 {
     trace_debug("app_evt_schedule\n\r");
+}
+
+/**
+ * @brief host-task
+ */
+static void host_loop_task(void)
+{
+
 }
 
 int main(void)
@@ -23,7 +120,7 @@ int main(void)
 
   /*greeting*/
   trace_info("\n\r\n\r");
-  trace_info("       *** Welcome to the Project ***\n\r");
+  trace_info("       *** Welcome to the Hand-Mic Project ***\n\r");
   trace_info("\n\r");
 
   TIMER_INIT();
@@ -36,9 +133,17 @@ int main(void)
   APP_SCHED_INIT(&m_app_scheduler, SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
   app_sched_event_put(&m_app_scheduler, NULL, 0, app_evt_schedule);
 
+  lcd_display_init();
+
+  gpio_config(&m_power_on_gpio);
+  button_hw_init(button_handler);
+
   bk9531_init();
 
   ir_rx_init();
+
+  /* adc 相关 */
+  adc_init();
 
   trace_info("Start loop\n\r");
   while(1)
@@ -46,10 +151,10 @@ int main(void)
     app_sched_execute(&m_app_scheduler);
 
     bk953x_loop_task();
-
-//    ir_rx_len = ir_rx_decode_result_get(ir_rx_data);
-
-
+    button_loop_task();
+    lcd_display_loop_task();
+    battery_loop_task();
+    host_loop_task();
   }
 
 }

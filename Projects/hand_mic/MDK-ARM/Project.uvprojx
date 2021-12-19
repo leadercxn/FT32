@@ -337,7 +337,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>FT32F030x6,USE_STDPERIPH_DRIVER,USE_FT32F030XX_EVAL,USE_DEFAULT_TIMEOUT_CALLBACK,FT32</Define>
+              <Define>FT32F030x6,USE_STDPERIPH_DRIVER,USE_FT32F030XX_EVAL,USE_DEFAULT_TIMEOUT_CALLBACK,FT32,DEBUG,</Define>
               <Undefine></Undefine>
               <IncludePath>..\;..\..\..\Libraries\CMSIS\Device\FT\FT32F0xx\Include;..\..\..\Libraries\CMSIS\Include;..\..\..\Libraries\FT32F0xx_StdPeriph_Driver\inc;..\..\..\Libraries\FT32F0xx_CPAL_Driver\inc;..\..\..\Utilities\FT32_EVAL\Common;..\..\..\Utilities\FT32_EVAL\FT32F030xx_EVAL;..\..\..\develop_lib\ft_lib\gpio;..\..\..\develop_lib\ft_lib\systick;..\..\..\develop_lib\ft_lib\timer;..\..\..\develop_lib\ft_lib\usart;..\..\..\develop_lib\middle_api\delay;..\..\..\develop_lib\middle_api\mid_gpio;..\..\..\develop_lib\middle_api\mid_systick;..\..\..\develop_lib\middle_api\mid_timer;..\..\..\develop_lib\middle_api\trace;..\..\..\develop_lib\middle_api\queue;..\..\..\develop_lib\ft_lib;..\..\..\develop_lib\middle_api;..\..\..\develop_lib\third_lib;..\..\..\develop_lib\third_lib\app_timer;..\..\..\develop_lib\third_lib\crc32;..\..\..\develop_lib;..\..\..\develop_lib\ft_lib\i2c;..\..\..\develop_lib\ft_lib\flash;..\..\..\develop_lib\ft_lib\timer_pwm;..\..\..\develop_lib\ft_lib\exit;..\..\..\develop_lib\ft_lib\adc;..\..\..\develop_lib\middle_api\tft_8080;..\..\..\develop_lib\middle_api\mid_bk953x;..\..\..\develop_lib\middle_api\mid_flash;..\..\..\develop_lib\middle_api\adc;..\..\..\develop_lib\middle_api\ir;..\..\..\develop_lib\middle_api\pwm;..\..\..\develop_lib\hardware;..\..\..\develop_lib\hardware\bk953x;..\..\..\develop_lib\hardware\ht1621;..\..\..\develop_lib\hardware\st7789;..\..\..\develop_lib\third_lib\app_scheduler;..\app</IncludePath>
             </VariousControls>
@@ -412,6 +412,21 @@
               <FileName>bk953x_handler.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\app\bk953x_handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_display_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\lcd_display_handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>button_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\button_handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>battery_hander.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\battery_hander.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -508,6 +523,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\hardware\bk953x\bk953x.c</FilePath>
             </File>
+            <File>
+              <FileName>ht1621.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\hardware\ht1621\ht1621.c</FilePath>
+            </File>
+            <File>
+              <FileName>seg_code.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\hardware\ht1621\seg_code.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -548,6 +573,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\ft_lib\exit\ft_exit.c</FilePath>
             </File>
+            <File>
+              <FileName>ft_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\ft_lib\adc\ft_adc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -587,6 +617,11 @@
               <FileName>ir_rx_decode.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\develop_lib\middle_api\ir\ir_rx_decode.c</FilePath>
+            </File>
+            <File>
+              <FileName>mid_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\develop_lib\middle_api\adc\mid_adc.c</FilePath>
             </File>
           </Files>
         </Group>

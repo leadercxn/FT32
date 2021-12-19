@@ -59,6 +59,7 @@ void ft_delay_us(uint32_t us)
 {
 	//	volatile uint32_t temp;
 	SysTick->LOAD = (uint32_t)us * fac_us;
+	SysTick->CTRL = 0x00; //停止计数
 	SysTick->VAL = 0x00;  //清空计数器
 	SysTick->CTRL = 0x01; //开始计数
 						  //	temp  = SysTick->VAL;
@@ -78,6 +79,7 @@ void ft_delay_ms(uint32_t ms)
 	{
 		//	volatile uint32_t temp;
 		SysTick->LOAD = (uint32_t)1 * fac_ms;
+		SysTick->CTRL = 0x00; //停止计数
 		SysTick->VAL = 0x00;  //清空计数器
 		SysTick->CTRL = 0x01; //开始计数
 							//	temp  = SysTick->VAL;

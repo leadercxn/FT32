@@ -36,6 +36,8 @@ int ht162x_bit_send(ht162x_t *p_dev, uint8_t data, uint8_t cnt)
 		gpio_output_set(&p_dev->wr_clk_pin, 1);
 		data <<= 1; //左移一位，丢弃已经写入的最高位
 	}
+
+	return 0;
 }
 
 
@@ -70,6 +72,8 @@ int ht162x_data_bit_send(ht162x_t *p_dev, uint8_t data, uint8_t cnt)
 		gpio_output_set(&p_dev->wr_clk_pin, 1);
 		data >>= 1;
 	}
+
+	return 0;
 }
 
 /********************************************************
@@ -90,6 +94,8 @@ int ht162x_cmd_send(ht162x_t *p_dev, uint8_t cmd)
 	ht162x_bit_send(p_dev, cmd, 9);  // - - 写入命令数据//写入9位数据，其中前8位是命令，最后一位任意。
 	gpio_output_set(&p_dev->cs_pin, 1);
 	delay_us(10);
+
+	return 0;
 }
 
 /********************************************************
@@ -111,6 +117,8 @@ int ht162x_write(ht162x_t *p_dev, uint8_t addr, uint8_t data)
 	ht162x_data_bit_send(p_dev, data, 4);  //写入DAT低4位，分别对应COM3,COM2,COM1,COM0
 	gpio_output_set(&p_dev->cs_pin, 1);
 	delay_us(10);
+
+	return 0;
 }
 
 /********************************************************
@@ -139,6 +147,8 @@ int ht162x_all_write(ht162x_t *p_dev, uint8_t addr, uint8_t *p, uint8_t cnt)
 	}
 	gpio_output_set(&p_dev->cs_pin, 1);
 	delay_us(10);
+
+	return 0;
 }
 
 /**
@@ -153,6 +163,8 @@ int ht162x_all_show(ht162x_t *p_dev)
 	{
 		ht162x_write(p_dev, i, 0xFF);
 	}
+
+	return 0;
 }
 
 //清屏
@@ -161,6 +173,8 @@ int ht162x_all_clean(ht162x_t *p_dev)
 	IS_NULL(p_dev);
 
 	ht162x_all_write(p_dev, 0, Ht1621Tab, 16); //清除1621寄存器数据，暨清屏
+
+	return 0;
 }
 
 /**
@@ -191,4 +205,6 @@ int ht162x_init(ht162x_t *p_dev)
 								  //    SendCmd(WDTDIS); // - - 禁止看门狗
 	ht162x_cmd_send(p_dev, SYSEN);		  // - - 打开系统振荡器 0X01
 	ht162x_cmd_send(p_dev, LCDON);		  // - - 打开LCD偏压 LCDON
+
+	return 0;
 }

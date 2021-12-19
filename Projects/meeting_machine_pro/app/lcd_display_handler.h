@@ -11,6 +11,58 @@
 
 #define SCREEN_L_CHANNEL_FREQ_MIN   6320
 
+/**
+ * LCD 上可显示的数码管
+ */
+typedef enum
+{
+    DIGITAL_1,
+    DIGITAL_2,
+    DIGITAL_3,
+    DIGITAL_4,
+    DIGITAL_5,
+    DIGITAL_6,
+    DIGITAL_7,
+    DIGITAL_8,
+    DIGITAL_9,
+    DIGITAL_10,
+    DIGITAL_11,
+    DIGITAL_12,
+    DIGITAL_13,
+    DIGITAL_14,
+    DIGITAL_15,
+    DIGITAL_16,
+    DIGITAL_S3,
+    DIGITAL_S4,
+
+    DIGITAL_S1,
+    DIGITAL_S2,
+
+    DIGITAL_T1,
+    DIGITAL_T2,
+    DIGITAL_T3,
+    DIGITAL_T4,
+    DIGITAL_T5,
+
+    DIGITAL_X1,
+    DIGITAL_X2,
+    DIGITAL_X3,
+    DIGITAL_X4,
+    DIGITAL_X5,
+
+    DIGITAL_M1,
+    DIGITAL_M2,
+    DIGITAL_M3,
+    DIGITAL_M4,
+    DIGITAL_M5,
+
+    DIGITAL_W1,
+    DIGITAL_W2,
+    DIGITAL_W3,
+    DIGITAL_W4,
+    DIGITAL_W5,
+} lcd_part_e;
+
 typedef struct
 {
     ht162x_t        ht162x;

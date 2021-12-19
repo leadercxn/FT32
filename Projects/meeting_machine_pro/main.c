@@ -288,7 +288,7 @@ int main(void)
 
   /*greeting*/
   trace_info("\n\r\n\r");
-  trace_info("       *** Welcome to the Project ***\n\r");
+  trace_info("       *** Welcome to the meeting-machine Project ***\n\r");
   trace_info("\n\r");
 
   TIMER_INIT();
