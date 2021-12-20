@@ -80,6 +80,11 @@ static lcd_display_obj_t    m_lcd_display_obj = {
 };
 
 /**
+ * VER 1.0的LCD图纸
+ */
+#if 0
+
+/**
  *@brief 适用于 显示数字channel index 和 channel freq 的数码管
  */
 static void digital_number_show(lcd_part_e part, uint8_t data)
@@ -228,6 +233,166 @@ static void digital_special_show(lcd_part_e part , bool enable)
     ht162x_write(&m_lcd_display_obj.ht162x, seg_cell.seg_index, m_seg_table[seg_cell.seg_index].seg_data.byte);
 }
 
+#endif
+
+
+/**
+ * VER X.X 的LCD图纸
+ */
+#if 1
+
+/**
+ *@brief 适用于 显示数字channel index 和 channel freq 的数码管
+ */
+static void digital_number_show(lcd_part_e part, uint8_t data)
+{
+    if(part > DIGITAL_6)
+    {
+        return;
+    }
+
+    lcd_seg_cell_t seg_cell_l;
+    lcd_seg_cell_t seg_cell_h;
+
+    encode_seg_code_t seg_code;
+	digital_to_segdata(&seg_code, data);
+
+    switch (part)
+    {
+        case DIGITAL_1:
+            seg_cell_l.seg_index = 3;
+            seg_cell_h.seg_index = 4;
+            break;
+        
+        case DIGITAL_2:
+            seg_cell_l.seg_index = 5;
+            seg_cell_h.seg_index = 6;
+            break;
+
+        case DIGITAL_3:
+            seg_cell_l.seg_index = 9;
+            seg_cell_h.seg_index = 10;
+            break;
+
+        case DIGITAL_4:
+            seg_cell_l.seg_index = 11;
+            seg_cell_h.seg_index = 12;
+            break;
+
+        case DIGITAL_5:
+            seg_cell_l.seg_index = 13;
+            seg_cell_h.seg_index = 14;
+            break;
+
+        case DIGITAL_6:
+            seg_cell_l.seg_index = 15;
+            seg_cell_h.seg_index = 16;
+            break;
+    }
+
+    //m_seg_table[seg_cell_l.seg_index].seg_data.seg.com1 = 0;
+    m_seg_table[seg_cell_l.seg_index].seg_data.seg.com2 = seg_code.seg_f;
+    m_seg_table[seg_cell_l.seg_index].seg_data.seg.com3 = seg_code.seg_g;
+    m_seg_table[seg_cell_l.seg_index].seg_data.seg.com4 = seg_code.seg_e;
+
+    m_seg_table[seg_cell_h.seg_index].seg_data.seg.com1 = seg_code.seg_a;
+    m_seg_table[seg_cell_h.seg_index].seg_data.seg.com2 = seg_code.seg_b;
+    m_seg_table[seg_cell_h.seg_index].seg_data.seg.com3 = seg_code.seg_c;
+    m_seg_table[seg_cell_h.seg_index].seg_data.seg.com4 = seg_code.seg_d;
+
+    ht162x_write(&m_lcd_display_obj.ht162x, seg_cell_l.seg_index, m_seg_table[seg_cell_l.seg_index].seg_data.byte);
+    ht162x_write(&m_lcd_display_obj.ht162x, seg_cell_h.seg_index, m_seg_table[seg_cell_h.seg_index].seg_data.byte);
+}
+
+/**
+ * @brief 适用于特别的字符显示
+ */
+static void digital_special_show(lcd_part_e part , bool enable)
+{
+    if(part < DIGITAL_T1)
+    {
+        return;
+    }
+
+    lcd_seg_cell_t seg_cell;
+
+    switch(part)
+    {
+        case DIGITAL_T1:
+            seg_cell.seg_index = 7;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com2 = enable;
+            break;
+
+        case DIGITAL_T2:
+            seg_cell.seg_index = 7;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
+            break;
+
+        case DIGITAL_T3:
+            seg_cell.seg_index = 7;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com3 = enable;
+            break;
+
+        case DIGITAL_T4:
+            seg_cell.seg_index = 7;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com4 = enable;
+            break;
+
+        case DIGITAL_T5:
+            seg_cell.seg_index = 8;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
+            break;
+
+        case DIGITAL_T6:
+            seg_cell.seg_index = 8;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com2 = enable;
+            break;
+        
+        case DIGITAL_T7:
+            seg_cell.seg_index = 8;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com3 = enable;
+            break;
+
+        case DIGITAL_T8:
+            seg_cell.seg_index = 9;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
+            break;
+
+        case DIGITAL_T9:
+            seg_cell.seg_index = 8;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com4 = enable;
+            break;
+
+        case DIGITAL_T10:
+            seg_cell.seg_index = 15;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
+            break;
+
+        case DIGITAL_T11:
+            seg_cell.seg_index = 13;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
+            break;
+
+        case DIGITAL_T12:
+            seg_cell.seg_index = 3;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
+            break;
+
+        case DIGITAL_T13:
+            seg_cell.seg_index = 11;
+            m_seg_table[seg_cell.seg_index].seg_data.seg.com1 = enable;
+            break;
+
+        default:
+            break;
+    }
+
+    ht162x_write(&m_lcd_display_obj.ht162x, seg_cell.seg_index, m_seg_table[seg_cell.seg_index].seg_data.byte);
+}
+
+#endif
+
+
 /**
  * @brief 显示通道频率
  * 
@@ -279,17 +444,11 @@ static void channel_off_show(void)
 int lcd_display_init(void)
 {
     ht162x_init(&m_lcd_display_obj.ht162x);
+
     ht162x_all_clean(&m_lcd_display_obj.ht162x);
 
     gpio_config(&m_lcd_display_obj.lcd_back_light_pin);
     gpio_output_set(&m_lcd_display_obj.lcd_back_light_pin, 1);
-
-    digital_number_show(DIGITAL_1, 8);
-    digital_number_show(DIGITAL_2, 1);
-    digital_number_show(DIGITAL_3, 2);
-    digital_number_show(DIGITAL_4, 3);
-    digital_number_show(DIGITAL_5, 4);
-    digital_number_show(DIGITAL_6, 6);
 
     return 0;
 }
