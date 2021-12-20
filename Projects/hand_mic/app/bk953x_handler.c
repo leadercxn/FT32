@@ -73,13 +73,11 @@ static void bk953x_stage_task_run(bk953x_task_t *p_task)
     switch(p_task->stage)
     {
         case BK_STAGE_INIT:
-#if 0
             err_code = bk953x_config_init(p_task->p_bk953x_object);
             if(err_code == 0)
             {
                 trace_debug("bk953x_config_init success\n\r");
             }
-#endif
             p_task->stage++;
             break;
 

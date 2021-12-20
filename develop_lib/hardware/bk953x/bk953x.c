@@ -69,8 +69,8 @@ bk953x_reg_value_t g_bk9532_init_config[54] = {
     {0x36 , 0x0C6060DD },
 
     {0x37 , 0x3E009800 },
-    {0x38 , 0x40D7D5F7 },
-    {0x39 , 0x00000000 },
+    {0x38 , 0x40D7D5F7 },   //Preamble
+    {0x39 , 0x00000000 },   //ID_code
     {0x3A , 0x28020564 },
     {0x3B , 0x6D000800 },//
     {0x3C , 0x0040FFDC },
@@ -101,6 +101,49 @@ bk953x_reg_value_t g_bk9532_init_config[54] = {
     {0x7C , 0x0F860074 },
     {0x7D , 0x0032A8FF },
 };
+
+bk953x_reg_value_t g_bk9531_init_config[] = {
+    {0x00 , 0x1C440C88},
+    {0x01 , 0x04CF0057},
+    {0x02 , 0x8990E02F},
+//    {0x03 , 0x341206FF},    //UBAND,
+    {0x03 , 0x341216FF},    //for cxn test U段,6分频
+    {0x04 , 0x53880044},
+    {0x05 , 0x00280380},
+    {0x06 , 0x5BEDFB00},
+    {0x07 , 0x1C400000},
+    {0x08 , 0x00080100},
+    {0x09 , 0x00007EFF},
+    {0x0A , 0x0F3A3030},
+    {0x0B , 0x0006C3FF},
+    {0x0C , 0x00000008},
+//  {0x0D , 0x3A980000},
+    {0x0D , 0x4D260000},    //for cxn test , 632MHz
+
+    {0x30 , 0x28282828},
+    {0x31 , 0xD0000028},
+    {0x32 , 0x10060064},
+    {0x33 , 0x48808D82},
+    {0x34 , 0x0B021108},
+    {0x35 , 0x70500080},
+    {0x36 , 0x0F801E04},
+    {0x37 , 0x00000000},
+    {0x38 , 0x00000000},    //ID_code
+    {0x39 , 0x03D7D5F7},    //Preamble
+    {0x3A , 0xC0250074},
+    {0x3B , 0x9525003B},
+    {0x3C , 0x9525003C},
+    {0x3D , 0x9525003C},
+    {0x3E , 0x00F867C3},
+    {0x3F , 0x800F0000},
+
+    {0x70 , 0x00009531},
+    {0x71 , 0x18A40810},
+    {0x72 , 0x00000000},
+    {0x77 , 0x00070051},
+    {0x78 , 0x00000008},
+};
+
 
 /**
  * @brief 接收软复位
@@ -792,14 +835,34 @@ int bk953x_config_init(bk953x_object_t *p_bk953x_object)
     int err_code = 0;
     uint8_t i = 0;
 
-    for(i = 0 ; i < ARRAY_SIZE(g_bk9532_init_config) ; i ++)
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
     {
-        err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, g_bk9532_init_config[i].reg, &g_bk9532_init_config[i].value);
-        if(err_code)
+        for(i = 0 ; i < ARRAY_SIZE(g_bk9532_init_config) ; i ++)
         {
-            trace_warn("bk953x_config_init  wite reg 0x%02x fail\n\r",g_bk9532_init_config[i].reg);
+            err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, g_bk9532_init_config[i].reg, &g_bk9532_init_config[i].value);
+            if(err_code)
+            {
+                trace_warn("bk953x_config_init  wite reg 0x%02x fail\n\r",g_bk9532_init_config[i].reg);
+            }
         }
+
+        trace_debug("bk9532_config_init  done\n\r");
     }
+    else if(p_bk953x_object->chip_id == BK9531_CHID_ID)
+    {
+        for(i = 0 ; i < ARRAY_SIZE(g_bk9531_init_config) ; i ++)
+        {
+            err_code = mid_bk953x_write_one_reg(&p_bk953x_object->mid_bk953x_object, BK953X_DEVICE_ID, g_bk9531_init_config[i].reg, &g_bk9531_init_config[i].value);
+            if(err_code)
+            {
+                trace_warn("bk953x_config_init  wite reg 0x%02x fail\n\r",g_bk9531_init_config[i].reg);
+            }
+        }
+
+        trace_debug("bk9531_config_init  done\n\r");
+    }
+
+
 
     delay_ms(50);
 
