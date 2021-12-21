@@ -70,6 +70,8 @@ static void bk953x_stage_task_run(bk953x_task_t *p_task)
 {
     int err_code = 0;
 
+    static uint64_t old_ticks = 0;
+
     switch(p_task->stage)
     {
         case BK_STAGE_INIT:
@@ -83,6 +85,17 @@ static void bk953x_stage_task_run(bk953x_task_t *p_task)
 
         case BK_STAGE_NORMAL:
 
+                if(mid_timer_ticks_get() - old_ticks > 5000)
+                {
+                    old_ticks = mid_timer_ticks_get();
+                    err_code = bk953x_tx_spec_data_set(p_task->p_bk953x_object, 0x12);
+                    if(!err_code)
+                    {
+                        trace_debug("bk953x_tx_spec_data_set success\n\r");
+                    }
+                    
+                }
+                
             break;
 
         case BK_STAGE_SEARCHING:

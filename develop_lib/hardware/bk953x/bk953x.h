@@ -122,8 +122,11 @@ int bk953x_rx_vol_get(bk953x_object_t *p_bk953x_object, uint16_t *p_vol);
 int bk953x_user_data_get(bk953x_object_t *p_bk953x_object, uint16_t *p_data);
 int bk953x_rx_id_get(bk953x_object_t *p_bk953x_object, uint32_t *p_rx_id);
 int bk953x_rx_id_set(bk953x_object_t *p_bk953x_object, uint32_t *p_rx_id);
-
+int bk953x_rx_spec_data_get(bk953x_object_t *p_bk953x_object, uint8_t *p_spec_data);
 int bk953x_soft_reset(bk953x_object_t *p_bk953x_object);
+
+int bk953x_tx_spec_data_set(bk953x_object_t *p_bk953x_object , uint8_t data);
+
 int bk953x_config_init(bk953x_object_t *p_bk953x_object);
 int bk953x_chip_id_get(bk953x_object_t *p_bk953x_object);
 void bk953x_res_init(bk953x_object_t *p_bk953x_object);

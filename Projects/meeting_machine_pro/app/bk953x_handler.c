@@ -113,6 +113,8 @@ static int bk953x_rx_channel_search(bk953x_object_t *p_bk953x_object)
 static void bk953x_stage_task_run(bk953x_task_t *p_task)
 {
     int err_code = 0;
+    uint8_t rx_spec_data = 0;
+    static uint64_t old_ticks = 0;
 
     switch(p_task->stage)
     {
@@ -126,7 +128,16 @@ static void bk953x_stage_task_run(bk953x_task_t *p_task)
             break;
 
         case BK_STAGE_NORMAL:
-
+            if( mid_timer_ticks_get() - old_ticks > 1000)
+            {
+                old_ticks = mid_timer_ticks_get();
+                err_code = bk953x_rx_spec_data_get(&m_l_bk9532_obj, &rx_spec_data);
+                if(!err_code)
+                {
+                    trace_debug("bk953x_rx_spec_data_get rx_spec_data = 0x%02x\n\r",rx_spec_data);
+                }
+                
+            }
             break;
 
         case BK_STAGE_SEARCHING:

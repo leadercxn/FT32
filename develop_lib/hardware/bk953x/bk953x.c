@@ -793,6 +793,28 @@ int bk953x_rx_id_set(bk953x_object_t *p_bk953x_object, uint32_t *p_rx_id)
     return err_code;
 }
 
+int bk953x_rx_spec_data_get(bk953x_object_t *p_bk953x_object, uint8_t *p_spec_data)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+
+    IS_NULL(p_bk953x_object);
+    IS_NULL(p_spec_data);
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+        MID_BK953X_READ(0x7C, &value);
+
+        *p_spec_data = (uint8_t)value;
+    }
+    else
+    {
+
+    }
+
+    return err_code;
+}
+
 /**
  * @brief BK953X 软复位
  */
@@ -827,6 +849,150 @@ int bk953x_soft_reset(bk953x_object_t *p_bk953x_object)
     return err_code;
 }
 
+
+/**
+ * @brief 
+ * 
+ */
+int bk953x_tx_trigger(bk953x_object_t *p_bk953x_object)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+
+    IS_NULL(p_bk953x_object);
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+
+    }
+    else if(p_bk953x_object->chip_id == BK9531_CHID_ID)
+    {
+        uint32_t reg_val_bak = g_bk9531_init_config[0x0A].value;
+
+        g_bk9531_init_config->value &= 0xFFFFFF00;
+
+        MID_BK953X_WRITE(0x0A, &g_bk9531_init_config[0x0A].value);
+
+        //Set ddf_en=0 for tx_trigger
+        MID_BK953X_READ(0x35, &value);
+        CLR_BIT(value,7);
+        MID_BK953X_WRITE(0x35, &value);
+
+        //Set tx_en=0 for tx_trigger
+        MID_BK953X_READ(0x3F, &value);
+        CLR_BIT(value,31);
+        MID_BK953X_WRITE(0x3F, &value);
+
+        //Set tx_en=0 another tx enable, from hds
+        MID_BK953X_READ(0x39, &value);
+        CLR_BIT(value,24);
+        MID_BK953X_WRITE(0x39, &value);
+
+        //Enable calibration clock
+        SET_BIT(g_bk9531_init_config[7].value, 25);
+        CLR_BIT(g_bk9531_init_config[7].value, 28);
+        MID_BK953X_WRITE(0x07, &g_bk9531_init_config[7].value);
+
+        //Calibrate RF VCO
+        CLR_BIT(g_bk9531_init_config[3].value, 22);
+        MID_BK953X_WRITE(0x03, &g_bk9531_init_config[3].value);
+        delay_ms(2);
+
+        SET_BIT(g_bk9531_init_config[3].value, 22);
+        MID_BK953X_WRITE(0x03, &g_bk9531_init_config[3].value);
+        delay_ms(2);
+        
+        CLR_BIT(g_bk9531_init_config[3].value, 22);
+        MID_BK953X_WRITE(0x03, &g_bk9531_init_config[3].value);
+        delay_ms(60);
+
+        //Calibrate Digital VCO
+        CLR_BIT(g_bk9531_init_config[4].value, 25);
+        MID_BK953X_WRITE(0x04, &g_bk9531_init_config[4].value);
+        SET_BIT(g_bk9531_init_config[3].value, 25);
+        MID_BK953X_WRITE(0x04, &g_bk9531_init_config[4].value);
+
+        //Disable calibration clock
+        CLR_BIT(g_bk9531_init_config[7].value, 25);
+        SET_BIT(g_bk9531_init_config[7].value, 28);
+        MID_BK953X_WRITE(0x07, &g_bk9531_init_config[4].value);
+
+        //Set ddf_en=1 for tx_trigger
+        MID_BK953X_READ(0x35, &value);
+        SET_BIT(value,7);
+        MID_BK953X_WRITE(0x35, &value);
+
+        //Set tx_en=1 for tx_trigger
+        MID_BK953X_READ(0x3F, &value);
+        SET_BIT(value,31);
+        MID_BK953X_WRITE(0x3F, &value);
+
+        //Set tx_en=1 another tx enable, from hds
+        MID_BK953X_READ(0x39, &value);
+        SET_BIT(value,24);
+        MID_BK953X_WRITE(0x39, &value);
+
+        MID_BK953X_WRITE(0x0A, &reg_val_bak);
+    }
+    else
+    {
+        return -ENODEV;
+    }
+
+    return err_code;
+}
+
+int bk953x_tx_freq_chan_set(bk953x_object_t *p_bk953x_object, freq_chan_object_t *p_freq_chan_object)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+
+    }
+    else if(p_bk953x_object->chip_id == BK9531_CHID_ID)
+    {
+        CLR_BIT(g_bk9531_init_config[3].value, 15);
+        CLR_BIT(g_bk9531_init_config[3].value, 14);
+        CLR_BIT(g_bk9531_init_config[3].value, 13);
+
+        CLR_BIT(g_bk9531_init_config[3].value, 21);
+        SET_BIT(g_bk9531_init_config[3].value, 20);
+        MID_BK953X_WRITE(0x03, &g_bk9531_init_config[3].value);
+
+        value = 0x4D260000; //632MHz
+        MID_BK953X_WRITE(0x0D, &value);
+
+        bk953x_tx_trigger(p_bk953x_object);
+    }
+
+    return err_code;
+}
+
+int bk953x_tx_spec_data_set(bk953x_object_t *p_bk953x_object , uint8_t data)
+{
+    int err_code = 0;
+    uint32_t value = 0;
+
+    if(p_bk953x_object->chip_id == BK9532_CHID_ID)
+    {
+
+    }
+    else if(p_bk953x_object->chip_id == BK9531_CHID_ID)
+    {
+        //Set ddf_en=0 for tx_trigger
+        MID_BK953X_READ(0x3A, &value);
+        value &= 0xFFFFFF00;
+
+        value |= data;
+        MID_BK953X_WRITE(0x3A, &value);
+    }
+
+
+    return err_code;
+}
+
 /**
  * @brief BK953X 芯片寄存器配置
  */
@@ -846,6 +1012,10 @@ int bk953x_config_init(bk953x_object_t *p_bk953x_object)
             }
         }
 
+        delay_ms(100);
+
+        err_code = bk953x_soft_reset(p_bk953x_object);
+
         trace_debug("bk9532_config_init  done\n\r");
     }
     else if(p_bk953x_object->chip_id == BK9531_CHID_ID)
@@ -859,14 +1029,13 @@ int bk953x_config_init(bk953x_object_t *p_bk953x_object)
             }
         }
 
+        bk953x_tx_trigger(p_bk953x_object);
+
+        bk953x_tx_freq_chan_set(p_bk953x_object, NULL);
+
         trace_debug("bk9531_config_init  done\n\r");
     }
 
-
-
-    delay_ms(50);
-
-    err_code = bk953x_soft_reset(p_bk953x_object);
 
     return err_code;
 }

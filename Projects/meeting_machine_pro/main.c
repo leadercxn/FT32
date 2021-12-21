@@ -245,7 +245,7 @@ static void host_loop_task(void)
   static uint64_t old_ir_ticks = 0;
   
   /* 15ms 刷新一次 */
-  if( mid_timer_ticks_get() - old_bk9532_ticks > 200)
+  if( mid_timer_ticks_get() - old_bk9532_ticks > 1000)
   {
     old_bk9532_ticks = mid_timer_ticks_get();
 
@@ -262,21 +262,20 @@ static void host_loop_task(void)
     channel_af_level_lr_set(SCREEN_R, r_af_level);
   }
 
-  if( mid_timer_ticks_get() - old_ir_ticks > 2000)
+  if( mid_timer_ticks_get() - old_ir_ticks > 20000)
   {
-    old_ir_ticks = mid_timer_ticks_get();
+      old_ir_ticks = mid_timer_ticks_get();
 
-    err_code = ir_tx_start(data, sizeof(data));
-    if(err_code)
-    {
-      trace_error("ir_tx_start error %d\n\r",err_code);
-    }
-    else
-    {
-      trace_debug("ir_tx_start success\n\r");
-    }
+      err_code = ir_tx_start(data, sizeof(data));
+      if(err_code)
+      {
+        trace_error("ir_tx_start error %d\n\r",err_code);
+      }
+      else
+      {
+        trace_debug("ir_tx_start success\n\r");
+      }
   }
-
   
 }
 
