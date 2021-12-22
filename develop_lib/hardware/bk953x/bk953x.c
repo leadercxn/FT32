@@ -1000,6 +1000,7 @@ int bk953x_config_init(bk953x_object_t *p_bk953x_object)
 {
     int err_code = 0;
     uint8_t i = 0;
+    uint32_t value =0;
 
     if(p_bk953x_object->chip_id == BK9532_CHID_ID)
     {
@@ -1015,8 +1016,61 @@ int bk953x_config_init(bk953x_object_t *p_bk953x_object)
         delay_ms(100);
 
         err_code = bk953x_soft_reset(p_bk953x_object);
+    
+        trace_debug("bk953x_soft_reset  done\n\r");
 
-        trace_debug("bk9532_config_init  done\n\r");
+        /**
+         * 先粗暴的配置
+         */
+#if 1
+        MID_BK953X_READ(0x38, &value);
+        value &= 0x00ffffff;
+        value |= 0x55;      //设晶振振荡电容调整初值 2019-08-15
+        MID_BK953X_WRITE(0x38, &value);
+
+        freq_chan_object_t freq_chan_obj;
+
+        freq_chan_obj.chan_index = 1;
+        freq_chan_obj.reg_value = 0x4D2B1EB8;   //632Mhz
+
+        bk953x_freq_chan_set(p_bk953x_object, &freq_chan_obj);
+
+        bk953x_rx_afc_enable(p_bk953x_object,false);
+
+        uint8_t xtal_tab[5] = {31,43,55,67,79};           //频偏测试表格
+
+        uint8_t rec_spec_data = 0;
+
+        for(i = 0; i < 5; i ++)
+        {
+            MID_BK953X_READ(0x38, &value);
+
+            value &= 0x00ffffff;
+            value |= xtal_tab[i];
+
+            MID_BK953X_WRITE(0x38, &value);
+
+            delay_ms(15);
+
+            MID_BK953X_READ(0x7C, &value);
+            if(!IS_SET(value,27))
+            {
+                rec_spec_data = value & 0xff;
+
+                trace_debug("frame_err_ind success , i = %d, rec_spec_data = 0x%02x, value = 0x%08x\n\r",i , rec_spec_data,value);
+
+                delay_ms(60);
+                bk953x_rx_afc_enable(p_bk953x_object,true);
+                break;
+            }
+        }
+
+        if(i >= 5)
+        {
+            trace_error("frame_err_ind fail , i = %d\n\r",i);
+        }
+#endif
+
     }
     else if(p_bk953x_object->chip_id == BK9531_CHID_ID)
     {
@@ -1029,10 +1083,14 @@ int bk953x_config_init(bk953x_object_t *p_bk953x_object)
             }
         }
 
+#if 1
+        /**
+         * 先粗暴的配置
+         */
         bk953x_tx_trigger(p_bk953x_object);
 
         bk953x_tx_freq_chan_set(p_bk953x_object, NULL);
-
+#endif
         trace_debug("bk9531_config_init  done\n\r");
     }
 

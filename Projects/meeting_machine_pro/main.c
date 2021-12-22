@@ -326,6 +326,7 @@ int main(void)
   bk9532_lr_init();
   ad22650_lr_init();
 
+#if 0
   err_code = bk953x_ch_index_set(BK953X_L, 1);
   if(err_code)
   {
@@ -345,7 +346,7 @@ int main(void)
   {
     trace_debug("r ch index set success\n\r");
   }
-
+#endif
   APP_SCHED_INIT(&m_app_scheduler, SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
 
   app_sched_event_put(&m_app_scheduler, NULL, 0, app_evt_schedule);

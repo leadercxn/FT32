@@ -450,6 +450,13 @@ int lcd_display_init(void)
     gpio_config(&m_lcd_display_obj.lcd_back_light_pin);
     gpio_output_set(&m_lcd_display_obj.lcd_back_light_pin, 1);
 
+	
+	digital_number_show(DIGITAL_1, 8);
+	digital_number_show(DIGITAL_2, 7);
+	digital_number_show(DIGITAL_3, 6);
+	digital_number_show(DIGITAL_4, 5);
+	digital_number_show(DIGITAL_5, 4);
+	digital_number_show(DIGITAL_6, 3);
     return 0;
 }
 

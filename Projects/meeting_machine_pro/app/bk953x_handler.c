@@ -124,6 +124,27 @@ static void bk953x_stage_task_run(bk953x_task_t *p_task)
             {
                 trace_debug("bk953x_config_init success\n\r");
             }
+
+            err_code = bk953x_ch_index_set(BK953X_L, 1);
+            if(err_code)
+            {
+                trace_error("l ch index set error\n\r");
+            }
+            else
+            {
+                trace_debug("l ch index set success\n\r");
+            }
+
+            err_code = bk953x_ch_index_set(BK953X_R, 101);
+            if(err_code)
+            {
+                trace_error("r ch index set error\n\r");
+            }
+            else
+            {
+                trace_debug("r ch index set success\n\r");
+            }
+
             p_task->stage++;
             break;
 
@@ -136,7 +157,6 @@ static void bk953x_stage_task_run(bk953x_task_t *p_task)
                 {
                     trace_debug("bk953x_rx_spec_data_get rx_spec_data = 0x%02x\n\r",rx_spec_data);
                 }
-                
             }
             break;
 
@@ -156,7 +176,7 @@ static void bk953x_stage_task_run(bk953x_task_t *p_task)
 void bk953x_loop_task(void)
 {
     bk953x_stage_task_run(&m_l_bk953x_task);
-    bk953x_stage_task_run(&m_r_bk953x_task);
+//    bk953x_stage_task_run(&m_r_bk953x_task);
 }
 
 void bk953x_task_stage_set(bk953x_lr_e lr, bk953x_task_stage_e stage)
