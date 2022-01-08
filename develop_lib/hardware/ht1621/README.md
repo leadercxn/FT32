@@ -1,6 +1,0 @@
-# HT1621_DRIVER
-
-PA4: LCD-CS  --- CS
-PA5: LCD-SCL --- WR
-PA6: LCD-RD --- RD
-PA7: LCD-SDA --- DATA

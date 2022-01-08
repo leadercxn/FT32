@@ -73,6 +73,10 @@ void button_loop_task(void)
             m_is_button_start = false;
             button_event = BUTTON_EVENT_RELEASE;
         }
+        else
+        {
+            button_event = BUTTON_EVENT_MAX;
+        }
     }
 
     if((button_event != BUTTON_EVENT_MAX) && (m_button_event_handler))

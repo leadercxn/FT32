@@ -71,6 +71,8 @@ static void bk953x_stage_task_run(bk953x_task_t *p_task)
     int err_code = 0;
 
     static uint64_t old_ticks = 0;
+    static uint64_t mic_old_ticks = 0;
+    uint32_t mic_rssi = 0;
 
     switch(p_task->stage)
     {
@@ -93,7 +95,16 @@ static void bk953x_stage_task_run(bk953x_task_t *p_task)
                     {
                         trace_debug("bk953x_tx_spec_data_set success\n\r");
                     }
-                    
+                }
+
+                if(mid_timer_ticks_get() - mic_old_ticks > 1000)
+                {
+                    mic_old_ticks = mid_timer_ticks_get();
+                    err_code = bk953x_tx_mic_rssi_get(p_task->p_bk953x_object, &mic_rssi);
+                    if(!err_code)
+                    {
+                        trace_debug("0X3F get regvalue, mic_rssi 0x%08x\n\r",mic_rssi);
+                    }
                 }
                 
             break;

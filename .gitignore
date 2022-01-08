@@ -16,5 +16,7 @@ Projects/hand_mic/MDK-ARM/EventRecorderStub.*
 Projects/hand_mic/MDK-ARM/JLink*
 Projects/hand_mic/.DS_Store
 
+develop_lib/
+
 *.DS_Store/
 

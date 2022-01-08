@@ -63,37 +63,36 @@ static void button_handler(button_event_e event)
     {
       return;
     }
-
+  
+    trace_debug("button_handler %s\n\r",mp_button[event]);
     switch(event)
     {
         case BUTTON_EVENT_PUSH:
           if(m_sys_power_on)
           {
             lcd_black_light_enable(true);
-
             trace_debug("turn on lcd led\n\r");
           }
 
           break;
 
         case BUTTON_EVENT_LONG_PUSH:
-
             if(m_sys_power_on)
             {
                 m_sys_power_on = false;
-                lcd_black_light_enable(false);
-
-                gpio_output_set(&m_power_on_gpio, 0);
                 trace_debug("system power off\n\r");
             }
             else
             {
                 m_sys_power_on = true;
-                lcd_black_light_enable(true);
-
-                gpio_output_set(&m_power_on_gpio, 1);
                 trace_debug("system power on\n\r");
             }
+
+            gpio_output_set(&m_power_on_gpio, m_sys_power_on);
+            lcd_black_light_enable(m_sys_power_on);
+          break;
+
+        default:
           break;
     }
 }
@@ -119,9 +118,10 @@ int main(void)
   trace_init();
 
   /*greeting*/
-  trace_info("\n\r\n\r");
+  trace_info("\n\r\n\r\n\r\n\r");
   trace_info("       *** Welcome to the Hand-Mic Project ***\n\r");
   trace_info("\n\r");
+
 
   TIMER_INIT();
 
@@ -131,7 +131,7 @@ int main(void)
   mid_system_tick_init();
 
   APP_SCHED_INIT(&m_app_scheduler, SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
-  app_sched_event_put(&m_app_scheduler, NULL, 0, app_evt_schedule);
+//  app_sched_event_put(&m_app_scheduler, NULL, 0, app_evt_schedule);
 
   lcd_display_init();
 
